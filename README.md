@@ -1,8 +1,8 @@
-.tmp
+pipes
 ---------------
 
 Welcome to the example application used in angular.io/dart's
-[.tmp](//github.com/angular/angular.io/tree/master/public/docs/_examples/pipes/dart) page.
+[pipes](//github.com/angular/angular.io/tree/master/public/docs/_examples/pipes/dart) page.
 
 To run your own copy:
 
