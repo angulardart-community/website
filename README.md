@@ -1,8 +1,8 @@
-.tmp
+displaying-data
 ---------------
 
 Welcome to the example application used in angular.io/dart's
-[.tmp](//github.com/angular/angular.io/tree/master/public/docs/_examples/displaying-data/dart) page.
+[displaying-data](//github.com/angular/angular.io/tree/master/public/docs/_examples/displaying-data/dart) page.
 
 To run your own copy:
 
