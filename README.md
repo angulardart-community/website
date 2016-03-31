@@ -1,8 +1,8 @@
-.tmp
+dependency-injection
 ---------------
 
 Welcome to the example application used in angular.io/dart's
-[.tmp](//github.com/angular/angular.io/tree/master/public/docs/_examples/dependency-injection/dart) page.
+[dependency-injection](//github.com/angular/angular.io/tree/master/public/docs/_examples/dependency-injection/dart) page.
 
 To run your own copy:
 
