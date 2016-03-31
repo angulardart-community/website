@@ -1,8 +1,8 @@
-.tmp
+attribute-directives
 ---------------
 
 Welcome to the example application used in angular.io/dart's
-[.tmp](//github.com/angular/angular.io/tree/master/public/docs/_examples/attribute-directives/dart) page.
+[attribute-directives](//github.com/angular/angular.io/tree/master/public/docs/_examples/attribute-directives/dart) page.
 
 To run your own copy:
 
