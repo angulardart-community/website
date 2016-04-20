@@ -1,13 +1,10 @@
-**WARNING:** This example is preliminary and will probably change.
 
-------------------------------------------------------------------
-      
 
-forms
+Forms
 ---------------
 
 Welcome to the example application used in angular.io/dart's
-[forms](//github.com/angular/angular.io/tree/master/public/docs/_examples/forms/dart) page.
+[Forms](https://angular.io/docs/dart/latest/guide/forms.html) page.
 
 To run your own copy:
 
