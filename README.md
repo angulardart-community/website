@@ -1,13 +1,10 @@
-**WARNING:** This example is preliminary and will probably change.
 
-------------------------------------------------------------------
-      
 
-displaying-data
+Displaying data
 ---------------
 
 Welcome to the example application used in angular.io/dart's
-[displaying-data](//github.com/angular/angular.io/tree/master/public/docs/_examples/displaying-data/dart) page.
+[Displaying data](https://angular.io/docs/dart/latest/guide/displaying-data.html) page.
 
 To run your own copy:
 
