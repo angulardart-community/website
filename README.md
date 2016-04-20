@@ -1,13 +1,10 @@
-**WARNING:** This example is preliminary and will probably change.
 
-------------------------------------------------------------------
-      
 
-dependency-injection
+Dependency injection
 ---------------
 
 Welcome to the example application used in angular.io/dart's
-[dependency-injection](//github.com/angular/angular.io/tree/master/public/docs/_examples/dependency-injection/dart) page.
+[Dependency injection](https://angular.io/docs/dart/latest/guide/dependency-injection.html) page.
 
 To run your own copy:
 
