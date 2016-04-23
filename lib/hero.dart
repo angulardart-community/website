@@ -1,5 +1,3 @@
-import 'package:angular2/core.dart';
-
 class Hero {
   String name;
   String power;
