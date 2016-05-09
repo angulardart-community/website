@@ -4,14 +4,14 @@ import '../logger_service.dart';
 import 'car.dart';
 
 Car useInjector() {
-  Injector injector;
+  ReflectiveInjector injector;
 
   /*
-  // Cannot 'new' an Injector like this!
-  var injector = new Injector([Car, Engine, Tires, Logger]);
+  // Cannot 'new' an ReflectiveInjector like this!
+  var injector = new ReflectiveInjector([Car, Engine, Tires, Logger]);
 */
 
-  injector = Injector.resolveAndCreate([Car, Engine, Tires, Logger]);
+  injector = ReflectiveInjector.resolveAndCreate([Car, Engine, Tires, Logger]);
   var car = injector.get(Car);
 
   car.description = 'Injector';
