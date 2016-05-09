@@ -1,22 +1,23 @@
 import 'package:angular2/core.dart';
 
-@Directive(selector: '[my-highlight]', host: const {
+@Directive(selector: '[myHighlight]', host: const {
   '(mouseenter)': 'onMouseEnter()',
   '(mouseleave)': 'onMouseLeave()'
 })
-class Highlight {
-  final ElementRef _element;
-  onMouseEnter() {
+class HighlightDirective {
+  final dynamic _el;
+
+  HighlightDirective(ElementRef elRef) : _el = elRef.nativeElement;
+
+  void onMouseEnter() {
     _highlight("yellow");
   }
 
-  onMouseLeave() {
-    _highlight(null);
+  void onMouseLeave() {
+    _highlight();
   }
 
-  void _highlight(String color) {
-    _element.nativeElement.style.backgroundColor = color;
+  void _highlight([String color]) {
+    if (_el != null) _el.style.backgroundColor = color;
   }
-
-  Highlight(this._element);
 }

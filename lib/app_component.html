@@ -5,8 +5,8 @@
   <input type="radio" name="colors" (click)="color='yellow'">Yellow
   <input type="radio" name="colors" (click)="color='cyan'">Cyan
 </div>
-<p><span [my-highlight]="color">Highlight me!</span></p>
+<p [myHighlight]="color">Highlight me!</p>
 
-<p><span [my-highlight]="color" [default-color]="'violet'">
+<p [myHighlight]="color" [defaultColor]="'violet'">
 Highlight me too!
-</span></p>
+</p>
