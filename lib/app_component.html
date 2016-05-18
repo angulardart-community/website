@@ -1,36 +1,73 @@
-<hr>
-<!-- async examples at the top so can see them in action -->
-<hero-message></hero-message>
+<a id="toc"></a>
+<h1>Pipes</h1>
+<a href="#happy-birthday1">Happy Birthday v1</a><br>
+<a href="#birthday-date-pipe">Birthday DatePipe</a><br>
+<a href="#happy-birthday2">Happy Birthday v2</a><br>
+<a href="#birthday-pipe-chaining">Birthday Pipe Chaining</a><br>
+<a href="#power-booster">Power Booster custom pipe</a><br>
+<a href="#power-boost-calc">Power Boost Calculator custom pipe with params</a><br>
+<a href="#flying-heroes">Flying Heroes filter pipe (pure)</a><br>
+<a href="#flying-heroes-impure">Flying Heroes filter pipe (impure)</a><br>
+<a href="#hero-message">Async Hero Message and AsyncPipe</a><br>
+<a href="#hero-list">Hero List with caching FetchJsonPipe</a><br>
+
 
 <hr>
-<hero-list></hero-list>
+<a id="happy-birthday1"></a>
+<h2>Hero Birthday v1</h2>
+<hero-birthday></hero-birthday>
 
 <hr>
+<a id="birthday-date-pipe"></a>
+<h2>Birthday DatePipe</h2>
 <p>The hero's birthday is {{ birthday | date }}</p>
 
 <p>The hero's birthday is {{ birthday | date:"MM/dd/yy" }} </p>
 
 <hr>
-<h4>Hero Birthday v.2</h4>
-<hero-birthday>loading...</hero-birthday>
+<a id="happy-birthday2"></a>
+<h2>Hero Birthday v2</h2>
+<hero-birthday2></hero-birthday2>
+
 <hr>
-
-
+<a id="birthday-pipe-chaining"></a>
+<h2>Birthday Pipe Chaining</h2>
 <p>
-    The chained hero's birthday is
-    {{ birthday | date | uppercase}}
+  The chained hero's birthday is
+  {{ birthday | date | uppercase}}
 </p>
 
 <p>
-    The chained hero's birthday is
-    {{  birthday | date:'fullDate' | uppercase}}
+  The chained hero's birthday is
+  {{  birthday | date:'fullDate' | uppercase}}
 </p>
 <p>
-    The chained hero's birthday is
-    {{ ( birthday | date:'fullDate' ) | uppercase}}
+  The chained hero's birthday is
+  {{ ( birthday | date:'fullDate' ) | uppercase}}
 </p>
 <hr>
-<power-booster>loading...</power-booster>
+<a id="power-booster"></a>
+<power-booster></power-booster>
 
 <hr>
-<power-boost-calculator>loading ..</power-boost-calculator>
+<a id="power-boost-calc"></a>
+<power-boost-calculator>loading</power-boost-calculator>
+
+<hr>
+<a id="flying-heroes"></a>
+<flying-heroes></flying-heroes>
+
+<hr>
+<a id="flying-heroes-impure"></a>
+<flying-heroes-impure></flying-heroes-impure>
+
+<hr>
+<a id="hero-message"></a>
+<!-- async examples at the top so can see them in action -->
+<hero-message></hero-message>
+
+<hr>
+<a id="hero-list"></a>
+<hero-list></hero-list>
+
+<div style="margin-top:12em;"></div>
