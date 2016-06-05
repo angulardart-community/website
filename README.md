@@ -1,15 +1,11 @@
-**WARNING:** This example is preliminary and subject to change.
 
-------------------------------------------------------------------
-      
 
-toh-4
----------------
+## Tour of Heroes: Services
 
 Welcome to the example application used in angular.io/dart's
-[toh-4](//github.com/angular/angular.io/tree/master/public/docs/_examples/toh-4/dart) page.
+[Tour of Heroes: Services](https://angular.io/docs/dart/latest/tutorial/toh-pt4.html) page.
 
-To run your own copy:
+You can run a [hosted copy](http://angular-examples.github.io/toh-4) of this sample. Or run your own copy:
 
 1. Clone this repo.
 2. Download the dependencies:
@@ -30,4 +26,4 @@ To run your own copy:
 [the angular.io repository](//github.com/angular/angular.io/tree/master/public/docs/_examples/toh-4/dart) by running the
 [dart-doc-syncer](//github.com/angular/dart-doc-syncer) tool.
 If you find a problem with this sample's code, please open an
-[issue at angular/angular.io](https://github.com/angular/angular.io/issues/new).
+[issue at angular/angular.io](//github.com/angular/angular.io/issues/new?labels=dart,example&title=%5BDart%5D%5Bexample%5D%20tutorial/toh-4%3A%20).
