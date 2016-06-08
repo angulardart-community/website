@@ -15,7 +15,7 @@ class Hero {
       <div><label>id: </label>{{hero.id}}</div>
       <div>
         <label>name: </label>
-        <div><input [(ngModel)]="hero.name" placeholder="name"></div>
+        <input [(ngModel)]="hero.name" placeholder="name">
       </div>''')
 class AppComponent {
   String title = 'Tour of Heroes';
