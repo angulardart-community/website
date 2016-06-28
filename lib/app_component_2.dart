@@ -11,10 +11,16 @@ import 'logger_service.dart';
       <h1>{{title}}</h1>
       <my-car></my-car>
       <my-heroes></my-heroes>''',
-    directives: const [CarComponent, HeroesComponent],
-    providers: const [Logger, const Provider(AppConfig, useValue: config1)])
+    directives: const [
+      CarComponent,
+      HeroesComponent
+    ],
+    providers: const [
+      Logger,
+      const Provider(APP_CONFIG, useValue: heroDiConfig)
+    ])
 class AppComponent {
   final String title;
 
-  AppComponent(AppConfig config) : title = config.title;
+  AppComponent(@Inject(APP_CONFIG) Map config) : title = config['title'];
 }

@@ -1,7 +1,10 @@
 import 'package:angular2/core.dart';
 
 import 'hero.dart';
+import 'hero_service_1.dart';
+/*
 import 'hero_service.dart';
+*/
 
 @Component(
     selector: 'hero-list',

@@ -13,37 +13,23 @@ import 'logger_service.dart';
       <div id="car">{{car.drive()}}</div>
       <div id="hero">{{hero.name}}</div>
       <div id="rodent">{{rodent}}</div>''',
-    providers: const [
-      Car,
-      Engine,
-      Tires,
-      const Provider(HeroService, useFactory: heroServiceFactory),
-      Logger
-    ])
+    providers: const [Car, Engine, Tires, heroServiceProvider, Logger])
 class InjectorComponent {
   final Injector _injector;
   Car car;
   HeroService heroService;
   Hero hero;
 
-  String get rodent {
-    try {
-      _injector.get(ROUS);
-    } on NoProviderError {
-      return "R.O.U.S.'s? I don't think they exist!";
-    }
-    throw new Exception('Aaaargh!');
-  }
-
   InjectorComponent(this._injector) {
     car = _injector.get(Car);
     heroService = _injector.get(HeroService);
     hero = heroService.getHeroes()[0];
   }
+
+  String get rodent =>
+      _injector.get(ROUS, "R.O.U.S.'s? I don't think they exist!");
 }
 
-/**
- * R.O.U.S. - Rodents Of Unusual Size
- * // https://www.youtube.com/watch?v=BOv5ZjAOpC8
- */
+/// R.O.U.S. - Rodents Of Unusual Size
+/// https://www.youtube.com/watch?v=BOv5ZjAOpC8
 class ROUS {}

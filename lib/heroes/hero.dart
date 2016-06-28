@@ -1,5 +1,7 @@
 class Hero {
-  num id;
-  String name;
-  bool isSecret = false;
+  final int id;
+  final String name;
+  final bool isSecret;
+
+  Hero(this.id, this.name, [this.isSecret = false]);
 }

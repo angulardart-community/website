@@ -1,11 +1,20 @@
 import 'package:angular2/core.dart';
 
-@Injectable()
-class AppConfig {
-  final apiEndpoint;
-  final String title;
+const APP_CONFIG = const OpaqueToken('app.config');
 
-  const AppConfig(this.apiEndpoint, this.title);
+const Map heroDiConfig = const <String, String>{
+  'apiEndpoint': 'api.heroes.com',
+  'title': 'Dependency Injection'
+};
+
+class AppConfig {
+  String apiEndpoint;
+  String title;
 }
 
-const config1 = const AppConfig('api.heroes.com', 'Dependency Injection');
+AppConfig heroDiConfigFactory() => new AppConfig()
+  ..apiEndpoint = 'api.heroes.com'
+  ..title = 'Dependency Injection';
+
+const appConfigProvider =
+    const Provider(APP_CONFIG, useFactory: heroDiConfigFactory, deps: const []);

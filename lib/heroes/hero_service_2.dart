@@ -9,7 +9,6 @@ class HeroService {
   final Logger _logger;
 
   HeroService(this._logger);
-
   List<Hero> getHeroes() {
     _logger.log('Getting heroes ...');
     return HEROES;

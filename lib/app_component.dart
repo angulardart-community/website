@@ -5,8 +5,8 @@ import 'car/car_component.dart';
 import 'heroes/heroes_component.dart';
 import 'logger_service.dart';
 import 'user_service.dart';
-//PENDING: check whether we intend to hide injector_component.dart & providers_component.dart; if so, change docregion name?
 import 'injector_component.dart';
+import 'test_component.dart';
 import 'providers_component.dart';
 
 @Component(
@@ -27,18 +27,20 @@ import 'providers_component.dart';
       CarComponent,
       HeroesComponent,
       InjectorComponent,
+      TestComponent,
       ProvidersComponent
     ],
     providers: const [
       Logger,
       UserService,
-      const Provider(AppConfig, useValue: config1)
+      const Provider(APP_CONFIG, useFactory: heroDiConfigFactory)
     ])
 class AppComponent {
   final UserService _userService;
   final String title;
 
-  AppComponent(AppConfig config, this._userService) : title = config.title;
+  AppComponent(@Inject(APP_CONFIG) AppConfig config, this._userService)
+      : title = config.title;
 
   bool get isAuthorized {
     return user.isAuthorized;
@@ -52,6 +54,8 @@ class AppComponent {
     return _userService.user;
   }
 
-  String get userInfo => 'Current user, ${user.name}, is'
-      '${isAuthorized ? "" : " not"} authorized. ';
+  String get userInfo =>
+      'Current user, ${user.name}, is' +
+      (isAuthorized ? '' : ' not') +
+      ' authorized. ';
 }

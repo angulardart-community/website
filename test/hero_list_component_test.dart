@@ -7,15 +7,7 @@ import 'package:dependency_injection/heroes/hero_service.dart';
 import 'package:test/test.dart';
 
 ///////////////////////////////////////
-List<Hero> expectedHeroes = [
-  new Hero()
-    ..id = 1
-    ..name = 'hero1',
-  new Hero()
-    ..id = 2
-    ..name = 'hero2'
-    ..isSecret = true
-];
+List<Hero> expectedHeroes = [new Hero(1, 'hero1'), new Hero(2, 'hero2', true)];
 
 class HeroServiceMock implements HeroService {
   @override
