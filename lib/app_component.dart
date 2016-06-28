@@ -85,15 +85,15 @@ class AppComponent implements OnInit {
 
   AppComponent(this._heroService);
 
-  getHeroes() async {
+  Future<Null> getHeroes() async {
     heroes = await _heroService.getHeroes();
   }
 
-  ngOnInit() {
+  void ngOnInit() {
     getHeroes();
   }
 
-  onSelect(Hero hero) {
+  void onSelect(Hero hero) {
     selectedHero = hero;
   }
 }

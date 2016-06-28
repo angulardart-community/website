@@ -23,15 +23,16 @@ class AppComponent implements OnInit {
   HeroService heroService = new HeroService(); // don't do this
   final HeroService _heroService;
   AppComponent(this._heroService);
-  getHeroes() {
+
+  void getHeroes() {
     heroes = _heroService.getHeroes();
   }
 
-  ngOnInit() {
+  void ngOnInit() {
     getHeroes();
   }
 
-  onSelect(Hero hero) {
+  void onSelect(Hero hero) {
     selectedHero = hero;
   }
 }

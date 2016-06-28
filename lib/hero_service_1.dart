@@ -7,6 +7,6 @@ import 'mock_heroes.dart';
 class HeroService {
   /*
   List<Hero> getHeroes() {}
-   */
+  */
   List<Hero> getHeroes() => mockHeroes;
 }
