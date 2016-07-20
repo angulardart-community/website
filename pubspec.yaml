@@ -1,5 +1,5 @@
 name: displaying_data
-description: Displaying Data Example
+description: Displaying Data
 version: 0.0.1
 environment:
   sdk: '>=1.13.0 <2.0.0'

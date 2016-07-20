@@ -1,7 +1,8 @@
 class Hero {
-  int id;
+  final int id;
   String name;
 
   Hero(this.id, this.name);
+
   String toString() => '$id: $name';
 }

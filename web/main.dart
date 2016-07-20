@@ -5,7 +5,7 @@ import 'package:angular2/platform/browser.dart';
 //import 'package:displaying_data/app_component_3.dart' as v3;
 import 'package:displaying_data/app_component.dart';
 
-main() {
+void main() {
 // pick one
 //  bootstrap(v1.AppComponent);
 //  bootstrap(v2.AppComponent);
