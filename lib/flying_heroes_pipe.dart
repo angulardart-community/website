@@ -3,7 +3,7 @@ import 'heroes.dart';
 
 @Pipe(name: 'flyingHeroes')
 class FlyingHeroesPipe extends PipeTransform {
-  List<Hero> transform(dynamic value, [List<dynamic> args]) =>
+  List<Hero> transform(List<Hero> value) =>
       value.where((hero) => hero.canFly).toList();
 }
 

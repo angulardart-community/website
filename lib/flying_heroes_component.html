@@ -13,14 +13,14 @@ New hero:
 
 <h4>Heroes who fly (piped)</h4>
 <div id="flyers">
-  <div *ngFor="#hero of (heroes | flyingHeroes)">
+  <div *ngFor="let hero of (heroes | flyingHeroes)">
     {{hero.name}}
   </div>
 </div>
 
 <h4>All Heroes (no pipe)</h4>
 <div id="all">
-  <div *ngFor="#hero of heroes">
+  <div *ngFor="let hero of heroes">
     {{hero.name}}
   </div>
 </div>
