@@ -1,18 +1,15 @@
-**WARNING:** This example is preliminary and subject to change.
 
-------------------------------------------------------------------
-      
 
-component-styles
----------------
+## Component Styles
 
 Welcome to the example application used in angular.io/dart's
-[component-styles](//github.com/angular/angular.io/tree/master/public/docs/_examples/component-styles/dart) page.
+[Component Styles](https://angular.io/docs/dart/latest/guide/component-styles.html) page.
 
-To run your own copy:
+You can run a [hosted copy](http://angular-examples.github.io/component-styles) of this sample. Or run your own copy:
 
-1. Clone this repo.
-2. Download the dependencies:
+1. Clone or [download][] this repo.
+   [download]: //github.com/angular-examples/component-styles/archive/master.zip
+2. Get the dependencies:
 
   `pub get`
 3. Launch a development server:
@@ -30,4 +27,4 @@ To run your own copy:
 [the angular.io repository](//github.com/angular/angular.io/tree/master/public/docs/_examples/component-styles/dart) by running the
 [dart-doc-syncer](//github.com/angular/dart-doc-syncer) tool.
 If you find a problem with this sample's code, please open an
-[issue at angular/angular.io](https://github.com/angular/angular.io/issues/new).
+[issue at angular/angular.io](//github.com/angular/angular.io/issues/new?labels=dart,example&title=%5BDart%5D%5Bexample%5D%20guide/component-styles%3A%20).
