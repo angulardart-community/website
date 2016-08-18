@@ -15,7 +15,7 @@ class ChildViewComponent {
     <div>-- child view begins --</div>
       <my-child></my-child>
     <div>-- child view ends --</div>
-    <p *ngIf="comment != null" class="comment">{{comment}}</p>''',
+    <p *ngIf="comment.isNotEmpty" class="comment">{{comment}}</p>''',
     directives: const [ChildViewComponent])
 class AfterViewComponent implements AfterViewChecked, AfterViewInit {
   var _prevHero = '';

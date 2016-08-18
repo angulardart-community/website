@@ -11,7 +11,7 @@ import 'spy_directive.dart';
       '.heroes {background: LightYellow; padding: 0 8px}'
     ],
     directives: const [
-      Spy
+      SpyDirective
     ],
     providers: const [
       LoggerService

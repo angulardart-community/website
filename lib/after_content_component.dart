@@ -15,7 +15,7 @@ class ChildComponent {
       <div>-- projected content begins --</div>
         <ng-content></ng-content>
       <div>-- projected content ends --</div>
-      <p *ngIf="comment != null" class="comment">{{comment}}</p>
+      <p *ngIf="comment.isNotEmpty" class="comment">{{comment}}</p>
     ''')
 class AfterContentComponent implements AfterContentChecked, AfterContentInit {
   String _prevHero = '';
