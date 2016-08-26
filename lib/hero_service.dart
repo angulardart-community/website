@@ -10,6 +10,6 @@ class HeroService {
   Future<List<Hero>> getHeroes() async => mockHeroes;
   // See the "Take it slow" appendix
   Future<List<Hero>> getHeroesSlowly() {
-    return new Future.delayed(const Duration(seconds: 2), () => mockHeroes);
+    return new Future.delayed(const Duration(seconds: 2), getHeroes);
   }
 }
