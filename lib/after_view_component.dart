@@ -3,7 +3,7 @@ import 'package:angular2/core.dart';
 import 'logger_service.dart';
 
 //////////////////
-@Component(selector: 'my-child', template: '<input [(ngModel)]="hero">')
+@Component(selector: 'my-child-view', template: '<input [(ngModel)]="hero">')
 class ChildViewComponent {
   String hero = 'Magneta';
 }
@@ -13,7 +13,7 @@ class ChildViewComponent {
     selector: 'after-view',
     template: '''
     <div>-- child view begins --</div>
-      <my-child></my-child>
+      <my-child-view></my-child-view>
     <div>-- child view ends --</div>
     <p *ngIf="comment.isNotEmpty" class="comment">{{comment}}</p>''',
     directives: const [ChildViewComponent])
