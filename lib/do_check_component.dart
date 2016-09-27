@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:angular2/core.dart';
 
 class Hero {
@@ -22,7 +20,7 @@ class Hero {
       '.hero {background: LightYellow; padding: 8px; margin-top: 8px}',
       'p {background: Yellow; padding: 8px; margin-top: 8px}'
     ])
-class DoCheckComponent implements DoCheck, OnChanges {
+class DoCheckComponent implements DoCheck {
   @Input()
   Hero hero;
   @Input()
@@ -67,16 +65,6 @@ class DoCheckComponent implements DoCheck, OnChanges {
     }
 
     changeDetected = false;
-  }
-
-  // Copied from OnChangesComponent
-  ngOnChanges(Map<String, SimpleChange> changes) {
-    changes.forEach((String propName, SimpleChange change) {
-      String cur = JSON.encode(change.currentValue);
-      String prev =
-          change.isFirstChange() ? "{}" : JSON.encode(change.previousValue);
-      changeLog.add('$propName: currentValue = $cur, previousValue = $prev');
-    });
   }
 
   void reset() {
