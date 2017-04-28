@@ -21,6 +21,6 @@ you'll have to wait a bit while pub converts the app.
 If you find a problem with this sample's code, please open an
 [issue][].
 
-[docs repo]: //github.com/dart-lang/site-webdev/tree/master/public/docs/_examples/user-input/dart
+[docs repo]: //github.com/dart-lang/site-webdev/tree/master/examples/ng/doc/user-input
 [download]: //github.com/angular-examples/user-input/archive/master.zip
 [issue]: //github.com/dart-lang/site-webdev/issues/new?labels=example&title=%5BAngular%5D%5Bexample%5D%20guide/user-input%3A%20
