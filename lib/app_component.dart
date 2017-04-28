@@ -40,7 +40,7 @@ final List<Hero> mockHeroes = [
         margin: 0 0 2em 0;
         list-style-type: none;
         padding: 0;
-        width: 10em;
+        width: 15em;
       }
       .heroes li {
         cursor: pointer;
@@ -81,10 +81,10 @@ final List<Hero> mockHeroes = [
     '''
     ],
     directives: const [
-      HeroDetailComponent
+      HeroDetailComponent,
     ])
 class AppComponent {
-  final String title = 'Tour of Heroes';
+  final title = 'Tour of Heroes';
   final List<Hero> heroes = mockHeroes;
   Hero selectedHero;
 
