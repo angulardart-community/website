@@ -33,8 +33,9 @@ class OnChangesComponent implements OnChanges {
   ngOnChanges(Map<String, SimpleChange> changes) {
     changes.forEach((String propName, SimpleChange change) {
       String cur = JSON.encode(change.currentValue);
-      String prev =
-          change.isFirstChange() ? "{}" : JSON.encode(change.previousValue);
+      String prev = change.previousValue == null
+          ? "{}"
+          : JSON.encode(change.previousValue);
       changeLog.add('$propName: currentValue = $cur, previousValue = $prev');
     });
   }
