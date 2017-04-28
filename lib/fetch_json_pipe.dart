@@ -3,7 +3,7 @@ import 'dart:html';
 
 import 'package:angular2/angular2.dart';
 
-@Pipe(name: 'fetch', pure: false)
+@Pipe('fetch', pure: false)
 class FetchJsonPipe extends PipeTransform {
   dynamic _cachedData;
   String _cachedUrl;

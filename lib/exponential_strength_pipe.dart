@@ -10,7 +10,7 @@ import 'package:angular2/angular2.dart';
  *   {{ 2 |  exponentialStrength:10}}
  *   formats to: 1024
  */
-@Pipe(name: 'exponentialStrength')
+@Pipe('exponentialStrength')
 class ExponentialStrengthPipe extends PipeTransform {
-  num transform(num value, num exponent) => math.pow(value, exponent);
+  num transform(num value, num exponent) => math.pow(value ?? 0, exponent ?? 1);
 }
