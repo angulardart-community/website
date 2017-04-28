@@ -7,7 +7,7 @@ class Hero {
   Hero(this.id, this.name);
 }
 
-final List<Hero> mockHeroes = [
+final mockHeroes = <Hero>[
   new Hero(11, 'Mr. Nice'),
   new Hero(12, 'Narco'),
   new Hero(13, 'Bombasto'),
@@ -51,7 +51,7 @@ final List<Hero> mockHeroes = [
         margin: 0 0 2em 0;
         list-style-type: none;
         padding: 0;
-        width: 10em;
+        width: 15em;
       }
       .heroes li {
         cursor: pointer;
@@ -92,11 +92,11 @@ final List<Hero> mockHeroes = [
     '''
     ])
 class AppComponent {
-  final String title = 'Tour of Heroes';
+  final title = 'Tour of Heroes';
   final List<Hero> heroes = mockHeroes;
   Hero selectedHero;
 
-  onSelect(Hero hero) {
+  void onSelect(Hero hero) {
     selectedHero = hero;
   }
 }
