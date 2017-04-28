@@ -21,6 +21,6 @@ you'll have to wait a bit while pub converts the app.
 If you find a problem with this sample's code, please open an
 [issue][].
 
-[docs repo]: //github.com/dart-lang/site-webdev/tree/master/public/docs/_examples/displaying-data/dart
+[docs repo]: //github.com/dart-lang/site-webdev/tree/master/examples/ng/doc/displaying-data
 [download]: //github.com/angular-examples/displaying-data/archive/master.zip
 [issue]: //github.com/dart-lang/site-webdev/issues/new?labels=example&title=%5BAngular%5D%5Bexample%5D%20guide/displaying-data%3A%20
