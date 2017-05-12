@@ -1,8 +1,8 @@
-/* pub build fails on
-     @ import 'hero_details_box.css';
-   See https://github.com/angular/angular/issues/8518 */
-
-@import '/packages/component_styles/hero_details_box.css';
+/*
+https://github.com/dart-lang/angular2/issues/39
+pub build fails on
+  @ import 'hero_details_box.css';
+*/
 
 :host {
   display: block;
