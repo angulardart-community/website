@@ -1,4 +1,4 @@
-import 'package:angular2/core.dart';
+import 'package:angular2/angular2.dart';
 
 class Hero {
   final int id;
@@ -21,28 +21,28 @@ final mockHeroes = <Hero>[
 ];
 
 @Component(
-    selector: 'my-app',
-    template: '''
-      <h1>{{title}}</h1>
-      <h2>My Heroes</h2>
-      <ul class="heroes">
-        <li *ngFor="let hero of heroes"
-          [class.selected]="hero == selectedHero"
-          (click)="onSelect(hero)">
-          <span class="badge">{{hero.id}}</span> {{hero.name}}
-        </li>
-      </ul>
-      <div *ngIf="selectedHero != null">
-        <h2>{{selectedHero.name}} details!</h2>
-        <div><label>id: </label>{{selectedHero.id}}</div>
-        <div>
-          <label>name: </label>
-          <input [(ngModel)]="selectedHero.name" placeholder="name"/>
-        </div>
+  selector: 'my-app',
+  template: '''
+    <h1>{{title}}</h1>
+    <h2>My Heroes</h2>
+    <ul class="heroes">
+      <li *ngFor="let hero of heroes"
+        [class.selected]="hero == selectedHero"
+        (click)="onSelect(hero)">
+        <span class="badge">{{hero.id}}</span> {{hero.name}}
+      </li>
+    </ul>
+    <div *ngIf="selectedHero != null">
+      <h2>{{selectedHero.name}} details!</h2>
+      <div><label>id: </label>{{selectedHero.id}}</div>
+      <div>
+        <label>name: </label>
+        <input [(ngModel)]="selectedHero.name" placeholder="name"/>
       </div>
-    ''',
-    styles: const [
-      '''
+    </div>
+  ''',
+  styles: const [
+    '''
       .selected {
         background-color: #CFD8DC !important;
         color: white;
@@ -90,7 +90,9 @@ final mockHeroes = <Hero>[
         border-radius: 4px 0px 0px 4px;
       }
     '''
-    ])
+  ],
+  directives: const [COMMON_DIRECTIVES],
+)
 class AppComponent {
   final title = 'Tour of Heroes';
   final List<Hero> heroes = mockHeroes;
