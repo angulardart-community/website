@@ -1,4 +1,4 @@
-import 'package:angular2/core.dart';
+import 'package:angular2/angular2.dart';
 
 import 'car_components.dart';
 import 'heroes_list_component.dart';
@@ -19,6 +19,7 @@ import 'villains_list_component.dart';
       <my-cars       *ngIf="showCars"></my-cars>
     ''',
     directives: const [
+      CORE_DIRECTIVES,
       carComponents,
       HeroesListComponent,
       VillainsListComponent

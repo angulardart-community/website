@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:angular2/core.dart';
+import 'package:angular2/angular2.dart';
 
 import 'hero.dart';
 import 'hero_tax_return_service.dart';
@@ -30,6 +30,7 @@ import 'hero_tax_return_service.dart';
       </div>
     ''',
     styleUrls: const ['hero_tax_return_component.css'],
+    directives: const [COMMON_DIRECTIVES],
     providers: const [HeroTaxReturnService])
 class HeroTaxReturnComponent {
   final HeroTaxReturnService _heroTaxReturnService;
