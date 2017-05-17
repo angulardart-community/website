@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:angular2/core.dart';
+import 'package:angular2/angular2.dart';
 
 class Hero {
   String name;
@@ -9,8 +9,8 @@ class Hero {
 }
 
 @Component(
-    selector: 'on-changes',
-    template: '''
+  selector: 'on-changes',
+  template: '''
     <div class="hero">
       <p>{{hero.name}} can {{power}}</p>
 
@@ -18,10 +18,12 @@ class Hero {
       <div *ngFor="let chg of changeLog">{{chg}}</div>
     </div>
     ''',
-    styles: const [
-      '.hero {background: LightYellow; padding: 8px; margin-top: 8px}',
-      'p {background: Yellow; padding: 8px; margin-top: 8px}'
-    ])
+  styles: const [
+    '.hero {background: LightYellow; padding: 8px; margin-top: 8px}',
+    'p {background: Yellow; padding: 8px; margin-top: 8px}'
+  ],
+  directives: const [CORE_DIRECTIVES],
+)
 class OnChangesComponent implements OnChanges {
   @Input()
   Hero hero;
@@ -46,10 +48,11 @@ class OnChangesComponent implements OnChanges {
 }
 
 @Component(
-    selector: 'on-changes-parent',
-    templateUrl: 'on_changes_parent_component.html',
-    styles: const ['.parent {background: Lavender}'],
-    directives: const [OnChangesComponent])
+  selector: 'on-changes-parent',
+  templateUrl: 'on_changes_parent_component.html',
+  styles: const ['.parent {background: Lavender}'],
+  directives: const [COMMON_DIRECTIVES, OnChangesComponent],
+)
 class OnChangesParentComponent {
   Hero hero;
   String power;

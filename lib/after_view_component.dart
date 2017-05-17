@@ -1,22 +1,27 @@
-import 'package:angular2/core.dart';
+import 'package:angular2/angular2.dart';
 
 import 'logger_service.dart';
 
 //////////////////
-@Component(selector: 'my-child-view', template: '<input [(ngModel)]="hero">')
+@Component(
+  selector: 'my-child-view',
+  template: '<input [(ngModel)]="hero">',
+  directives: const [COMMON_DIRECTIVES],
+)
 class ChildViewComponent {
   String hero = 'Magneta';
 }
 
 //////////////////////
 @Component(
-    selector: 'after-view',
-    template: '''
+  selector: 'after-view',
+  template: '''
     <div>-- child view begins --</div>
       <my-child-view></my-child-view>
     <div>-- child view ends --</div>
     <p *ngIf="comment.isNotEmpty" class="comment">{{comment}}</p>''',
-    directives: const [ChildViewComponent])
+  directives: const [CORE_DIRECTIVES, ChildViewComponent],
+)
 class AfterViewComponent implements AfterViewChecked, AfterViewInit {
   var _prevHero = '';
 
@@ -70,8 +75,8 @@ class AfterViewComponent implements AfterViewChecked, AfterViewInit {
 
 //////////////
 @Component(
-    selector: 'after-view-parent',
-    template: '''
+  selector: 'after-view-parent',
+  template: '''
     <div class="parent">
       <h2>AfterView</h2>
 
@@ -82,9 +87,10 @@ class AfterViewComponent implements AfterViewChecked, AfterViewInit {
       <div *ngFor="let msg of logs">{{msg}}</div>
     </div>
     ''',
-    styles: const ['.parent {background: burlywood}'],
-    providers: const [LoggerService],
-    directives: const [AfterViewComponent])
+  styles: const ['.parent {background: burlywood}'],
+  providers: const [LoggerService],
+  directives: const [CORE_DIRECTIVES, AfterViewComponent],
+)
 class AfterViewParentComponent {
   final LoggerService _logger;
   bool show = true;

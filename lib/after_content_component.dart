@@ -1,22 +1,28 @@
-import 'package:angular2/core.dart';
+import 'package:angular2/angular2.dart';
 
 import 'logger_service.dart';
 
 //////////////////
-@Component(selector: 'my-child', template: '<input [(ngModel)]="hero">')
+@Component(
+  selector: 'my-child',
+  template: '<input [(ngModel)]="hero">',
+  directives: const [COMMON_DIRECTIVES],
+)
 class ChildComponent {
   String hero = 'Magneta';
 }
 
 //////////////////////
 @Component(
-    selector: 'after-content',
-    template: '''
-      <div>-- projected content begins --</div>
-        <ng-content></ng-content>
-      <div>-- projected content ends --</div>
-      <p *ngIf="comment.isNotEmpty" class="comment">{{comment}}</p>
-    ''')
+  selector: 'after-content',
+  template: '''
+    <div>-- projected content begins --</div>
+      <ng-content></ng-content>
+    <div>-- projected content ends --</div>
+    <p *ngIf="comment.isNotEmpty" class="comment">{{comment}}</p>
+    ''',
+  directives: const [CORE_DIRECTIVES],
+)
 class AfterContentComponent implements AfterContentChecked, AfterContentInit {
   String _prevHero = '';
   String comment = '';
@@ -63,25 +69,26 @@ class AfterContentComponent implements AfterContentChecked, AfterContentInit {
 
 //////////////
 @Component(
-    selector: 'after-content-parent',
-    template: '''
-      <div class="parent">
-        <h2>AfterContent</h2>
+  selector: 'after-content-parent',
+  template: '''
+    <div class="parent">
+      <h2>AfterContent</h2>
 
-        <div *ngIf="show">
-          <after-content>
-            <my-child></my-child>
-          </after-content>
-        </div>
-
-        <h4>-- AfterContent Logs --</h4>
-        <p><button (click)="reset()">Reset</button></p>
-        <div *ngFor="let msg of logs">{{msg}}</div>
+      <div *ngIf="show">
+        <after-content>
+          <my-child></my-child>
+        </after-content>
       </div>
+
+      <h4>-- AfterContent Logs --</h4>
+      <p><button (click)="reset()">Reset</button></p>
+      <div *ngFor="let msg of logs">{{msg}}</div>
+    </div>
     ''',
-    styles: const ['.parent {background: burlywood}'],
-    providers: const [LoggerService],
-    directives: const [AfterContentComponent, ChildComponent])
+  styles: const ['.parent {background: burlywood}'],
+  providers: const [LoggerService],
+  directives: const [CORE_DIRECTIVES, AfterContentComponent, ChildComponent],
+)
 class AfterContentParentComponent {
   final LoggerService _logger;
   bool show = true;
