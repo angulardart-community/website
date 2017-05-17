@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:angular2/core.dart';
+import 'package:angular2/angular2.dart';
 
 import 'hero.dart';
 import 'hero_detail_component.dart';
@@ -71,6 +71,7 @@ import 'hero_service.dart';
    '''
     ],
     directives: const [
+      CORE_DIRECTIVES,
       HeroDetailComponent
     ],
     providers: const [
