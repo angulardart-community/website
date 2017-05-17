@@ -3,10 +3,12 @@ import 'flying_heroes_pipe.dart';
 import 'heroes.dart';
 
 @Component(
-    selector: 'flying-heroes',
-    templateUrl: 'flying_heroes_component.html',
-    styles: const ['#flyers, #all {font-style: italic}'],
-    pipes: const [FlyingHeroesPipe])
+  selector: 'flying-heroes',
+  templateUrl: 'flying_heroes_component.html',
+  styles: const ['#flyers, #all {font-style: italic}'],
+  pipes: const [FlyingHeroesPipe],
+  directives: const [COMMON_DIRECTIVES],
+)
 class FlyingHeroesComponent {
   List<Hero> heroes;
   bool canFly = true;
@@ -39,10 +41,12 @@ class FlyingHeroesComponent {
 
 //\\\\ Identical except for impure pipe \\\\\\
 @Component(
-    selector: 'flying-heroes-impure',
-    templateUrl: 'flying_heroes_component.html',
-    styles: const ['.flyers, .all {font-style: italic}'],
-    pipes: const [FlyingHeroesImpurePipe])
+  selector: 'flying-heroes-impure',
+  templateUrl: 'flying_heroes_component.html',
+  styles: const ['.flyers, .all {font-style: italic}'],
+  pipes: const [FlyingHeroesImpurePipe],
+  directives: const [COMMON_DIRECTIVES],
+)
 class FlyingHeroesImpureComponent extends FlyingHeroesComponent {
   FlyingHeroesImpureComponent() {
     title = 'Flying Heroes (impure pipe)';
