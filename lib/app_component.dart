@@ -1,20 +1,22 @@
-import 'package:angular2/core.dart';
+import 'package:angular2/angular2.dart';
 
 import 'hero.dart';
 
 @Component(
-    selector: 'my-app',
-    template: '''
-      <h1>{{title}}</h1>
-      <h2>My favorite hero is: {{myHero.name}}</h2>
-      <p>Heroes:</p>
-      <ul>
-        <li *ngFor="let hero of heroes">
-          {{ hero.name }}
-        </li>
-      </ul>
-      <p *ngIf="heroes.length > 3">There are many heroes!</p>
-    ''')
+  selector: 'my-app',
+  template: '''
+    <h1>{{title}}</h1>
+    <h2>My favorite hero is: {{myHero.name}}</h2>
+    <p>Heroes:</p>
+    <ul>
+      <li *ngFor="let hero of heroes">
+        {{ hero.name }}
+      </li>
+    </ul>
+    <p *ngIf="heroes.length > 3">There are many heroes!</p>
+  ''',
+  directives: const [CORE_DIRECTIVES],
+)
 class AppComponent {
   String title = 'Tour of Heroes';
   List<Hero> heroes = [
