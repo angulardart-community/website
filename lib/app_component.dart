@@ -1,4 +1,4 @@
-import 'package:angular2/core.dart';
+import 'package:angular2/angular2.dart';
 
 import 'after_content_component.dart';
 import 'after_view_component.dart';
