@@ -2,7 +2,7 @@
   <button (click)="onClickMe()">Click me!</button>
 */
 
-import 'package:angular2/core.dart';
+import 'package:angular2/angular2.dart';
 
 @Component(
     selector: 'click-me',
