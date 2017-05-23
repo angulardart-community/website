@@ -28,7 +28,7 @@ final List<Hero> mockHeroes = [
         <span class="badge">{{hero.id}}</span> {{hero.name}}
       </li>
     </ul>
-    <my-hero-detail [hero]="selectedHero"></my-hero-detail>
+    <hero-detail [hero]="selectedHero"></hero-detail>
   ''',
   styles: const [
     '''
