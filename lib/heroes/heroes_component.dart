@@ -1,4 +1,4 @@
-import 'package:angular2/core.dart';
+import 'package:angular2/angular2.dart';
 
 import 'hero_list_component.dart';
 import 'hero_service_provider.dart';
