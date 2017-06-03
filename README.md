@@ -3,7 +3,7 @@
 Welcome to the example application used in AngularDart's
 [Lifecycle Hooks](https://webdev.dartlang.org/angular/guide/lifecycle-hooks) page.
 
-You can run a [hosted copy](http://angular-examples.github.io/lifecycle-hooks) of this sample. Or run your own copy:
+You can run a [hosted copy](https://webdev.dartlang.org/examples/ng/doc/lifecycle-hooks) of this sample. Or run your own copy:
 
 1. Clone or [download][] this repo.
 2. Get the dependencies: `pub get`
