@@ -3,7 +3,7 @@
 Welcome to the example application used in AngularDart's
 [Component Styles](https://webdev.dartlang.org/angular/guide/component-styles) page.
 
-You can run a [hosted copy](http://angular-examples.github.io/component-styles) of this sample. Or run your own copy:
+You can run a [hosted copy](https://webdev.dartlang.org/examples/ng/doc/component-styles) of this sample. Or run your own copy:
 
 1. Clone or [download][] this repo.
 2. Get the dependencies: `pub get`
