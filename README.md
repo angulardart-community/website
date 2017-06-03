@@ -3,7 +3,7 @@
 Welcome to the example application used in AngularDart's
 [Tour of Heroes: Services](https://webdev.dartlang.org/angular/tutorial/toh-pt4.html) page.
 
-You can run a [hosted copy](http://angular-examples.github.io/toh-4) of this sample. Or run your own copy:
+You can run a [hosted copy](https://webdev.dartlang.org/examples/ng/doc/toh-4) of this sample. Or run your own copy:
 
 1. Clone or [download][] this repo.
 2. Get the dependencies: `pub get`

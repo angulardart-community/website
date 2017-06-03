@@ -7,8 +7,8 @@ import 'hero_detail_component.dart';
 import 'hero_service.dart';
 
 @Component(
-    selector: 'my-app',
-    template: '''
+  selector: 'my-app',
+  template: '''
       <h1>{{title}}</h1>
       <h2>My Heroes</h2>
       <ul class="heroes">
@@ -20,8 +20,8 @@ import 'hero_service.dart';
       </ul>
       <hero-detail [hero]="selectedHero"></hero-detail>
     ''',
-    styles: const [
-      '''
+  styles: const [
+    '''
       .selected {
         background-color: #CFD8DC !important;
         color: white;
@@ -69,14 +69,10 @@ import 'hero_service.dart';
         border-radius: 4px 0px 0px 4px;
       }
    '''
-    ],
-    directives: const [
-      CORE_DIRECTIVES,
-      HeroDetailComponent
-    ],
-    providers: const [
-      HeroService
-    ])
+  ],
+  directives: const [CORE_DIRECTIVES, HeroDetailComponent],
+  providers: const [HeroService],
+)
 class AppComponent implements OnInit {
   String title = 'Tour of Heroes';
   List<Hero> heroes;
