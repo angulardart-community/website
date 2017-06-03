@@ -3,7 +3,7 @@
 Welcome to the example application used in AngularDart's
 [Attribute Directives](https://webdev.dartlang.org/angular/guide/attribute-directives) page.
 
-You can run a [hosted copy](http://angular-examples.github.io/attribute-directives) of this sample. Or run your own copy:
+You can run a [hosted copy](https://webdev.dartlang.org/examples/ng/doc/attribute-directives) of this sample. Or run your own copy:
 
 1. Clone or [download][] this repo.
 2. Get the dependencies: `pub get`
