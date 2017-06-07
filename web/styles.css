@@ -1,20 +1,23 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Material+Icons);
+
 /* Master Styles */
 h1 {
-  color: #369; 
-  font-family: Arial, Helvetica, sans-serif;   
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
-h2, h3 { 
+h2, h3 {
   color: #444;
-  font-family: Arial, Helvetica, sans-serif;   
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
 }
-body { 
-  margin: 2em; 
+body {
+  margin: 2em;
 }
-body, input[text], button { 
-  color: #888; 
-  font-family: Cambria, Georgia; 
+body, input[text], button {
+  color: #888;
+  font-family: Cambria, Georgia;
 }
 a {
   cursor: pointer;
@@ -34,7 +37,7 @@ button:hover {
 }
 button:disabled {
   background-color: #eee;
-  color: #aaa; 
+  color: #aaa;
   cursor: auto;
 }
 
@@ -42,6 +45,7 @@ button:disabled {
 nav a {
   padding: 5px 10px;
   text-decoration: none;
+  margin-right: 10px;
   margin-top: 10px;
   display: inline-block;
   background-color: #eee;
@@ -54,7 +58,7 @@ nav a:hover {
   color: #039be5;
   background-color: #CFD8DC;
 }
-nav a.router-link-active {
+nav a.active {
   color: #039be5;
 }
 
@@ -80,40 +84,10 @@ nav a.router-link-active {
   background-color: #DDD;
   left: .1em;
 }
-.items li.selected:hover {
-  background-color: #BBD8DC;
-  color: white;
-}
-.items .text {
-  position: relative;
-  top: -3px;
-}
-.items {
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 24em;
-}
-.items li {
-  cursor: pointer;
-  position: relative;
-  left: 0;
-  background-color: #EEE;
-  margin: .5em;
-  padding: .3em 0;
-  height: 1.6em;
-  border-radius: 4px;
-}
-.items li:hover {
-  color: #607D8B;
-  background-color: #DDD;
-  left: .1em;
-}
 .items li.selected {
   background-color: #CFD8DC;
   color: white;
 }
-
 .items li.selected:hover {
   background-color: #BBD8DC;
 }
@@ -135,8 +109,7 @@ nav a.router-link-active {
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
 }
-
 /* everywhere else */
-* { 
-  font-family: Arial, Helvetica, sans-serif; 
+* {
+  font-family: Arial, Helvetica, sans-serif;
 }
