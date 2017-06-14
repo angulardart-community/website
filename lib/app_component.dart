@@ -1,6 +1,6 @@
 import 'package:angular2/angular2.dart';
 
-import 'highlight_directive.dart';
+import 'src/highlight_directive.dart';
 
 @Component(
     selector: 'my-app',
