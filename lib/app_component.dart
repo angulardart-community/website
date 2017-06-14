@@ -1,6 +1,6 @@
 import 'package:angular2/angular2.dart';
 
-import 'hero.dart';
+import 'src/hero.dart';
 
 @Component(
   selector: 'my-app',
