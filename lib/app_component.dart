@@ -1,6 +1,6 @@
 import 'package:angular2/angular2.dart';
-import 'hero.dart';
-import 'hero_app_main_component.dart';
+import 'src/hero.dart';
+import 'src/hero_app_main_component.dart';
 
 @Component(
     selector: 'hero-app',
@@ -9,7 +9,7 @@ import 'hero_app_main_component.dart';
       <hero-app-main [hero]="hero"></hero-app-main>''',
     styles: const ['h1 { font-weight: normal; }'],
     directives: const [HeroAppMainComponent])
-class HeroAppComponent {
+class AppComponent {
   Hero hero =
       new Hero('Human Torch', ['Mister Fantastic', 'Invisible Woman', 'Thing']);
 
