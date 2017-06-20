@@ -3,11 +3,12 @@ import 'dart:html';
 import 'package:angular2/angular2.dart';
 
 @Component(
-    selector: 'key-up1',
-    template: '''
-      <input (keyup)="onKey(\$event)">
-      <p>{{values}}</p>
-    ''')
+  selector: 'key-up1',
+  template: '''
+    <input (keyup)="onKey(\$event)">
+    <p>{{values}}</p>
+  ''',
+)
 class KeyUpComponentV1 {
   String values = '';
 
@@ -25,26 +26,26 @@ class KeyUpComponentV1 {
 //////////////////////////////////////////
 
 @Component(
-    selector: 'key-up2',
-    template: '''
-      <input #box (keyup)="onKey(box.value)">
-      <p>{{values}}</p>
-    ''')
+  selector: 'key-up2',
+  template: '''
+    <input #box (keyup)="onKey(box.value)">
+    <p>{{values}}</p>
+  ''',
+)
 class KeyUpComponentV2 {
   String values = '';
-  onKey(value) {
-    values += '$value | ';
-  }
+  onKey(value) => values += '$value | ';
 }
 
 //////////////////////////////////////////
 
 @Component(
-    selector: 'key-up3',
-    template: '''
-      <input #box (keyup.enter)="values=box.value">
-      <p>{{values}}</p>
-    ''')
+  selector: 'key-up3',
+  template: '''
+    <input #box (keyup.enter)="values=box.value">
+    <p>{{values}}</p>
+  ''',
+)
 class KeyUpComponentV3 {
   String values = '';
 }
@@ -52,13 +53,14 @@ class KeyUpComponentV3 {
 //////////////////////////////////////////
 
 @Component(
-    selector: 'key-up4',
-    template: '''
-      <input #box
-        (keyup.enter)="values=box.value"
-        (blur)="values=box.value">
-      <p>{{values}}</p>
-    ''')
+  selector: 'key-up4',
+  template: '''
+    <input #box
+      (keyup.enter)="values=box.value"
+      (blur)="values=box.value">
+    <p>{{values}}</p>
+  ''',
+)
 class KeyUpComponentV4 {
   String values = '';
 }

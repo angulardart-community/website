@@ -5,14 +5,14 @@
 import 'package:angular2/angular2.dart';
 
 @Component(
-    selector: 'click-me',
-    template: '''
-      <button (click)="onClickMe()">Click me!</button>
-      {{clickMessage}}''')
+  selector: 'click-me',
+  template: '''
+    <button (click)="onClickMe()">Click me!</button>
+    {{clickMessage}}
+  ''',
+)
 class ClickMeComponent {
   String clickMessage = '';
 
-  void onClickMe() {
-    clickMessage = 'You are my hero!';
-  }
+  void onClickMe() => clickMessage = 'You are my hero!';
 }
