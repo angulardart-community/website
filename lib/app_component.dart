@@ -1,7 +1,7 @@
 import 'package:angular2/angular2.dart';
 
-import 'hero.dart';
-import 'hero_detail_component.dart';
+import 'src/hero.dart';
+import 'src/hero_detail_component.dart';
 
 final List<Hero> mockHeroes = [
   new Hero(11, 'Mr. Nice'),
