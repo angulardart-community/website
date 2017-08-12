@@ -9,13 +9,17 @@ pub build fails on
   border: 1px solid black;
 }
 
+/* #docregion host-function */
 :host(.active) {
   border-width: 3px;
 }
+/* #enddocregion host-function */
 
+/* #docregion host-context */
 :host-context(.theme-light) h2 {
   background-color: #eef;
 }
+/* #enddocregion host-context */
 
 :host /deep/ h3 {
   font-style: italic;
