@@ -20,7 +20,7 @@ void main() {
 
   tearDown(disposeAnyRunningTest);
 
-  group('Null initial @Input() hero:', () {
+  group('No initial @Input() hero:', () {
     setUp(() async {
       fixture = await testBed.create();
       po = await fixture.resolvePageObject(HeroDetailPO);
@@ -28,6 +28,7 @@ void main() {
 
     test('has empty view', () async {
       expect(fixture.rootElement.text.trim(), '');
+      expect(await po.heroFromDetails, isNull);
     });
 
     test('transition to ${targetHero['name']} hero', () async {
