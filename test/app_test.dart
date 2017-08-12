@@ -48,8 +48,8 @@ void selectHeroTests() {
   const targetHero = const {'id': 16, 'name': 'RubberMan'};
 
   setUp(() async {
-    await appPO.clickHero(5);
-    appPO = await fixture.resolvePageObject(AppPO); // Refresh PO
+    await appPO.selectHero(5);
+    appPO = await fixture.resolvePageObject(AppPO);
   });
 
   test('is selected', () async {
