@@ -1,4 +1,4 @@
-import 'package:angular2/platform/browser.dart';
+import 'package:angular/angular.dart';
 
 //import 'package:displaying_data/app_component_1.dart' as v1;
 //import 'package:displaying_data/app_component_2.dart' as v2;
