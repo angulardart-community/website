@@ -1,4 +1,5 @@
 import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 
 @Component(
   selector: 'little-tour',
@@ -11,7 +12,7 @@ import 'package:angular/angular.dart';
 
     <ul><li *ngFor="let hero of heroes">{{hero}}</li></ul>
   ''',
-  directives: const [COMMON_DIRECTIVES],
+  directives: const [CORE_DIRECTIVES, formDirectives],
 )
 class LittleTourComponent {
   List<String> heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
