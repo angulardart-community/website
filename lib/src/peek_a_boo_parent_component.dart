@@ -1,4 +1,5 @@
 import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 
 import 'logger_service.dart';
 import 'peek_a_boo_component.dart';
@@ -22,7 +23,7 @@ import 'peek_a_boo_component.dart';
     </div>
     ''',
   styles: const ['.parent {background: moccasin}'],
-  directives: const [COMMON_DIRECTIVES, PeekABooComponent],
+  directives: const [CORE_DIRECTIVES, formDirectives, PeekABooComponent],
   providers: const [LoggerService],
 )
 class PeekABooParentComponent {
