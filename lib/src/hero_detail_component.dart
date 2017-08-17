@@ -1,4 +1,5 @@
 import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 
 import 'hero.dart';
 
@@ -13,7 +14,7 @@ import 'hero.dart';
         <input [(ngModel)]="hero.name" placeholder="name">
       </div>
     </div>''',
-  directives: const [COMMON_DIRECTIVES],
+  directives: const [CORE_DIRECTIVES, formDirectives],
 )
 class HeroDetailComponent {
   @Input()
