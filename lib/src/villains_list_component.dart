@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 
 import 'villains_service.dart';
 
