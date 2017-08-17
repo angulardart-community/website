@@ -1,5 +1,5 @@
 // Examples of provider arrays
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 
 import 'app_config.dart';
 import 'heroes/hero_service_provider.dart';
