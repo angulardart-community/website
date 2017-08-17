@@ -1,4 +1,5 @@
 import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 import 'flying_heroes_pipe.dart';
 import 'heroes.dart';
 
@@ -7,7 +8,7 @@ import 'heroes.dart';
   templateUrl: 'flying_heroes_component.html',
   styles: const ['#flyers, #all {font-style: italic}'],
   pipes: const [FlyingHeroesPipe],
-  directives: const [COMMON_DIRECTIVES],
+  directives: const [CORE_DIRECTIVES, formDirectives],
 )
 class FlyingHeroesComponent {
   List<Hero> heroes;
@@ -45,7 +46,7 @@ class FlyingHeroesComponent {
   templateUrl: 'flying_heroes_component.html',
   styles: const ['.flyers, .all {font-style: italic}'],
   pipes: const [FlyingHeroesImpurePipe],
-  directives: const [COMMON_DIRECTIVES],
+  directives: const [CORE_DIRECTIVES, formDirectives],
 )
 class FlyingHeroesImpureComponent extends FlyingHeroesComponent {
   FlyingHeroesImpureComponent() {
