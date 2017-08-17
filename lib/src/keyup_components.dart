@@ -1,6 +1,6 @@
 import 'dart:html';
 
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 
 @Component(
   selector: 'key-up1',
