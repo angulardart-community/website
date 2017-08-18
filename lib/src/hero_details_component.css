@@ -17,6 +17,6 @@
 }
 /* #enddocregion host-context */
 
-:host /deep/ h3 {
+:host ::ng-deep h3 {
   font-style: italic;
 }
