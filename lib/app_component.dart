@@ -1,4 +1,5 @@
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 
 import 'src/hero.dart';
 import 'src/hero_detail_component.dart';
@@ -81,7 +82,8 @@ final List<Hero> mockHeroes = [
     '''
   ],
   directives: const [
-    COMMON_DIRECTIVES,
+    CORE_DIRECTIVES,
+    formDirectives,
     HeroDetailComponent,
   ],
 )
