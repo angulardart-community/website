@@ -16,5 +16,5 @@ AppConfig heroDiConfigFactory() => new AppConfig()
   ..apiEndpoint = 'api.heroes.com'
   ..title = 'Dependency Injection';
 
-const appConfigProvider =
-    const Provider(APP_CONFIG, useFactory: heroDiConfigFactory, deps: const []);
+const appConfigProvider = const Provider<AppConfig>(APP_CONFIG,
+    useFactory: heroDiConfigFactory, deps: const []);
