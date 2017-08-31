@@ -1,4 +1,5 @@
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 
 class Hero {
   String name;
@@ -81,7 +82,7 @@ class DoCheckComponent implements DoCheck {
   selector: 'do-check-parent',
   templateUrl: 'do_check_parent_component.html',
   styles: const ['.parent {background: Lavender}'],
-  directives: const [COMMON_DIRECTIVES, DoCheckComponent],
+  directives: const [CORE_DIRECTIVES, formDirectives, DoCheckComponent],
 )
 class DoCheckParentComponent {
   Hero hero;
