@@ -1,4 +1,4 @@
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 
 import 'src/flying_heroes_component.dart';
 import 'src/hero_async_message_component.dart';
