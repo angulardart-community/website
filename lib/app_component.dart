@@ -1,13 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 
-class Hero {
-  final int id;
-  String name;
-
-  Hero(this.id, this.name);
-}
-
 @Component(
   selector: 'my-app',
   template: '''
@@ -18,9 +11,16 @@ class Hero {
       <label>name: </label>
       <input [(ngModel)]="hero.name" placeholder="name">
     </div>''',
-  directives: const [CORE_DIRECTIVES, formDirectives],
+  directives: const [formDirectives],
 )
 class AppComponent {
-  String title = 'Tour of Heroes';
+  final title = 'Tour of Heroes';
   Hero hero = new Hero(1, 'Windstorm');
+}
+
+class Hero {
+  final int id;
+  String name;
+
+  Hero(this.id, this.name);
 }
