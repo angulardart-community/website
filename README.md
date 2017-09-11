@@ -1,11 +1,13 @@
 ## Lifecycle Hooks
 
-Welcome to the example application used in AngularDart's
-[Lifecycle Hooks](https://webdev.dartlang.org/angular/guide/lifecycle-hooks) page.
+Welcome to the example app used in the
+[Lifecycle Hooks](https://webdev.dartlang.org/angular/guide/lifecycle-hooks) page
+of [Dart for the web](https://webdev.dartlang.org).
 
-You can run a [hosted copy](https://webdev.dartlang.org/examples/ng/doc/lifecycle-hooks) of this sample. Or run your own copy:
+You can run a [hosted copy](https://webdev.dartlang.org/examples/ng/doc/lifecycle-hooks) of this
+sample. Or run your own copy:
 
-1. Clone or [download][] this repo.
+1. Create a local copy of this repo (use the "Clone or download" button above).
 2. Get the dependencies: `pub get`
 3. Launch a development server: `pub serve`
 4. In a browser, open [http://localhost:8080](http://localhost:8080)
@@ -15,12 +17,10 @@ you'll have to wait a bit while pub converts the app.
 
 ---
 
-*Note:* The content of this repository is generated from
-[the Angular docs repository][docs repo] by running the
+*Note:* The content of this repository is generated from the
+[Angular docs repository][docs repo] by running the
 [dart-doc-syncer](//github.com/angular/dart-doc-syncer) tool.
-If you find a problem with this sample's code, please open an
-[issue][].
+If you find a problem with this sample's code, please open an [issue][].
 
 [docs repo]: //github.com/dart-lang/site-webdev/tree/master/examples/ng/doc/lifecycle-hooks
-[download]: //github.com/angular-examples/lifecycle-hooks/archive/master.zip
-[issue]: //github.com/dart-lang/site-webdev/issues/new?labels=example&title=%5BAngular%5D%5Bexample%5D%20guide/lifecycle-hooks%3A%20
+[issue]: //github.com/dart-lang/site-webdev/issues/new?title=examples/ng/doc/lifecycle-hooks
