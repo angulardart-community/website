@@ -10,7 +10,8 @@ import 'package:angular_forms/angular_forms.dart';
     <div>
       <label>name: </label>
       <input [(ngModel)]="hero.name" placeholder="name">
-    </div>''',
+    </div>
+  ''',
   directives: const [formDirectives],
 )
 class AppComponent {
