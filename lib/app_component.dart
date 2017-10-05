@@ -23,35 +23,7 @@ final mockHeroes = <Hero>[
 
 @Component(
   selector: 'my-app',
-  template: '''
-    <h1>{{title}}</h1>
-    <h2>My Heroes</h2>
-    <ul class="heroes">
-      <li *ngFor="let hero of heroes"
-        [class.selected]="hero == selectedHero"
-        (click)="onSelect(hero)">
-        <span class="badge">{{hero.id}}</span> {{hero.name}}
-      </li>
-    </ul>
-    <div *ngIf="selectedHero != null">
-      <h2>{{selectedHero.name}} details!</h2>
-      <div><label>id: </label>{{selectedHero.id}}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="selectedHero.name" placeholder="name"/>
-      </div>
-    </div>
-  ''',
-  /*
-  // Not recommended when adding many CSS classes:
-  styles: const [
-    '''
-      .selected { ... }
-      .heroes { ... }
-      ...
-    '''
-  ],
-  */
+  templateUrl: 'app_component.html',
   styleUrls: const ['app_component.css'],
   directives: const [CORE_DIRECTIVES, formDirectives],
 )
