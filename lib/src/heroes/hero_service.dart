@@ -14,6 +14,6 @@ class HeroService {
   List<Hero> getHeroes() {
     var auth = _isAuthorized ? 'authorized' : 'unauthorized';
     _logger.log('Getting heroes for $auth user.');
-    return HEROES.where((hero) => _isAuthorized || !hero.isSecret).toList();
+    return mockHeroes.where((hero) => _isAuthorized || !hero.isSecret).toList();
   }
 }

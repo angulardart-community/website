@@ -164,16 +164,16 @@ class Provider8Component {
 @Component(
     selector: 'provider-9',
     template: '{{log}}',
-    providers: const [const Provider(APP_CONFIG, useValue: heroDiConfig)])
+    providers: const [const Provider(appConfigToken, useValue: heroDiConfig)])
 class Provider9Component implements OnInit {
   Map _config;
   String log;
 
-  Provider9Component(@Inject(APP_CONFIG) this._config);
+  Provider9Component(@Inject(appConfigToken) this._config);
 
   @override
   void ngOnInit() {
-    log = 'APP_CONFIG Application title is ${_config['title']}';
+    log = 'AppConfig Application title is ${_config['title']}';
   }
 }
 

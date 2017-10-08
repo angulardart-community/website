@@ -36,14 +36,14 @@ import 'src/providers_component.dart';
   providers: const [
     Logger,
     UserService,
-    const Provider(APP_CONFIG, useFactory: heroDiConfigFactory),
+    const Provider(appConfigToken, useFactory: heroDiConfigFactory),
   ],
 )
 class AppComponent {
   final UserService _userService;
   final String title;
 
-  AppComponent(@Inject(APP_CONFIG) AppConfig config, this._userService)
+  AppComponent(@Inject(appConfigToken) AppConfig config, this._userService)
       : title = config.title;
 
   bool get isAuthorized {
