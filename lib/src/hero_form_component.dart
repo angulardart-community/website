@@ -37,6 +37,8 @@ class HeroFormComponent {
         'ng-invalid': control.valid == false
       };
   // TODO: does this map need to be cached?
+
+  void newHero([NgForm form]) => model = new Hero(42, '', ''); // use mock id
 }
 
 Hero skyDog() {
