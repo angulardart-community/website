@@ -3,12 +3,14 @@
     <h1>Hero Form</h1>
     <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
       <div class="form-group">
-        <label for="name">Name</label>
+        <label for="name">Name&nbsp;*</label>
         <input type="text" class="form-control" id="name" required
                [(ngModel)]="model.name"
-               #name="ngForm" [ngClass]="controlStateClasses(name)"
+               #name="ngForm"
+               [class.is-valid]="name.valid"
+               [class.is-invalid]="!name.valid"
                ngControl="name">
-        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+        <div [hidden]="name.valid || name.pristine" class="invalid-feedback">
           Name is required
         </div>
       </div>
@@ -16,45 +18,49 @@
         <label for="alterEgo">Alter Ego</label>
         <input type="text" class="form-control" id="alterEgo"
                [(ngModel)]="model.alterEgo"
-               #alterEgo="ngForm" [ngClass]="controlStateClasses(alterEgo)"
-               ngControl="alterEgo" >
+               ngControl="alterEgo">
       </div>
       <div class="form-group">
-        <label for="power">Hero Power</label>
+        <label for="power">Hero Power&nbsp;*</label>
         <select class="form-control" id="power" required
                 [(ngModel)]="model.power"
-                #power="ngForm" [ngClass]="controlStateClasses(power)"
+                #power="ngForm"
+                [ngClass]="setCssValidityClass(power)"
                 ngControl="power">
           <option *ngFor="let p of powers" [value]="p">{{p}}</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-default"
-              [disabled]="!heroForm.form.valid">Submit</button>
-      <button type="button" class="btn btn-default"
-              (click)="newHero()">
-        <!-- Should be:
-               (click)="newHero(); heroForm.reset()"
-             Awaiting fix to https://github.com/dart-lang/angular/issues/216 -->
-        New Hero
-      </button>
-      <button type="reset">Reset</button>
+      <div class="row">
+        <div class="col-auto">
+          <button [disabled]="!heroForm.form.valid" type="submit" class="btn btn-primary">
+            Submit
+          </button>
+          <button (click)="clear()" type="button" class="btn">
+            Clear
+          </button>
+        </div>
+        <small class="col text-right">*&nbsp;Required</small>
+      </div>
     </form>
   </div>
   <div [hidden]="!submitted">
-    <h2>You submitted the following:</h2>
-    <div class="row">
-      <div class="col-xs-3">Name</div>
-      <div class="col-xs-9  pull-left">{{ model.name }}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3">Alter Ego</div>
-      <div class="col-xs-9 pull-left">{{ model.alterEgo }}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3">Power</div>
-      <div class="col-xs-9 pull-left">{{ model.power }}</div>
-    </div>
-    <br>
-    <button class="btn btn-default" (click)="submitted=false">Edit</button>
+    <h1>Hero data</h1>
+
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <td>{{model.name}}</td>
+      </tr>
+      <tr>
+        <th>Alter Ego</th>
+        <td>{{model.alterEgo}}</td>
+      </tr>
+      <tr>
+        <th>Power</th>
+        <td>{{model.power}}</td>
+      </tr>
+    </table>
+
+    <button (click)="submitted=false" class="btn btn-primary">Edit</button>
   </div>
 </div>
