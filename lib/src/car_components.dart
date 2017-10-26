@@ -14,19 +14,15 @@ class CCarComponent {
   }
 }
 
-@Component(
-    selector: 'b-car',
-    template: '''
+@Component(selector: 'b-car', template: '''
       <div>B: {{description}}</div>
       <c-car></c-car>
-    ''',
-    directives: const [
-      CCarComponent
-    ],
-    providers: const [
-      const Provider(CarService, useClass: CarService2),
-      const Provider(EngineService, useClass: EngineService2)
-    ])
+    ''', directives: const [
+  CCarComponent
+], providers: const [
+  const Provider(CarService, useClass: CarService2),
+  const Provider(EngineService, useClass: EngineService2)
+])
 class BCarComponent {
   String description;
   BCarComponent(CarService carService) {
@@ -35,13 +31,10 @@ class BCarComponent {
   }
 }
 
-@Component(
-    selector: 'a-car',
-    template: '''
+@Component(selector: 'a-car', template: '''
       <div>A: {{description}}</div>
       <b-car></b-car>
-    ''',
-    directives: const [BCarComponent])
+    ''', directives: const [BCarComponent])
 class ACarComponent {
   String description;
   ACarComponent(CarService carService) {
@@ -50,13 +43,10 @@ class ACarComponent {
   }
 }
 
-@Component(
-    selector: 'my-cars',
-    template: '''
+@Component(selector: 'my-cars', template: '''
       <h3>Cars</h3>
       <a-car></a-car>
-    ''',
-    directives: const [ACarComponent])
+    ''', directives: const [ACarComponent])
 class CarsComponent {}
 
 const carComponents = const [
