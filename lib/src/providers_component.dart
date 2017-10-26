@@ -202,9 +202,7 @@ class Provider10Component implements OnInit {
   }
 }
 
-@Component(
-    selector: 'my-providers',
-    template: '''
+@Component(selector: 'my-providers', template: '''
       <h2>Provider variations</h2>
       <div id="p1"><provider-1></provider-1></div>
       <div id="p3"><provider-3></provider-3></div>
@@ -215,17 +213,16 @@ class Provider10Component implements OnInit {
       <div id="p7"><provider-7></provider-7></div>
       <div id="p8"><provider-8></provider-8></div>
       <div id="p9"><provider-9></provider-9></div>
-      <div id="p10"><provider-10></provider-10></div>''',
-    directives: const [
-      Provider1Component,
-      Provider3Component,
-      Provider4Component,
-      Provider5Component,
-      Provider6aComponent,
-      Provider6bComponent,
-      Provider7Component,
-      Provider8Component,
-      Provider9Component,
-      Provider10Component
-    ])
+      <div id="p10"><provider-10></provider-10></div>''', directives: const [
+  Provider1Component,
+  Provider3Component,
+  Provider4Component,
+  Provider5Component,
+  Provider6aComponent,
+  Provider6bComponent,
+  Provider7Component,
+  Provider8Component,
+  Provider9Component,
+  Provider10Component
+])
 class ProvidersComponent {}
