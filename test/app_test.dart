@@ -24,7 +24,7 @@ class AppPO {
   Future<String> get title => _title.visibleText;
 
   Future<int> get heroId async {
-    final idAsString = (await _id.visibleText).split(' ')[1];
+    final idAsString = (await _id.visibleText).split(':')[1];
     return int.parse(idAsString, onError: (_) => -1);
   }
 
