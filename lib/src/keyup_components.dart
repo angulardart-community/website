@@ -3,27 +3,35 @@ import 'dart:html';
 import 'package:angular/angular.dart';
 
 @Component(
+  selector: 'key-up1-untyped',
+  template: '''
+    <input (keyup)="onKey(\$event)">
+    <p>{{values}}</p>
+  ''',
+)
+class KeyUp1Component_untyped {
+  String values = '';
+
+  void onKey(dynamic event) {
+    values += event.target.value + ' | ';
+  }
+}
+
+@Component(
   selector: 'key-up1',
   template: '''
     <input (keyup)="onKey(\$event)">
     <p>{{values}}</p>
   ''',
 )
-class KeyUpComponentV1 {
+class KeyUp1Component {
   String values = '';
 
-  /*
-  onKey(dynamic event) {
-    values += event.target.value + ' | ';
-  }
-  */
-  onKey(KeyboardEvent event) {
+  void onKey(KeyboardEvent event) {
     InputElement el = event.target;
     values += '${el.value}  | ';
   }
 }
-
-//////////////////////////////////////////
 
 @Component(
   selector: 'key-up2',
@@ -32,12 +40,10 @@ class KeyUpComponentV1 {
     <p>{{values}}</p>
   ''',
 )
-class KeyUpComponentV2 {
+class KeyUp2Component {
   String values = '';
-  onKey(value) => values += '$value | ';
+  void onKey(value) => values += '$value | ';
 }
-
-//////////////////////////////////////////
 
 @Component(
   selector: 'key-up3',
@@ -46,11 +52,9 @@ class KeyUpComponentV2 {
     <p>{{values}}</p>
   ''',
 )
-class KeyUpComponentV3 {
+class KeyUp3Component {
   String values = '';
 }
-
-//////////////////////////////////////////
 
 @Component(
   selector: 'key-up4',
@@ -61,6 +65,6 @@ class KeyUpComponentV3 {
     <p>{{values}}</p>
   ''',
 )
-class KeyUpComponentV4 {
+class KeyUp4Component {
   String values = '';
 }
