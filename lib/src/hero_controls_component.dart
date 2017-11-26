@@ -1,9 +1,7 @@
 import 'package:angular/angular.dart';
 import 'hero.dart';
 
-@Component(
-    selector: 'hero-controls',
-    template: '''
+@Component(selector: 'hero-controls', template: '''
       <style>
         button {
           background-color: white;
