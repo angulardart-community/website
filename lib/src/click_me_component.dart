@@ -1,7 +1,3 @@
-/* FOR DOCS ... MUST MATCH ClickMeComponent template
-  <button (click)="onClickMe()">Click me!</button>
-*/
-
 import 'package:angular/angular.dart';
 
 @Component(
