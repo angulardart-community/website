@@ -1,12 +1,12 @@
-@Tags(const ['aot'])
 @TestOn('browser')
 import 'dart:async';
 
-import 'package:angular/angular.dart';
 import 'package:angular_test/angular_test.dart';
 import 'package:angular_tour_of_heroes/app_component.dart';
 import 'package:pageloader/objects.dart';
 import 'package:test/test.dart';
+
+import 'app_test.template.dart' as ng;
 
 class AppPO {
   @ByTagName('h1')
@@ -36,8 +36,8 @@ class AppPO {
   Future type(String s) => _input.type(s);
 }
 
-@AngularEntrypoint()
 void main() {
+  ng.initReflector();
   final testBed = new NgTestBed<AppComponent>();
   NgTestFixture<AppComponent> fixture;
   AppPO appPO;
