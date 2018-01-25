@@ -1,21 +1,20 @@
-@Tags(const ['aot'])
 @TestOn('browser')
 
-import 'package:angular/angular.dart';
 import 'package:angular_test/angular_test.dart';
 import 'package:angular_tour_of_heroes/src/hero.dart';
 import 'package:angular_tour_of_heroes/src/hero_detail_component.dart';
 import 'package:test/test.dart';
 
 import 'hero_detail_po.dart';
+import 'hero_detail_test.template.dart' as ng;
 
 const targetHero = const {'id': 1, 'name': 'Alice'};
 
 NgTestFixture<HeroDetailComponent> fixture;
 HeroDetailPO po;
 
-@AngularEntrypoint()
 void main() {
+  ng.initReflector();
   final testBed = new NgTestBed<HeroDetailComponent>();
 
   tearDown(disposeAnyRunningTest);
