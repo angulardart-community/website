@@ -26,7 +26,7 @@ import 'src/providers_component.dart';
     <my-providers></my-providers>
   ''',
   directives: const [
-    CORE_DIRECTIVES,
+    coreDirectives,
     CarComponent,
     HeroesComponent,
     InjectorComponent,
