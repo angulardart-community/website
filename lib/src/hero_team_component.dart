@@ -11,7 +11,7 @@ import 'hero.dart';
           {{member}}
         </li>
       </ul>''',
-  directives: const [CORE_DIRECTIVES],
+  directives: const [coreDirectives],
 )
 class HeroTeamComponent {
   @Input()
