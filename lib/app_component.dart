@@ -11,7 +11,7 @@ import 'src/hero_switch_components.dart';
   templateUrl: 'app_component.html',
   styleUrls: const ['app_component.css'],
   directives: const [
-    CORE_DIRECTIVES,
+    coreDirectives,
     formDirectives,
     heroSwitchComponents,
     materialDirectives,
