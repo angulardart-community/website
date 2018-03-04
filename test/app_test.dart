@@ -8,18 +8,18 @@ import 'package:test/test.dart';
 
 import 'app_test.template.dart' as ng;
 
-class AppPO {
+class AppPO extends PageObjectBase {
   @ByTagName('h1')
-  PageLoaderElement _title;
+  PageLoaderElement get _title => q('h1');
 
   @FirstByCss('div')
-  PageLoaderElement _id; // e.g. 'id: 1'
+  PageLoaderElement get _id => q('div'); // e.g. 'id: 1'
 
   @ByTagName('h2')
-  PageLoaderElement _heroName; // e.g. 'Mr Freeze details!'
+  PageLoaderElement get _heroName => q('h2'); // e.g. 'Mr Freeze details!'
 
   @ByTagName('input')
-  PageLoaderElement _input;
+  PageLoaderElement get _input => q('input');
 
   Future<String> get title => _title.visibleText;
 
@@ -44,7 +44,7 @@ void main() {
 
   setUp(() async {
     fixture = await testBed.create();
-    appPO = await fixture.resolvePageObject(AppPO);
+    appPO = await new AppPO().resolve(fixture);
   });
 
   tearDown(disposeAnyRunningTest);
