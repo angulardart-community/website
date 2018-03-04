@@ -7,7 +7,7 @@ import 'logger_service.dart';
 @Component(
   selector: 'my-child-view',
   template: '<input [(ngModel)]="hero">',
-  directives: const [CORE_DIRECTIVES, formDirectives],
+  directives: const [coreDirectives, formDirectives],
 )
 class ChildViewComponent {
   String hero = 'Magneta';
@@ -21,7 +21,7 @@ class ChildViewComponent {
       <my-child-view></my-child-view>
     <div>-- child view ends --</div>
     <p *ngIf="comment.isNotEmpty" class="comment">{{comment}}</p>''',
-  directives: const [CORE_DIRECTIVES, ChildViewComponent],
+  directives: const [coreDirectives, ChildViewComponent],
 )
 class AfterViewComponent implements AfterViewChecked, AfterViewInit {
   var _prevHero = '';
@@ -90,7 +90,7 @@ class AfterViewComponent implements AfterViewChecked, AfterViewInit {
     ''',
   styles: const ['.parent {background: burlywood}'],
   providers: const [LoggerService],
-  directives: const [CORE_DIRECTIVES, AfterViewComponent],
+  directives: const [coreDirectives, AfterViewComponent],
 )
 class AfterViewParentComponent {
   final LoggerService _logger;

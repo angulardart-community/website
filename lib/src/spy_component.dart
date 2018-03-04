@@ -11,7 +11,7 @@ import 'spy_directive.dart';
     '.parent {background: khaki}',
     '.heroes {background: LightYellow; padding: 0 8px}'
   ],
-  directives: const [CORE_DIRECTIVES, formDirectives, SpyDirective],
+  directives: const [coreDirectives, formDirectives, SpyDirective],
   providers: const [LoggerService],
 )
 class SpyParentComponent {

@@ -23,7 +23,7 @@ class Hero {
     '.hero {background: LightYellow; padding: 8px; margin-top: 8px}',
     'p {background: Yellow; padding: 8px; margin-top: 8px}'
   ],
-  directives: const [CORE_DIRECTIVES],
+  directives: const [coreDirectives],
 )
 class OnChangesComponent implements OnChanges {
   @Input()
@@ -52,7 +52,7 @@ class OnChangesComponent implements OnChanges {
   selector: 'on-changes-parent',
   templateUrl: 'on_changes_parent_component.html',
   styles: const ['.parent {background: Lavender}'],
-  directives: const [CORE_DIRECTIVES, formDirectives, OnChangesComponent],
+  directives: const [coreDirectives, formDirectives, OnChangesComponent],
 )
 class OnChangesParentComponent {
   Hero hero;

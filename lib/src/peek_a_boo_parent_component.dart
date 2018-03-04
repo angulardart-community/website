@@ -23,7 +23,7 @@ import 'peek_a_boo_component.dart';
     </div>
     ''',
   styles: const ['.parent {background: moccasin}'],
-  directives: const [CORE_DIRECTIVES, formDirectives, PeekABooComponent],
+  directives: const [coreDirectives, formDirectives, PeekABooComponent],
   providers: const [LoggerService],
 )
 class PeekABooParentComponent {

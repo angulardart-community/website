@@ -16,7 +16,7 @@ import 'spy_directive.dart';
   styles: const [
     '.counter {background: LightYellow; padding: 8px; margin-top: 8px}'
   ],
-  directives: const [CORE_DIRECTIVES, SpyDirective],
+  directives: const [coreDirectives, SpyDirective],
 )
 class MyCounterComponent implements OnChanges {
   @Input()
@@ -54,7 +54,7 @@ class MyCounterComponent implements OnChanges {
     </div>
     ''',
   styles: const ['.parent {background: gold;}'],
-  directives: const [CORE_DIRECTIVES, MyCounterComponent],
+  directives: const [coreDirectives, MyCounterComponent],
   providers: const [LoggerService],
 )
 class CounterParentComponent {
