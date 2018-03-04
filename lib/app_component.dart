@@ -8,7 +8,7 @@ import 'src/mock_heroes.dart';
   selector: 'my-app',
   templateUrl: 'app_component.html',
   styleUrls: const ['app_component.css'],
-  directives: const [CORE_DIRECTIVES, HeroDetailComponent],
+  directives: const [coreDirectives, HeroDetailComponent],
 )
 class AppComponent {
   final title = 'Tour of Heroes';

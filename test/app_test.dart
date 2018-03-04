@@ -16,7 +16,7 @@ void main() {
 
   setUp(() async {
     fixture = await testBed.create();
-    appPO = await fixture.resolvePageObject(AppPO);
+    appPO = await new AppPO().resolve(fixture);
   });
 
   tearDown(disposeAnyRunningTest);
@@ -48,7 +48,7 @@ void selectHeroTests() {
 
   setUp(() async {
     await appPO.selectHero(5);
-    appPO = await fixture.resolvePageObject(AppPO); // Refresh PO
+    appPO = await new AppPO().resolve(fixture); // Refresh PO
   });
 
   test('is selected', () async {

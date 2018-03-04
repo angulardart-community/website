@@ -2,32 +2,33 @@ import 'dart:async';
 
 import 'package:pageloader/objects.dart';
 
-class AppPO {
+class AppPO extends PageObjectBase {
   @ByTagName('h1')
-  PageLoaderElement _pageTitle;
+  PageLoaderElement get _pageTitle => q('h1');
 
   @FirstByCss('h2')
-  PageLoaderElement _tabTitle;
+  PageLoaderElement get _tabTitle => q('h2');
 
   @ByTagName('li')
-  List<PageLoaderElement> _heroes;
+  List<PageLoaderElement> get _heroes => qq('li');
 
   @ByTagName('li')
   @WithClass('selected')
   @optional
-  PageLoaderElement _selectedHero;
+  PageLoaderElement get _selectedHero => q('li.selected');
 
   @FirstByCss('div h2')
   @optional
-  PageLoaderElement _heroDetailHeading; // e.g. 'Mr Freeze details!'
+  PageLoaderElement get _heroDetailHeading =>
+      q('div h2'); // e.g. 'Mr Freeze details!'
 
   @FirstByCss('div div')
   @optional
-  PageLoaderElement _heroDetailId;
+  PageLoaderElement get _heroDetailId => q('div div');
 
   @ByTagName('input')
   @optional
-  PageLoaderElement _input;
+  PageLoaderElement get _input => q('input');
 
   Future<String> get pageTitle => _pageTitle.visibleText;
   Future<String> get tabTitle => _tabTitle.visibleText;

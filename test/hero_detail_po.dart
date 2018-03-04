@@ -2,18 +2,18 @@ import 'dart:async';
 
 import 'package:pageloader/objects.dart';
 
-class HeroDetailPO {
+class HeroDetailPO extends PageObjectBase {
   @FirstByCss('div h2')
   @optional
-  PageLoaderElement _title; // e.g. 'Mr Freeze details!'
+  PageLoaderElement get _title => q('div h2'); // e.g. 'Mr Freeze details!'
 
   @FirstByCss('div div')
   @optional
-  PageLoaderElement _id;
+  PageLoaderElement get _id => q('div div');
 
   @ByTagName('input')
   @optional
-  PageLoaderElement _input;
+  PageLoaderElement get _input => q('input');
 
   Future<Map> get heroFromDetails async {
     if (_id == null) return null;

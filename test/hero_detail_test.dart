@@ -22,7 +22,7 @@ void main() {
   group('No initial @Input() hero:', () {
     setUp(() async {
       fixture = await testBed.create();
-      po = await fixture.resolvePageObject(HeroDetailPO);
+      po = await new HeroDetailPO().resolve(fixture);
     });
 
     test('has empty view', () async {
@@ -31,10 +31,10 @@ void main() {
     });
 
     test('transition to ${targetHero['name']} hero', () async {
-      fixture.update((comp) {
+      await fixture.update((comp) {
         comp.hero = new Hero(targetHero['id'], targetHero['name']);
       });
-      po = await fixture.resolvePageObject(HeroDetailPO);
+      po = await new HeroDetailPO().resolve(fixture);
       expect(await po.heroFromDetails, targetHero);
     });
   });
@@ -46,7 +46,7 @@ void main() {
       fixture = await testBed.create(
           beforeChangeDetection: (c) =>
               c.hero = new Hero(targetHero['id'], targetHero['name']));
-      po = await fixture.resolvePageObject(HeroDetailPO);
+      po = await new HeroDetailPO().resolve(fixture);
     });
 
     test('show hero details', () async {

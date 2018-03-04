@@ -14,7 +14,7 @@ import 'hero.dart';
         <input [(ngModel)]="hero.name" placeholder="name">
       </div>
     </div>''',
-  directives: const [CORE_DIRECTIVES, formDirectives],
+  directives: const [coreDirectives, formDirectives],
 )
 class HeroDetailComponent {
   @Input()
