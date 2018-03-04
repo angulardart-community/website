@@ -15,7 +15,7 @@ import 'hero.dart';
       </div>
     </div>
   ''',
-  directives: const [CORE_DIRECTIVES, formDirectives],
+  directives: const [coreDirectives, formDirectives],
 )
 class HeroDetailComponent {
   @Input()
