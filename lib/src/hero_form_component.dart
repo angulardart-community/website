@@ -13,7 +13,7 @@ const List<String> _powers = const [
 @Component(
   selector: 'hero-form',
   templateUrl: 'hero_form_component.html',
-  directives: const [CORE_DIRECTIVES, formDirectives],
+  directives: const [coreDirectives, formDirectives],
 )
 class HeroFormComponent {
   Hero model = new Hero(18, 'Dr IQ', _powers[0], 'Chuck Overstreet');
