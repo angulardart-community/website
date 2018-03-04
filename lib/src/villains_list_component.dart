@@ -13,7 +13,7 @@ import 'villains_service.dart';
         </ul>
       </div>
     ''',
-  directives: const [CORE_DIRECTIVES],
+  directives: const [coreDirectives],
   providers: const [VillainsService],
   pipes: const [COMMON_PIPES],
 )

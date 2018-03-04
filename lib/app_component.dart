@@ -19,7 +19,7 @@ import 'src/villains_list_component.dart';
     <my-cars       *ngIf="showCars"></my-cars>
   ''',
   directives: const [
-    CORE_DIRECTIVES,
+    coreDirectives,
     carComponents,
     HeroesListComponent,
     VillainsListComponent

@@ -23,7 +23,7 @@ import 'hero_tax_return_component.dart';
       </div>
     ''',
   styles: const ['li {cursor: pointer;}'],
-  directives: const [CORE_DIRECTIVES, HeroTaxReturnComponent],
+  directives: const [coreDirectives, HeroTaxReturnComponent],
   pipes: const [COMMON_PIPES],
 )
 class HeroesListComponent {

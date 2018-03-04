@@ -31,7 +31,7 @@ import 'hero_tax_return_service.dart';
       </div>
     ''',
     styleUrls: const ['hero_tax_return_component.css'],
-    directives: const [CORE_DIRECTIVES, formDirectives],
+    directives: const [coreDirectives, formDirectives],
     providers: const [HeroTaxReturnService])
 class HeroTaxReturnComponent {
   final HeroTaxReturnService _heroTaxReturnService;
