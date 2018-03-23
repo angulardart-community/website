@@ -7,8 +7,8 @@ import 'src/hero_app_main_component.dart';
     template: '''
       <h1>Tour of Heroes</h1>
       <hero-app-main [hero]="hero"></hero-app-main>''',
-    styles: const ['h1 { font-weight: normal; }'],
-    directives: const [HeroAppMainComponent])
+    styles: ['h1 { font-weight: normal; }'],
+    directives: [HeroAppMainComponent])
 class AppComponent {
   Hero hero =
       new Hero('Human Torch', ['Mister Fantastic', 'Invisible Woman', 'Thing']);
