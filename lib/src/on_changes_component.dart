@@ -19,11 +19,11 @@ class Hero {
       <div *ngFor="let chg of changeLog">{{chg}}</div>
     </div>
     ''',
-  styles: const [
+  styles: [
     '.hero {background: LightYellow; padding: 8px; margin-top: 8px}',
     'p {background: Yellow; padding: 8px; margin-top: 8px}'
   ],
-  directives: const [coreDirectives],
+  directives: [coreDirectives],
 )
 class OnChangesComponent implements OnChanges {
   @Input()
@@ -35,10 +35,10 @@ class OnChangesComponent implements OnChanges {
 
   ngOnChanges(Map<String, SimpleChange> changes) {
     changes.forEach((String propName, SimpleChange change) {
-      String cur = JSON.encode(change.currentValue);
+      String cur = json.encode(change.currentValue);
       String prev = change.previousValue == null
           ? "{}"
-          : JSON.encode(change.previousValue);
+          : json.encode(change.previousValue);
       changeLog.add('$propName: currentValue = $cur, previousValue = $prev');
     });
   }
@@ -51,8 +51,8 @@ class OnChangesComponent implements OnChanges {
 @Component(
   selector: 'on-changes-parent',
   templateUrl: 'on_changes_parent_component.html',
-  styles: const ['.parent {background: Lavender}'],
-  directives: const [coreDirectives, formDirectives, OnChangesComponent],
+  styles: ['.parent {background: Lavender}'],
+  directives: [coreDirectives, formDirectives, OnChangesComponent],
 )
 class OnChangesParentComponent {
   Hero hero;

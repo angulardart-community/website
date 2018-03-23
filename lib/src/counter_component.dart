@@ -13,10 +13,8 @@ import 'spy_directive.dart';
       <div *ngFor="let chg of changeLog" mySpy>{{chg}}</div>
     </div>
     ''',
-  styles: const [
-    '.counter {background: LightYellow; padding: 8px; margin-top: 8px}'
-  ],
-  directives: const [coreDirectives, SpyDirective],
+  styles: ['.counter {background: LightYellow; padding: 8px; margin-top: 8px}'],
+  directives: [coreDirectives, SpyDirective],
 )
 class MyCounterComponent implements OnChanges {
   @Input()
@@ -53,9 +51,9 @@ class MyCounterComponent implements OnChanges {
       <div *ngFor="let msg of logs">{{msg}}</div>
     </div>
     ''',
-  styles: const ['.parent {background: gold;}'],
-  directives: const [coreDirectives, MyCounterComponent],
-  providers: const [LoggerService],
+  styles: ['.parent {background: gold;}'],
+  directives: [coreDirectives, MyCounterComponent],
+  providers: [LoggerService],
 )
 class CounterParentComponent {
   final LoggerService _logger;
