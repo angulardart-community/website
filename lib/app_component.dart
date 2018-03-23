@@ -12,7 +12,7 @@ import 'package:angular_forms/angular_forms.dart';
       <input [(ngModel)]="hero.name" placeholder="name">
     </div>
   ''',
-  directives: const [formDirectives],
+  directives: [formDirectives],
 )
 class AppComponent {
   final title = 'Tour of Heroes';
