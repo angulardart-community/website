@@ -15,7 +15,7 @@ import 'src/hero.dart';
     </ul>
     <p *ngIf="heroes.length > 3">There are many heroes!</p>
   ''',
-  directives: const [coreDirectives],
+  directives: [coreDirectives],
 )
 class AppComponent {
   final title = 'Tour of Heroes';
