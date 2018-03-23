@@ -44,7 +44,7 @@ void basicTests() {
 }
 
 void selectHeroTests() {
-  const targetHero = const {'id': 16, 'name': 'RubberMan'};
+  const targetHero = {'id': 16, 'name': 'RubberMan'};
 
   setUp(() async {
     await appPO.selectHero(5);
