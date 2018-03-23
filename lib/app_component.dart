@@ -6,7 +6,7 @@ import 'src/highlight_directive.dart';
 @Component(
   selector: 'my-app',
   templateUrl: 'app_component.html',
-  directives: const [autoIdDirective, HighlightDirective],
+  directives: [autoIdDirective, HighlightDirective],
 )
 class AppComponent {
   String color;
