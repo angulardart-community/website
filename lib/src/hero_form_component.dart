@@ -3,7 +3,7 @@ import 'package:angular_forms/angular_forms.dart';
 
 import 'hero.dart';
 
-const List<String> _powers = const [
+const List<String> _powers = [
   'Really Smart',
   'Super Flexible',
   'Super Hot',
@@ -13,7 +13,7 @@ const List<String> _powers = const [
 @Component(
   selector: 'hero-form',
   templateUrl: 'hero_form_component.html',
-  directives: const [coreDirectives, formDirectives],
+  directives: [coreDirectives, formDirectives],
 )
 class HeroFormComponent {
   Hero model = new Hero(18, 'Dr IQ', _powers[0], 'Chuck Overstreet');
