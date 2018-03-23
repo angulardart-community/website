@@ -30,9 +30,9 @@ import 'hero_tax_return_service.dart';
         </fieldset>
       </div>
     ''',
-    styleUrls: const ['hero_tax_return_component.css'],
-    directives: const [coreDirectives, formDirectives],
-    providers: const [HeroTaxReturnService])
+    styleUrls: ['hero_tax_return_component.css'],
+    directives: [coreDirectives, formDirectives],
+    providers: [HeroTaxReturnService])
 class HeroTaxReturnComponent {
   final HeroTaxReturnService _heroTaxReturnService;
   String message = '';
@@ -50,19 +50,19 @@ class HeroTaxReturnComponent {
     _heroTaxReturnService.taxReturn = htr;
   }
 
-  Future<Null> onCanceled() async {
+  Future<void> onCanceled() async {
     _heroTaxReturnService.restoreTaxReturn();
     await flashMessage('Canceled');
   }
 
   void onClose() => _close.add(null);
 
-  Future<Null> onSaved() async {
+  Future<void> onSaved() async {
     await _heroTaxReturnService.saveTaxReturn();
     await flashMessage('Saved');
   }
 
-  Future<Null> flashMessage(String msg) async {
+  Future<void> flashMessage(String msg) async {
     message = msg;
     await new Future.delayed(const Duration(milliseconds: 500));
     message = '';
