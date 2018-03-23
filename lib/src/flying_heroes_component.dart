@@ -6,9 +6,9 @@ import 'heroes.dart';
 @Component(
   selector: 'flying-heroes',
   templateUrl: 'flying_heroes_component.html',
-  styles: const ['#flyers, #all {font-style: italic}'],
-  pipes: const [FlyingHeroesPipe],
-  directives: const [coreDirectives, formDirectives],
+  styles: ['#flyers, #all {font-style: italic}'],
+  pipes: [FlyingHeroesPipe],
+  directives: [coreDirectives, formDirectives],
 )
 class FlyingHeroesComponent {
   List<Hero> heroes;
@@ -44,9 +44,9 @@ class FlyingHeroesComponent {
 @Component(
   selector: 'flying-heroes-impure',
   templateUrl: 'flying_heroes_component.html',
-  styles: const ['.flyers, .all {font-style: italic}'],
-  pipes: const [FlyingHeroesImpurePipe],
-  directives: const [coreDirectives, formDirectives],
+  styles: ['.flyers, .all {font-style: italic}'],
+  pipes: [FlyingHeroesImpurePipe],
+  directives: [coreDirectives, formDirectives],
 )
 class FlyingHeroesImpureComponent extends FlyingHeroesComponent {
   FlyingHeroesImpureComponent() {

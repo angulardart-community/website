@@ -2,9 +2,7 @@ import 'package:angular/angular.dart';
 
 import 'fetch_json_pipe.dart';
 
-@Component(
-    selector: 'hero-list',
-    template: '''
+@Component(selector: 'hero-list', template: '''
       <h2>Heroes from JSON File</h2>
 
       <div *ngFor="let hero of ('heroes.json' | fetch) ">
@@ -12,7 +10,5 @@ import 'fetch_json_pipe.dart';
       </div>
 
       <p>Heroes as JSON: {{'heroes.json' | fetch | json}}</p>
-    ''',
-    directives: const [coreDirectives],
-    pipes: const [COMMON_PIPES, FetchJsonPipe])
+    ''', directives: [coreDirectives], pipes: [COMMON_PIPES, FetchJsonPipe])
 class HeroListComponent {}
