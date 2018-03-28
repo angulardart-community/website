@@ -39,7 +39,7 @@ void basicTests() {
   });
 
   test('no selected hero', () async {
-    expect(await appPO.selectedHero, null);
+    expect(await appPO.selected, null);
   });
 }
 
@@ -52,7 +52,7 @@ void selectHeroTests() {
   });
 
   test('is selected', () async {
-    expect(await appPO.selectedHero, targetHero);
+    expect(await appPO.selected, targetHero);
   });
 
   test('show hero details', () async {
@@ -75,7 +75,7 @@ void selectHeroTests() {
     });
 
     test('name in list is updated', () async {
-      expect(await appPO.selectedHero, updatedHero);
+      expect(await appPO.selected, updatedHero);
     });
 
     test('name in details view is updated', () async {
