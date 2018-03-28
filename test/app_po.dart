@@ -15,7 +15,7 @@ class AppPO extends PageObjectBase {
   @ByTagName('li')
   @WithClass('selected')
   @optional
-  PageLoaderElement get _selectedHero => q('li.selected');
+  PageLoaderElement get _selected => q('li.selected');
 
   @FirstByCss('div h2')
   @optional
@@ -38,9 +38,8 @@ class AppPO extends PageObjectBase {
 
   Future selectHero(int index) => _heroes[index].click();
 
-  Future<Map> get selectedHero async => _selectedHero == null
-      ? null
-      : _heroDataFromLi(await _selectedHero.visibleText);
+  Future<Map> get selected async =>
+      _selected == null ? null : _heroDataFromLi(await _selected.visibleText);
 
   Future<Map> get heroFromDetails async {
     if (_heroDetailId == null) return null;
