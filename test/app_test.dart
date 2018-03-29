@@ -31,7 +31,7 @@ void basicTests() {
   });
 
   test('tab title', () async {
-    expect(await appPO.tabTitle, 'My Heroes');
+    expect(await appPO.tabTitle, 'Heroes');
   });
 
   test('hero count', () {
