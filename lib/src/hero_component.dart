@@ -7,7 +7,7 @@ import 'hero.dart';
   selector: 'my-hero',
   template: '''
     <div *ngIf="hero != null">
-      <h2>{{hero.name}} details!</h2>
+      <h2>{{hero.name}}</h2>
       <div><label>id: </label>{{hero.id}}</div>
       <div>
         <label>name: </label>
