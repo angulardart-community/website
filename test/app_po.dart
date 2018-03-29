@@ -19,8 +19,7 @@ class AppPO extends PageObjectBase {
 
   @FirstByCss('div h2')
   @optional
-  PageLoaderElement get _heroDetailHeading =>
-      q('div h2'); // e.g. 'Mr Freeze details!'
+  PageLoaderElement get _heroDetailHeading => q('div h2');
 
   @FirstByCss('div div')
   @optional
@@ -44,9 +43,9 @@ class AppPO extends PageObjectBase {
   Future<Map> get heroFromDetails async {
     if (_heroDetailId == null) return null;
     final idAsString = (await _heroDetailId.visibleText).split(':')[1];
-    final text = await _heroDetailHeading.visibleText;
-    final matches = new RegExp((r'^(.*) details!$')).firstMatch(text);
-    return _heroData(idAsString, matches[1]);
+//    final text = await _heroDetailHeading.visibleText;
+//    final matches = new RegExp((r'^(.*) details!$')).firstMatch(text);
+    return _heroData(idAsString, await _heroDetailHeading.visibleText);
   }
 
   Future clear() => _input.clear();

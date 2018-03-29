@@ -1,5 +1,5 @@
 <h1>{{title}}</h1>
-<h2>My Heroes</h2>
+<h2>Heroes</h2>
 <ul class="heroes">
   <li *ngFor="let hero of heroes"
       [class.selected]="hero === selected"
@@ -8,10 +8,10 @@
   </li>
 </ul>
 <div *ngIf="selected != null">
-  <h2>{{selected.name}} details!</h2>
+  <h2>{{selected.name}}</h2>
   <div><label>id: </label>{{selected.id}}</div>
   <div>
     <label>name: </label>
-    <input [(ngModel)]="selected.name" placeholder="name"/>
+    <input [(ngModel)]="selected.name" placeholder="name">
   </div>
 </div>
