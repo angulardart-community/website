@@ -16,7 +16,7 @@ class AppPO extends PageObjectBase {
   PageLoaderElement get _id => q('div'); // e.g. 'id: 1'
 
   @ByTagName('h2')
-  PageLoaderElement get _heroName => q('h2'); // e.g. 'Mr Freeze details!'
+  PageLoaderElement get _heroName => q('h2');
 
   @ByTagName('input')
   PageLoaderElement get _input => q('input');
@@ -28,10 +28,7 @@ class AppPO extends PageObjectBase {
     return int.parse(idAsString, onError: (_) => -1);
   }
 
-  Future<String> get heroName async {
-    final text = await _heroName.visibleText;
-    return text.substring(0, text.lastIndexOf(' '));
-  }
+  Future<String> get heroName => _heroName.visibleText;
 
   Future type(String s) => _input.type(s);
 }
