@@ -15,7 +15,7 @@ import 'villains_service.dart';
     ''',
   directives: [coreDirectives],
   providers: [VillainsService],
-  pipes: [COMMON_PIPES],
+  pipes: [commonPipes],
 )
 class VillainsListComponent {
   final VillainsService _villainsService;

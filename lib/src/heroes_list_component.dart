@@ -24,7 +24,7 @@ import 'hero_tax_return_component.dart';
     ''',
   styles: ['li {cursor: pointer;}'],
   directives: [coreDirectives, HeroTaxReturnComponent],
-  pipes: [COMMON_PIPES],
+  pipes: [commonPipes],
 )
 class HeroesListComponent {
   final HeroesService _heroesService;
