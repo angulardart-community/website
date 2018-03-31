@@ -6,7 +6,7 @@ import 'package:angular/angular.dart';
       <p>The hero's birthday is {{ birthday | date:format }}</p>
       <button (click)="toggleFormat()">Toggle Format</button>
     ''',
-  pipes: [COMMON_PIPES],
+  pipes: [commonPipes],
 )
 class HeroBirthday2Component {
   DateTime birthday = new DateTime(1988, 4, 15); // April 15, 1988

@@ -10,5 +10,5 @@ import 'fetch_json_pipe.dart';
       </div>
 
       <p>Heroes as JSON: {{'heroes.json' | fetch | json}}</p>
-    ''', directives: [coreDirectives], pipes: [COMMON_PIPES, FetchJsonPipe])
+    ''', directives: [coreDirectives], pipes: [commonPipes, FetchJsonPipe])
 class HeroListComponent {}
