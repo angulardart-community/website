@@ -1,25 +1,25 @@
-@Tags(const ['aot'])
 @TestOn('browser')
 import 'dart:async';
 
-import 'package:angular/angular.dart';
 import 'package:angular_test/angular_test.dart';
 import 'package:angular_tour_of_heroes/app_component.dart';
 import 'package:pageloader/objects.dart';
 import 'package:test/test.dart';
 
-class AppPO {
+import 'app_test.template.dart' as ng;
+
+class AppPO extends PageObjectBase {
   @ByTagName('h1')
-  PageLoaderElement _title;
+  PageLoaderElement get _title => q('h1');
 
   @FirstByCss('div')
-  PageLoaderElement _id; // e.g. 'id: 1'
+  PageLoaderElement get _id => q('div'); // e.g. 'id: 1'
 
   @ByTagName('h2')
-  PageLoaderElement _heroName; // e.g. 'Mr Freeze details!'
+  PageLoaderElement get _heroName => q('h2');
 
   @ByTagName('input')
-  PageLoaderElement _input;
+  PageLoaderElement get _input => q('input');
 
   Future<String> get title => _title.visibleText;
 
@@ -28,23 +28,20 @@ class AppPO {
     return int.parse(idAsString, onError: (_) => -1);
   }
 
-  Future<String> get heroName async {
-    final text = await _heroName.visibleText;
-    return text.substring(0, text.lastIndexOf(' '));
-  }
+  Future<String> get heroName => _heroName.visibleText;
 
   Future type(String s) => _input.type(s);
 }
 
-@AngularEntrypoint()
 void main() {
+  ng.initReflector();
   final testBed = new NgTestBed<AppComponent>();
   NgTestFixture<AppComponent> fixture;
   AppPO appPO;
 
   setUp(() async {
     fixture = await testBed.create();
-    appPO = await fixture.resolvePageObject(AppPO);
+    appPO = await new AppPO().resolve(fixture);
   });
 
   tearDown(disposeAnyRunningTest);
