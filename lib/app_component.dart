@@ -7,13 +7,13 @@ import 'src/mock_heroes.dart';
 @Component(
   selector: 'my-app',
   templateUrl: 'app_component.html',
-  styleUrls: const ['app_component.css'],
-  directives: const [CORE_DIRECTIVES, formDirectives],
+  styleUrls: ['app_component.css'],
+  directives: [coreDirectives, formDirectives],
 )
 class AppComponent {
   final title = 'Tour of Heroes';
   List<Hero> heroes = mockHeroes;
-  Hero selectedHero;
+  Hero selected;
 
-  void onSelect(Hero hero) => selectedHero = hero;
+  void onSelect(Hero hero) => selected = hero;
 }
