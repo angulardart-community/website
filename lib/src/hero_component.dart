@@ -4,10 +4,10 @@ import 'package:angular_forms/angular_forms.dart';
 import 'hero.dart';
 
 @Component(
-  selector: 'hero-detail',
+  selector: 'my-hero',
   template: '''
     <div *ngIf="hero != null">
-      <h2>{{hero.name}} details!</h2>
+      <h2>{{hero.name}}</h2>
       <div><label>id: </label>{{hero.id}}</div>
       <div>
         <label>name: </label>
@@ -15,9 +15,9 @@ import 'hero.dart';
       </div>
     </div>
   ''',
-  directives: const [CORE_DIRECTIVES, formDirectives],
+  directives: [coreDirectives, formDirectives],
 )
-class HeroDetailComponent {
+class HeroComponent {
   @Input()
   Hero hero;
 }
