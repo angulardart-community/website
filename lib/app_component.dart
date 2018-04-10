@@ -9,15 +9,15 @@ import 'src/hero_switch_components.dart';
 @Component(
   selector: 'my-app',
   templateUrl: 'app_component.html',
-  styleUrls: const ['app_component.css'],
-  directives: const [
-    CORE_DIRECTIVES,
+  styleUrls: ['app_component.css'],
+  directives: [
+    coreDirectives,
     formDirectives,
     heroSwitchComponents,
     materialDirectives,
     UnlessDirective
   ],
-  providers: const [materialProviders],
+  providers: [materialProviders],
 )
 class AppComponent {
   final List<Hero> heroes = mockHeroes;
