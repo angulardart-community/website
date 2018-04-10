@@ -13,7 +13,7 @@ import 'logger_service.dart';
       <div id="car">{{car.drive()}}</div>
       <div id="hero">{{hero.name}}</div>
       <div id="rodent">{{rodent}}</div>''',
-  providers: const [
+  providers: [
     Car,
     Engine,
     Tires,
@@ -33,7 +33,7 @@ class InjectorComponent implements OnInit {
   void ngOnInit() {
     car = _injector.get(Car);
     heroService = _injector.get(HeroService);
-    hero = heroService.getHeroes()[0];
+    hero = heroService.getAll()[0];
   }
 
   String get rodent =>

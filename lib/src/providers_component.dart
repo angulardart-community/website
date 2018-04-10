@@ -10,8 +10,7 @@ import 'user_service.dart';
 // TODO file an issue: cannot use the following const in metadata.
 const template = '{{log}}';
 
-@Component(
-    selector: 'provider-1', template: '{{log}}', providers: const [Logger])
+@Component(selector: 'provider-1', template: '{{log}}', providers: [Logger])
 class Provider1Component {
   String log;
 
@@ -25,7 +24,7 @@ class Provider1Component {
 @Component(
     selector: 'provider-3',
     template: '{{log}}',
-    providers: const [const Provider(Logger, useClass: Logger)])
+    providers: [const Provider(Logger, useClass: Logger)])
 class Provider3Component {
   String log;
 
@@ -41,7 +40,7 @@ class BetterLogger extends Logger {}
 @Component(
     selector: 'provider-4',
     template: '{{log}}',
-    providers: const [const Provider(Logger, useClass: BetterLogger)])
+    providers: [const Provider(Logger, useClass: BetterLogger)])
 class Provider4Component {
   String log;
 
@@ -64,7 +63,7 @@ class EvenBetterLogger extends Logger {
   }
 }
 
-@Component(selector: 'provider-5', template: '{{log}}', providers: const [
+@Component(selector: 'provider-5', template: '{{log}}', providers: [
   UserService,
   const Provider(Logger, useClass: EvenBetterLogger)
 ])
@@ -87,7 +86,7 @@ class OldLogger extends Logger {
   }
 }
 
-@Component(selector: 'provider-6a', template: '{{log}}', providers: const [
+@Component(selector: 'provider-6a', template: '{{log}}', providers: [
   NewLogger,
   // Not aliased! Creates two instances of `NewLogger`
   const Provider(OldLogger, useClass: NewLogger)
@@ -140,7 +139,7 @@ const silentLogger = const SilentLogger();
 @Component(
     selector: 'provider-7',
     template: '{{log}}',
-    providers: const [const Provider(Logger, useValue: silentLogger)])
+    providers: [const Provider(Logger, useValue: silentLogger)])
 class Provider7Component {
   String log;
 
@@ -153,7 +152,7 @@ class Provider7Component {
 @Component(
     selector: 'provider-8',
     template: '{{log}}',
-    providers: const [heroServiceProvider, Logger, UserService])
+    providers: [heroServiceProvider, Logger, UserService])
 class Provider8Component {
   // must be true else this component would have blown up at runtime
   var log = 'Hero service injected successfully via heroServiceProvider';
@@ -164,7 +163,7 @@ class Provider8Component {
 @Component(
     selector: 'provider-9',
     template: '{{log}}',
-    providers: const [const Provider(appConfigToken, useValue: heroDiConfig)])
+    providers: [const Provider(appConfigToken, useValue: heroDiConfig)])
 class Provider9Component implements OnInit {
   Map _config;
   String log;
@@ -182,7 +181,7 @@ class Provider9Component implements OnInit {
 @Component(
     selector: 'provider-10',
     template: '{{log}}',
-    providers: const [const Provider(Logger, useValue: null)])
+    providers: [const Provider(Logger, useValue: null)])
 class Provider10Component implements OnInit {
   final Logger _logger;
   String log;
@@ -202,9 +201,7 @@ class Provider10Component implements OnInit {
   }
 }
 
-@Component(
-    selector: 'my-providers',
-    template: '''
+@Component(selector: 'my-providers', template: '''
       <h2>Provider variations</h2>
       <div id="p1"><provider-1></provider-1></div>
       <div id="p3"><provider-3></provider-3></div>
@@ -215,17 +212,16 @@ class Provider10Component implements OnInit {
       <div id="p7"><provider-7></provider-7></div>
       <div id="p8"><provider-8></provider-8></div>
       <div id="p9"><provider-9></provider-9></div>
-      <div id="p10"><provider-10></provider-10></div>''',
-    directives: const [
-      Provider1Component,
-      Provider3Component,
-      Provider4Component,
-      Provider5Component,
-      Provider6aComponent,
-      Provider6bComponent,
-      Provider7Component,
-      Provider8Component,
-      Provider9Component,
-      Provider10Component
-    ])
+      <div id="p10"><provider-10></provider-10></div>''', directives: [
+  Provider1Component,
+  Provider3Component,
+  Provider4Component,
+  Provider5Component,
+  Provider6aComponent,
+  Provider6bComponent,
+  Provider7Component,
+  Provider8Component,
+  Provider9Component,
+  Provider10Component
+])
 class ProvidersComponent {}

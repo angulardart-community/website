@@ -7,9 +7,7 @@ import 'heroes/hero.dart';
 import 'heroes/hero_list_component.dart';
 import 'heroes/hero_service.dart';
 
-@Component(
-    selector: 'my-tests',
-    template: '''
+@Component(selector: 'my-tests', template: '''
       <h2>Tests</h2>
       <p id="tests">Tests {{results['pass']}}: {{results['message']}}</p>
     ''')
@@ -22,7 +20,7 @@ class MockHeroService implements HeroService {
   MockHeroService(this._heroes);
 
   @override
-  List<Hero> getHeroes() => _heroes;
+  List<Hero> getAll() => _heroes;
 }
 
 /////////////////////////////////////

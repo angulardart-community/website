@@ -25,15 +25,15 @@ import 'src/providers_component.dart';
     <my-heroes id="unauthorized" *ngIf="!isAuthorized"></my-heroes>
     <my-providers></my-providers>
   ''',
-  directives: const [
-    CORE_DIRECTIVES,
+  directives: [
+    coreDirectives,
     CarComponent,
     HeroesComponent,
     InjectorComponent,
     TestComponent,
     ProvidersComponent
   ],
-  providers: const [
+  providers: [
     Logger,
     UserService,
     const Provider(appConfigToken, useFactory: heroDiConfigFactory),

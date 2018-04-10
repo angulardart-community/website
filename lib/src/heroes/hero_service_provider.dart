@@ -8,4 +8,4 @@ HeroService heroServiceFactory(Logger logger, UserService userService) =>
     new HeroService(logger, userService.user.isAuthorized);
 
 const heroServiceProvider = const Provider<HeroService>(HeroService,
-    useFactory: heroServiceFactory, deps: const [Logger, UserService]);
+    useFactory: heroServiceFactory, deps: [Logger, UserService]);

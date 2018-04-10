@@ -10,7 +10,7 @@ List<Hero> expectedHeroes = [new Hero(1, 'hero1'), new Hero(2, 'hero2', true)];
 
 class HeroServiceMock implements HeroService {
   @override
-  List<Hero> getHeroes() => expectedHeroes;
+  List<Hero> getAll() => expectedHeroes;
 }
 
 var mockService = new HeroServiceMock();

@@ -10,10 +10,10 @@ import 'hero_service.dart';
       {{hero.id}} - {{hero.name}}
       ({{hero.isSecret ? 'secret' : 'public'}})
     </div>''',
-  directives: const [CORE_DIRECTIVES],
+  directives: [coreDirectives],
 )
 class HeroListComponent {
   final List<Hero> heroes;
 
-  HeroListComponent(HeroService heroService) : heroes = heroService.getHeroes();
+  HeroListComponent(HeroService heroService) : heroes = heroService.getAll();
 }
