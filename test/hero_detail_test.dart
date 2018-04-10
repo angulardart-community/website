@@ -1,29 +1,28 @@
-@Tags(const ['aot'])
 @TestOn('browser')
 
-import 'package:angular/angular.dart';
 import 'package:angular_test/angular_test.dart';
 import 'package:angular_tour_of_heroes/src/hero.dart';
-import 'package:angular_tour_of_heroes/src/hero_detail_component.dart';
+import 'package:angular_tour_of_heroes/src/hero_component.dart';
 import 'package:test/test.dart';
 
 import 'hero_detail_po.dart';
+import 'hero_detail_test.template.dart' as ng;
 
-const targetHero = const {'id': 1, 'name': 'Alice'};
+const targetHero = {'id': 1, 'name': 'Alice'};
 
-NgTestFixture<HeroDetailComponent> fixture;
+NgTestFixture<HeroComponent> fixture;
 HeroDetailPO po;
 
-@AngularEntrypoint()
 void main() {
-  final testBed = new NgTestBed<HeroDetailComponent>();
+  ng.initReflector();
+  final testBed = new NgTestBed<HeroComponent>();
 
   tearDown(disposeAnyRunningTest);
 
   group('No initial @Input() hero:', () {
     setUp(() async {
       fixture = await testBed.create();
-      po = await fixture.resolvePageObject(HeroDetailPO);
+      po = await new HeroDetailPO().resolve(fixture);
     });
 
     test('has empty view', () async {
@@ -32,10 +31,10 @@ void main() {
     });
 
     test('transition to ${targetHero['name']} hero', () async {
-      fixture.update((comp) {
+      await fixture.update((comp) {
         comp.hero = new Hero(targetHero['id'], targetHero['name']);
       });
-      po = await fixture.resolvePageObject(HeroDetailPO);
+      po = await new HeroDetailPO().resolve(fixture);
       expect(await po.heroFromDetails, targetHero);
     });
   });
@@ -47,7 +46,7 @@ void main() {
       fixture = await testBed.create(
           beforeChangeDetection: (c) =>
               c.hero = new Hero(targetHero['id'], targetHero['name']));
-      po = await fixture.resolvePageObject(HeroDetailPO);
+      po = await new HeroDetailPO().resolve(fixture);
     });
 
     test('show hero details', () async {
