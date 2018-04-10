@@ -11,7 +11,7 @@ import 'package:angular/angular.dart';
 
     <ul><li *ngFor="let hero of heroes">{{hero}}</li></ul>
   ''',
-  directives: const [CORE_DIRECTIVES],
+  directives: [coreDirectives],
 )
 class LittleTourComponent {
   List<String> heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
