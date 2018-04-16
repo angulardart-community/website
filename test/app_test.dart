@@ -26,7 +26,7 @@ class AppPO extends PageObjectBase {
 
   Future<int> get heroId async {
     final idAsString = (await _id.visibleText).split(':')[1];
-    return int.parse(idAsString, onError: (_) => -1);
+    return int.tryParse(idAsString) ?? -1;
   }
 
   Future<String> get heroName => _heroName.visibleText;
