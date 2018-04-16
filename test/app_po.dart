@@ -43,8 +43,6 @@ class AppPO extends PageObjectBase {
   Future<Map> get heroFromDetails async {
     if (_heroDetailId == null) return null;
     final idAsString = (await _heroDetailId.visibleText).split(':')[1];
-//    final text = await _heroDetailHeading.visibleText;
-//    final matches = new RegExp((r'^(.*) details!$')).firstMatch(text);
     return _heroData(idAsString, await _heroDetailHeading.visibleText);
   }
 
