@@ -87,8 +87,8 @@ class AfterContentComponent implements AfterContentChecked, AfterContentInit {
     </div>
     ''',
   styles: ['.parent {background: burlywood}'],
-  providers: [LoggerService],
   directives: [coreDirectives, AfterContentComponent, ChildComponent],
+  providers: [const ClassProvider(LoggerService)],
 )
 class AfterContentParentComponent {
   final LoggerService _logger;
