@@ -1,20 +1,22 @@
 import 'package:angular/angular.dart';
 
-const appConfigToken = const OpaqueToken('app.config');
+const appTitleToken = const OpaqueToken<String>('app.title');
 
-const Map heroDiConfig = const <String, String>{
+const appTitle = 'Dependency Injection';
+
+const appConfigMap = const {
   'apiEndpoint': 'api.heroes.com',
-  'title': 'Dependency Injection'
+  'title': 'Dependency Injection',
+  // ...
 };
+
+const appConfigMapToken = const OpaqueToken<Map>('app.config');
 
 class AppConfig {
   String apiEndpoint;
   String title;
 }
 
-AppConfig heroDiConfigFactory() => new AppConfig()
+AppConfig appConfigFactory() => new AppConfig()
   ..apiEndpoint = 'api.heroes.com'
   ..title = 'Dependency Injection';
-
-const appConfigProvider = const Provider<AppConfig>(appConfigToken,
-    useFactory: heroDiConfigFactory, deps: []);

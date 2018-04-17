@@ -1,4 +1,3 @@
-// Examples of provider arrays
 import 'package:angular/angular.dart';
 
 import 'app_config.dart';
@@ -7,47 +6,36 @@ import 'heroes/hero_service.dart';
 import 'logger_service.dart';
 import 'user_service.dart';
 
-// TODO file an issue: cannot use the following const in metadata.
-const template = '{{log}}';
+abstract class _Base {
+  final Logger logger;
+  _Base([this.logger]);
 
-@Component(selector: 'provider-1', template: '{{log}}', providers: [Logger])
-class Provider1Component {
-  String log;
-
-  Provider1Component(Logger logger) {
-    logger.log('Hello from logger provided with Logger class');
-    log = logger.logs[0];
-  }
+  void log(String msg) => logger?.fine(msg);
 }
 
-/// Component just used to ensure that shared E2E tests pass.
 @Component(
-    selector: 'provider-3',
-    template: '{{log}}',
-    providers: [const Provider(Logger, useClass: Logger)])
-class Provider3Component {
-  String log;
-
-  Provider3Component(Logger logger) {
-    logger.log('Hello from logger provided with useClass:Logger');
-    log = logger.logs[0];
-  }
+  selector: 'class-provider',
+  template: '{{logger}}',
+  providers: [
+    const ClassProvider(Logger),
+  ],
+)
+class ClassProviderComponent extends _Base {
+  ClassProviderComponent(Logger logger) : super(logger);
 }
 
 @Injectable()
 class BetterLogger extends Logger {}
 
 @Component(
-    selector: 'provider-4',
-    template: '{{log}}',
-    providers: [const Provider(Logger, useClass: BetterLogger)])
-class Provider4Component {
-  String log;
-
-  Provider4Component(Logger logger) {
-    logger.log('Hello from logger provided with useClass:BetterLogger');
-    log = logger.logs[0];
-  }
+  selector: 'use-class',
+  template: '{{logger}}',
+  providers: [
+    const ClassProvider(Logger, useClass: BetterLogger),
+  ],
+)
+class ClassProviderUseClassComponent extends _Base {
+  ClassProviderUseClassComponent(Logger logger) : super(logger);
 }
 
 @Injectable()
@@ -56,172 +44,167 @@ class EvenBetterLogger extends Logger {
 
   EvenBetterLogger(this._userService);
 
-  @override
-  void log(String message) {
-    var name = _userService.user.name;
-    super.log('Message to $name: $message');
-  }
+  String toString() => super.toString() + ' (user:${_userService.user.name})';
 }
 
-@Component(selector: 'provider-5', template: '{{log}}', providers: [
-  UserService,
-  const Provider(Logger, useClass: EvenBetterLogger)
-])
-class Provider5Component {
-  String log;
-
-  Provider5Component(Logger logger) {
-    logger.log('Hello from EvenBetterlogger');
-    log = logger.logs[0];
-  }
+@Component(
+  selector: 'use-class-deps',
+  template: '{{logger}}',
+  providers: [
+    const ClassProvider(UserService),
+    const ClassProvider(Logger, useClass: EvenBetterLogger),
+  ],
+)
+class ServiceWithDepsComponent extends _Base {
+  ServiceWithDepsComponent(Logger logger) : super(logger);
 }
 
 @Injectable()
 class NewLogger extends Logger implements OldLogger {}
 
 class OldLogger extends Logger {
-  @override
-  void log(String message) {
-    throw new Exception('Should not call the old logger!');
+  OldLogger() {
+    throw new Exception("Don't call the Old Logger!");
   }
 }
 
-@Component(selector: 'provider-6a', template: '{{log}}', providers: [
-  NewLogger,
-  // Not aliased! Creates two instances of `NewLogger`
-  const Provider(OldLogger, useClass: NewLogger)
-])
-class Provider6aComponent {
-  String log;
-
-  Provider6aComponent(NewLogger newLogger, OldLogger oldLogger) {
-    if (newLogger == oldLogger) {
-      throw new Exception('expected the two loggers to be different instances');
-    }
-    oldLogger.log('Hello OldLogger (but we want NewLogger)');
-    // The newLogger wasn't called so no logs[]
-    // display the logs of the oldLogger.
-    log = newLogger.logs.isEmpty ? oldLogger.logs[0] : newLogger.logs[0];
+@Component(
+  selector: 'two-new-loggers',
+  template: '{{logger}}',
+  providers: [
+    const ClassProvider(NewLogger),
+    const ClassProvider(OldLogger, useClass: NewLogger),
+  ],
+)
+class TwoNewLoggersComponent extends _Base {
+  TwoNewLoggersComponent(NewLogger logger, OldLogger o) : super(logger) {
+    log('The newLogger and oldLogger are identical: ${identical(logger, o)}');
   }
 }
 
-@Component(selector: 'provider-6b', template: '{{log}}', providers: const [
-  NewLogger,
-  // Alias OldLogger with reference to NewLogger
-  const Provider(OldLogger, useExisting: NewLogger)
-])
-class Provider6bComponent {
-  String log;
-
-  Provider6bComponent(NewLogger newLogger, OldLogger oldLogger) {
-    if (newLogger != oldLogger) {
-      throw new Exception('expected the two loggers to be the same instance');
-    }
-    oldLogger.log('Hello from NewLogger (via aliased OldLogger)');
-    log = newLogger.logs[0];
+@Component(
+  selector: 'existing-provider',
+  template: '{{logger}}',
+  providers: [
+    const ClassProvider(NewLogger),
+    const ExistingProvider(OldLogger, NewLogger),
+  ],
+)
+class ExistingProviderComponent extends _Base {
+  ExistingProviderComponent(NewLogger logger, OldLogger o) : super(o) {
+    log('The newLogger and oldLogger are identical: ${identical(logger, o)}');
   }
 }
 
 class SilentLogger implements Logger {
-  @override
-  final List<String> logs = const [
-    'Silent logger says "Shhhhh!". Provided via "useValue"'
-  ];
-
   const SilentLogger();
-
   @override
-  void log(String message) {}
+  void fine(String msg) {}
+  @override
+  String toString() => '';
 }
 
 const silentLogger = const SilentLogger();
 
 @Component(
-    selector: 'provider-7',
-    template: '{{log}}',
-    providers: [const Provider(Logger, useValue: silentLogger)])
-class Provider7Component {
-  String log;
-
-  Provider7Component(Logger logger) {
-    logger.log('Hello from logger provided with useValue');
-    log = logger.logs[0];
+  selector: 'value-provider',
+  template: '{{logger}}',
+  providers: [
+    const ValueProvider(Logger, silentLogger),
+  ],
+)
+class ValueProviderComponent extends _Base {
+  ValueProviderComponent(Logger logger) : super(logger) {
+    log('Hello?');
   }
 }
 
 @Component(
-    selector: 'provider-8',
-    template: '{{log}}',
-    providers: [heroServiceProvider, Logger, UserService])
-class Provider8Component {
-  // must be true else this component would have blown up at runtime
-  var log = 'Hero service injected successfully via heroServiceProvider';
-
-  Provider8Component(HeroService heroService);
+  selector: 'factory-provider',
+  template: '{{logger}}',
+  providers: [
+    heroServiceProvider,
+    const ClassProvider(Logger),
+    const ClassProvider(UserService),
+  ],
+)
+class FactoryProviderComponent extends _Base {
+  FactoryProviderComponent(Logger o, HeroService heroService) : super(o) {
+    log('Got ${heroService.getAll().length} heroes');
+  }
 }
 
 @Component(
-    selector: 'provider-9',
-    template: '{{log}}',
-    providers: [const Provider(appConfigToken, useValue: heroDiConfig)])
-class Provider9Component implements OnInit {
-  Map _config;
+  selector: 'value-provider-for-token',
+  template: '{{log}}',
+  providers: [
+    const ValueProvider.forToken(appTitleToken, appTitle)
+    // const FactoryProvider.forToken(appConfigMapToken, () => appConfigMap)
+  ],
+)
+class ValueProviderForTokenComponent {
   String log;
 
-  Provider9Component(@Inject(appConfigToken) this._config);
-
-  @override
-  void ngOnInit() {
-    log = 'AppConfig Application title is ${_config['title']}';
-  }
+  ValueProviderForTokenComponent(@Inject(appTitleToken) title)
+      : log = 'App config map title is $title';
 }
 
-// Sample providers 1 to 7 illustrate a required logger dependency.
-// Optional logger, can be null.
 @Component(
-    selector: 'provider-10',
-    template: '{{log}}',
-    providers: [const Provider(Logger, useValue: null)])
-class Provider10Component implements OnInit {
-  final Logger _logger;
+  selector: 'value-provider-for-map',
+  template: '{{log}}',
+  providers: [const ValueProvider.forToken(appConfigMapToken, appConfigMap)],
+)
+class ValueProviderForMapComponent {
   String log;
 
-  /*
-  HeroService(@Optional() this._logger) {
-   */
-  Provider10Component(@Optional() this._logger) {
-    const someMessage = 'Hello from the injected logger';
-    _logger?.log(someMessage);
-  }
-
-  @override
-  void ngOnInit() {
-    log =
-        _logger == null ? 'Optional logger was not available' : _logger.logs[0];
+  ValueProviderForMapComponent(@Inject(appConfigMapToken) Map config) {
+    final title = config == null ? 'null config' : config['title'];
+    log = 'App config map title is $title';
   }
 }
 
-@Component(selector: 'my-providers', template: '''
-      <h2>Provider variations</h2>
-      <div id="p1"><provider-1></provider-1></div>
-      <div id="p3"><provider-3></provider-3></div>
-      <div id="p4"><provider-4></provider-4></div>
-      <div id="p5"><provider-5></provider-5></div>
-      <div id="p6a"><provider-6a></provider-6a></div>
-      <div id="p6b"><provider-6b></provider-6b></div>
-      <div id="p7"><provider-7></provider-7></div>
-      <div id="p8"><provider-8></provider-8></div>
-      <div id="p9"><provider-9></provider-9></div>
-      <div id="p10"><provider-10></provider-10></div>''', directives: [
-  Provider1Component,
-  Provider3Component,
-  Provider4Component,
-  Provider5Component,
-  Provider6aComponent,
-  Provider6bComponent,
-  Provider7Component,
-  Provider8Component,
-  Provider9Component,
-  Provider10Component
-])
+@Component(
+  selector: 'optional-injection',
+  template: '{{message}}',
+  providers: [
+    const ValueProvider(Logger, null),
+  ],
+)
+class HeroService1 extends _Base {
+  String message;
+  HeroService1(@Optional() Logger logger) : super(logger) {
+    logger?.fine('Hello');
+    message = 'Optional logger is $logger';
+  }
+}
+
+@Component(
+  selector: 'my-providers',
+  template: '''
+    <h2>Provider variations</h2>
+    
+    <class-provider></class-provider>
+    <use-class></use-class>
+    <use-class-deps></use-class-deps>
+    <two-new-loggers></two-new-loggers>
+    <existing-provider></existing-provider>
+    <value-provider></value-provider>
+    <factory-provider></factory-provider>
+    <value-provider-for-token></value-provider-for-token>
+    <value-provider-for-map></value-provider-for-map>
+    <optional-injection></optional-injection>
+  ''',
+  directives: [
+    ClassProviderComponent,
+    ClassProviderUseClassComponent,
+    ServiceWithDepsComponent,
+    TwoNewLoggersComponent,
+    ExistingProviderComponent,
+    ValueProviderComponent,
+    FactoryProviderComponent,
+    ValueProviderForTokenComponent,
+    ValueProviderForMapComponent,
+    HeroService1
+  ],
+)
 class ProvidersComponent {}

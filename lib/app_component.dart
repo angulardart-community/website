@@ -31,20 +31,19 @@ import 'src/providers_component.dart';
     HeroesComponent,
     InjectorComponent,
     TestComponent,
-    ProvidersComponent
+    ProvidersComponent,
   ],
   providers: [
-    Logger,
-    UserService,
-    const Provider(appConfigToken, useFactory: heroDiConfigFactory),
+    const ClassProvider(Logger),
+    const ClassProvider(UserService),
+    const FactoryProvider(AppConfig, appConfigFactory),
   ],
 )
 class AppComponent {
   final UserService _userService;
   final String title;
 
-  AppComponent(@Inject(appConfigToken) AppConfig config, this._userService)
-      : title = config.title;
+  AppComponent(AppConfig config, this._userService) : title = config.title;
 
   bool get isAuthorized {
     return user.isAuthorized;
