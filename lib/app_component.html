@@ -125,21 +125,21 @@
 
 <div class="box">
 
-<p class="code">&lt;div *ngFor="let hero of heroes; let i=index; let odd=odd; trackBy: trackById" [class.odd]="odd"&gt;</p>
-<div *ngFor="let hero of heroes; let i=index; let odd=odd; trackBy: trackById"
+<p class="code">&lt;div *ngFor="let hero of heroes; let i=index; let odd=odd; trackBy: trackByHeroId" [class.odd]="odd"&gt;</p>
+<div *ngFor="let hero of heroes; let i=index; let odd=odd; trackBy: trackByHeroId"
      [class.odd]="odd">
   ({{i}}) {{hero.name}}
 </div>
 
-<p class="code">&lt;div template="ngFor let hero of heroes; let i=index; let odd=odd; trackBy: trackById" [class.odd]="odd"&gt;</p>
-<div template="ngFor let hero of heroes; let i=index; let odd=odd; trackBy: trackById"
+<p class="code">&lt;div template="ngFor let hero of heroes; let i=index; let odd=odd; trackBy: trackByHeroId" [class.odd]="odd"&gt;</p>
+<div template="ngFor let hero of heroes; let i=index; let odd=odd; trackBy: trackByHeroId"
      [class.odd]="odd">
   ({{i}}) {{hero.name}}
 </div>
 
-<p class="code">&lt;template ngFor let-hero [ngForOf]="heroes" let-i="index" let-odd="odd" [ngForTrackBy]="trackById"&gt;</p>
+<p class="code">&lt;template ngFor let-hero [ngForOf]="heroes" let-i="index" let-odd="odd" [ngForTrackBy]="trackByHeroId"&gt;</p>
 <template ngFor let-hero [ngForOf]="heroes" let-i="index" let-odd="odd"
-          [ngForTrackBy]="trackById">
+          [ngForTrackBy]="trackByHeroId">
   <div [class.odd]="odd">({{i}}) {{hero.name}}</div>
 </template>
 

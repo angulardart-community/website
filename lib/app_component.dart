@@ -31,5 +31,5 @@ class AppComponent {
     hero = heroes[0];
   }
 
-  num trackById(num index, Hero hero) => hero.id;
+  Object trackByHeroId(_, dynamic o) => o is Hero ? o.id : o;
 }
