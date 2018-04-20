@@ -137,10 +137,7 @@ class FactoryProviderComponent extends _Base {
 @Component(
   selector: 'value-provider-for-token',
   template: '{{log}}',
-  providers: [
-    const ValueProvider.forToken(appTitleToken, appTitle)
-    // const FactoryProvider.forToken(appConfigMapToken, () => appConfigMap)
-  ],
+  providers: [const ValueProvider.forToken(appTitleToken, appTitle)],
 )
 class ValueProviderForTokenComponent {
   String log;
@@ -182,7 +179,7 @@ class HeroService1 extends _Base {
   selector: 'my-providers',
   template: '''
     <h2>Provider variations</h2>
-    
+
     <class-provider></class-provider>
     <use-class></use-class>
     <use-class-deps></use-class-deps>
