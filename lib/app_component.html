@@ -41,9 +41,6 @@
   <div>{{hero.name}}</div>
 </template>
 
-<p>template attribute</p>
-<div template="ngIf hero != null">{{hero.name}}</div>
-
 <hr>
 
 <a id="ng-container"></a>
@@ -131,12 +128,6 @@
   ({{i}}) {{hero.name}}
 </div>
 
-<p class="code">&lt;div template="ngFor let hero of heroes; let i=index; let odd=odd; trackBy: trackByHeroId" [class.odd]="odd"&gt;</p>
-<div template="ngFor let hero of heroes; let i=index; let odd=odd; trackBy: trackByHeroId"
-     [class.odd]="odd">
-  ({{i}}) {{hero.name}}
-</div>
-
 <p class="code">&lt;template ngFor let-hero [ngForOf]="heroes" let-i="index" let-odd="odd" [ngForTrackBy]="trackByHeroId"&gt;</p>
 <template ngFor let-hero [ngForOf]="heroes" let-i="index" let-odd="odd"
           [ngForTrackBy]="trackByHeroId">
@@ -164,14 +155,6 @@
   <sad-hero      *ngSwitchCase="'sad'"      [hero]="hero"></sad-hero>
   <confused-hero *ngSwitchCase="'confused'" [hero]="hero"></confused-hero>
   <unknown-hero  *ngSwitchDefault           [hero]="hero"></unknown-hero>
-</div>
-
-<h4>NgSwitch with <i>template</i> attribute</h4>
-<div [ngSwitch]="hero?.emotion">
-  <happy-hero    template="ngSwitchCase 'happy'"    [hero]="hero"></happy-hero>
-  <sad-hero      template="ngSwitchCase 'sad'"      [hero]="hero"></sad-hero>
-  <confused-hero template="ngSwitchCase 'confused'" [hero]="hero"></confused-hero>
-  <unknown-hero  template="ngSwitchDefault"         [hero]="hero"></unknown-hero>
 </div>
 
 <h4>NgSwitch with &lt;template&gt;</h4>
@@ -224,10 +207,6 @@
 <h4>UnlessDirective with template</h4>
 
 <p *myUnless="condition">Show this sentence unless the condition is true.</p>
-
-<p template="myUnless condition" class="code unless">
-  (A) &lt;p template="myUnless condition" class="code unless"&gt;
-</p>
 
 <template [myUnless]="condition">
   <p class="code unless">

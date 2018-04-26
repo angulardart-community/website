@@ -13,7 +13,6 @@ import 'package:angular/angular.dart';
 ///  ### Syntax
 ///
 ///  - `<div *myUnless="condition">...</div>`
-///  - `<div template="myUnless condition">...</div>`
 ///  - `<template [myUnless]="condition"><div>...</div></template>`
 @Directive(selector: '[myUnless]')
 class UnlessDirective {
