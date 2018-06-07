@@ -65,7 +65,6 @@ class AfterContentComponent implements AfterContentChecked, AfterContentInit {
     var message = "${method}: ${child?.hero ?? 'no'} child content";
     _logger.log(message);
   }
-  // ...
 }
 
 //////////////

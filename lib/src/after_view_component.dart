@@ -71,7 +71,6 @@ class AfterViewComponent implements AfterViewChecked, AfterViewInit {
     var message = "${method}: ${child != null ? child.hero:'no'} child view";
     _logger.log(message);
   }
-  // ...
 }
 
 //////////////
