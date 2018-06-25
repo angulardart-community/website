@@ -16,7 +16,7 @@ const List<String> _powers = [
   directives: [coreDirectives, formDirectives],
 )
 class HeroFormComponent {
-  Hero model = new Hero(18, 'Dr IQ', _powers[0], 'Chuck Overstreet');
+  Hero model = Hero(18, 'Dr IQ', _powers[0], 'Chuck Overstreet');
   bool submitted = false;
 
   List<String> get powers => _powers;
@@ -37,8 +37,8 @@ class HeroFormComponent {
 }
 
 Hero skyDog() {
-  var myHero = new Hero(
-      42, 'SkyDog', 'Fetch any object at any distance', 'Leslie Rollover');
+  var myHero =
+      Hero(42, 'SkyDog', 'Fetch any object at any distance', 'Leslie Rollover');
   print('My hero is ${myHero.name}.'); // "My hero is SkyDog."
   return myHero;
 }
