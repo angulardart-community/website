@@ -1,15 +1,19 @@
 import 'package:angular/angular.dart';
 import 'hero.dart';
 
-@Component(selector: 'hero-controls', template: '''
-      <style>
-        button {
-          background-color: white;
-          border: 1px solid #777;
-        }
-      </style>
-      <h3>Controls</h3>
-      <button (click)="activate()">Activate</button>''')
+@Component(
+  selector: 'hero-controls',
+  template: '''
+    <style>
+      button {
+        background-color: white;
+        border: 1px solid #777;
+      }
+    </style>
+    <h3>Controls</h3>
+    <button (click)="activate()">Activate</button>
+  ''',
+)
 class HeroControlsComponent {
   @Input()
   Hero hero;
