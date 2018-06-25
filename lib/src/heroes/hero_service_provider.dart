@@ -5,7 +5,6 @@ import '../user_service.dart';
 import 'hero_service.dart';
 
 HeroService heroServiceFactory(Logger logger, UserService userService) =>
-    new HeroService(logger, userService.user.isAuthorized);
+    HeroService(logger, userService.user.isAuthorized);
 
-const heroServiceProvider =
-    const FactoryProvider(HeroService, heroServiceFactory);
+const heroServiceProvider = FactoryProvider(HeroService, heroServiceFactory);

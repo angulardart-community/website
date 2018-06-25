@@ -7,10 +7,13 @@ import 'heroes/hero.dart';
 import 'heroes/hero_list_component.dart';
 import 'heroes/hero_service.dart';
 
-@Component(selector: 'my-tests', template: '''
-      <h2>Tests</h2>
-      <p id="tests">Tests {{results['pass']}}: {{results['message']}}</p>
-    ''')
+@Component(
+  selector: 'my-tests',
+  template: '''
+    <h2>Tests</h2>
+    <p id="tests">Tests {{results['pass']}}: {{results['message']}}</p>
+  ''',
+)
 class TestComponent {
   var results = runTests();
 }
@@ -25,10 +28,10 @@ class MockHeroService implements HeroService {
 
 /////////////////////////////////////
 dynamic runTests() {
-  var expectedHeroes = [new Hero(0, 'A'), new Hero(1, 'B')];
-  var mockService = new MockHeroService(expectedHeroes);
+  var expectedHeroes = [Hero(0, 'A'), Hero(1, 'B')];
+  var mockService = MockHeroService(expectedHeroes);
   it('should have heroes when HeroListComponent created', () {
-    var hlc = new HeroListComponent(mockService);
+    var hlc = HeroListComponent(mockService);
     expect(hlc.heroes.length).toEqual(expectedHeroes.length);
   });
   return testResults;
@@ -38,7 +41,7 @@ dynamic runTests() {
 // Fake Jasmine infrastructure
 String testName;
 dynamic testResults;
-dynamic expect(dynamic actual) => new ExpectResult(actual);
+dynamic expect(dynamic actual) => ExpectResult(actual);
 
 class ExpectResult {
   final actual;

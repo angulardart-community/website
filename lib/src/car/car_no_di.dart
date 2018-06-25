@@ -8,8 +8,8 @@ class Car {
   var description = 'No DI';
 
   Car() {
-    engine = new Engine();
-    tires = new Tires();
+    engine = Engine();
+    tires = Tires();
   }
 
   // Method using the engine and tires

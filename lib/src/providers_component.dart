@@ -17,7 +17,7 @@ abstract class _Base {
   selector: 'class-provider',
   template: 'ClassProvider: {{logger}}',
   providers: [
-    const ClassProvider(Logger),
+    ClassProvider(Logger),
   ],
 )
 class ClassProviderComponent extends _Base {
@@ -33,7 +33,7 @@ class BetterLogger extends Logger {
   selector: 'use-class',
   template: 'ClassProvider, useClass: {{logger}}',
   providers: [
-    const ClassProvider(Logger, useClass: BetterLogger),
+    ClassProvider(Logger, useClass: BetterLogger),
   ],
 )
 class ClassProviderUseClassComponent extends _Base {
@@ -54,8 +54,8 @@ class EvenBetterLogger extends Logger {
   selector: 'use-class-deps',
   template: 'ClassProvider, useClass: {{logger}}',
   providers: [
-    const ClassProvider(UserService),
-    const ClassProvider(Logger, useClass: EvenBetterLogger),
+    ClassProvider(UserService),
+    ClassProvider(Logger, useClass: EvenBetterLogger),
   ],
 )
 class ServiceWithDepsComponent extends _Base {
@@ -69,7 +69,7 @@ class NewLogger extends Logger implements OldLogger {
 
 class OldLogger extends Logger {
   OldLogger() {
-    throw new Exception("Don't call the Old Logger!");
+    throw Exception("Don't call the Old Logger!");
   }
   String get id => 'OldLogger';
 }
@@ -78,8 +78,8 @@ class OldLogger extends Logger {
   selector: 'two-new-loggers',
   template: 'Two new loggers: {{logger}}',
   providers: [
-    const ClassProvider(NewLogger),
-    const ClassProvider(OldLogger, useClass: NewLogger),
+    ClassProvider(NewLogger),
+    ClassProvider(OldLogger, useClass: NewLogger),
   ],
 )
 class TwoNewLoggersComponent extends _Base {
@@ -92,8 +92,8 @@ class TwoNewLoggersComponent extends _Base {
   selector: 'existing-provider',
   template: 'ExistingProvider: {{logger}}',
   providers: [
-    const ClassProvider(NewLogger),
-    const ExistingProvider(OldLogger, NewLogger),
+    ClassProvider(NewLogger),
+    ExistingProvider(OldLogger, NewLogger),
   ],
 )
 class ExistingProviderComponent extends _Base {
@@ -111,13 +111,13 @@ class SilentLogger implements Logger {
   String toString() => '';
 }
 
-const silentLogger = const SilentLogger();
+const silentLogger = SilentLogger();
 
 @Component(
   selector: 'value-provider',
   template: 'ValueProvider: {{logger}}',
   providers: [
-    const ValueProvider(Logger, silentLogger),
+    ValueProvider(Logger, silentLogger),
   ],
 )
 class ValueProviderComponent extends _Base {
@@ -131,8 +131,8 @@ class ValueProviderComponent extends _Base {
   template: 'FactoryProvider: {{logger}}',
   providers: [
     heroServiceProvider,
-    const ClassProvider(Logger),
-    const ClassProvider(UserService),
+    ClassProvider(Logger),
+    ClassProvider(UserService),
   ],
 )
 class FactoryProviderComponent extends _Base {
@@ -144,7 +144,7 @@ class FactoryProviderComponent extends _Base {
 @Component(
   selector: 'value-provider-for-token',
   template: 'ValueProvider.forToken: {{log}}',
-  providers: [const ValueProvider.forToken(appTitleToken, appTitle)],
+  providers: [ValueProvider.forToken(appTitleToken, appTitle)],
 )
 class ValueProviderForTokenComponent {
   String log;
@@ -156,7 +156,7 @@ class ValueProviderForTokenComponent {
 @Component(
   selector: 'value-provider-for-map',
   template: 'ValueProvider.forToken, map: {{log}}',
-  providers: [const ValueProvider.forToken(appConfigMapToken, appConfigMap)],
+  providers: [ValueProvider.forToken(appConfigMapToken, appConfigMap)],
 )
 class ValueProviderForMapComponent {
   String log;
@@ -171,7 +171,7 @@ class ValueProviderForMapComponent {
   selector: 'optional-injection',
   template: '{{message}}',
   providers: [
-    const ValueProvider(Logger, null),
+    ValueProvider(Logger, null),
   ],
 )
 class HeroService1 extends _Base {

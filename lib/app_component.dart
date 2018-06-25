@@ -34,9 +34,9 @@ import 'src/providers_component.dart';
     ProvidersComponent,
   ],
   providers: [
-    const ClassProvider(Logger),
-    const ClassProvider(UserService),
-    const FactoryProvider(AppConfig, appConfigFactory),
+    ClassProvider(Logger),
+    ClassProvider(UserService),
+    FactoryProvider(AppConfig, appConfigFactory),
   ],
 )
 class AppComponent {

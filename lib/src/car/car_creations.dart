@@ -4,7 +4,7 @@ import 'car.dart';
 ///////// example 1 ////////////
 Car simpleCar() =>
     // Simple car with 4 cylinders and Flintstone tires.
-    new Car(new Engine(), new Tires())..description = 'Simple';
+    Car(Engine(), Tires())..description = 'Simple';
 
 ///////// example 2 ////////////
 
@@ -14,7 +14,8 @@ class Engine2 extends Engine {
 
 Car superCar() =>
     // Super car with 12 cylinders and Flintstone tires.
-    new Car(new Engine2(12), new Tires())..description = 'Super';
+    Car(Engine2(12), Tires()) //!<br>
+      ..description = 'Super';
 
 /////////// example 3 //////////
 
@@ -30,4 +31,5 @@ class MockTires extends Tires {
 
 Car testCar() =>
     // Test car with 8 cylinders and YokoGoodStone tires.
-    new Car(new MockEngine(), new MockTires())..description = 'Test';
+    Car(MockEngine(), MockTires()) //!<br>
+      ..description = 'Test';
