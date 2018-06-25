@@ -4,7 +4,9 @@ import 'package:angular/security.dart';
 /// NOTE: this implementation is incomplete. Current content is provided
 /// as a placeholder.
 @Component(
-    selector: 'bypass-security', templateUrl: 'bypass_security_component.html')
+  selector: 'bypass-security',
+  templateUrl: 'bypass_security_component.html',
+)
 class BypassSecurityComponent {
   DomSanitizationService sanitizer;
   String dangerousUrl;
