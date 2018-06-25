@@ -17,8 +17,8 @@ void main() {
   setUp(() async {
     fixture = await testBed.create();
     final context =
-        new HtmlPageLoaderElement.createFromElement(fixture.rootElement);
-    appPO = new AppPO.create(context);
+        HtmlPageLoaderElement.createFromElement(fixture.rootElement);
+    appPO = AppPO.create(context);
   });
 
   tearDown(disposeAnyRunningTest);
@@ -27,7 +27,7 @@ void main() {
     expect(appPO.title, 'Tour of Heroes');
   });
 
-  const windstormData = const <String, dynamic>{'id': 1, 'name': 'Windstorm'};
+  const windstormData = <String, dynamic>{'id': 1, 'name': 'Windstorm'};
 
   test('initial hero properties', () {
     expect(appPO.heroId, windstormData['id']);

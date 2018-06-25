@@ -18,5 +18,5 @@ import 'hero.dart';
 )
 class AppComponent {
   final title = 'Tour of Heroes';
-  Hero hero = new Hero(1, 'Windstorm');
+  Hero hero = Hero(1, 'Windstorm');
 }
