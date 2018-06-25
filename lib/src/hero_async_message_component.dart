@@ -12,7 +12,7 @@ import 'package:angular/angular.dart';
   pipes: [commonPipes],
 )
 class HeroAsyncMessageComponent {
-  static const _msgEventDelay = const Duration(milliseconds: 500);
+  static const _msgEventDelay = Duration(milliseconds: 500);
 
   Stream<String> message;
 
@@ -22,7 +22,7 @@ class HeroAsyncMessageComponent {
 
   void resend() {
     message =
-        new Stream.periodic(_msgEventDelay, (i) => _msgs[i]).take(_msgs.length);
+        Stream.periodic(_msgEventDelay, (i) => _msgs[i]).take(_msgs.length);
   }
 
   List<String> _msgs = <String>[

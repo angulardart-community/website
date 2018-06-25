@@ -24,19 +24,19 @@ class FlyingHeroesComponent {
     name = name.trim();
     if (name.isEmpty) return;
 
-    var hero = new Hero(name, canFly);
+    var hero = Hero(name, canFly);
     if (mutate) {
       // Pure pipe won't update display because heroes list
       // reference is unchanged; Impure pipe will display.
       heroes.add(hero);
     } else {
-      // Pipe updates display because heroes list is a new object
-      heroes = new List<Hero>.from(heroes)..add(hero);
+      // Pipe updates display because heroes list is a object
+      heroes = List<Hero>.from(heroes)..add(hero);
     }
   }
 
   void reset() {
-    heroes = new List<Hero>.from(mockHeroes);
+    heroes = List<Hero>.from(mockHeroes);
   }
 }
 
