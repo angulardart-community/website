@@ -1,10 +1,10 @@
 ## Lifecycle Hooks
 
 Welcome to the example app used in the
-[Lifecycle Hooks](https://webdev-dartlang-org-dev.firebaseapp.com/angular/guide/lifecycle-hooks) page
-of [Dart for the web](https://webdev-dartlang-org-dev.firebaseapp.com).
+[Lifecycle Hooks](https://webdev.dartlang.org/angular/guide/lifecycle-hooks) page
+of [Dart for the web](https://webdev.dartlang.org).
 
-You can run a [hosted copy](https://webdev-dartlang-org-dev.firebaseapp.com/examples/lifecycle-hooks) of this
+You can run a [hosted copy](https://webdev.dartlang.org/examples/lifecycle-hooks) of this
 sample. Or run your own copy:
 
 1. Create a local copy of this repo (use the "Clone or download" button above).
