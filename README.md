@@ -1,10 +1,10 @@
 ## Structural Directives
 
 Welcome to the example app used in the
-[Structural Directives](https://webdev-dartlang-org-dev.firebaseapp.com/angular/guide/structural-directives) page
-of [Dart for the web](https://webdev-dartlang-org-dev.firebaseapp.com).
+[Structural Directives](https://webdev.dartlang.org/angular/guide/structural-directives) page
+of [Dart for the web](https://webdev.dartlang.org).
 
-You can run a [hosted copy](https://webdev-dartlang-org-dev.firebaseapp.com/examples/structural-directives) of this
+You can run a [hosted copy](https://webdev.dartlang.org/examples/structural-directives) of this
 sample. Or run your own copy:
 
 1. Create a local copy of this repo (use the "Clone or download" button above).
