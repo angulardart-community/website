@@ -1,10 +1,10 @@
 ## Hierarchical Dependency Injection
 
 Welcome to the example app used in the
-[Hierarchical Dependency Injection](https://webdev-dartlang-org-dev.firebaseapp.com/angular/guide/hierarchical-dependency-injection) page
-of [Dart for the web](https://webdev-dartlang-org-dev.firebaseapp.com).
+[Hierarchical Dependency Injection](https://webdev.dartlang.org/angular/guide/hierarchical-dependency-injection) page
+of [Dart for the web](https://webdev.dartlang.org).
 
-You can run a [hosted copy](https://webdev-dartlang-org-dev.firebaseapp.com/examples/hierarchical-dependency-injection) of this
+You can run a [hosted copy](https://webdev.dartlang.org/examples/hierarchical-dependency-injection) of this
 sample. Or run your own copy:
 
 1. Create a local copy of this repo (use the "Clone or download" button above).
