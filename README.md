@@ -1,10 +1,10 @@
 ## Security
 
 Welcome to the example app used in the
-[Security](https://webdev-dartlang-org-dev.firebaseapp.com/angular/guide/security) page
-of [Dart for the web](https://webdev-dartlang-org-dev.firebaseapp.com).
+[Security](https://webdev.dartlang.org/angular/guide/security) page
+of [Dart for the web](https://webdev.dartlang.org).
 
-You can run a [hosted copy](https://webdev-dartlang-org-dev.firebaseapp.com/examples/security) of this
+You can run a [hosted copy](https://webdev.dartlang.org/examples/security) of this
 sample. Or run your own copy:
 
 1. Create a local copy of this repo (use the "Clone or download" button above).
