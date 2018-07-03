@@ -1,10 +1,10 @@
 ## Displaying Data
 
 Welcome to the example app used in the
-[Displaying Data](https://webdev-dartlang-org-dev.firebaseapp.com/angular/guide/displaying-data) page
-of [Dart for the web](https://webdev-dartlang-org-dev.firebaseapp.com).
+[Displaying Data](https://webdev.dartlang.org/angular/guide/displaying-data) page
+of [Dart for the web](https://webdev.dartlang.org).
 
-You can run a [hosted copy](https://webdev-dartlang-org-dev.firebaseapp.com/examples/displaying-data) of this
+You can run a [hosted copy](https://webdev.dartlang.org/examples/displaying-data) of this
 sample. Or run your own copy:
 
 1. Create a local copy of this repo (use the "Clone or download" button above).
