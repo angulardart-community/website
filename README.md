@@ -1,10 +1,10 @@
 ## Tour of Heroes: The Hero Editor
 
 Welcome to the example app used in the
-[Tour of Heroes: The Hero Editor](https://webdev-dartlang-org-dev.firebaseapp.com/angular/tutorial/toh-pt1) page
-of [Dart for the web](https://webdev-dartlang-org-dev.firebaseapp.com).
+[Tour of Heroes: The Hero Editor](https://webdev.dartlang.org/angular/tutorial/toh-pt1) page
+of [Dart for the web](https://webdev.dartlang.org).
 
-You can run a [hosted copy](https://webdev-dartlang-org-dev.firebaseapp.com/examples/toh-1) of this
+You can run a [hosted copy](https://webdev.dartlang.org/examples/toh-1) of this
 sample. Or run your own copy:
 
 1. Create a local copy of this repo (use the "Clone or download" button above).
