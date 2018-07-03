@@ -1,10 +1,10 @@
 ## Attribute Directives
 
 Welcome to the example app used in the
-[Attribute Directives](https://webdev-dartlang-org-dev.firebaseapp.com/angular/guide/attribute-directives) page
-of [Dart for the web](https://webdev-dartlang-org-dev.firebaseapp.com).
+[Attribute Directives](https://webdev.dartlang.org/angular/guide/attribute-directives) page
+of [Dart for the web](https://webdev.dartlang.org).
 
-You can run a [hosted copy](https://webdev-dartlang-org-dev.firebaseapp.com/examples/attribute-directives) of this
+You can run a [hosted copy](https://webdev.dartlang.org/examples/attribute-directives) of this
 sample. Or run your own copy:
 
 1. Create a local copy of this repo (use the "Clone or download" button above).
