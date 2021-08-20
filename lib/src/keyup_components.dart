@@ -9,6 +9,7 @@ import 'package:angular/angular.dart';
     <p>{{values}}</p>
   ''',
 )
+// #docregion v1-class-untyped
 class KeyUp1Component_untyped {
   String values = '';
 
@@ -16,14 +17,18 @@ class KeyUp1Component_untyped {
     values += event.target.value + ' | ';
   }
 }
+// #enddocregion v1-class-untyped
 
 @Component(
   selector: 'key-up1',
+  // #docregion v1-template
   template: '''
     <input (keyup)="onKey(\$event)">
     <p>{{values}}</p>
   ''',
+  // #enddocregion v1-template
 )
+// #docregion v1-class
 class KeyUp1Component {
   String values = '';
 
@@ -32,7 +37,9 @@ class KeyUp1Component {
     values += '${el.value}  | ';
   }
 }
+// #enddocregion v1-class
 
+// #docregion v2
 @Component(
   selector: 'key-up2',
   template: '''
@@ -44,7 +51,9 @@ class KeyUp2Component {
   String values = '';
   void onKey(value) => values += '$value | ';
 }
+// #enddocregion v2
 
+// #docregion v3
 @Component(
   selector: 'key-up3',
   template: '''
@@ -55,7 +64,9 @@ class KeyUp2Component {
 class KeyUp3Component {
   String values = '';
 }
+// #enddocregion v3
 
+// #docregion v4
 @Component(
   selector: 'key-up4',
   template: '''

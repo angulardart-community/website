@@ -1,5 +1,6 @@
 import 'package:angular/angular.dart';
 
+// #docregion little-tour
 @Component(
   selector: 'little-tour',
   template: '''
