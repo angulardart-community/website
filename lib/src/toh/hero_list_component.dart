@@ -12,6 +12,7 @@ import 'hero_service.dart';
   styles: ['.error {color:red;}'],
   directives: [coreDirectives],
 )
+// #docregion component
 class HeroListComponent implements OnInit {
   final HeroService _heroService;
   String errorMessage;
@@ -22,6 +23,7 @@ class HeroListComponent implements OnInit {
   @override
   void ngOnInit() => _getHeroes();
 
+  // #docregion methods, _getHeroes
   Future<void> _getHeroes() async {
     try {
       heroes = await _heroService.getAll();
@@ -29,7 +31,9 @@ class HeroListComponent implements OnInit {
       errorMessage = e.toString();
     }
   }
+  // #enddocregion _getHeroes
 
+  // #docregion add
   Future<void> add(String name) async {
     name = name.trim();
     if (name.isEmpty) return null;
@@ -39,4 +43,5 @@ class HeroListComponent implements OnInit {
       errorMessage = e.toString();
     }
   }
+  // #enddocregion add, methods
 }
