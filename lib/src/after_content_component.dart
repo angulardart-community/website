@@ -16,14 +16,17 @@ class ChildComponent {
 //////////////////////
 @Component(
   selector: 'after-content',
+  // #docregion template
   template: '''
     <div>-- projected content begins --</div>
       <ng-content></ng-content>
     <div>-- projected content ends --</div>
     <p *ngIf="comment.isNotEmpty" class="comment">{{comment}}</p>
     ''',
+  // #enddocregion template
   directives: [coreDirectives],
 )
+// #docregion hooks
 class AfterContentComponent implements AfterContentChecked, AfterContentInit {
   String _prevHero = '';
   String comment = '';
@@ -32,12 +35,14 @@ class AfterContentComponent implements AfterContentChecked, AfterContentInit {
   @ContentChild(ChildComponent)
   ChildComponent contentChild;
 
+  // #enddocregion hooks
   final LoggerService _logger;
 
   AfterContentComponent(this._logger) {
     _logIt('AfterContent constructor');
   }
 
+  // #docregion hooks
   ngAfterContentInit() {
     // contentChild is set after the content has been initialized
     _logIt('AfterContentInit');
@@ -54,22 +59,28 @@ class AfterContentComponent implements AfterContentChecked, AfterContentInit {
       _doSomething();
     }
   }
+  // #enddocregion hooks
 
+  // #docregion do-something
   /// This surrogate for real business logic; sets the `comment`
   void _doSomething() {
     comment = contentChild.hero.length > 10 ? "That's a long name" : '';
   }
+  // #enddocregion do-something
 
   void _logIt(String method) {
     var child = contentChild;
     var message = "${method}: ${child?.hero ?? 'no'} child content";
     _logger.log(message);
   }
+  // #docregion hooks
 }
+// #enddocregion hooks
 
 //////////////
 @Component(
   selector: 'after-content-parent',
+  // #docregion parent-template
   template: '''
     <div class="parent">
       <h2>AfterContent</h2>
@@ -85,6 +96,7 @@ class AfterContentComponent implements AfterContentChecked, AfterContentInit {
       <div *ngFor="let msg of logs">{{msg}}</div>
     </div>
     ''',
+  // #enddocregion parent-template
   styles: ['.parent {background: burlywood}'],
   directives: [coreDirectives, AfterContentComponent, ChildComponent],
   providers: [ClassProvider(LoggerService)],

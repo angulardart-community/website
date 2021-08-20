@@ -1,9 +1,11 @@
+// #docregion lc-imports
 import 'package:angular/angular.dart';
 
 import 'logger_service.dart';
 
 int _nextId = 1;
 
+// #docregion ngOnInit
 class PeekABoo implements OnInit {
   final LoggerService _logger;
 
@@ -21,6 +23,7 @@ class PeekABoo implements OnInit {
     _logger.log("#${_nextId++} $msg");
   }
 }
+// #enddocregion ngOnInit
 
 @Component(
     selector: 'peek-a-boo',

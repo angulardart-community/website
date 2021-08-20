@@ -26,13 +26,16 @@ class Hero {
   directives: [coreDirectives],
 )
 class OnChangesComponent implements OnChanges {
+  // #docregion inputs
   @Input()
   Hero hero;
   @Input()
   String power;
+  // #enddocregion inputs
 
   List<String> changeLog = [];
 
+  // #docregion ng-on-changes
   ngOnChanges(Map<String, SimpleChange> changes) {
     changes.forEach((String propName, SimpleChange change) {
       String cur = json.encode(change.currentValue);
@@ -42,6 +45,7 @@ class OnChangesComponent implements OnChanges {
       changeLog.add('$propName: currentValue = $cur, previousValue = $prev');
     });
   }
+  // #enddocregion ng-on-changes
 
   void reset() {
     changeLog.clear();

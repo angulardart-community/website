@@ -4,6 +4,7 @@ import 'package:angular_forms/angular_forms.dart';
 import 'logger_service.dart';
 
 //////////////////
+// #docregion child-view
 @Component(
   selector: 'my-child-view',
   template: '<input [(ngModel)]="hero">',
@@ -12,17 +13,21 @@ import 'logger_service.dart';
 class ChildViewComponent {
   String hero = 'Magneta';
 }
+// #enddocregion child-view
 
 //////////////////////
 @Component(
   selector: 'after-view',
+  // #docregion template
   template: '''
     <div>-- child view begins --</div>
       <my-child-view></my-child-view>
     <div>-- child view ends --</div>
     <p *ngIf="comment.isNotEmpty" class="comment">{{comment}}</p>''',
+  // #enddocregion template
   directives: [coreDirectives, ChildViewComponent],
 )
+// #docregion hooks
 class AfterViewComponent implements AfterViewChecked, AfterViewInit {
   var _prevHero = '';
 
@@ -30,12 +35,14 @@ class AfterViewComponent implements AfterViewChecked, AfterViewInit {
   @ViewChild(ChildViewComponent)
   ChildViewComponent viewChild;
 
+  // #enddocregion hooks
   final LoggerService _logger;
 
   AfterViewComponent(this._logger) {
     _logIt('AfterView constructor');
   }
 
+  // #docregion hooks
   ngAfterViewInit() {
     // viewChild is set after the view has been initialized
     _logIt('AfterViewInit');
@@ -52,9 +59,11 @@ class AfterViewComponent implements AfterViewChecked, AfterViewInit {
       _doSomething();
     }
   }
+  // #enddocregion hooks
 
   String comment = '';
 
+  // #docregion do-something
   // This surrogate for real business logic sets the `comment`
   void _doSomething() {
     var c = viewChild.hero.length > 10 ? "That's a long name" : '';
@@ -65,13 +74,16 @@ class AfterViewComponent implements AfterViewChecked, AfterViewInit {
       });
     }
   }
+  // #enddocregion do-something
 
   void _logIt(String method) {
     var child = viewChild;
     var message = "${method}: ${child != null ? child.hero : 'no'} child view";
     _logger.log(message);
   }
+  // #docregion hooks
 }
+// #enddocregion hooks
 
 //////////////
 @Component(

@@ -37,6 +37,7 @@ class DoCheckComponent implements DoCheck {
   int oldLogLength = 0;
   int noChangeCount = 0;
 
+  // #docregion ng-do-check
   ngDoCheck() {
     if (hero.name != oldHeroName) {
       changeDetected = true;
@@ -69,6 +70,7 @@ class DoCheckComponent implements DoCheck {
 
     changeDetected = false;
   }
+  // #enddocregion ng-do-check
 
   void reset() {
     changeDetected = true;
