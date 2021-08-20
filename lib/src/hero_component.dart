@@ -6,6 +6,7 @@ import 'hero.dart';
 @Component(
   selector: 'my-hero',
   styles: ['button {margin-left: 8px} div {margin: 8px 0} img {height:24px}'],
+  // #docregion template-1
   template: '''
     <div>
       <img src="{{heroImageUrl}}">
@@ -15,13 +16,17 @@ import 'hero.dart';
       <button (click)="delete()">Delete</button>
     </div>
   ''',
+  // #enddocregion template-1
 )
 class HeroComponent implements OnInit {
+  // #docregion input-output-1
   @Input()
   Hero hero;
+  // #docregion deleteRequest
   final _deleteRequest = StreamController<Hero>();
   @Output()
   Stream<Hero> get deleteRequest => _deleteRequest.stream;
+  // #enddocregion input-output-1, deleteRequest
 
   // heroImageUrl = 'http://www.wpclipart.com/cartoon/people/hero/hero_silhoutte_T.png';
   // Public Domain terms of use: http://www.wpclipart.com/terms.html
@@ -35,10 +40,15 @@ class HeroComponent implements OnInit {
     if (hero == null) hero = Hero(null, '', 'Zzzzzz'); // default sleeping hero
   }
 
+  // #docregion deleteRequest
+
   void delete() {
     _deleteRequest.add(hero);
+    // #enddocregion deleteRequest
     lineThrough = lineThrough.isNotEmpty ? '' : 'line-through';
+    // #docregion deleteRequest
   }
+  // #enddocregion deleteRequest
 }
 
 @Component(

@@ -5,11 +5,13 @@ import 'package:angular/angular.dart';
 
 @Directive(selector: '[myClick]')
 class ClickDirective {
+  // #docregion output-myClick
   final _onClick = StreamController<String>();
   // @Output(alias) propertyName = ...
   @Output('myClick')
   Stream<String> get clicks => _onClick.stream;
 
+  // #enddocregion output-myClick
   bool _toggle = false;
 
   ClickDirective(Element el) {
