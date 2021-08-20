@@ -3,7 +3,9 @@ import 'dart:html';
 
 import 'package:angular/angular.dart';
 
+// #docregion pipe-metadata
 @Pipe('fetch', pure: false)
+// #enddocregion pipe-metadata
 class FetchJsonPipe extends PipeTransform {
   dynamic _cachedData;
   String _cachedUrl;
