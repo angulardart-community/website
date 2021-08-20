@@ -2,6 +2,7 @@ import 'package:angular/angular.dart';
 import 'hero.dart';
 import 'hero_team_component.dart';
 
+// #docregion styleUrls
 @Component(
     selector: 'hero-details',
     template: '''
@@ -11,6 +12,8 @@ import 'hero_team_component.dart';
     styleUrls: ['hero_details_component.css'],
     directives: [HeroTeamComponent])
 class HeroDetailsComponent {
+  // #enddocregion styleUrls
   @Input()
   Hero hero;
+  // #docregion styleUrls
 }

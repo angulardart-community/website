@@ -3,6 +3,7 @@ import 'package:angular/angular.dart';
 import 'src/hero.dart';
 import 'src/hero_app_main_component.dart';
 
+// #docregion class
 @Component(
   selector: 'hero-app',
   template: '''
@@ -13,9 +14,11 @@ import 'src/hero_app_main_component.dart';
   directives: [HeroAppMainComponent],
 )
 class AppComponent {
+  // #enddocregion class
   Hero hero =
       Hero('Human Torch', ['Mister Fantastic', 'Invisible Woman', 'Thing']);
 
   @HostBinding('class')
   String get themeClass => 'theme-light';
+  // #docregion class
 }
