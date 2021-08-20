@@ -8,6 +8,7 @@ import 'src/highlight_directive.dart';
   templateUrl: 'app_component.html',
   directives: [autoIdDirective, HighlightDirective],
 )
+// #docregion class
 class AppComponent {
   String color;
 }

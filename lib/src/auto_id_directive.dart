@@ -1,3 +1,4 @@
+// #docregion
 import 'dart:html';
 import 'package:angular/angular.dart';
 
@@ -10,6 +11,7 @@ void autoIdDirective(
 ) {
   el.id = '$prefix${_idCounter++}';
 }
+// #enddocregion
 
 /*
 TODO: the original idea was to auto-generate a header ID from the header text,
