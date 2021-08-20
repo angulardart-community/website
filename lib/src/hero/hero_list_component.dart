@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
+// #docregion import
 import '../route_paths.dart';
+// #enddocregion import
 import 'hero.dart';
 import 'hero_service.dart';
 
@@ -25,6 +27,7 @@ class HeroListComponent implements OnActivate {
     heroes = await _heroService.getAll();
   }
 
+  // #docregion onActivate
   @override
   void onActivate(_, RouterState current) async {
     await _getHeroes();
@@ -37,12 +40,18 @@ class HeroListComponent implements OnActivate {
         ? null
         : heroes.firstWhere((e) => e.id == id, orElse: () => null);
   }
+  // #enddocregion onActivate
 
+  // #docregion onSelect, onSelect-_gotoDetail
   void onSelect(Hero hero) => _gotoDetail(hero.id);
+  // #enddocregion onSelect, onSelect-_gotoDetail
 
+  // #docregion _gotoDetail-heroUrl
   String _heroUrl(int id) =>
       RoutePaths.hero.toUrl(parameters: {idParam: '$id'});
 
+  // #docregion _gotoDetail, onSelect-_gotoDetail
   Future<NavigationResult> _gotoDetail(int id) =>
       _router.navigate(_heroUrl(id));
+  // #enddocregion _gotoDetail, _gotoDetail-heroUrl, onSelect-_gotoDetail
 }

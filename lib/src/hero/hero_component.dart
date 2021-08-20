@@ -17,17 +17,23 @@ import 'hero_service.dart';
 class HeroComponent implements OnActivate {
   Hero hero;
   final HeroService _heroService;
+  // #docregion router
   final Router _router;
 
   HeroComponent(this._heroService, this._router);
+  // #enddocregion router
 
+  // #docregion OnActivate
   @override
   void onActivate(_, RouterState current) async {
     final id = getId(current.parameters);
     if (id != null) hero = await (_heroService.get(id));
   }
+  // #enddocregion OnActivate
 
+  // #docregion goBack
   Future<NavigationResult> goBack() => _router.navigate(
       RoutePaths.heroes.toUrl(),
       NavigationParams(queryParameters: {idParam: '${hero.id}'}));
+  // #enddocregion goBack
 }
