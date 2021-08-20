@@ -3,6 +3,7 @@ import 'package:angular/angular.dart';
 
 import 'villains_service.dart';
 
+// #docregion metadata
 @Component(
   selector: 'villains-list',
   template: '''
@@ -17,6 +18,7 @@ import 'villains_service.dart';
   providers: [ClassProvider(VillainsService)],
   pipes: [commonPipes],
 )
+// #enddocregion metadata
 class VillainsListComponent {
   final VillainsService _villainsService;
 

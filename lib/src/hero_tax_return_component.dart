@@ -32,7 +32,9 @@ import 'hero_tax_return_service.dart';
   ''',
   styleUrls: ['hero_tax_return_component.css'],
   directives: [coreDirectives, formDirectives],
+  // #docregion providers
   providers: [ClassProvider(HeroTaxReturnService)],
+  // #enddocregion providers
 )
 class HeroTaxReturnComponent {
   final HeroTaxReturnService _heroTaxReturnService;
