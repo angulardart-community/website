@@ -16,9 +16,11 @@ abstract class _Base {
 @Component(
   selector: 'class-provider',
   template: 'ClassProvider: {{logger}}',
+  // #docregion ClassProvider
   providers: [
     ClassProvider(Logger),
   ],
+  // #enddocregion ClassProvider
 )
 class ClassProviderComponent extends _Base {
   ClassProviderComponent(Logger logger) : super(logger);
@@ -32,13 +34,16 @@ class BetterLogger extends Logger {
   selector: 'use-class',
   template: 'ClassProvider, useClass: {{logger}}',
   providers: [
+    // #docregion ClassProvider-useClass
     ClassProvider(Logger, useClass: BetterLogger),
+    // #enddocregion ClassProvider-useClass
   ],
 )
 class ClassProviderUseClassComponent extends _Base {
   ClassProviderUseClassComponent(Logger logger) : super(logger);
 }
 
+// #docregion EvenBetterLogger
 class EvenBetterLogger extends Logger {
   final UserService _userService;
 
@@ -47,13 +52,16 @@ class EvenBetterLogger extends Logger {
   String get id => 'EvenBetterLogger';
   String toString() => super.toString() + ' (user:${_userService.user.name})';
 }
+// #enddocregion EvenBetterLogger
 
 @Component(
   selector: 'use-class-deps',
   template: 'ClassProvider, useClass: {{logger}}',
   providers: [
+    // #docregion logger-with-dependencies
     ClassProvider(UserService),
     ClassProvider(Logger, useClass: EvenBetterLogger),
+    // #enddocregion logger-with-dependencies
   ],
 )
 class ServiceWithDepsComponent extends _Base {
@@ -75,8 +83,10 @@ class OldLogger extends Logger {
   selector: 'two-new-loggers',
   template: 'Two new loggers: {{logger}}',
   providers: [
+    // #docregion two-NewLoggers
     ClassProvider(NewLogger),
     ClassProvider(OldLogger, useClass: NewLogger),
+    // #enddocregion two-NewLoggers
   ],
 )
 class TwoNewLoggersComponent extends _Base {
@@ -89,8 +99,10 @@ class TwoNewLoggersComponent extends _Base {
   selector: 'existing-provider',
   template: 'ExistingProvider: {{logger}}',
   providers: [
+    // #docregion ExistingProvider
     ClassProvider(NewLogger),
     ExistingProvider(OldLogger, NewLogger),
+    // #enddocregion ExistingProvider
   ],
 )
 class ExistingProviderComponent extends _Base {
@@ -99,6 +111,7 @@ class ExistingProviderComponent extends _Base {
   }
 }
 
+// #docregion const-class, silent-logger
 class SilentLogger implements Logger {
   const SilentLogger();
   String get id => 'SilentLogger';
@@ -107,14 +120,19 @@ class SilentLogger implements Logger {
   @override
   String toString() => '';
 }
+// #enddocregion const-class
 
+// #docregion const-object
 const silentLogger = SilentLogger();
+// #enddocregion const-object, silent-logger
 
 @Component(
   selector: 'value-provider',
   template: 'ValueProvider: {{logger}}',
   providers: [
+    // #docregion ValueProvider
     ValueProvider(Logger, silentLogger),
+    // #enddocregion ValueProvider
   ],
 )
 class ValueProviderComponent extends _Base {
@@ -141,7 +159,11 @@ class FactoryProviderComponent extends _Base {
 @Component(
   selector: 'value-provider-for-token',
   template: 'ValueProvider.forToken: {{log}}',
-  providers: [ValueProvider.forToken(appTitleToken, appTitle)],
+  providers: [
+    // #docregion ValueProvider-forToken
+    ValueProvider.forToken(appTitleToken, appTitle)
+    // #enddocregion ValueProvider-forToken
+  ],
 )
 class ValueProviderForTokenComponent {
   String log;
@@ -153,7 +175,11 @@ class ValueProviderForTokenComponent {
 @Component(
   selector: 'value-provider-for-map',
   template: 'ValueProvider.forToken, map: {{log}}',
-  providers: [ValueProvider.forToken(appConfigMapToken, appConfigMap)],
+  providers: [
+    // #docregion ValueProvider-map-forToken
+    ValueProvider.forToken(appConfigMapToken, appConfigMap)
+    // #enddocregion ValueProvider-map-forToken
+  ],
 )
 class ValueProviderForMapComponent {
   String log;
@@ -173,10 +199,14 @@ class ValueProviderForMapComponent {
 )
 class HeroService1 extends _Base {
   String message;
+  // #docregion Optional
   HeroService1(@Optional() Logger logger) : super(logger) {
     logger?.fine('Hello');
+    // #enddocregion Optional
     message = 'Optional logger is $logger';
+    // #docregion Optional
   }
+  // #enddocregion Optional
 }
 
 @Component(

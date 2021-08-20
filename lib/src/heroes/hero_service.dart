@@ -3,6 +3,7 @@ import 'hero.dart';
 import 'mock_heroes.dart';
 
 class HeroService {
+  // #docregion internals
   final Logger _logger;
   final bool _isAuthorized;
 
@@ -13,4 +14,5 @@ class HeroService {
     _logger.fine('Getting heroes for $auth user.');
     return mockHeroes.where((hero) => _isAuthorized || !hero.isSecret).toList();
   }
+  // #enddocregion internals
 }

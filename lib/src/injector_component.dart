@@ -6,6 +6,7 @@ import 'heroes/hero_service.dart';
 import 'heroes/hero_service_provider.dart';
 import 'logger_service.dart';
 
+// #docregion injector
 @Component(
   selector: 'my-injectors',
   template: '''
@@ -31,14 +32,19 @@ class InjectorComponent implements OnInit {
 
   @override
   void ngOnInit() {
+    // #docregion injector-get
     car = _injector.get(Car);
+    // #enddocregion injector-get
+    // #docregion get-hero-service
     heroService = _injector.get(HeroService);
+    // #enddocregion get-hero-service
     hero = heroService.getAll()[0];
   }
 
   String get rodent =>
       _injector.get(ROUS, "R.O.U.S.'s? I don't think they exist!");
 }
+// #enddocregion injector
 
 /// R.O.U.S. - Rodents Of Unusual Size
 /// https://www.youtube.com/watch?v=BOv5ZjAOpC8

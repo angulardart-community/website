@@ -30,17 +30,23 @@ import 'src/providers_component.dart';
     InjectorComponent,
     ProvidersComponent,
   ],
+  // #docregion providers
   providers: [
     ClassProvider(Logger),
     ClassProvider(UserService),
+    // #docregion FactoryProvider
     FactoryProvider(AppConfig, appConfigFactory),
+    // #enddocregion FactoryProvider
   ],
+  // #enddocregion providers
 )
 class AppComponent {
   final UserService _userService;
   final String title;
 
+  // #docregion AppComponent
   AppComponent(AppConfig config, this._userService) : title = config.title;
+  // #enddocregion AppComponent
 
   bool get isAuthorized {
     return user.isAuthorized;

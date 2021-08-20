@@ -11,11 +11,13 @@ class Tires {
 }
 
 class Car {
+  //#docregion car-ctor
   final Engine engine;
   final Tires tires;
   String description = 'DI';
 
   Car(this.engine, this.tires);
+  // #enddocregion car-ctor
 
   // Method using the engine and tires
   String drive() => '$description car with '
