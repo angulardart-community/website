@@ -19,8 +19,10 @@ abstract class HeroDetailPO {
   @ByTagName('input')
   PageLoaderElement get _input;
 
+  // #docregion back-button
   @ByTagName('button')
   PageLoaderElement get _button;
+  // #enddocregion back-button
 
   Map get heroFromDetails {
     if (!_id.exists) return null;
@@ -31,5 +33,7 @@ abstract class HeroDetailPO {
   Future<void> clear() => _input.clear();
   Future<void> type(String s) => _input.type(s);
 
+  // #docregion back-button
   Future<void> back() => _button.click();
+  // #enddocregion back-button
 }

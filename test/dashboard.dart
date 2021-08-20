@@ -16,6 +16,7 @@ import 'dashboard_po.dart';
 import 'matchers.dart';
 import 'utils.dart';
 
+// #docregion providers-with-context
 NgTestFixture<DashboardComponent> fixture;
 DashboardPO po;
 
@@ -29,9 +30,11 @@ final InjectorFactory rootInjector = self.rootInjector$Injector;
 
 void main() {
   final injector = InjectorProbe(rootInjector);
+  // #docregion providers
   final testBed = NgTestBed.forComponent<DashboardComponent>(
       ng.DashboardComponentNgFactory,
       rootInjector: injector.factory);
+  // #enddocregion providers, providers-with-context
 
   setUp(() async {
     fixture = await testBed.create();
@@ -51,6 +54,7 @@ void main() {
     expect(po.heroNames, expectedNames);
   });
 
+  // #docregion go-to-detail
   test('select hero and navigate to detail', () async {
     final mockRouter = injector.get<MockRouter>(Router);
     clearInteractions(mockRouter);
@@ -60,4 +64,6 @@ void main() {
     expect(c.captured[1], isNavParams()); // empty params
     expect(c.captured.length, 2);
   });
+  // #enddocregion go-to-detail
+  // #docregion providers-with-context
 }

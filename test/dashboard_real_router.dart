@@ -14,6 +14,7 @@ import 'dashboard_real_router.template.dart' as self;
 import 'matchers.dart';
 import 'utils.dart';
 
+// #docregion providers-with-context
 NgTestFixture<TestComponent> fixture;
 DashboardPO po;
 Router router;
@@ -29,7 +30,9 @@ void main() {
   final testBed = NgTestBed.forComponent<TestComponent>(
       self.TestComponentNgFactory,
       rootInjector: injector.factory);
+  // #enddocregion providers-with-context
 
+  // #docregion setUp
   List<RouterState> navHistory;
 
   setUp(() async {
@@ -41,6 +44,7 @@ void main() {
         HtmlPageLoaderElement.createFromElement(fixture.rootElement);
     po = DashboardPO.create(context);
   });
+  // #enddocregion setUp
 
   tearDown(disposeAnyRunningTest);
 
@@ -53,6 +57,7 @@ void main() {
     expect(po.heroNames, expectedNames);
   });
 
+  // #docregion go-to-detail
   test('select hero and navigate to detail + navHistory', () async {
     await po.selectHero(3);
     await fixture.update();
@@ -61,15 +66,21 @@ void main() {
     // Or, using a custom matcher:
     expect(navHistory[0], isRouterState('/heroes/15'));
   });
+  // #enddocregion go-to-detail
 
+  // #docregion go-to-detail-alt
   test('select hero and navigate to detail + mock platform location', () async {
     await po.selectHero(3);
     await fixture.update();
     final mockLocation = injector.get<MockPlatformLocation>(PlatformLocation);
     expect(mockLocation.pathname, '/heroes/15');
   });
+  // #enddocregion go-to-detail-alt
+  // #docregion providers-with-context
 }
+// #enddocregion providers-with-context
 
+// #docregion TestComponent
 @Component(
   selector: 'test',
   template: '''

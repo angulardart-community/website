@@ -4,15 +4,18 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:mockito/mockito.dart';
 
+// #docregion routerProvidersForTesting
 const /* List<Provider|List<Provider>> */ routerProvidersForTesting = [
   ValueProvider.forToken(appBaseHref, '/'),
   routerProviders,
   // Mock platform location even with real router, otherwise sometimes tests hang.
   ClassProvider(PlatformLocation, useClass: MockPlatformLocation),
 ];
+// #enddocregion routerProvidersForTesting
 
 //-----------------------------------------------------------------------------
 
+// #docregion InjectorProbe
 class InjectorProbe {
   InjectorFactory _parent;
   Injector _injector;
@@ -25,10 +28,13 @@ class InjectorProbe {
   Injector _factory([Injector parent]) => _injector = _parent(parent);
   T get<T>(dynamic token) => injector?.get(token);
 }
+// #enddocregion InjectorProbe
 
 //-----------------------------------------------------------------------------
 
+// #docregion MockRouter
 class MockRouter extends Mock implements Router {}
+// #enddocregion MockRouter
 
 class MockPlatformLocation extends Mock implements PlatformLocation {
   String _url;

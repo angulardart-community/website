@@ -19,6 +19,7 @@ Router router;
 final InjectorFactory rootInjector = self.rootInjector$Injector;
 
 void main() {
+  // #docregion provisioning-and-setup
   final injector = InjectorProbe(rootInjector);
   final testBed = NgTestBed.forComponent<AppComponent>(ng.AppComponentNgFactory,
       rootInjector: injector.factory);
@@ -32,6 +33,7 @@ void main() {
         HtmlPageLoaderElement.createFromElement(fixture.rootElement);
     appPO = AppPO.create(context);
   });
+  // #enddocregion provisioning-and-setup
 
   tearDown(disposeAnyRunningTest);
 
@@ -65,6 +67,7 @@ void main() {
     dashboardTests();
   });
 
+  // #docregion deep-linking
   group('Deep linking:', () {
     test('navigate to hero details', () async {
       await router.navigate('/heroes/11');
@@ -78,6 +81,7 @@ void main() {
       expect(fixture.rootElement.querySelector('my-heroes'), isNotNull);
     });
   });
+  // #enddocregion deep-linking
 }
 
 void basicTests() {
