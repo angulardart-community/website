@@ -1,3 +1,4 @@
+/* #docregion */
 .selected {
   background-color: #CFD8DC !important;
   color: white;
@@ -57,6 +58,7 @@ button {
 button:hover {
   background-color: #cfd8dc;
 }
+/* #docregion additions */
 button.delete {
   float:right;
   margin-top: 2px;

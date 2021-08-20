@@ -53,11 +53,13 @@ abstract class HeroesPO {
     return matches[1];
   }
 
+  // #docregion addHero
   Future<void> addHero(String name) async {
     await _input.clear();
     await _input.type(name);
     await _add.click();
   }
+  // #enddocregion addHero
 
   Future<void> gotoDetail() => _gotoDetail.click();
 

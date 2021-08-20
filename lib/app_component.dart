@@ -6,6 +6,7 @@ import 'src/hero_service.dart';
 
 @Component(
   selector: 'my-app',
+  // #docregion template
   template: '''
     <h1>{{title}}</h1>
     <nav>
@@ -16,6 +17,7 @@ import 'src/hero_service.dart';
     </nav>
     <router-outlet [routes]="Routes.all"></router-outlet>
   ''',
+  // #enddocregion template
   styleUrls: ['app_component.css'],
   directives: [routerDirectives],
   providers: [ClassProvider(HeroService)],

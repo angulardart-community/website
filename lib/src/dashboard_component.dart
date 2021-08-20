@@ -3,8 +3,11 @@ import 'package:angular_router/angular_router.dart';
 
 import 'hero.dart';
 import 'hero_service.dart';
+// #docregion search
 import 'hero_search_component.dart';
+// #enddocregion search
 import 'route_paths.dart';
+// #docregion search
 
 @Component(
   selector: 'my-dashboard',
@@ -12,6 +15,7 @@ import 'route_paths.dart';
   styleUrls: ['dashboard_component.css'],
   directives: [coreDirectives, HeroSearchComponent, routerDirectives],
 )
+// #enddocregion search
 class DashboardComponent implements OnInit {
   List<Hero> heroes;
 

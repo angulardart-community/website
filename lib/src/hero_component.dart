@@ -1,3 +1,4 @@
+// #docregion v2
 import 'dart:async';
 
 import 'package:angular/angular.dart';
@@ -27,10 +28,12 @@ class HeroComponent implements OnActivate {
     if (id != null) hero = await (_heroService.get(id));
   }
 
+  // #docregion save
   Future<void> save() async {
     await _heroService.update(hero);
     goBack();
   }
+  // #enddocregion save
 
   void goBack() => _location.back();
 }

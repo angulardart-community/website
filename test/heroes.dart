@@ -25,6 +25,7 @@ const targetHero = {'id': 15, 'name': 'Magneta'};
 NgTestFixture<HeroListComponent> fixture;
 HeroesPO po;
 
+// #docregion rootInjector
 @GenerateInjector([
   ClassProvider(Client, useClass: InMemoryDataService),
   ClassProvider(HeroService),

@@ -1,5 +1,6 @@
 // Note: MockClient constructor API forces all InMemoryDataService members to
 // be static.
+// #docregion init
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';

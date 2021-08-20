@@ -27,18 +27,22 @@ class HeroListComponent implements OnInit {
     heroes = await _heroService.getAll();
   }
 
+  // #docregion add
   Future<void> add(String name) async {
     name = name.trim();
     if (name.isEmpty) return null;
     heroes.add(await _heroService.create(name));
     selected = null;
   }
+  // #enddocregion add
 
+  // #docregion delete
   Future<void> delete(Hero hero) async {
     await _heroService.delete(hero.id);
     heroes.remove(hero);
     if (selected == hero) selected = null;
   }
+  // #enddocregion delete
 
   void ngOnInit() => _getHeroes();
 
