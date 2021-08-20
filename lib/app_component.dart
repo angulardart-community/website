@@ -32,5 +32,7 @@ class AppComponent {
     hero = heroes[0];
   }
 
+  // #docregion trackByHeroId
   Object trackByHeroId(_, dynamic o) => o is Hero ? o.id : o;
+  // #enddocregion trackByHeroId
 }

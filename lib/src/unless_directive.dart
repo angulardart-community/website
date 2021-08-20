@@ -1,5 +1,7 @@
+// #docregion no-docs, skeleton
 import 'package:angular/angular.dart';
 
+// #enddocregion no-docs, skeleton
 /// Add the template content to the DOM unless the condition is true.
 ///
 ///  If the expression assigned to `myUnless` evaluates to a truthy value
@@ -14,15 +16,20 @@ import 'package:angular/angular.dart';
 ///
 ///  - `<div *myUnless="condition">...</div>`
 ///  - `<template [myUnless]="condition"><div>...</div></template>`
+// #docregion no-docs, skeleton
 @Directive(selector: '[myUnless]')
 class UnlessDirective {
+  // #enddocregion skeleton
   bool _hasView = false;
 
+  // #docregion ctor
   TemplateRef _templateRef;
   ViewContainerRef _viewContainer;
 
   UnlessDirective(this._templateRef, this._viewContainer);
+  // #enddocregion ctor
 
+  // #docregion set
   @Input()
   set myUnless(bool condition) {
     if (!condition && !_hasView) {
@@ -33,4 +40,6 @@ class UnlessDirective {
       _hasView = false;
     }
   }
+  // #enddocregion set
+  // #docregion skeleton
 }

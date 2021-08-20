@@ -1,22 +1,30 @@
+<!-- #docregion -->
 <h1>Structural Directives</h1>
 
 <p>Conditional display of hero</p>
 
 <blockquote>
+<!-- #docregion built-in, asterisk, ngif -->
 <div *ngIf="hero != null" >{{hero.name}}</div>
+<!-- #enddocregion built-in, asterisk, ngif -->
 </blockquote>
 
 <p>List of heroes</p>
+<!-- #docregion built-in -->
 
 <ul>
+  <!-- #docregion ngfor-li -->
   <li *ngFor="let hero of heroes">{{hero.name}}</li>
+  <!-- #enddocregion ngfor-li -->
 </ul>
 
+<!-- #enddocregion built-in -->
 
 <hr>
 
 <h2 id="ngIf">NgIf</h2>
 
+<!-- #docregion ngif-true -->
 <p *ngIf="true">
   Expression is true and ngIf is true.
   This paragraph is in the DOM.
@@ -25,7 +33,9 @@
   Expression is false and ngIf is false.
   This paragraph is not in the DOM.
 </p>
+<!-- #enddocregion ngif-true -->
 
+<!-- #docregion display-none -->
 <p [style.display]="'block'">
   Expression sets display to "block".
   This paragraph is visible.
@@ -34,12 +44,15 @@
   Expression sets display to "none".
   This paragraph is hidden but still in the DOM.
 </p>
+<!-- #enddocregion display-none -->
 
 <h4>NgIf with template</h4>
 <p>&lt;template&gt; element</p>
+<!-- #docregion ngif-template -->
 <template [ngIf]="hero != null">
   <div>{{hero.name}}</div>
 </template>
+<!-- #enddocregion ngif-template -->
 
 <hr>
 
@@ -50,6 +63,7 @@
 
 <button (click)="hero = hero != null ? null : heroes[0]">Toggle hero</button>
 
+<!-- #docregion ngif-ngcontainer -->
 <p>
   I turned the corner
   <template [ngIf]="hero != null">
@@ -57,6 +71,7 @@
   </template>
   and continued on my way. [template]
 </p>
+<!-- #enddocregion ngif-ngcontainer -->
 <!-- No ng-container yet:
 <p>
   I turned the corner
@@ -66,6 +81,7 @@
   and continued on my way.
 </p>
 -->
+<!-- #docregion ngif-span -->
 <p>
   I turned the corner
   <span *ngIf="hero != null">
@@ -73,8 +89,10 @@
   </span>
   and continued on my way.
 </p>
+<!-- #enddocregion ngif-span -->
 
 <p><i>&lt;select&gt; with &lt;span&gt;</i></p>
+<!-- #docregion select-span -->
 <div>
   Pick your favorite hero
   (<label><input type="checkbox" checked (change)="showSad = !showSad">show sad</label>)
@@ -86,8 +104,10 @@
     </span>
   </span>
 </select>
+<!-- #enddocregion select-span -->
 
 <p><i>&lt;select&gt; with &lt;template&gt;</i></p>
+<!-- #docregion select-ngcontainer -->
 <div>
   Pick your favorite hero 2
   (<label><input type="checkbox" checked (change)="showSad = !showSad">show sad</label>)
@@ -99,6 +119,7 @@
     </template>
   </template>
 </select>
+<!-- #enddocregion select-ngcontainer -->
 
 <!--
 <p><i>&lt;select&gt; with &lt;ng-container&gt;</i></p>
@@ -123,16 +144,20 @@
 <div class="box">
 
 <p class="code">&lt;div *ngFor="let hero of heroes; let i=index; let odd=odd; trackBy: trackByHeroId" [class.odd]="odd"&gt;</p>
+<!--#docregion inside-ngfor -->
 <div *ngFor="let hero of heroes; let i=index; let odd=odd; trackBy: trackByHeroId"
      [class.odd]="odd">
   ({{i}}) {{hero.name}}
 </div>
 
+<!--#enddocregion inside-ngfor -->
 <p class="code">&lt;template ngFor let-hero [ngForOf]="heroes" let-i="index" let-odd="odd" [ngForTrackBy]="trackByHeroId"&gt;</p>
+<!--#docregion inside-ngfor -->
 <template ngFor let-hero [ngForOf]="heroes" let-i="index" let-odd="odd"
           [ngForTrackBy]="trackByHeroId">
   <div [class.odd]="odd">({{i}}) {{hero.name}}</div>
 </template>
+<!--#enddocregion inside-ngfor -->
 
 </div>
 <hr>
@@ -150,14 +175,17 @@
 
 <h4>NgSwitch</h4>
 
+<!-- #docregion built-in , ngswitch -->
 <div [ngSwitch]="hero?.emotion">
   <happy-hero    *ngSwitchCase="'happy'"    [hero]="hero"></happy-hero>
   <sad-hero      *ngSwitchCase="'sad'"      [hero]="hero"></sad-hero>
   <confused-hero *ngSwitchCase="'confused'" [hero]="hero"></confused-hero>
   <unknown-hero  *ngSwitchDefault           [hero]="hero"></unknown-hero>
 </div>
+<!-- #enddocregion built-in, ngswitch -->
 
 <h4>NgSwitch with &lt;template&gt;</h4>
+<!-- #docregion ngswitch-template -->
 <div [ngSwitch]="hero?.emotion">
   <template [ngSwitchCase]="'happy'">
     <happy-hero [hero]="hero"></happy-hero>
@@ -172,15 +200,18 @@
     <unknown-hero [hero]="hero"></unknown-hero>
   </template>
 </div>
+<!-- #enddocregion ngswitch-template -->
 
 <hr>
 
 <h2>&lt;template&gt;</h2>
+<!-- #docregion template-tag -->
 <p>Hip!</p>
 <template>
   <p>Hip!</p>
 </template>
 <p>Hooray!</p>
+<!-- #enddocregion template-tag -->
 
 <hr>
 
@@ -194,6 +225,7 @@
     Toggle condition to {{condition ? 'false' : 'true'}}
   </button>
 </p>
+<!-- #docregion myUnless-->
 <p *myUnless="condition" class="unless a">
   (A) This paragraph is displayed because the condition is false.
 </p>
@@ -202,11 +234,14 @@
   (B) Although the condition is true,
   this paragraph is displayed because myUnless is set to false.
 </p>
+<!-- #enddocregion myUnless-->
 
 
 <h4>UnlessDirective with template</h4>
 
+<!-- #docregion myUnless-1 -->
 <p *myUnless="condition">Show this sentence unless the condition is true.</p>
+<!-- #enddocregion myUnless-1 -->
 
 <template [myUnless]="condition">
   <p class="code unless">
