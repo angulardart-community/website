@@ -1,8 +1,13 @@
+<!-- #docregion final -->
 <div class="container">
+  <!-- #docregion edit-div -->
   <div [hidden]="submitted">
     <h1>Hero Form</h1>
+    <!-- #docregion ngSubmit -->
     <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+      <!-- #enddocregion ngSubmit, edit-div -->
       <div class="form-group">
+        <!-- #docregion name-with-error-message -->
         <label for="name">Name&nbsp;*</label>
         <input type="text" class="form-control" id="name" required
                [(ngModel)]="model.name"
@@ -10,9 +15,11 @@
                [class.is-valid]="name.valid"
                [class.is-invalid]="!name.valid"
                ngControl="name">
+        <!-- #docregion hidden-error-message -->
         <div [hidden]="name.valid || name.pristine" class="invalid-feedback">
           Name is required
         </div>
+        <!-- #enddocregion hidden-error-message, name-with-error-message -->
       </div>
       <div class="form-group">
         <label for="alterEgo">Alter Ego</label>
@@ -22,6 +29,7 @@
       </div>
       <div class="form-group">
         <label for="power">Hero Power&nbsp;*</label>
+        <!-- #docregion power -->
         <select class="form-control" id="power" required
                 [(ngModel)]="model.power"
                 #power="ngForm"
@@ -29,20 +37,28 @@
                 ngControl="power">
           <option *ngFor="let p of powers" [value]="p">{{p}}</option>
         </select>
+        <!-- #enddocregion power -->
       </div>
       <div class="row">
         <div class="col-auto">
+          <!-- #docregion Submit-button -->
           <button [disabled]="!heroForm.form.valid" type="submit" class="btn btn-primary">
             Submit
           </button>
+          <!-- #enddocregion Submit-button -->
+          <!-- #docregion Clear-button -->
           <button (click)="clear()" type="button" class="btn">
             Clear
           </button>
+          <!-- #enddocregion Clear-button -->
         </div>
         <small class="col text-right">*&nbsp;Required</small>
       </div>
+      <!-- #docregion edit-div -->
     </form>
   </div>
+  <!-- #enddocregion edit-div -->
+  <!-- #docregion submitted -->
   <div [hidden]="!submitted">
     <h1>Hero data</h1>
 
@@ -63,4 +79,5 @@
 
     <button (click)="submitted=false" class="btn btn-primary">Edit</button>
   </div>
+  <!-- #enddocregion submitted -->
 </div>
