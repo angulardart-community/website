@@ -14,6 +14,7 @@ class BypassSecurityComponent {
   String dangerousVideoUrl;
   SafeResourceUrl videoUrl;
 
+  // #docregion trust-url
   BypassSecurityComponent(this.sanitizer) {
     // javascript: URLs are dangerous if attacker controlled.
     // Angular sanitizes them in data binding, but we can
@@ -21,8 +22,10 @@ class BypassSecurityComponent {
     dangerousUrl = 'javascript:alert("Hi there")';
     trustedUrl =
         sanitizer.bypassSecurityTrustUrl('javascript:alert("Hi there")');
+    // #enddocregion trust-url
     updateVideoUrl('PUBnlbjZFAI');
   }
+  // #docregion trust-video-url
   void updateVideoUrl(String id) {
     // Appending an ID to a YouTube URL is safe.
     // Always make sure to construct SafeValue objects as
@@ -31,4 +34,5 @@ class BypassSecurityComponent {
     dangerousVideoUrl = 'https://www.youtube.com/embed/$id';
     videoUrl = sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
   }
+  // #enddocregion trust-video-url
 }
