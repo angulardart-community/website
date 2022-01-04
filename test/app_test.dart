@@ -10,8 +10,7 @@ import 'package:test/test.dart';
 
 // #docregion test-bed-and-fixture
 void main() {
-  final testBed =
-      NgTestBed.forComponent<AppComponent>(ng.AppComponentNgFactory);
+  final testBed = NgTestBed<AppComponent>(ng.AppComponentNgFactory);
   NgTestFixture<AppComponent> fixture;
   // #enddocregion test-bed-and-fixture
 
