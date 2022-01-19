@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:pageloader/pageloader.dart';
+import 'package:ngpageloader/pageloader.dart';
 
 part 'app_po.g.dart';
 
@@ -52,12 +52,12 @@ abstract class AppPO {
   // #enddocregion selectHero
 
   // #docregion selected
-  Map get selected =>
+  Map<String, dynamic>? get selected =>
       _selected.exists ? _heroDataFromLi(_selected.visibleText) : null;
   // #enddocregion selected
 
   // #docregion heroFromDetails
-  Map get heroFromDetails {
+  Map<String, dynamic>? get heroFromDetails {
     if (!_heroDetailId.exists) return null;
     // #enddocregion heroFromDetails
     final idAsString = _heroDetailId.visibleText.split(':')[1];
@@ -71,13 +71,13 @@ abstract class AppPO {
   // #enddocregion clear
   Future<void> type(String s) => _input.type(s);
 
-  Map<String, dynamic> _heroData(String idAsString, String name) =>
-      {'id': int.tryParse(idAsString) ?? -1, 'name': name};
+  Map<String, dynamic> _heroData(String? idAsString, String? name) =>
+      {'id': int.parse(idAsString ?? '-1'), 'name': name};
 
   // #docregion heroes
   Map<String, dynamic> _heroDataFromLi(String liText) {
     final matches = RegExp((r'^(\d+) (.*)$')).firstMatch(liText);
-    return _heroData(matches[1], matches[2]);
+    return _heroData(matches?[1], matches?[2]);
   }
   // #enddocregion heroes
 }

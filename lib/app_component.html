@@ -2,16 +2,16 @@
 <h2>Heroes</h2>
 <ul class="heroes">
   <li *ngFor="let hero of heroes"
-      [class.selected]="hero === selected"
+      [class.selected]="hero == selected"
       (click)="onSelect(hero)">
     <span class="badge">{{hero.id}}</span> {{hero.name}}
   </li>
 </ul>
 <div *ngIf="selected != null">
-  <h2>{{selected.name}}</h2>
-  <div><label>id: </label>{{selected.id}}</div>
+  <h2>{{selected!.name}}</h2>
+  <div><label>id: </label>{{selected!.id}}</div>
   <div>
     <label>name: </label>
-    <input [(ngModel)]="selected.name" placeholder="name">
+    <input [(ngModel)]="selected!.name" placeholder="name">
   </div>
 </div>

@@ -28,7 +28,7 @@ class AppComponent {
   List<Hero> heroes = mockHeroes;
   // #enddocregion heroes
   // #docregion selected
-  Hero selected;
+  Hero? selected;
   // #enddocregion selected
 
   // #docregion onSelect

@@ -3,17 +3,16 @@
 import 'package:angular_test/angular_test.dart';
 import 'package:angular_tour_of_heroes/app_component.dart';
 import 'package:angular_tour_of_heroes/app_component.template.dart' as ng;
-import 'package:pageloader/html.dart';
+import 'package:ngpageloader/html.dart';
 import 'package:test/test.dart';
 
 import 'app_po.dart';
 
-NgTestFixture<AppComponent> fixture;
-AppPO appPO;
+late NgTestFixture<AppComponent> fixture;
+late AppPO appPO;
 
 void main() {
-  final testBed =
-      NgTestBed.forComponent<AppComponent>(ng.AppComponentNgFactory);
+  final testBed = NgTestBed<AppComponent>(ng.AppComponentNgFactory);
 
   setUp(() async {
     fixture = await testBed.create();
@@ -48,7 +47,7 @@ void basicTests() {
 
 void selectHeroTests() {
   // #docregion show-hero-details
-  const targetHero = {'id': 16, 'name': 'RubberMan'};
+  const Map<String, dynamic> targetHero = {'id': 16, 'name': 'RubberMan'};
 
   setUp(() async {
     // #docregion new-PO-after-view-update
