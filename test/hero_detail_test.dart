@@ -4,7 +4,7 @@ import 'package:angular_test/angular_test.dart';
 import 'package:angular_tour_of_heroes/src/hero.dart';
 import 'package:angular_tour_of_heroes/src/hero_component.dart';
 import 'package:angular_tour_of_heroes/src/hero_component.template.dart' as ng;
-import 'package:pageloader/html.dart';
+import 'package:ngpageloader/html.dart';
 import 'package:test/test.dart';
 
 import 'hero_detail_po.dart';
@@ -18,7 +18,7 @@ HeroDetailPO po;
 
 void main() {
   final testBed =
-      NgTestBed.forComponent<HeroComponent>(ng.HeroComponentNgFactory);
+      NgTestBed<HeroComponent>(ng.HeroComponentNgFactory);
 
   tearDown(disposeAnyRunningTest);
 
