@@ -12,8 +12,7 @@ NgTestFixture<AppComponent> fixture;
 AppPO appPO;
 
 void main() {
-  final testBed =
-      NgTestBed<AppComponent>(ng.AppComponentNgFactory);
+  final testBed = NgTestBed<AppComponent>(ng.AppComponentNgFactory);
 
   setUp(() async {
     fixture = await testBed.create();

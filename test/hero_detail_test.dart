@@ -17,8 +17,7 @@ NgTestFixture<HeroComponent> fixture;
 HeroDetailPO po;
 
 void main() {
-  final testBed =
-      NgTestBed<HeroComponent>(ng.HeroComponentNgFactory);
+  final testBed = NgTestBed<HeroComponent>(ng.HeroComponentNgFactory);
 
   tearDown(disposeAnyRunningTest);
 

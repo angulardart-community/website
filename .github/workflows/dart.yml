@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [stable, beta, dev, 2.12.0, 2.14.0]
+        sdk: [stable, beta, dev, 2.14.0]
 
     steps:
       - uses: actions/checkout@v2
