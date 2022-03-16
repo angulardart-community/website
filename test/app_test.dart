@@ -3,7 +3,7 @@
 import 'package:angular_test/angular_test.dart';
 import 'package:angular_tour_of_heroes/app_component.dart';
 import 'package:angular_tour_of_heroes/app_component.template.dart' as ng;
-import 'package:pageloader/html.dart';
+import 'package:ngpageloader/html.dart';
 import 'package:test/test.dart';
 
 import 'app_po.dart';
@@ -12,8 +12,7 @@ NgTestFixture<AppComponent> fixture;
 AppPO appPO;
 
 void main() {
-  final testBed =
-      NgTestBed.forComponent<AppComponent>(ng.AppComponentNgFactory);
+  final testBed = NgTestBed<AppComponent>(ng.AppComponentNgFactory);
 
   setUp(() async {
     fixture = await testBed.create();
