@@ -1,7 +1,7 @@
 // #docregion imports
 import 'dart:async';
 
-import 'package:pageloader/pageloader.dart';
+import 'package:ngpageloader/pageloader.dart';
 // #enddocregion imports
 
 // #docregion boilerplate
