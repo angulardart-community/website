@@ -20,7 +20,7 @@ class HeroService {
 
   Future<List<Hero>> getAll() async {
     try {
-      final response = await _http.get(_heroesUrl);
+      final response = await _http.get(Uri.parse(_heroesUrl));
       final heroes = (_extractData(response) as List)
           .map((json) => Hero.fromJson(json))
           .toList();
@@ -46,7 +46,7 @@ class HeroService {
   // #docregion get
   Future<Hero> get(int id) async {
     try {
-      final response = await _http.get('$_heroesUrl/$id');
+      final response = await _http.get(Uri.parse('$_heroesUrl/$id'));
       return Hero.fromJson(_extractData(response));
     } catch (e) {
       throw _handleError(e);
@@ -57,7 +57,7 @@ class HeroService {
   // #docregion create
   Future<Hero> create(String name) async {
     try {
-      final response = await _http.post(_heroesUrl,
+      final response = await _http.post(Uri.parse(_heroesUrl),
           headers: _headers, body: json.encode({'name': name}));
       return Hero.fromJson(_extractData(response));
     } catch (e) {
@@ -71,7 +71,7 @@ class HeroService {
     try {
       final url = '$_heroesUrl/${hero.id}';
       final response =
-          await _http.put(url, headers: _headers, body: json.encode(hero));
+          await _http.put(Uri.parse(url), headers: _headers, body: json.encode(hero));
       return Hero.fromJson(_extractData(response));
     } catch (e) {
       throw _handleError(e);
@@ -83,7 +83,7 @@ class HeroService {
   Future<void> delete(int id) async {
     try {
       final url = '$_heroesUrl/$id';
-      await _http.delete(url, headers: _headers);
+      await _http.delete(Uri.parse(url), headers: _headers);
     } catch (e) {
       throw _handleError(e);
     }

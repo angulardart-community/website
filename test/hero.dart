@@ -10,7 +10,7 @@ import 'package:angular_tour_of_heroes/src/hero_component.template.dart' as ng;
 import 'package:angular_tour_of_heroes/src/hero_service.dart';
 import 'package:http/http.dart';
 import 'package:mockito/mockito.dart';
-import 'package:pageloader/html.dart';
+import 'package:ngpageloader/html.dart';
 import 'package:test/test.dart';
 
 import 'hero.template.dart' as self;
@@ -29,7 +29,7 @@ final InjectorFactory rootInjector = self.rootInjector$Injector;
 
 void main() {
   final injector = InjectorProbe(rootInjector);
-  final testBed = NgTestBed.forComponent<HeroComponent>(
+  final testBed = NgTestBed<HeroComponent>(
       ng.HeroComponentNgFactory,
       rootInjector: injector.factory);
 

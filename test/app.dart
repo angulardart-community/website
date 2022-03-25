@@ -6,7 +6,7 @@ import 'package:angular_tour_of_heroes/app_component.dart';
 import 'package:angular_tour_of_heroes/app_component.template.dart' as ng;
 import 'package:angular_tour_of_heroes/in_memory_data_service.dart';
 import 'package:http/http.dart';
-import 'package:pageloader/html.dart';
+import 'package:ngpageloader/html.dart';
 import 'package:test/test.dart';
 
 import 'app.template.dart' as self;
@@ -26,7 +26,7 @@ final InjectorFactory rootInjector = self.rootInjector$Injector;
 void main() {
   // #docregion provisioning-and-setup
   final injector = InjectorProbe(rootInjector);
-  final testBed = NgTestBed.forComponent<AppComponent>(ng.AppComponentNgFactory,
+  final testBed = NgTestBed<AppComponent>(ng.AppComponentNgFactory,
       rootInjector: injector.factory);
 
   setUp(() async {

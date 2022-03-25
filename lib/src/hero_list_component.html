@@ -3,7 +3,7 @@
 <!-- #docregion add -->
 <div>
   <label>Hero name:</label> <input #heroName />
-  <button (click)="add(heroName.value); heroName.value=''">
+  <button (click)="add(heroName.value)">
     Add
   </button>
 </div>
@@ -11,20 +11,20 @@
 <ul class="heroes">
   <!-- #docregion li-element -->
   <li *ngFor="let hero of heroes"
-      [class.selected]="hero === selected"
+      [class.selected]="hero == selected"
       (click)="onSelect(hero)">
     <span class="badge">{{hero.id}}</span>
     <span>{{hero.name}}</span>
     <!-- #docregion delete -->
     <button class="delete"
-      (click)="delete(hero); $event.stopPropagation()">x</button>
+      (click)="delete(hero, $event)">x</button>
     <!-- #enddocregion delete -->
   </li>
   <!-- #enddocregion li-element -->
 </ul>
 <div *ngIf="selected != null">
   <h2>
-    {{selected.name | uppercase}} is my hero
+    {{$pipe.uppercase(selected.name)}} is my hero
   </h2>
   <button (click)="gotoDetail()">View Details</button>
 </div>

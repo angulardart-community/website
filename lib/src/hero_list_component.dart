@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
@@ -30,17 +31,21 @@ class HeroListComponent implements OnInit {
   // #docregion add
   Future<void> add(String name) async {
     name = name.trim();
-    if (name.isEmpty) return null;
+    if (name.isEmpty) return;
     heroes.add(await _heroService.create(name));
     selected = null;
+		name = '';
   }
   // #enddocregion add
 
   // #docregion delete
-  Future<void> delete(Hero hero) async {
+  Future<void> delete(Hero hero, Event event) async {
     await _heroService.delete(hero.id);
     heroes.remove(hero);
     if (selected == hero) selected = null;
+
+		// This makes any component **above** <my-hero> 
+		event.stopPropagation();
   }
   // #enddocregion delete
 

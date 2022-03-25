@@ -4,7 +4,7 @@
          (change)="search(searchBox.value)"
          (keyup)="search(searchBox.value)" />
   <div>
-    <div *ngFor="let hero of heroes | async"
+    <div *ngFor="let hero of $pipe.async(heroes)"
          (click)="gotoDetail(hero)" class="search-result" >
       {{hero.name}}
     </div>

@@ -12,7 +12,7 @@ class HeroSearchService {
 
   Future<List<Hero>> search(String term) async {
     try {
-      final response = await _http.get('app/heroes/?name=$term');
+      final response = await _http.get(Uri.parse('app/heroes/?name=$term'));
       return (_extractData(response) as List)
           .map((json) => Hero.fromJson(json))
           .toList();
