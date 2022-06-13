@@ -10,8 +10,8 @@ class Hero {
 @Component(
   selector: 'do-check',
   template: '''
-    <div class="hero">
-      <p>{{hero.name}} can {{power}}</p>
+    <div *ngIf="hero != null" class="hero">
+      <p>{{hero!.name}} can {{power}}</p>
 
       <h4>-- Change Log --</h4>
       <div *ngFor="let chg of changeLog">{{chg}}</div>
@@ -25,9 +25,9 @@ class Hero {
 )
 class DoCheckComponent implements DoCheck {
   @Input()
-  Hero hero;
+  Hero? hero;
   @Input()
-  String power;
+  String power = '';
 
   bool changeDetected = false;
   List<String> changeLog = [];
@@ -39,11 +39,12 @@ class DoCheckComponent implements DoCheck {
 
   // #docregion ng-do-check
   ngDoCheck() {
-    if (hero.name != oldHeroName) {
+    final heroName = hero?.name ?? '';
+    if (heroName != oldHeroName) {
       changeDetected = true;
       changeLog.add(
-          'DoCheck: Hero name changed to "${hero.name}" from "$oldHeroName"');
-      oldHeroName = hero.name;
+          'DoCheck: Hero name changed to "${heroName}" from "$oldHeroName"');
+      oldHeroName = heroName;
     }
 
     if (power != oldPower) {
@@ -87,11 +88,11 @@ class DoCheckComponent implements DoCheck {
   directives: [coreDirectives, formDirectives, DoCheckComponent],
 )
 class DoCheckParentComponent {
-  Hero hero;
-  String power;
+  late Hero hero;
+  late String power;
   String title = 'DoCheck';
   @ViewChild(DoCheckComponent)
-  DoCheckComponent childView;
+  DoCheckComponent? childView;
 
   DoCheckParentComponent() {
     reset();
