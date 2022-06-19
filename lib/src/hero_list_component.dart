@@ -29,12 +29,12 @@ class HeroListComponent implements OnInit {
   }
 
   // #docregion add
-  Future<void> add(String name) async {
-    name = name.trim();
+  Future<void> add(InputElement event) async {
+    final String name = event.value.trim();
     if (name.isEmpty) return;
     heroes.add(await _heroService.create(name));
     selected = null;
-		name = '';
+    event.value = "";
   }
   // #enddocregion add
 
@@ -44,8 +44,8 @@ class HeroListComponent implements OnInit {
     heroes.remove(hero);
     if (selected == hero) selected = null;
 
-		// This makes any component **above** <my-hero> 
-		event.stopPropagation();
+    // This makes any component **above** <my-hero>
+    event.stopPropagation();
   }
   // #enddocregion delete
 

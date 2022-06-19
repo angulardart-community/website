@@ -29,8 +29,7 @@ final InjectorFactory rootInjector = self.rootInjector$Injector;
 
 void main() {
   final injector = InjectorProbe(rootInjector);
-  final testBed = NgTestBed<HeroComponent>(
-      ng.HeroComponentNgFactory,
+  final testBed = NgTestBed<HeroComponent>(ng.HeroComponentNgFactory,
       rootInjector: injector.factory);
 
   setUp(() async {

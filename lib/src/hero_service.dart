@@ -70,8 +70,8 @@ class HeroService {
   Future<Hero> update(Hero hero) async {
     try {
       final url = '$_heroesUrl/${hero.id}';
-      final response =
-          await _http.put(Uri.parse(url), headers: _headers, body: json.encode(hero));
+      final response = await _http.put(Uri.parse(url),
+          headers: _headers, body: json.encode(hero));
       return Hero.fromJson(_extractData(response));
     } catch (e) {
       throw _handleError(e);

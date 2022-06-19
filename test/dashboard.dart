@@ -36,8 +36,7 @@ final InjectorFactory rootInjector = self.rootInjector$Injector;
 
 void main() {
   final injector = InjectorProbe(rootInjector);
-  final testBed = NgTestBed<DashboardComponent>(
-      ng.DashboardComponentNgFactory,
+  final testBed = NgTestBed<DashboardComponent>(ng.DashboardComponentNgFactory,
       rootInjector: injector.factory);
 
   setUp(() async {
