@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [stable, beta, dev, 2.14.0]
+        sdk: [stable, dev, 2.17.0]
 
     steps:
       - uses: actions/checkout@v2
@@ -46,11 +46,8 @@ jobs:
       - name: Analyze project source
         run: dart analyze --fatal-infos
 
-      # Skip browser test for now because pageloader requries a browser window
-      # to be launched.
-      # 
       # Your project will need to have tests in test/ and a dependency on
       # package:test for this step to succeed. Note that Flutter projects will
       # want to change this to 'flutter test'.
-      # - name: Run tests
-      #   run: dart run build_runner test -- -p chrome
+      - name: Run tests
+        run: dart run build_runner test -- -p chrome

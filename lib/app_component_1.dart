@@ -23,9 +23,9 @@ class AppComponent implements OnInit {
   // #enddocregion OnInit-and-ngOnInit
   final title = 'Tour of Heroes';
   // #docregion heroes, heroes-and-getHeroes
-  List<Hero> heroes;
+  List<Hero> heroes = <Hero>[];
   // #enddocregion heroes, heroes-and-getHeroes
-  Hero selected;
+  Hero? selected;
 
   // #docregion new-service
   HeroService heroService = HeroService(); // DON'T do this

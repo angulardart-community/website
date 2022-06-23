@@ -39,10 +39,10 @@ abstract class AppPO {
 
   Future<void> selectHero(int index) => _heroes[index].click();
 
-  Map get selected =>
+  Map? get selected =>
       _selected.exists ? _heroDataFromLi(_selected.visibleText) : null;
 
-  Map get heroFromDetails {
+  Map? get heroFromDetails {
     if (!_heroDetailId.exists) return null;
     final idAsString = _heroDetailId.visibleText.split(':')[1];
     return _heroData(idAsString, _heroDetailHeading.visibleText);
@@ -55,7 +55,7 @@ abstract class AppPO {
       {'id': int.tryParse(idAsString) ?? -1, 'name': name};
 
   Map<String, dynamic> _heroDataFromLi(String liText) {
-    final matches = RegExp((r'^(\d+) (.*)$')).firstMatch(liText);
-    return _heroData(matches[1], matches[2]);
+    final RegExpMatch matches = RegExp((r'^(\d+) (.*)$')).firstMatch(liText)!;
+    return _heroData(matches[1]!, matches[2]!);
   }
 }

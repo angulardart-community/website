@@ -20,8 +20,8 @@ import 'src/hero_service.dart';
 class AppComponent implements OnInit {
   final title = 'Tour of Heroes';
   final HeroService _heroService;
-  List<Hero> heroes;
-  Hero selected;
+  List<Hero> heroes = <Hero>[];
+  Hero? selected;
 
   AppComponent(this._heroService);
 

@@ -13,7 +13,7 @@ import 'src/hero_service.dart';
   providers: [ClassProvider(HeroService)],
 )
 class AppComponent implements OnInit {
-  List<Hero> heroes;
+  List<Hero> heroes = <Hero>[];
   final HeroService _heroService;
 
   AppComponent(this._heroService);
