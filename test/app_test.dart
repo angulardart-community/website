@@ -11,8 +11,8 @@ import 'app_po.dart';
 void main() {
   // #docregion appPO-setup
   final testBed = NgTestBed<AppComponent>(ng.AppComponentNgFactory);
-  NgTestFixture<AppComponent> fixture;
-  AppPO appPO;
+  late NgTestFixture<AppComponent> fixture;
+  late AppPO appPO;
 
   setUp(() async {
     fixture = await testBed.create();
