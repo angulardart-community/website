@@ -14,11 +14,11 @@ import 'hero.dart';
   // #docregion template
   template: '''
     <div *ngIf="hero != null">
-      <h2>{{hero.name}}</h2>
-      <div><label>id: </label>{{hero.id}}</div>
+      <h2>{{hero!.name}}</h2>
+      <div><label>id: </label>{{hero!.id}}</div>
       <div>
         <label>name: </label>
-        <input [(ngModel)]="hero.name" placeholder="name">
+        <input [(ngModel)]="hero!.name" placeholder="name">
       </div>
     </div>''',
   // #enddocregion template
@@ -31,7 +31,7 @@ class HeroComponent {
   // #docregion Input-annotation
   @Input()
   // #docregion hero
-  Hero hero;
+  Hero? hero;
   // #enddocregion Input-annotation
   // #docregion v1
 }

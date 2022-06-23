@@ -8,8 +8,8 @@ import 'package:test/test.dart';
 
 import 'app_po.dart';
 
-NgTestFixture<AppComponent> fixture;
-AppPO appPO;
+late NgTestFixture<AppComponent> fixture;
+late AppPO appPO;
 
 void main() {
   final testBed = NgTestBed<AppComponent>(ng.AppComponentNgFactory);
@@ -72,7 +72,7 @@ void selectHeroTests() {
     tearDown(() async {
       // Restore hero name
       await appPO.clear();
-      await appPO.type(targetHero['name']);
+      await appPO.type(targetHero['name'] as String);
     });
 
     test('name in list is updated', () {

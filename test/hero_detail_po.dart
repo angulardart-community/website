@@ -18,7 +18,7 @@ abstract class HeroDetailPO {
   @ByTagName('input')
   PageLoaderElement get _input;
 
-  Map get heroFromDetails {
+  Map? get heroFromDetails {
     if (!_id.exists) return null;
     final idAsString = _id.visibleText.split(':')[1];
     return _heroData(idAsString, _title.visibleText);

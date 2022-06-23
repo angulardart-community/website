@@ -13,8 +13,8 @@ import 'hero_detail_po.dart';
 const targetHero = {'id': 1, 'name': 'Alice'};
 // #enddocregion targetHero
 
-NgTestFixture<HeroComponent> fixture;
-HeroDetailPO po;
+late NgTestFixture<HeroComponent> fixture;
+late HeroDetailPO po;
 
 void main() {
   final testBed = NgTestBed<HeroComponent>(ng.HeroComponentNgFactory);
@@ -32,7 +32,7 @@ void main() {
     // #enddocregion transition-to-hero
 
     test('has empty view', () {
-      expect(fixture.rootElement.text.trim(), '');
+      expect(fixture.rootElement.text!.trim(), '');
       expect(po.heroFromDetails, isNull);
     });
     // #enddocregion no-initial-hero
@@ -40,7 +40,10 @@ void main() {
 
     test('transition to ${targetHero['name']} hero', () async {
       await fixture.update((comp) {
-        comp.hero = Hero(targetHero['id'], targetHero['name']);
+        comp.hero = Hero(
+          targetHero['id'] as int,
+          targetHero['name'] as String,
+        );
       });
       expect(po.heroFromDetails, targetHero);
     });
@@ -56,8 +59,10 @@ void main() {
     // #docregion initial-hero
     setUp(() async {
       fixture = await testBed.create(
-          beforeChangeDetection: (c) =>
-              c.hero = Hero(targetHero['id'], targetHero['name']));
+          beforeChangeDetection: (c) => c.hero = Hero(
+                targetHero['id'] as int,
+                targetHero['name'] as String,
+              ));
       final context =
           HtmlPageLoaderElement.createFromElement(fixture.rootElement);
       po = HeroDetailPO.create(context);
