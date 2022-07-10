@@ -21,7 +21,7 @@ class RoutePaths {
 // #enddocregion hero, v1
 
 // #docregion getId
-int getId(Map<String, String> parameters) {
+int? getId(Map<String, String> parameters) {
   final id = parameters[idParam];
   return id == null ? null : int.tryParse(id);
 }

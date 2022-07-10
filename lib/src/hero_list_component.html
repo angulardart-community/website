@@ -11,7 +11,7 @@
 <div *ngIf="selected != null">
   <h2>
     <!-- #docregion pipe -->
-    {{$pipe.uppercase(selected.name)}} is my hero
+    {{$pipe.uppercase(selected!.name)}} is my hero
     <!-- #enddocregion pipe -->
   </h2>
   <button (click)="gotoDetail()">View Details</button>

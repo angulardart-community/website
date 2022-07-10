@@ -19,7 +19,7 @@ import 'route_paths.dart';
 // #enddocregion metadata, metadata-wo-styles
 // #docregion class
 class DashboardComponent implements OnInit {
-  List<Hero> heroes;
+  List<Hero> heroes = <Hero>[];
 
   // #docregion ctor
   final HeroService _heroService;

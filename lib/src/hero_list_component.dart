@@ -27,8 +27,8 @@ class HeroListComponent implements OnInit {
   // #enddocregion renaming, gotoDetail-stub
   final HeroService _heroService;
   final Router _router;
-  List<Hero> heroes;
-  Hero selected;
+  List<Hero> heroes = <Hero>[];
+  Hero? selected;
 
   // #docregion renaming
   HeroListComponent(this._heroService, this._router);
@@ -47,7 +47,7 @@ class HeroListComponent implements OnInit {
 
   // #docregion gotoDetail, gotoDetail-stub
   Future<NavigationResult> gotoDetail() =>
-      _router.navigate(_heroUrl(selected.id));
+      _router.navigate(_heroUrl(selected!.id));
   // #enddocregion gotoDetail
   // #docregion renaming
 }
