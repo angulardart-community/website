@@ -10,14 +10,14 @@ import 'package:ngpageloader/html.dart';
 import 'package:test/test.dart';
 
 import 'dashboard_po.dart';
-import 'dashboard_real_router.template.dart' as self;
+import 'dashboard_real_router_test.template.dart' as self;
 import 'matchers.dart';
 import 'utils.dart';
 
 // #docregion providers-with-context
-NgTestFixture<TestComponent> fixture;
-DashboardPO po;
-Router router;
+late NgTestFixture<TestComponent> fixture;
+late DashboardPO po;
+late Router router;
 
 @GenerateInjector([
   ClassProvider(HeroService),
@@ -27,12 +27,14 @@ final InjectorFactory rootInjector = self.rootInjector$Injector;
 
 void main() {
   final injector = InjectorProbe(rootInjector);
-  final testBed = NgTestBed<TestComponent>(self.TestComponentNgFactory,
-      rootInjector: injector.factory);
+  final testBed = NgTestBed<TestComponent>(
+    self.TestComponentNgFactory as ComponentFactory<TestComponent>,
+    rootInjector: injector.factory,
+  );
   // #enddocregion providers-with-context
 
   // #docregion setUp
-  List<RouterState> navHistory;
+  late List<RouterState> navHistory;
 
   setUp(() async {
     fixture = await testBed.create();

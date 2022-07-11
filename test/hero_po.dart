@@ -24,8 +24,11 @@ abstract class HeroDetailPO {
   PageLoaderElement get _button;
   // #enddocregion back-button
 
-  Map get heroFromDetails {
-    if (!_id.exists) return null;
+  Map? get heroFromDetails {
+    if (!_id.exists) {
+			print("I'm returning null!");
+			return null;
+		}
     final idAsString = _id.visibleText.split(':')[1];
     return heroData(idAsString, _title.visibleText);
   }

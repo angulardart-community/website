@@ -11,12 +11,12 @@ import 'package:mockito/mockito.dart';
 import 'package:ngpageloader/html.dart';
 import 'package:test/test.dart';
 
-import 'hero.template.dart' as self;
+import 'hero_test.template.dart' as self;
 import 'hero_po.dart';
 import 'utils.dart';
 
-NgTestFixture<HeroComponent> fixture;
-HeroDetailPO po;
+late NgTestFixture<HeroComponent> fixture;
+late HeroDetailPO po;
 
 @GenerateInjector([
   ClassProvider(HeroService),
@@ -38,7 +38,7 @@ void main() {
   tearDown(disposeAnyRunningTest);
 
   test('No initial hero results in an empty view', () {
-    expect(fixture.rootElement.text.trim(), '');
+    expect(fixture.rootElement.text?.trim(), '');
   });
 
   const targetHero = {'id': 15, 'name': 'Magneta'};
@@ -47,6 +47,8 @@ void main() {
     final Map updatedHero = <String, dynamic>{'id': targetHero['id']};
 
     final mockRouterState = MockRouterState();
+
+	print(mockRouterState?.parameters);
     when(mockRouterState.parameters)
         .thenReturn({idParam: '${targetHero['id']}'});
 

@@ -15,13 +15,13 @@ import 'package:ngpageloader/html.dart';
 import 'package:test/test.dart';
 
 // #docregion rootInjector
-import 'heroes.template.dart' as self;
+import 'heroes_test.template.dart' as self;
 // #enddocregion rootInjector
 import 'heroes_po.dart';
 import 'utils.dart';
 
-NgTestFixture<HeroListComponent> fixture;
-HeroesPO po;
+late NgTestFixture<HeroListComponent> fixture;
+late HeroesPO po;
 
 // #docregion rootInjector
 @GenerateInjector([
@@ -32,8 +32,10 @@ final InjectorFactory rootInjector = self.rootInjector$Injector;
 
 void main() {
   final injector = InjectorProbe(rootInjector);
-  final testBed = NgTestBed<HeroListComponent>(ng.HeroListComponentNgFactory,
-      rootInjector: injector.factory);
+  final testBed = NgTestBed<HeroListComponent>(
+    ng.HeroListComponentNgFactory,
+    rootInjector: injector.factory,
+  );
   // #enddocregion rootInjector
 
   setUp(() async {
@@ -80,14 +82,15 @@ void selectedHeroTests(InjectorProbe injector) {
   });
 
   test('show mini-detail', () {
-    expect(po.myHeroNameInUppercase, equalsIgnoringCase(targetHero['name']));
+    expect(po.myHeroNameInUppercase, equalsIgnoringCase(targetHero['name'] as String));
   });
 
   // #docregion go-to-detail
   test('go to detail', () async {
     await po.gotoDetail();
     final mockRouter = injector.get<MockRouter>(Router);
-    final c = verify(mockRouter.navigate(captureAny));
+    // final c = verify(mockRouter.navigate(captureAny));
+		final c = verify(mockRouter.navigate(""));
     expect(c.captured.single,
         RoutePaths.hero.toUrl(parameters: {idParam: '${targetHero['id']}'}));
   });

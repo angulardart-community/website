@@ -26,7 +26,7 @@ import 'route_paths.dart';
 // #docregion OnActivate, hero
 class HeroComponent implements OnActivate {
   // #enddocregion OnActivate
-  late Hero hero;
+  Hero? hero;
   // #enddocregion hero
   // #docregion ctor
   final HeroService _heroService;

@@ -33,20 +33,25 @@ abstract class HeroesPO {
 
   Future<void> selectHero(int index) => _heroes[index].click();
 
-  Map get selected =>
-      _selected.exists ? _heroDataFromLi(_selected.visibleText) : null;
+  Map? get selected {
+		if (_selected.exists) {
+			print("I'm also returning null!");
+		}
 
-  String get myHeroNameInUppercase {
+    return _selected.exists ? _heroDataFromLi(_selected.visibleText) : null;
+  }
+
+  String? get myHeroNameInUppercase {
     if (!_miniDetailHeading.exists) return null;
     final text = _miniDetailHeading.visibleText;
     final matches = RegExp((r'^\s*(.+) is my hero\s*$')).firstMatch(text);
-    return matches[1];
+    return matches?[1];
   }
 
   Future<void> gotoDetail() => _gotoDetail.click();
 
   Map<String, dynamic> _heroDataFromLi(String liText) {
     final matches = RegExp((r'^(\d+) (.*)$')).firstMatch(liText);
-    return heroData(matches[1], matches[2]);
+    return heroData(matches![1]!, matches[2]!);
   }
 }

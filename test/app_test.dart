@@ -7,13 +7,13 @@ import 'package:angular_tour_of_heroes/app_component.template.dart' as ng;
 import 'package:ngpageloader/html.dart';
 import 'package:test/test.dart';
 
-import 'app.template.dart' as self;
+import 'app_test.template.dart' as self;
 import 'app_po.dart';
 import 'utils.dart';
 
-NgTestFixture<AppComponent> fixture;
-AppPO appPO;
-Router router;
+late NgTestFixture<AppComponent> fixture;
+late AppPO appPO;
+late Router router;
 
 @GenerateInjector(routerProvidersForTesting)
 final InjectorFactory rootInjector = self.rootInjector$Injector;
@@ -27,7 +27,7 @@ void main() {
   setUp(() async {
     fixture = await testBed.create();
     router = injector.get<Router>(Router);
-    await router?.navigate('/');
+    await router.navigate('/');
     await fixture.update();
     final context =
         HtmlPageLoaderElement.createFromElement(fixture.rootElement);
@@ -47,7 +47,7 @@ void main() {
     });
 
     test('route', () {
-      expect(router.current.path, '/heroes');
+      expect(router.current?.path, '/heroes');
     });
 
     test('tab is showing', () {
@@ -97,7 +97,7 @@ void basicTests() {
 
 void dashboardTests() {
   test('route', () {
-    expect(router.current.path, '/dashboard');
+    expect(router.current?.path, '/dashboard');
   });
 
   test('tab is showing', () {

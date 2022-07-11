@@ -11,14 +11,14 @@ import 'package:mockito/mockito.dart';
 import 'package:ngpageloader/html.dart';
 import 'package:test/test.dart';
 
-import 'dashboard.template.dart' as self;
+import 'dashboard_test.template.dart' as self;
 import 'dashboard_po.dart';
 import 'matchers.dart';
 import 'utils.dart';
 
 // #docregion providers-with-context
-NgTestFixture<DashboardComponent> fixture;
-DashboardPO po;
+late NgTestFixture<DashboardComponent> fixture;
+late DashboardPO po;
 
 @GenerateInjector([
   ValueProvider.forToken(appBaseHref, '/'),
@@ -58,7 +58,7 @@ void main() {
     final mockRouter = injector.get<MockRouter>(Router);
     clearInteractions(mockRouter);
     await po.selectHero(3);
-    final c = verify(mockRouter.navigate(captureAny, captureAny));
+    final c = verify(mockRouter.navigate("", captureAny));
     expect(c.captured[0], '/heroes/15');
     expect(c.captured[1], isNavParams()); // empty params
     expect(c.captured.length, 2);

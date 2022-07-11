@@ -6,9 +6,10 @@ IsNavParams isNavParams([dynamic expected]) => IsNavParams(expected);
 
 class IsNavParams extends Matcher {
   NavigationParams _expected;
-  IsNavParams([NavigationParams expected]) {
-    _expected = expected == null ? NavigationParams() : expected;
-  }
+
+  IsNavParams([NavigationParams? expected])
+      : _expected = expected ?? NavigationParams() {}
+
   bool matches(item, Map matchState) =>
       item is NavigationParams &&
       _expected.fragment == item.fragment &&
@@ -25,9 +26,10 @@ IsRouterState isRouterState(dynamic expected) => IsRouterState(expected);
 
 class IsRouterState extends Matcher {
   RouterState _expected;
-  IsRouterState(/*RouterState|String*/ expected) {
-    _expected = expected is String ? RouterState(expected, []) : expected;
-  }
+
+  IsRouterState(/*RouterState|String*/ expected)
+      : _expected = expected is String ? RouterState(expected, []) : expected {}
+			
   bool matches(item, Map matchState) =>
       item is RouterState &&
       _expected.path == item.path &&
