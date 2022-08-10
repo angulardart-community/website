@@ -1,5 +1,5 @@
 // #docregion a-first-route
-import 'package:angular_router/angular_router.dart';
+import 'package:ngrouter/ngrouter.dart';
 
 import 'route_paths.dart';
 // #enddocregion a-first-route

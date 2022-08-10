@@ -1,8 +1,8 @@
 @TestOn('browser')
 
-import 'package:angular/angular.dart';
-import 'package:angular_router/angular_router.dart';
-import 'package:angular_test/angular_test.dart';
+import 'package:ngdart/angular.dart';
+import 'package:ngrouter/ngrouter.dart';
+import 'package:ngtest/angular_test.dart';
 import 'package:angular_tour_of_heroes/src/dashboard_component.dart';
 import 'package:angular_tour_of_heroes/src/dashboard_component.template.dart'
     as ng;
@@ -58,7 +58,7 @@ void main() {
     final mockRouter = injector.get<MockRouter>(Router);
     clearInteractions(mockRouter);
     await po.selectHero(3);
-    final c = verify(mockRouter.navigate("", captureAny));
+    final c = verify(mockRouter.navigate(captureAny, captureAny));
     expect(c.captured[0], '/heroes/15');
     expect(c.captured[1], isNavParams()); // empty params
     expect(c.captured.length, 2);

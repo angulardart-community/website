@@ -1,4 +1,4 @@
-import 'package:angular_router/angular_router.dart';
+import 'package:ngrouter/ngrouter.dart';
 import 'package:collection/collection.dart';
 import 'package:test/test.dart';
 

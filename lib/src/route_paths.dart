@@ -1,5 +1,5 @@
 // #docregion v1
-import 'package:angular_router/angular_router.dart';
+import 'package:ngrouter/ngrouter.dart';
 
 // #enddocregion v1
 // #docregion hero

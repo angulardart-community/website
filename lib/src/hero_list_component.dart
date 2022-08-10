@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 // #docregion gotoDetail-stub
-import 'package:angular_router/angular_router.dart';
+import 'package:ngrouter/ngrouter.dart';
 // #enddocregion gotoDetail-stub
 
 import 'route_paths.dart';

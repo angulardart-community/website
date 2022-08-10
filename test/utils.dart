@@ -1,8 +1,14 @@
 import 'dart:async';
 
-import 'package:angular/angular.dart';
-import 'package:angular_router/angular_router.dart';
+import 'package:mockito/annotations.dart';
+import 'package:ngdart/angular.dart';
+import 'package:ngrouter/ngrouter.dart';
 import 'package:mockito/mockito.dart';
+
+// #docregion MockRouter
+@GenerateNiceMocks([MockSpec<Router>(as: #MockRouter)])
+export 'utils.mocks.dart';
+// #enddocregion MockRouter
 
 // #docregion routerProvidersForTesting
 const /* List<Provider|List<Provider>> */ routerProvidersForTesting = [
@@ -32,10 +38,6 @@ class InjectorProbe {
 // #enddocregion InjectorProbe
 
 //-----------------------------------------------------------------------------
-
-// #docregion MockRouter
-class MockRouter extends Mock implements Router {}
-// #enddocregion MockRouter
 
 class MockPlatformLocation extends Mock implements PlatformLocation {
   String? _url;

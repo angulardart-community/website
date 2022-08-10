@@ -1,8 +1,8 @@
 @TestOn('browser')
 
-import 'package:angular/angular.dart';
-import 'package:angular_router/angular_router.dart';
-import 'package:angular_test/angular_test.dart';
+import 'package:ngdart/angular.dart';
+import 'package:ngrouter/ngrouter.dart';
+import 'package:ngtest/angular_test.dart';
 import 'package:angular_tour_of_heroes/src/hero_list_component.dart';
 // #docregion providers-with-context, rootInjector
 import 'package:angular_tour_of_heroes/src/hero_list_component.template.dart'
@@ -82,15 +82,15 @@ void selectedHeroTests(InjectorProbe injector) {
   });
 
   test('show mini-detail', () {
-    expect(po.myHeroNameInUppercase, equalsIgnoringCase(targetHero['name'] as String));
+    expect(po.myHeroNameInUppercase,
+        equalsIgnoringCase(targetHero['name'] as String));
   });
 
   // #docregion go-to-detail
   test('go to detail', () async {
     await po.gotoDetail();
     final mockRouter = injector.get<MockRouter>(Router);
-    // final c = verify(mockRouter.navigate(captureAny));
-		final c = verify(mockRouter.navigate(""));
+    final c = verify(mockRouter.navigate(captureAny));
     expect(c.captured.single,
         RoutePaths.hero.toUrl(parameters: {idParam: '${targetHero['id']}'}));
   });

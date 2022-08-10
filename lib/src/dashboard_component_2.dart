@@ -1,5 +1,5 @@
 // #docregion imports
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 
 import 'hero.dart';
 import 'hero_service.dart';

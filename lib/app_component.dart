@@ -1,6 +1,6 @@
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 // #docregion angular_router
-import 'package:angular_router/angular_router.dart';
+import 'package:ngrouter/ngrouter.dart';
 // #enddocregion angular_router
 
 import 'src/hero_service.dart';
