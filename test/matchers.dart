@@ -29,7 +29,7 @@ class IsRouterState extends Matcher {
 
   IsRouterState(/*RouterState|String*/ expected)
       : _expected = expected is String ? RouterState(expected, []) : expected {}
-			
+
   bool matches(item, Map matchState) =>
       item is RouterState &&
       _expected.path == item.path &&
