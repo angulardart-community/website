@@ -33,13 +33,8 @@ abstract class HeroesPO {
 
   Future<void> selectHero(int index) => _heroes[index].click();
 
-  Map? get selected {
-		if (_selected.exists) {
-			print("I'm also returning null!");
-		}
-
-    return _selected.exists ? _heroDataFromLi(_selected.visibleText) : null;
-  }
+  Map? get selected =>
+      _selected.exists ? _heroDataFromLi(_selected.visibleText) : null;
 
   String? get myHeroNameInUppercase {
     if (!_miniDetailHeading.exists) return null;

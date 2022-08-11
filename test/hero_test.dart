@@ -1,5 +1,6 @@
 @TestOn('browser')
 
+import 'package:mockito/annotations.dart';
 import 'package:ngdart/angular.dart';
 import 'package:ngrouter/ngrouter.dart';
 import 'package:ngtest/angular_test.dart';
@@ -14,6 +15,12 @@ import 'package:test/test.dart';
 import 'hero_test.template.dart' as self;
 import 'hero_po.dart';
 import 'utils.dart';
+
+@GenerateNiceMocks([
+  MockSpec<Location>(),
+  MockSpec<RouterState>(),
+])
+import 'hero_test.mocks.dart';
 
 late NgTestFixture<HeroComponent> fixture;
 late HeroDetailPO po;
@@ -48,7 +55,6 @@ void main() {
 
     final mockRouterState = MockRouterState();
 
-	print(mockRouterState?.parameters);
     when(mockRouterState.parameters)
         .thenReturn({idParam: '${targetHero['id']}'});
 
@@ -79,6 +85,6 @@ void main() {
   });
 }
 
-class MockLocation extends Mock implements Location {}
-
-class MockRouterState extends Mock implements RouterState {}
+// class MockLocation extends Mock implements Location {}
+// 
+// class MockRouterState extends Mock implements RouterState {}

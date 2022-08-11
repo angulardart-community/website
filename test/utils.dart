@@ -6,7 +6,7 @@ import 'package:ngrouter/ngrouter.dart';
 import 'package:mockito/mockito.dart';
 
 // #docregion MockRouter
-@GenerateNiceMocks([MockSpec<Router>(as: #MockRouter)])
+@GenerateNiceMocks([MockSpec<Router>()])
 export 'utils.mocks.dart';
 // #enddocregion MockRouter
 

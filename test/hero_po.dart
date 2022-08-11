@@ -26,9 +26,8 @@ abstract class HeroDetailPO {
 
   Map? get heroFromDetails {
     if (!_id.exists) {
-			print("I'm returning null!");
-			return null;
-		}
+      return null;
+    }
     final idAsString = _id.visibleText.split(':')[1];
     return heroData(idAsString, _title.visibleText);
   }
