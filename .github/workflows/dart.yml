@@ -33,9 +33,9 @@ jobs:
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed .
 
-      # Otherwise pageloader's missing PO files will cause the analyzer to panic
+      # Otherwise pageloader's PO files/mockito's mock files will cause the analyzer to panic
       - name: Run build_runner
-        run: dart run build_runner build ngpageloader
+        run: dart run build_runner build
 
       - name: Analyze project source
         run: dart analyze --fatal-infos
