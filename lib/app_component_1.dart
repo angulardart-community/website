@@ -1,6 +1,6 @@
 // Based on toh-1 file. USED ONLY TO VALIDATE the .html template
-import 'package:angular/angular.dart';
-import 'package:angular_forms/angular_forms.dart';
+import 'package:ngdart/angular.dart';
+import 'package:ngforms/ngforms.dart';
 
 import 'src/hero.dart';
 
