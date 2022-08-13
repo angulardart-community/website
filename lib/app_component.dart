@@ -1,6 +1,6 @@
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 // #docregion directives
-import 'package:angular_forms/angular_forms.dart';
+import 'package:ngforms/ngforms.dart';
 
 import 'hero.dart';
 

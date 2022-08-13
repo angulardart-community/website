@@ -1,4 +1,4 @@
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 
 // #docregion import-and-class
 import 'hero.dart';
