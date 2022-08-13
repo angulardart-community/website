@@ -1,6 +1,6 @@
 // #docregion v1
-import 'package:angular/angular.dart';
-import 'package:angular_forms/angular_forms.dart';
+import 'package:ngdart/angular.dart';
+import 'package:ngforms/ngforms.dart';
 
 // #enddocregion v1
 // #docregion hero

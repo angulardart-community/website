@@ -1,6 +1,6 @@
 @TestOn('browser')
 
-import 'package:angular_test/angular_test.dart';
+import 'package:ngtest/ngtest.dart';
 import 'package:angular_tour_of_heroes/src/hero.dart';
 import 'package:angular_tour_of_heroes/src/hero_component.dart';
 import 'package:angular_tour_of_heroes/src/hero_component.template.dart' as ng;
