@@ -23,12 +23,13 @@ class InMemoryDataService extends MockClient {
     {'id': 19, 'name': 'Magma'},
     {'id': 20, 'name': 'Tornado'}
   ];
-  static List<Hero> _heroesDb;
-  static int _nextId;
+
+  static late List<Hero> _heroesDb;
+  static late int _nextId;
 
   static Future<Response> _handler(Request request) async {
-    if (_heroesDb == null) resetDb();
     var data;
+
     switch (request.method) {
       case 'GET':
         final id = int.tryParse(request.url.pathSegments.last);
@@ -65,13 +66,15 @@ class InMemoryDataService extends MockClient {
         headers: {'content-type': 'application/json'});
   }
 
-  static resetDb() {
+  static void resetDb() {
     _heroesDb = _initialHeroes.map((json) => Hero.fromJson(json)).toList();
     _nextId = _heroesDb.map((hero) => hero.id).fold(0, max) + 1;
   }
 
   static String lookUpName(int id) =>
-      _heroesDb.firstWhere((hero) => hero.id == id, orElse: null)?.name;
+      _heroesDb.firstWhere((hero) => hero.id == id, orElse: null).name;
 
-  InMemoryDataService() : super(_handler);
+  InMemoryDataService() : super(_handler) {
+    resetDb();
+  }
 }

@@ -89,5 +89,4 @@ class HeroService {
     }
   }
   // #enddocregion delete
-
 }

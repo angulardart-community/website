@@ -1,9 +1,9 @@
 // #docregion v2
 import 'dart:async';
 
-import 'package:angular/angular.dart';
-import 'package:angular_forms/angular_forms.dart';
-import 'package:angular_router/angular_router.dart';
+import 'package:ngdart/angular.dart';
+import 'package:ngforms/ngforms.dart';
+import 'package:ngrouter/ngrouter.dart';
 
 import 'hero.dart';
 import 'hero_service.dart';
@@ -16,7 +16,7 @@ import 'route_paths.dart';
   directives: [coreDirectives, formDirectives],
 )
 class HeroComponent implements OnActivate {
-  Hero hero;
+  Hero? hero;
   final HeroService _heroService;
   final Location _location;
 
@@ -30,7 +30,7 @@ class HeroComponent implements OnActivate {
 
   // #docregion save
   Future<void> save() async {
-    await _heroService.update(hero);
+    await _heroService.update(hero!);
     goBack();
   }
   // #enddocregion save

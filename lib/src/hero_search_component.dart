@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:angular/angular.dart';
-import 'package:angular_router/angular_router.dart';
+import 'package:ngdart/angular.dart';
+import 'package:ngrouter/ngrouter.dart';
 import 'package:stream_transform/stream_transform.dart';
 
 import 'route_paths.dart';
@@ -21,7 +21,7 @@ class HeroSearchComponent implements OnInit {
   Router _router;
 
   // #docregion search
-  Stream<List<Hero>> heroes;
+  late Stream<List<Hero>> heroes;
   // #enddocregion search
   // #docregion searchTerms
   StreamController<String> _searchTerms = StreamController<String>.broadcast();

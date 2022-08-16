@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:html';
 
-import 'package:angular/angular.dart';
-import 'package:angular_router/angular_router.dart';
+import 'package:ngdart/angular.dart';
+import 'package:ngrouter/ngrouter.dart';
 
 import 'route_paths.dart';
 import 'hero.dart';
@@ -19,8 +19,8 @@ import 'hero_service.dart';
 class HeroListComponent implements OnInit {
   final HeroService _heroService;
   final Router _router;
-  List<Hero> heroes;
-  Hero selected;
+  List<Hero> heroes = [];
+  Hero? selected;
 
   HeroListComponent(this._heroService, this._router);
 
@@ -30,8 +30,8 @@ class HeroListComponent implements OnInit {
 
   // #docregion add
   Future<void> add(InputElement event) async {
-    final String name = event.value.trim();
-    if (name.isEmpty) return;
+    final String? name = event.value?.trim();
+    if (name == null || name.isEmpty) return;
     heroes.add(await _heroService.create(name));
     selected = null;
     event.value = "";
@@ -57,5 +57,5 @@ class HeroListComponent implements OnInit {
       RoutePaths.hero.toUrl(parameters: {idParam: '$id'});
 
   Future<NavigationResult> gotoDetail() =>
-      _router.navigate(_heroUrl(selected.id));
+      _router.navigate(_heroUrl(selected!.id));
 }

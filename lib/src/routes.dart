@@ -1,4 +1,4 @@
-import 'package:angular_router/angular_router.dart';
+import 'package:ngrouter/ngrouter.dart';
 
 import 'route_paths.dart';
 import 'dashboard_component.template.dart' as dashboard_template;

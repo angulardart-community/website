@@ -24,7 +24,7 @@
 </ul>
 <div *ngIf="selected != null">
   <h2>
-    {{$pipe.uppercase(selected.name)}} is my hero
+    {{$pipe.uppercase(selected!.name)}} is my hero
   </h2>
   <button (click)="gotoDetail()">View Details</button>
 </div>

@@ -1,4 +1,4 @@
-import 'package:angular_router/angular_router.dart';
+import 'package:ngrouter/ngrouter.dart';
 
 const idParam = 'id';
 
@@ -9,7 +9,7 @@ class RoutePaths {
   static final hero = RoutePath(path: '${heroes.path}/:$idParam');
 }
 
-int getId(Map<String, String> parameters) {
+int? getId(Map<String, String> parameters) {
   final id = parameters[idParam];
   return id == null ? null : int.tryParse(id);
 }

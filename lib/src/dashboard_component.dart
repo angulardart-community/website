@@ -1,5 +1,5 @@
-import 'package:angular/angular.dart';
-import 'package:angular_router/angular_router.dart';
+import 'package:ngdart/angular.dart';
+import 'package:ngrouter/ngrouter.dart';
 
 import 'hero.dart';
 import 'hero_service.dart';
@@ -17,7 +17,7 @@ import 'route_paths.dart';
 )
 // #enddocregion search
 class DashboardComponent implements OnInit {
-  List<Hero> heroes;
+  List<Hero> heroes = <Hero>[];
 
   final HeroService _heroService;
 

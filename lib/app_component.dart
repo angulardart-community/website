@@ -1,5 +1,5 @@
-import 'package:angular/angular.dart';
-import 'package:angular_router/angular_router.dart';
+import 'package:ngdart/angular.dart';
+import 'package:ngrouter/ngrouter.dart';
 
 import 'src/routes.dart';
 import 'src/hero_service.dart';
