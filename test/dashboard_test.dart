@@ -16,13 +16,13 @@ import 'package:mockito/mockito.dart';
 import 'package:ngpageloader/html.dart';
 import 'package:test/test.dart';
 
-import 'dashboard.template.dart' as self;
+import 'dashboard_test.template.dart' as self;
 import 'dashboard_po.dart';
 import 'matchers.dart';
 import 'utils.dart';
 
-NgTestFixture<DashboardComponent> fixture;
-DashboardPO po;
+late NgTestFixture<DashboardComponent> fixture;
+late DashboardPO po;
 
 @GenerateInjector([
   ValueProvider.forToken(appBaseHref, '/'),

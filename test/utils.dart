@@ -1,8 +1,14 @@
 import 'dart:async';
 
+import 'package:mockito/annotations.dart';
 import 'package:ngdart/angular.dart';
 import 'package:ngrouter/ngrouter.dart';
 import 'package:mockito/mockito.dart';
+
+@GenerateNiceMocks([
+  MockSpec<Router>(),
+])
+export 'utils.mocks.dart';
 
 // #docregion routerProvidersForTesting
 const /* List<Provider|List<Provider>> */ routerProvidersForTesting = [
@@ -18,32 +24,29 @@ const /* List<Provider|List<Provider>> */ routerProvidersForTesting = [
 // #docregion InjectorProbe
 class InjectorProbe {
   InjectorFactory _parent;
-  Injector _injector;
+  Injector? _injector;
 
   InjectorProbe(this._parent);
 
   InjectorFactory get factory => _factory;
-  Injector get injector => _injector ??= _factory();
+  Injector? get injector => _injector;
 
-  Injector _factory([Injector parent]) => _injector = _parent(parent);
+  // Injector _factory([Injector? parent]) => _injector = _parent(parent);
+  Injector _factory(Injector parent) => _injector = _parent(parent);
   T get<T>(dynamic token) => injector?.get(token);
 }
 // #enddocregion InjectorProbe
 
 //-----------------------------------------------------------------------------
 
-// #docregion MockRouter
-class MockRouter extends Mock implements Router {}
-// #enddocregion MockRouter
-
 class MockPlatformLocation extends Mock implements PlatformLocation {
-  String _url;
+  String? _url;
 
   String get hash => '';
   String get pathname => _url ?? '';
   String get search => '';
 
-  void pushState(state, String title, String url) => _url = url;
+  void pushState(state, String title, String? url) => _url = url;
 }
 
 //-----------------------------------------------------------------------------

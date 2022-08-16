@@ -15,12 +15,12 @@ import 'package:mockito/mockito.dart';
 import 'package:ngpageloader/html.dart';
 import 'package:test/test.dart';
 
-import 'hero_search.template.dart' as self;
+import 'hero_search_test.template.dart' as self;
 import 'hero_search_po.dart';
 import 'utils.dart';
 
-NgTestFixture<HeroSearchComponent> fixture;
-HeroSearchPO po;
+late NgTestFixture<HeroSearchComponent> fixture;
+late HeroSearchPO po;
 
 @GenerateInjector([
   ClassProvider(Client, useClass: InMemoryDataService),
@@ -88,7 +88,7 @@ void heroSearchTests(InjectorProbe injector) {
 }
 
 Future _typeSearchTextAndRefreshPO(String searchText) async {
-  Future firstHero;
+  late Future firstHero;
   await fixture.update((c) => firstHero = c.heroes.first);
   await po.search.type(searchText);
   await firstHero;

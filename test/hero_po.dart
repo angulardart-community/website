@@ -27,7 +27,7 @@ abstract class HeroDetailPO {
   @WithVisibleText('Save')
   PageLoaderElement get _save;
 
-  Map get heroFromDetails {
+  Map? get heroFromDetails {
     if (!_id.exists) return null;
     final idAsString = _id.visibleText.split(':')[1];
     return heroData(idAsString, _title.visibleText);

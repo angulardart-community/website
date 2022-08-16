@@ -1,5 +1,6 @@
 @TestOn('browser')
 
+import 'package:mockito/annotations.dart';
 import 'package:ngdart/angular.dart';
 import 'package:ngrouter/ngrouter.dart';
 import 'package:ngtest/ngtest.dart';
@@ -13,12 +14,18 @@ import 'package:mockito/mockito.dart';
 import 'package:ngpageloader/html.dart';
 import 'package:test/test.dart';
 
-import 'hero.template.dart' as self;
+@GenerateNiceMocks([
+  MockSpec<Location>(),
+  MockSpec<RouterState>(),
+])
+import 'hero_test.mocks.dart';
+
+import 'hero_test.template.dart' as self;
 import 'hero_po.dart';
 import 'utils.dart';
 
-NgTestFixture<HeroComponent> fixture;
-HeroDetailPO po;
+late NgTestFixture<HeroComponent> fixture;
+late HeroDetailPO po;
 
 @GenerateInjector([
   ClassProvider(Client, useClass: InMemoryDataService),
@@ -40,7 +47,7 @@ void main() {
   tearDown(disposeAnyRunningTest);
 
   test('No initial hero results in an empty view', () {
-    expect(fixture.rootElement.text.trim(), '');
+    expect(fixture.rootElement.text?.trim(), '');
   });
 
   const targetHero = {'id': 15, 'name': 'Magneta'};
@@ -55,7 +62,7 @@ void main() {
     final mockRouterState = MockRouterState();
     when(mockRouterState.parameters)
         .thenReturn({idParam: '${targetHero['id']}'});
-    MockLocation mockLocation;
+    late MockLocation mockLocation;
 
     setUp(() async {
       mockLocation = injector.get<MockLocation>(Location);
@@ -86,20 +93,16 @@ void main() {
 
       test('discard changes', () async {
         await po.back();
-        final name = InMemoryDataService.lookUpName(targetHero['id']);
+        final name = InMemoryDataService.lookUpName(targetHero['id'] as int);
         expect(name, targetHero['name']);
       });
 
       test('save changes and go back', () async {
         await po.save();
         await fixture.update();
-        final name = InMemoryDataService.lookUpName(targetHero['id']);
+        final name = InMemoryDataService.lookUpName(targetHero['id'] as int);
         expect(name, updatedHero['name']);
       });
     });
   });
 }
-
-class MockLocation extends Mock implements Location {}
-
-class MockRouterState extends Mock implements RouterState {}

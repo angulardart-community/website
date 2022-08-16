@@ -44,13 +44,13 @@ abstract class HeroesPO {
   Future<void> selectHero(int index) => _heroes[index].click();
   Future<void> deleteHero(int index) => _deleteHeroes[index].click();
 
-  Map get selected => _selected.exists ? _heroDataFromLi(_selected) : null;
+  Map? get selected => _selected.exists ? _heroDataFromLi(_selected) : null;
 
-  String get myHeroNameInUppercase {
+  String? get myHeroNameInUppercase {
     if (!_miniDetailHeading.exists) return null;
     final text = _miniDetailHeading.visibleText;
     final matches = RegExp((r'^\s*(.+) is my hero\s*$')).firstMatch(text);
-    return matches[1];
+    return matches?[1];
   }
 
   // #docregion addHero

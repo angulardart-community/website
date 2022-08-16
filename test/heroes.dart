@@ -22,8 +22,8 @@ const numHeroes = 10;
 const targetHeroIndex = 4; // index in full heroes list
 const targetHero = {'id': 15, 'name': 'Magneta'};
 
-NgTestFixture<HeroListComponent> fixture;
-HeroesPO po;
+late NgTestFixture<HeroListComponent> fixture;
+late HeroesPO po;
 
 // #docregion rootInjector
 @GenerateInjector([
@@ -78,7 +78,8 @@ void selectedHeroTests(InjectorProbe injector) {
   });
 
   test('show mini-detail', () {
-    expect(po.myHeroNameInUppercase, equalsIgnoringCase(targetHero['name']));
+    expect(po.myHeroNameInUppercase,
+        equalsIgnoringCase(targetHero['name'] as String));
   });
 
   test('go to detail', () async {

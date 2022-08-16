@@ -6,9 +6,10 @@ IsNavParams isNavParams([dynamic expected]) => IsNavParams(expected);
 
 class IsNavParams extends Matcher {
   NavigationParams _expected;
-  IsNavParams([NavigationParams expected]) {
-    _expected = expected == null ? NavigationParams() : expected;
-  }
+
+  IsNavParams([NavigationParams? expected])
+      : _expected = expected ?? NavigationParams() {}
+
   bool matches(item, Map matchState) =>
       item is NavigationParams &&
       _expected.fragment == item.fragment &&
