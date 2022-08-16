@@ -14,7 +14,7 @@ import 'package:mockito/mockito.dart';
 import 'package:ngpageloader/html.dart';
 import 'package:test/test.dart';
 
-import 'heroes.template.dart' as self;
+import 'heroes_test.template.dart' as self;
 import 'heroes_po.dart';
 import 'utils.dart';
 
@@ -112,7 +112,7 @@ void addHeroTests() {
   test('select hero', () async {
     await po.selectHero(numHeroes);
     expect(po.heroes.length, numHeroes + 1);
-    expect(po.selected['name'], newHeroName);
+    expect(po.selected?['name'], newHeroName);
     expect(po.myHeroNameInUppercase, equalsIgnoringCase(newHeroName));
   });
 }
