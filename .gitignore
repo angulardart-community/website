@@ -1,5 +1,13 @@
-node_modules
+# Hugo
 public
 resources
+data/fragments
 .netlify
 .hugo_build.lock
+
+# JavaScript / NodeJS
+node_modules
+
+# Dart
+.dart_tool
+pubspec_overrides.yaml

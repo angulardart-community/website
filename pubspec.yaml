@@ -1,0 +1,13 @@
+name: website
+homepage: https://next.angulardart.xyz
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dev_dependencies:
+  build_runner: ^2.1.5
+  code_excerpter:
+    git:
+      url: https://github.com/angulardart-community/site-shared
+      ref: 2568c9140ce753d5fc90832b674f6656ae77b3b0
+      path: packages/code_excerpter
