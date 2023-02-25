@@ -1,0 +1,111 @@
+# Meta Data for SEO
+
+## Homepage
+title = "AngularDart"
+titleSeparator = "-"
+titleAddition = "The Next-Generation AngularDart Community Documentation"
+description = "An open-source web framework focused on productivity, performance, and stability."
+
+## Documentation
+# docsVersion = "0.3"
+
+## Open Graph
+images = ["angulardart.png"]
+ogLocale = "en_US"
+domainTLD = "next.angulardart.xyz"
+titleHome = "AngularDart Documentation"
+
+# ## Twitter Cards
+twitterSite = "@angulardart"
+twitterCreator = "@GZGavinZhao"
+
+## JSON-LD
+# schemaType = "Person"
+schemaType = "Organization"
+schemaName = "AngularDart"
+schemaAuthor = "Gavin Zhao"
+# schemaAuthorTwitter = "https://twitter.com/henkverlinde"
+# schemaAuthorLinkedIn = "https://www.linkedin.com/in/henkverlinde/"
+schemaAuthorGitHub = "https://github.com/GZGavinZhao"
+schemaLocale = "en-US"
+schemaLogo = "logo-angulardart.png"
+schemaLogoWidth = 512
+schemaLogoHeight = 512
+schemaImage = "angulardart.png"
+schemaImageWidth = 1280
+schemaImageHeight = 640
+# schemaTwitter = "https://twitter.com/getdoks"
+# schemaLinkedIn = ""
+schemaGitHub = "https://github.com/angulardart-community/website"
+schemaSection = "blog"
+
+## Sitelinks Search Box
+siteLinksSearchBox = false
+
+## Chrome Browser
+themeColor = "#fff"
+
+# Images
+quality = 85
+bgColor = "#fff"
+landscapePhotoWidths = [900, 800, 700, 600, 500]
+portraitPhotoWidths = [800, 700, 600, 500]
+lqipWidth = "20x"
+smallLimit = "300"
+
+# Images
+imageResponsive = true
+imageConvertTo = "webp"
+imageImageSizes = ["480","720","1080","1280","1600","2048"]
+singleSize = false
+imageAddClass = "img-fluid lazyload blur-up"
+
+### Image template
+defaultImage = "default-image.png" # put in `./assets/images/`
+fillImage = "1270x740 Center" # normalize image size
+
+# Footer
+footer = "Powered by <a class=\"text-muted\" href=\"https://gohugo.io/\">Hugo</a> and <a class=\"text-muted\" href=\"https://getdoks.org/\">Doks</a>"
+
+# Feed
+copyRight = "Copyright (c) 2023- AngularDart Community"
+
+# Alert
+alert = false
+alertDismissable = true
+alertText = "Introducing the Doks child theme, several DX + UX updates, and more! <a class=\"alert-link stretched-link\" href=\"https://getdoks.org/blog/doks-v0.2/\">Check out Doks v0.2</a>"
+
+# Edit Page
+repoHost = "GitHub"
+docsRepo = "https://github.com/angulardart-community/website"
+docsRepoBranch = "master"
+docsRepoSubPath = ""
+editPage = false
+lastMod = false
+
+[sections]
+  sectionNav = ["docs", "guides"]
+
+[options]
+  lazySizes = true
+  clipBoard = true
+  instantPage = true
+  flexSearch = true
+  searchSectionsShow = []
+  searchSectionsIndex = []
+  darkMode = true
+  bootStrapJs = true
+  breadCrumb = false
+  highLight = true
+  kaTex = false
+  multilingualMode = false
+  docsVersioning = false
+  fullWidth = true
+  navbarSticky = true
+  toTopButton = true
+  scrollSpy = false # experimental; needs Bootstrap >= 5.2.0-beta1
+
+[menu]
+  [menu.section]
+    auto = true
+    collapsibleSidebar = true
