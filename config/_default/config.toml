@@ -13,6 +13,26 @@ defaultContentLanguage = "en"
 disableLanguages = ["de", "nl"]
 # defaultContentLanguageInSubdir = true
 
+# Migrated from Jekyll.
+[params]
+www = 'https://dart.dev'
+webdev = 'https://dart.dev/web'
+dartlang = 'https://dart.dev'
+angulardart = 'https://next.angulardart.dev'
+angular = 'https://angular.io'
+angularOrg = 'https://github.com/angulardart-community'
+angularRepo = 'https://github.com/angulardart-community/angular'
+acxRepo = 'https://github.com/angulardart-community/angular_components'
+flutter =  'https://flutter.dev'
+dartVm =  'https://dart.dev/server'
+dartApi = 'https://api.dart.dev'
+acxApi = '/api/ngcomponents'
+flutterApi = 'https://api.flutter.dev'
+pubApi = 'https://pub.dev/documentation'
+pubPkg = 'https://pub.dev/packages'
+acxGallery = 'https://gallery.angulardart.xyz'
+api = '/api'
+
 # add redirects/headers
 [outputs]
 home = ["HTML", "RSS", "REDIRECTS", "HEADERS"]
