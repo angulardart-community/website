@@ -2,3 +2,34 @@
 	path = examples/toh-0
 	url = https://github.com/angulardart-community/toh-0
 	branch = master
+	shallow = true
+[submodule "examples/toh-1"]
+	path = examples/toh-1
+	url = https://github.com/angulardart-community/toh-1
+	branch = master
+	shallow = true
+[submodule "examples/toh-2"]
+	path = examples/toh-2
+	url = https://github.com/angulardart-community/toh-2
+	branch = master
+	shallow = true
+[submodule "examples/toh-3"]
+	path = examples/toh-3
+	url = https://github.com/angulardart-community/toh-3
+	branch = master
+	shallow = true
+[submodule "examples/toh-4"]
+	path = examples/toh-4
+	url = https://github.com/angulardart-community/toh-4
+	branch = master
+	shallow = true
+[submodule "examples/toh-5"]
+	path = examples/toh-5
+	url = https://github.com/angulardart-community/toh-5
+	branch = master
+	shallow = true
+[submodule "examples/toh-6"]
+	path = examples/toh-6
+	url = https://github.com/angulardart-community/toh-6
+	branch = master
+	shallow = true
