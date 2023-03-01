@@ -1,0 +1,4 @@
+{{ $raw := `[live example](%s) ([view source](%s))` }}
+{{ $org := .Site.Params.angularOrg }}
+{{ $name := .Get 0 }}
+{{ printf $raw (path.Join .Site.Params.oldsite "examples" $name) (path.Join $org $name) | markdownify }}

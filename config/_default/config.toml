@@ -1,9 +1,9 @@
-baseurl = "https://doks.netlify.app/"
+baseurl = "https://next.angulardart.xyz"
 canonifyURLs = false
 disableAliases = true
 disableHugoGeneratorInject = true
 enableEmoji = true
-enableGitInfo = false
+enableGitInfo = true
 enableRobotsTXT = true
 paginate = 7
 rssLimit = 10
@@ -15,10 +15,11 @@ disableLanguages = ["de", "nl"]
 
 # Migrated from Jekyll.
 [params]
+this = 'https://github.com/angulardart-community/website'
 www = 'https://dart.dev'
 webdev = 'https://dart.dev/web'
 dartlang = 'https://dart.dev'
-angulardart = 'https://next.angulardart.dev'
+angulardart = 'https://next.angulardart.xyz'
 angular = 'https://angular.io'
 angularOrg = 'https://github.com/angulardart-community'
 angularRepo = 'https://github.com/angulardart-community/angular'
@@ -31,6 +32,7 @@ flutterApi = 'https://api.flutter.dev'
 pubApi = 'https://pub.dev/documentation'
 pubPkg = 'https://pub.dev/packages'
 acxGallery = 'https://gallery.angulardart.xyz'
+oldsite = 'https://angulardart.xyz'
 api = '/api'
 
 # add redirects/headers
