@@ -81,7 +81,7 @@ payload (`$event`) to the component event handler.
 
 <div class="alert alert-warning" markdown="1">
   **Note:**
-  Non-[raw strings]({{site.dartlang}}/guides/language/language-tour#strings) in
+  Non-[raw strings]({{< param dartlang >}}/guides/language/language-tour#strings) in
   Dart files need a `\` in front of the `$`. If the template is in an HTML
   file, use `$event` instead of `\$event`.
 </div>

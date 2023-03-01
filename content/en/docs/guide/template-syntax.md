@@ -2072,7 +2072,7 @@ The generated output looks something like this:
 ### The safe navigation operator ( <span class="syntax">?.</span> ) and null property paths
 
 The Angular **safe navigation operator (`?.`)**, like the Dart [conditional member
-access]({{site.dartlang}}/guides/language/language-tour#other-operators)
+access]({{< param dartlang >}}/guides/language/language-tour#other-operators)
 operator, is a fluent and convenient way to
 guard against null values in property paths.
 Here it is, protecting against a view render failure if the `currentHero` is null.

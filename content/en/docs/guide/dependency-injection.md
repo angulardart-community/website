@@ -970,7 +970,7 @@ is not found. Angular can't find the service if it's not registered with this or
 [@Component()]: {{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/di/Component-class.html
 [@Inject()]: {{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/di/Inject-class.html
 [ClassProvider]: {{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/di/ClassProvider-class.html
-[cascade]: {{site.dartlang}}/guides/language/language-tour#cascade
+[cascade]: {{< param dartlang >}}/guides/language/language-tour#cascade
 [ExistingProvider]: {{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/di/ExistingProvider-class.html
 [Map]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-core/Map-class.html
 [OpaqueToken]: {{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/di/OpaqueToken-class.html
