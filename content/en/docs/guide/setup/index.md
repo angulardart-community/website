@@ -1,6 +1,6 @@
 ---
 title: Setup for Development
-description: How to use Dart tools to create and run Angular apps
+description: How to use Dart tools to create and run Angular apps.
 draft: false
 menu:
   docs:

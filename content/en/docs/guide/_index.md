@@ -1,6 +1,6 @@
 ---
 title: "Guide"
-description: "Basic guide to AngularDart"
+description: "Basic guide to AngularDart."
 lead: ""
 draft: false
 images: []

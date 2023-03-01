@@ -1,6 +1,6 @@
 ---
 title: Learning Angular
-description: A suggested path through the documentation for Angular newcomers
+description: A suggested path through the documentation for Angular newcomers.
 draft: false
 menu:
   docs:

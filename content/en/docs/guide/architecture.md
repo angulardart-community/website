@@ -1,6 +1,6 @@
 ---
 title: Architecture Overview
-description: The basic building blocks of Angular apps
+description: The basic building blocks of Angular apps.
 draft: false
 menu:
   docs:
