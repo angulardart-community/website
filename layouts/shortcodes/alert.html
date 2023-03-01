@@ -4,7 +4,11 @@
     <div class="w-100">{{ . | safeHTML }} </div>
   {{ else }}
     {{ with .Inner}}
-      <div class="w-100"> {{ . | markdownify}}</div>
+      {{ if ($.Get "raw") }}
+        <div class="w-100">{{ . }}</div>
+      {{ else }}
+        <div class="w-100">{{ . | markdownify}}</div>
+      {{ end }}
     {{ else }}
       {{ errorf "No valid text variable or Inner content given"}}
     {{ end }}

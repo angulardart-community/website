@@ -24,7 +24,7 @@ toc: true
 AngularDart (which we usually call simply Angular in this documentation)
 is a framework for building client apps in HTML and Dart.
 It is published as the
-[**angular**](https://pub.dev/packages/angular) package, which
+[**ngdart**]({{< param pubPkg >}}/ngdart) package, which
 is available via the Pub tool.
 
 You write Angular apps by composing HTML *templates* with Angularized
@@ -37,9 +37,10 @@ Angular takes over, presenting your app content in a browser and
 responding to user interactions according to the instructions you've provided.
 
 Of course, there is more to it than this.
-You'll learn the details in the pages that follow. For now, focus on the big picture.
+You'll learn the details in the pages that follow. For now, focus on the big
+picture.
 
-<img class="image-display" src="{% asset ng/devguide/architecture/overview2.png @path %}" alt="overview" width="700">
+{{< figure src="overview2.png" alt="overview" caption="overview" width="700" >}}
 
 The architecture diagram identifies the eight main building blocks of an Angular
 app:
@@ -53,13 +54,13 @@ app:
 * [Services](#services)
 * [Dependency injection](#dependency-injection)
 
-<div class="l-sub-section" markdown="1">
-  The code referenced on this page is available as a {% example_ref %}.
-</div>
+{{< alert context="info" raw=true >}}
+The code referenced on this page is available as a {{< exref architecture >}}.
+{{< /alert >}}
 
 ## Modules
 
-<img class="image-left" src="{% asset ng/devguide/architecture/module.png @path %}" alt="Modules" width="150px">
+{{< figure src="module.png" class="image-left" alt="Modules" width="150">}}
 
 Angular apps are modular; that is, apps are assembled from many
 **modules**.
@@ -82,7 +83,7 @@ The simplest of root modules defines a single _root_
 [**component**](#components) class such as this one:
 
 <?code-excerpt "lib/app_component.dart (class)" title?>
-```
+```dart
   class AppComponent {}
 ```
 
@@ -90,7 +91,8 @@ By convention, the name of the root component is `AppComponent`.
 
 ### Angular libraries
 
-<img class="image-left" src="{% asset ng/devguide/architecture/library-module.png @path %}" alt="Libraries" width="200px">
+{{< figure src="library-module.png" class="image-left" alt="Libraries"
+width="200">}}
 
 Angular ships as a collection of libraries within the
 [**angular**](https://pub.dev/packages/angular) package.
@@ -102,14 +104,16 @@ which most app modules import as follows:
   import 'package:angular/angular.dart';
 ```
 
+<!-- TODO: sorry, not yet!
 The angular package includes other important libraries, such as
-[angular.security]({{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/angular.security/angular.security-library.html).
+[angular.security]({{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/angular.security/angular.security-library.html). -->
 
 <div class="l-hr"></div>
 
 ## Components
 
-<img class="image-left" src="{% asset ng/devguide/architecture/hero-component.png @path %}" alt="Component" width="200px">
+{{< figure src="hero-component.png" class="image-left" alt="Component"
+width="200" >}}
 
 <div class="guide-architecture-fix-overflow" markdown="1">
   A _component_ controls a patch of screen called a *view*.
@@ -158,10 +162,12 @@ app. Your app can take action at each moment in this lifecycle through optional
 
 ## Templates
 
-<img class="image-left" src="{% asset ng/devguide/architecture/template.png @path %}" alt="Template" width="200px">
+{{< figure src="template.png" class="image-left" alt="Template" width="200" >}}
 
 You define a component's view with its companion **template**. A template is a
-form of HTML that tells Angular how to render the component.
+special form of HTML that tells Angular how to render the component. We call it
+"special" because it's not any ordinary HTML... Angular provides all sorts
+of features to make writing these templates fun and fast!
 
 A template looks like regular HTML, except for a few differences. Here is a
 template for the example `HeroListComponent`:
@@ -190,17 +196,27 @@ not shown) presents facts about the hero that the user selects from the list
 presented by the `HeroListComponent`. The `HeroDetailComponent` is a **child**
 of the `HeroListComponent`.
 
-<img class="image-left" src="{% asset ng/devguide/architecture/component-tree.png @path %}" alt="Metadata"  width="300px">
+{{< figure src="component-tree.png" class="image-left" alt="Metadata"
+width="300" >}}
 
 Notice how `<hero-detail>` rests comfortably among native HTML elements. You can
 mix custom components with native HTML in the same layouts.
 <br class="l-clear-both">
 
+<!-- TODO: the below l-hr class provides a divier, which should remove the need
+for the staggering amount of br's here. -->
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+
 <div class="l-hr"></div>
 
 ## Metadata
 
-<img class="image-left" src="{% asset ng/devguide/architecture/metadata.png @path %}" alt="Metadata" width="150px">
+{{< figure src="metadata.png" class="image-left" alt="Metadata" width="150" >}}
 
 Metadata tells Angular how to process a class.<br class="l-clear-both">
 
