@@ -135,7 +135,7 @@ The first build usually takes a few minutes, so sit back and grab a coffee while
 1. In WebStorm, the Dart plugin comes in pre-installed. If you find yourself having no syntax highlighting for Dart files or if you're using another IntelliJ-based IDE, installed the [Dart plugin](https://plugins.jetbrains.com/plugin/6351-dart/) for IntelliJ.
 2. Open the project folder. On the top right of the screen, click the button **Add Configuration...** This will open up the "Run/Debug Configurations" window as shown below.
 
-{{< figure src="webstorm-run-configuration.png" caption="WebStorm Run/Debug Configuration Window" >}}
+{{< figure src="webstorm-run-configuration.png" caption="WebStorm Run/Debug Configuration Window" alt="WebStorm Run/Debug Configuration Window" >}}
 
 3. Click on the plus sign on the top left or the **Add new run configuration...** on the middle right. In the drop-down list, choose **Dart Web**.
 4. WebStorm will tell you that "Path to HTML file is not specified". In the "HTML File" field, choose the file `web/index.html`.
@@ -161,7 +161,7 @@ Then, to view your app, use the Chrome browser to visit
 Regardless of your method, you should see the following app in a browser window:
 
 <!-- TODO: crop this image to remove the margins. It looks a bit ugly with the accessibility captions. -->
-{{< figure src="starter-app.png" caption="A web page with the header: Hello Angular" >}}
+{{< figure src="starter-app.png" caption="A web page with the header: Hello Angular" alt="A web page with the header: Hello Angular">}}
 
 ## Reload the app
 
