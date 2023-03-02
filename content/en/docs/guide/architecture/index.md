@@ -269,7 +269,7 @@ The example `HeroListComponent` uses the following `@Component` parameters:
   constructor requires a `HeroService` so it can get the list of heroes to
   display.
 
-<img class="image-left" src="{% asset ng/devguide/architecture/template-metadata-component.png @path %}" alt="Metadata" width="115px">
+{{< figure src="template-metadata-component.png" class="image-left" alt="Metadata" width="115" >}}
 
 The metadata in the `@Component` tells Angular where to get the major building
 blocks you specify for the component.
@@ -283,6 +283,9 @@ Apply other metadata annotations in a similar fashion to guide Angular behavior.
 The architectural takeaway is that you must add metadata to your code
 so that Angular knows what to do.
 
+<!-- Remove <br/> here -->
+<br/>
+
 <div class="l-hr"></div>
 
 ## Data binding
@@ -292,7 +295,7 @@ controls and turning user responses into actions and value updates. Writing such
 push/pull logic by hand is tedious and error prone, and the result is often
 difficult to read.
 
-<img class="image-left" src="{% asset ng/devguide/architecture/databinding.png @path %}" alt="Data Binding" width="220px">
+{{< figure src="databinding.png" class="image-left" alt="Data Binding" width="220" >}}
 
 Angular supports **data binding**, a mechanism for coordinating parts of a
 template with parts of a component. Add binding markup to the template HTML to
@@ -300,6 +303,12 @@ tell Angular how to connect the template and the component.
 
 As the diagram shows, there are four forms of data binding syntax. Each form has
 a direction: to the DOM, from the DOM, or in both directions.
+
+<!-- Remove <br/> here, use the l-clear-both -->
+<br/>
+<br/>
+<br/>
+
 <br class="l-clear-both">
 
 The `HeroListComponent` [example](#templates) template includes three of the
@@ -343,23 +352,38 @@ Here's an example of two-way binding from the `HeroDetailComponent` template:
 Angular processes all data bindings once per JavaScript event cycle,
 from the root of the app component tree through all child components.
 
-<img class="image-left" src="{% asset ng/devguide/architecture/component-databinding.png @path %}" alt="Data Binding" width="300px">
+{{< figure src="component-databinding.png" class="image-left" alt="Data Binding" width="300">}}
 
 Data binding plays an important role in communication between a template and its
 component.
+
+<!-- TODO: remove </br> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
 <br class="l-clear-both">
 
-<img class="image-left" src="{% asset ng/devguide/architecture/parent-child-binding.png @path %}" alt="Parent/Child binding" width="300px">
+{{< figure src="parent-child-binding.png" class="image-left" alt="Parent/Child binding" width="300" >}}
 
 Data binding is also important for communication between parent and child
 components.
 <br class="l-clear-both">
 
+<!-- TODO: remove </br> -->
+<br/>
+<br/>
+<br/>
+<br/>
+
 <div class="l-hr"></div>
 
 ## Directives
 
-<img class="image-left" src="{% asset ng/devguide/architecture/directive.png @path %}" alt="Parent child" width="150px">
+{{< figure src="directive.png" class="image-left" alt="Parent child" width="150">}}
 
 Angular templates are *dynamic*. When Angular renders them, it transforms the
 DOM according to the instructions given by **directives**.
@@ -397,14 +421,14 @@ The [example template](#templates) uses two built-in structural directives:
 * [`*ngIf`](displaying-data#ngIf) includes the `HeroDetail` component only
   if a selected hero exists.
 
-<div class="alert alert-warning" markdown="1">
+{{< alert context="warning" >}}
   In Dart, **the only value that is true is the boolean value `true`**; all
   other values are false. JavaScript and TypeScript, by contrast, treat values
   such as 1 and most non-null objects as true. For this reason, the JavaScript
   and TypeScript versions of this app can use just `selectedHero` as the value
   of the `*ngIf` expression. The Dart version must use a boolean operator such
   as `!=` instead.
-</div>
+{{< /alert >}}
 
 **Attribute** directives alter the appearance or behavior of an existing
 element. In templates they look like regular HTML attributes, hence the name.
@@ -435,7 +459,7 @@ are another.
 
 ## Services
 
-<img class="image-left" src="{% asset ng/devguide/architecture/service.png @path %}" alt="Service" width="150px">
+{{< figure src="service.png" class="image-left" alt="Service" width="150" >}}
 
 _Service_ is a broad category encompassing any value, function, or feature that your app needs.
 
@@ -509,7 +533,7 @@ through *dependency injection*.
 
 ## Dependency injection
 
-<img class="image-left" src="{% asset ng/devguide/architecture/dependency-injection.png @path %}" alt="Dependency injection" width="200px">
+{{< figure src="dependency-injection.png" class="image-left" alt="Dependency Injection" width="200" >}}
 
 _Dependency injection_ is a way to supply a new instance of a class
 with the fully-formed dependencies it requires. Most dependencies are services.
@@ -539,7 +563,7 @@ This is *dependency injection*.
 
 The process of `HeroService` injection looks a bit like this:
 
-<img src="{% asset ng/devguide/architecture/injector-injects.png @path %}" alt="Service">
+{{< figure src="injector-injects.png" alt="Service" >}}
 
 If the injector doesn't have a `HeroService`, how does it know how to make one?
 
@@ -617,23 +641,23 @@ But it doesn't include everything you need to know.
 
 Here is a brief, alphabetical list of other important Angular features and services.
 
-- [**Forms**](forms): Support complex data entry scenarios with HTML-based
+- [**Forms**]({{< ref forms >}}): Support complex data entry scenarios with HTML-based
   validation and dirty checking.
 
-- [**HTTP**](server-communication): Communicate with a server to get data, save
+- [**HTTP**]({{< ref server-communication >}}): Communicate with a server to get data, save
   data, and invoke server-side actions with an HTTP client.
 
-- [**Lifecycle hooks**](lifecycle-hooks): Tap into key moments in the lifetime
+- [**Lifecycle hooks**]({{< ref lifecycle-hooks >}}): Tap into key moments in the lifetime
   of a component, from its creation to its destruction,
   by implementing the lifecycle hook interfaces.
 
-- [**Pipes**](pipes): Improve the user experience by transforming values for
+- [**Pipes**]({{< ref pipes >}}): Improve the user experience by transforming values for
   display.
 
-- [**Router**](router): Navigate from page to page within the client app and
+- [**Router**]({{< ref router >}}): Navigate from page to page within the client app and
   never leave the browser.
 
-- [**Testing**](testing): Write component tests and end-to-end tests for your
+- [**Testing**]({{< ref testing >}}): Write component tests and end-to-end tests for your
   app.
 
-[Future]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-async/Future-class.html
+[Future]: {{< param dartApi >}}/stable/dart-async/Future-class.html
