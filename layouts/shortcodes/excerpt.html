@@ -1,1 +1,26 @@
-{{ highlight (index (getJSON (path.Join "data/fragments/examples" (printf "%s" (.Get 0) | printf "%s.excerpt.json"))) (.Get 1)) (.Get 2) (.Get 3)}}
+<!-- 
+Accepts these arguments:
+	1. src: the file that the fragment is from.
+	2. lang: the language the file is in. If not given, it will use the src
+	file's extension name (without the ".", of course) as the extension name,
+	so in most cases you don't need to specify it.
+	3. section: the section of the excerpt (marked as // #docregion in code).
+	If null, the full file will be rendered.
+	4. base: the excerpt-base (i.e. the example name of the code you're
+	referring to, so you don't need to type "architecture/web/index.html", only
+	"web/index.html" is sufficient). You should put a page parameter called
+	"excerptbase" so that you don't have to specify the example name over
+	and over again.
+	5. opts: additional opts to pass to the highlight funciton, if any.
+ -->
+{{ $src := .Get "src" }}
+{{ $lang := default (substr (path.Ext $src) 1) (.Get "lang")}}
+{{ $base := default .Page.Params.excerptbase (.Get "base")}}
+{{ $opts := .Get "opts" }}
+
+{{ if .Get "section" }}
+	{{ $section := .Get "section" }}
+	{{ highlight (index (path.Join "data/fragments/examples" $base (printf "%s.excerpt.json" $src) | getJSON) $section) $lang $opts }}
+{{ else }}
+	{{ highlight (path.Join "data/fragments/examples" $base $src | os.ReadFile) $lang $opts }}
+{{ end }}

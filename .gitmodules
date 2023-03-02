@@ -33,3 +33,7 @@
 	url = https://github.com/angulardart-community/toh-6
 	branch = master
 	shallow = true
+[submodule "examples/architecture"]
+	path = examples/architecture
+	url = https://github.com/angulardart-community/architecture
+	branch = master

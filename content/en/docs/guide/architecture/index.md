@@ -7,6 +7,7 @@ menu:
     parent: "guide"
 weight: 130
 toc: true
+excerptbase: architecture
 ---
 <?code-excerpt path-base="examples/ng/doc/architecture"?>
 <style>img.image-display {
@@ -82,10 +83,7 @@ a workflow, or a closely related set of capabilities.
 The simplest of root modules defines a single _root_
 [**component**](#components) class such as this one:
 
-<?code-excerpt "lib/app_component.dart (class)" title?>
-```dart
-  class AppComponent {}
-```
+{{< excerpt src="lib/app_component.dart" section="class" >}}
 
 By convention, the name of the root component is `AppComponent`.
 
@@ -99,10 +97,7 @@ Angular ships as a collection of libraries within the
 The main Angular library is [angular]({{site.api}}?package=angular),
 which most app modules import as follows:
 
-<?code-excerpt "lib/app_component.dart (import)" class="guide-architecture-fix-overflow"?>
-```
-  import 'package:angular/angular.dart';
-```
+{{< excerpt src="lib/app_component.dart" section="import" >}}
 
 <!-- TODO: sorry, not yet!
 The angular package includes other important libraries, such as
@@ -135,24 +130,7 @@ returns a list of heroes that it acquires from a service.
 `HeroListComponent` defines a `selectHero()` method that sets a `selectedHero`
 property when the user clicks to choose a hero from the list.
 
-<?code-excerpt "lib/src/hero_list_component.dart (class)" title?>
-```
-  class HeroListComponent implements OnInit {
-    List<Hero> heroes;
-    Hero selectedHero;
-    final HeroService _heroService;
-
-    HeroListComponent(this._heroService);
-
-    void ngOnInit() async {
-      heroes = await _heroService.getAll();
-    }
-
-    void selectHero(Hero hero) {
-      selectedHero = hero;
-    }
-  }
-```
+{{< excerpt src="lib/src/hero_list_component.dart" section="class" >}}
 
 Angular creates, updates, and destroys components as the user moves through the
 app. Your app can take action at each moment in this lifecycle through optional
@@ -172,22 +150,10 @@ of features to make writing these templates fun and fast!
 A template looks like regular HTML, except for a few differences. Here is a
 template for the example `HeroListComponent`:
 
-<?code-excerpt "lib/src/hero_list_component.html" title?>
-```
-  <h2>Hero List</h2>
-
-  <p><i>Pick a hero from the list</i></p>
-  <ul>
-    <li *ngFor="let hero of heroes" (click)="selectHero(hero)">
-      {!{hero.name}!}
-    </li>
-  </ul>
-
-  <hero-detail *ngIf="selectedHero != null" [hero]="selectedHero"></hero-detail>
-```
+{{< excerpt src="lib/src/hero_list_component.html" lang="html">}}
 
 The template uses typical HTML elements like `<h2>` and  `<p>`. It also
-includes code that uses Angular's [template syntax](template-syntax) like
+includes code that uses Angular's [template syntax]({{ ref template-syntax }}) like
 `*ngFor`, `{!{hero.name}}`, `(click)`, `[hero]`, and `<hero-detail>`.
 
 In the last line of the template, the `<hero-detail>` tag is a custom element
@@ -232,18 +198,7 @@ using an **annotation**.
 Here's some metadata for `HeroListComponent`. The `@Component` annotation
 identifies the class immediately below it as a component class:
 
-<?code-excerpt "lib/src/hero_list_component.dart (metadata)" title?>
-```
-  @Component(
-    selector: 'hero-list',
-    templateUrl: 'hero_list_component.html',
-    directives: [coreDirectives, formDirectives, HeroDetailComponent],
-    providers: [ClassProvider(HeroService)],
-  )
-  class HeroListComponent implements OnInit {
-    // ···
-  }
-```
+{{< excerpt src="lib/src/hero_list_component.dart" section="metadata" >}}
 
 The `@Component` annotation accepts parameters supplying the
 information Angular needs to create and present the component and its view.
@@ -295,7 +250,7 @@ controls and turning user responses into actions and value updates. Writing such
 push/pull logic by hand is tedious and error prone, and the result is often
 difficult to read.
 
-{{< figure src="databinding.png" class="image-left" alt="Data Binding" width="220" >}}
+{{< figure src="databinding.png" class="image-left" alt="Data Binding" width="250" >}}
 
 Angular supports **data binding**, a mechanism for coordinating parts of a
 template with parts of a component. Add binding markup to the template HTML to
@@ -306,20 +261,14 @@ a direction: to the DOM, from the DOM, or in both directions.
 
 <!-- Remove <br/> here, use the l-clear-both -->
 <br/>
-<br/>
-<br/>
 
 <br class="l-clear-both">
 
 The `HeroListComponent` [example](#templates) template includes three of the
 four forms of data binding syntax:
 
-<?code-excerpt "lib/src/hero_list_component_1.html (binding)" title?>
-```
-  <li>{!{hero.name}!}</li>
-  <hero-detail [hero]="selectedHero"></hero-detail>
-  <li (click)="selectHero(hero)"></li>
-```
+{{< excerpt src="lib/src/hero_list_component_1.html" section="binding" 
+lang="html" >}}
 
 Here are the three ways that the example uses data binding syntax:
 
@@ -344,10 +293,8 @@ component, resetting the property to the latest value, as with event binding.
 
 Here's an example of two-way binding from the `HeroDetailComponent` template:
 
-<?code-excerpt "lib/src/hero_detail_component.html (ngModel)" title?>
-```
-  <input [(ngModel)]="hero.name">
-```
+{{< excerpt src="lib/src/hero_detail_component.html" section="ngModel"
+lang="html" >}}
 
 Angular processes all data bindings once per JavaScript event cycle,
 from the root of the app component tree through all child components.
@@ -410,11 +357,7 @@ elements in the DOM.
 
 The [example template](#templates) uses two built-in structural directives:
 
-<?code-excerpt "lib/src/hero_list_component_1.html (structural)" title?>
-```
-  <li *ngFor="let hero of heroes"></li>
-  <hero-detail *ngIf="selectedHero != null"></hero-detail>
-```
+{{< excerpt src="lib/src/hero_list_component_1.html" section="structural" >}}
 
 * [`*ngFor`](displaying-data#ngFor) tells Angular to stamp out one
   `<li>` per hero in the `heroes` list.
@@ -481,35 +424,13 @@ are big consumers of services.
 
 Here's an example of a service class that logs to the browser console:
 
-<?code-excerpt "lib/src/logger_service.dart (class)" title?>
-```
-  class Logger {
-    void log(Object msg) => window.console.log(msg);
-    void error(Object msg) => window.console.error(msg);
-    void warn(Object msg) => window.console.warn(msg);
-  }
-```
+{{< excerpt src="lib/src/logger_service.dart" section="class">}}
 
 Here's a `HeroService` that uses a [Future][] to fetch heroes.
 The `HeroService` depends on the `Logger` service and another `BackendService`
 that handles the server communication grunt work.
 
-<?code-excerpt "lib/src/hero_service.dart (class)" title?>
-```
-  class HeroService {
-    final BackendService _backendService;
-    final Logger _logger;
-    List<Hero> heroes;
-
-    HeroService(this._logger, this._backendService);
-
-    Future<List<Hero>> getAll() async {
-      heroes = await _backendService.getAll(Hero);
-      _logger.log('Fetched ${heroes.length} heroes.');
-      return heroes;
-    }
-  }
-```
+{{< excerpt src="lib/src/hero_service.dart" section="class">}}
 
 Services are everywhere.
 
@@ -545,12 +466,7 @@ Angular can tell which services a component needs by looking at the types of its
 constructor parameters. For example, the constructor of the example
 `HeroListComponent` needs a `HeroService`:
 
-<?code-excerpt "lib/src/hero_list_component.dart (constructor)" region="ctor" title?>
-```
-  final HeroService _heroService;
-
-  HeroListComponent(this._heroService);
-```
+{{< excerpt src="lib/src/hero_list_component.dart" section="ctor" >}}
 
 When Angular creates a component, it first asks an **injector** for
 the services that the component requires. An injector maintains a container of
@@ -579,18 +495,7 @@ when the app is launched.
 The most common way to register providers is at the component level using the
 `providers` argument of the `@Component` annotation:
 
-<?code-excerpt "lib/app_component.dart (providers)" title?>
-```
-  @Component(
-    // ···
-    providers: [
-      ClassProvider(BackendService),
-      ClassProvider(HeroService),
-      ClassProvider(Logger),
-    ],
-  )
-  class AppComponent {}
-```
+{{< excerpt src="lib/app_component.dart" section="providers" >}}
 
 Registering the provider with a component means you get a new instance of the
 service with each new instance of that component. A service provided through a
