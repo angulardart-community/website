@@ -1,0 +1,17 @@
+<!-- 
+Just pass all the files you want to show, e.g.
+{{< codetabs
+	"lib/app.component.dart"
+	"web/index.html"
+>}}
+
+Note that you can insert line breaks to make it more readable.
+ -->
+<div class="alert alert-success">
+<p>Sorry, code tabs have not been implemented yet. Below are the links to the final files:</p>
+<ul>
+	{{ range .Params }}
+		<li><a href="{{ path.Join $.Page.Site.Params.angularOrg $.Page.Params.excerptbase "tree/master" (print .) }}">{{ . }}</a></li>
+	{{ end}}
+</ul>
+</div>

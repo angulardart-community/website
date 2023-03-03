@@ -1,4 +1,6 @@
 <!-- 
+TODO: show the title of the file, turn line numbers on and off, etc.
+
 Accepts these arguments:
 	1. src: the file that the fragment is from.
 	2. lang: the language the file is in. If not given, it will use the src
@@ -16,11 +18,12 @@ Accepts these arguments:
 {{ $src := .Get "src" }}
 {{ $lang := default (substr (path.Ext $src) 1) (.Get "lang")}}
 {{ $base := default .Page.Params.excerptbase (.Get "base")}}
+{{ $section := default "" (.Get "section")}}
 {{ $opts := .Get "opts" }}
 
-{{ if .Get "section" }}
-	{{ $section := .Get "section" }}
-	{{ highlight (index (path.Join "data/fragments/examples" $base (printf "%s.excerpt.json" $src) | getJSON) $section) $lang $opts }}
+{{ $jsonFile := path.Join "data/fragments/examples" $base (printf "%s.excerpt.json" $src) }}
+{{ if os.FileExists $jsonFile }}
+	{{ highlight (index (getJSON $jsonFile) $section) $lang $opts }}
 {{ else }}
-	{{ highlight (path.Join "data/fragments/examples" $base $src | os.ReadFile) $lang $opts }}
+ 	{{ highlight (path.Join "data/fragments/examples" $base $src | os.ReadFile) $lang $opts }}
 {{ end }}
