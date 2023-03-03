@@ -9,7 +9,6 @@ weight: 130
 toc: true
 excerptbase: architecture
 ---
-<?code-excerpt path-base="examples/ng/doc/architecture"?>
 <style>img.image-display {
   box-shadow: none;
   padding: 0;
