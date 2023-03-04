@@ -32,8 +32,8 @@ Accepts these arguments:
 	{{ end }}
 {{ else }}
  	{{ if isset .Params "pattern" }}
- 		{{ highlight (path.Join "data/fragments/examples" $base $src | os.ReadFile | replaceRE (.Get "pattern") (.Get "replace")) $lang $opts }}
+ 		{{ highlight (path.Join "examples" $base $src | os.ReadFile | replaceRE (.Get "pattern") (.Get "replace")) $lang $opts }}
 	{{ else }}
- 		{{ highlight (path.Join "data/fragments/examples" $base $src | os.ReadFile) $lang $opts }}
+ 		{{ highlight (path.Join "examples" $base $src | os.ReadFile) $lang $opts }}
 	{{ end }}
 {{ end }}
