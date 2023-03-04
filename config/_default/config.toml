@@ -87,6 +87,10 @@ rel  = "sitemap"
   blog = "/blog/:title/"
 # docs = "/docs/1.0/:sections[1:]/:title/"
 
+# https://github.com/h-enk/doks/issues/973
+[minify]
+  disableJS = true
+
 [minify.tdewolff.html]
   keepWhitespace = false
 
