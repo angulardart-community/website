@@ -14,6 +14,8 @@ Accepts these arguments:
 	"excerptbase" so that you don't have to specify the example name over
 	and over again.
 	5. opts: additional opts to pass to the highlight funciton, if any.
+	6. pattern: pattern to search for
+	7. replace: string to replace the pattern with
  -->
 {{ $src := .Get "src" }}
 {{ $lang := default (substr (path.Ext $src) 1) (.Get "lang")}}
@@ -23,7 +25,15 @@ Accepts these arguments:
 
 {{ $jsonFile := path.Join "data/fragments/examples" $base (printf "%s.excerpt.json" $src) }}
 {{ if os.FileExists $jsonFile }}
-	{{ highlight (index (getJSON $jsonFile) $section) $lang $opts }}
+ 	{{ if isset .Params "pattern" }}
+		{{ highlight (index (getJSON $jsonFile) $section | replaceRE (.Get "pattern") (.Get "replace")) $lang $opts }}
+	{{ else }}
+		{{ highlight (index (getJSON $jsonFile) $section) $lang $opts }}
+	{{ end }}
 {{ else }}
- 	{{ highlight (path.Join "data/fragments/examples" $base $src | os.ReadFile) $lang $opts }}
+ 	{{ if isset .Params "pattern" }}
+ 		{{ highlight (path.Join "data/fragments/examples" $base $src | os.ReadFile | replaceRE (.Get "pattern") (.Get "replace")) $lang $opts }}
+	{{ else }}
+ 		{{ highlight (path.Join "data/fragments/examples" $base $src | os.ReadFile) $lang $opts }}
+	{{ end }}
 {{ end }}
