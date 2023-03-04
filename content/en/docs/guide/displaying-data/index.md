@@ -135,9 +135,7 @@ repeat items for any [Iterable][] object.
 Before you can use any Angular directives in a template,
 you need to list them in the `directives` argument of your component's
 `@Component` annotation. You can list directives individually, or for
-convenience you can use groups like [CORE_DIRECTIVES][]
-
-[CORE_DIRECTIVES]: {{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/angular/CORE_DIRECTIVES-constant.html
+convenience you can use groups like [`coreDirectives`]({{< param pubApi >}}/ngdart/latest/angular/coreDirectives-constant.html)
 {{< /markdownify >}}
 
 {{< excerpt src="lib/app_component_2.dart" section="directives" >}}
