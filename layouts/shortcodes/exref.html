@@ -1,4 +1,4 @@
-{{ $raw := `[live example](%s) ([view source](%s))` }}
+{{ $raw := `[live example](%s/%s) ([view source](%s/%s))` }}
 {{ $org := .Site.Params.angularOrg }}
 {{ $name := .Get 0 }}
-{{ printf $raw (path.Join .Site.Params.oldsite "examples" $name) (path.Join $org $name) | markdownify }}
+{{ printf $raw .Site.Params.oldsite (path.Join "examples" $name) $org $name | markdownify }}
