@@ -36,7 +36,7 @@ If this is your first time interacting with Pub global packages, Dart will tell 
 
 ### ngdart_cli (recommended)
 
-[`ngdart_cli`]({{< param pubPkg >}}/ngdart_cli) is a community-maintained command-line tool for creating and managing AngularDart applications. AngularDart can still run without it, but `ngdart_cli` makes your life much easier by providing some handy commands such as `ngdart create <project_name>` to create a new project and `ngdart clean` to clean all build artifacts and cache, similar to `flutter clean` if you come from Flutter. For more info on `ngdart_cli`, see [`ngdart_cli`'s Pub page]({{< param pubPkg >}}/ngdart_cli).
+[`ngdart_cli`]({{< param pubPkg >}}/ngdart_cli) is a community-maintained command-line tool for creating and managing AngularDart applications. AngularDart can still run without it, but `ngdart_cli` makes your life easier by providing some handy commands such as `ngdart create <project_name>` to create a new project and `ngdart clean` to clean all build artifacts and cache, similar to `flutter clean` if you come from Flutter. For more info on `ngdart_cli`, see [`ngdart_cli`'s Pub page]({{< param pubPkg >}}/ngdart_cli).
 
 Similar to `webdev`, run the following to install `ngdart_cli`:
 ```terminal
