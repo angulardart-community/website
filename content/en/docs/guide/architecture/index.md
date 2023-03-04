@@ -380,10 +380,7 @@ an example of an attribute directive. `ngModel` modifies the behavior of
 an existing element (typically an `<input>`)
 by setting its display value property and responding to change events.
 
-<?code-excerpt "lib/src/hero_detail_component.html (ngModel)" title?>
-```
-  <input [(ngModel)]="hero.name">
-```
+{{< excerpt src="lib/src/hero_detail_component.html" section="ngModel" >}}
 
 Angular has a few more directives that either alter the layout structure
 (for example, [ngSwitch](template-syntax#ngSwitch))
