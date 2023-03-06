@@ -6,7 +6,10 @@ This will be the next-generation documentation for AngularDart, built with
 much easier and quicker to build and iterate new content.
 
 It's still very much WIP in the current state, namely to migrate all the Jekyll
-templates to Hugo shortcodes. A better README will be provided later.
+templates to Hugo shortcodes. Follow
+[#9](https://github.com/angulardart-community/website/issues/9) for this
+progress. A better README
+will be provided later.
 
 ## Build the site
 
