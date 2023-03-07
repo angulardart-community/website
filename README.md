@@ -2,7 +2,7 @@
 
 This will be the next-generation documentation for AngularDart, built with
 [Hugo] and a modified version of the [Doks] theme. Compared to the
-[older site](https://github.com/angulardart-community/site-angulardart), it's
+[old site](https://github.com/angulardart-community/site-angulardart), it's
 much easier and quicker to build and iterate new content.
 
 It's still very much WIP in the current state, namely to migrate all the Jekyll
@@ -18,7 +18,7 @@ Here are simple instructions if you want to hack on it now:
 1. Install [Dart](https://dart.dev/get-dart) and NodeJS (>= 16.16.0, though an
   older version may also work, just remove the restriction in package.json).
 2. (Optional) Run `npm install`. This is technically only needed if you don't
-  have [Hugo] installed on your systemand you want to only serve the site
+  have [Hugo] installed on your system **or** if you want to build the site
   locally using Hugo
   for testing.
 3. Run `dart pub get` and `dart run build_runner build -o data/fragments` to
@@ -31,7 +31,7 @@ Here are simple instructions if you want to hack on it now:
 6. If you want to build the site, perform step 2 and run
   `npm run build:preview`. **DON'T** run
   `npm run build` or `hugo build`. The site's baseurl won't be setup correctly.
-  These options are for release builds. The result will rest inside the
+  These options are for release builds. The result website will rest inside the
   `public/` folder. Use your favorite http server to serve it (e.g.
   `dhttpd --path public`).
 
