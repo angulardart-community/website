@@ -7,8 +7,9 @@ menu:
     parent: "guide"
 weight: 160
 toc: true
+excerptbase: forms
 ---
-<?code-excerpt path-base="examples/ng/doc/forms"?>
+
 Forms are the mainstay of business apps.
 You use forms to log in, submit a help request, place an order, book a flight,
 schedule a meeting, and perform countless other data-entry tasks.
@@ -29,17 +30,17 @@ This page shows you how to build a simple form from scratch. Along the way you'l
 * Display validation errors to users and enable/disable form controls.
 * Share information across HTML elements using template reference variables.
 
-You can run the {% example_ref %} in Plunker and download the code from there.
+You can run the {{< exref forms >}} in Plunker and download the code from there.
 
 ## Template-driven forms
 
-You can build forms by writing templates in the Angular [template syntax](template-syntax) with
+You can build forms by writing templates in the Angular [template syntax]({{< ref template-syntax >}}) with
 the form-specific directives and techniques described in this page.
 
-<div class="l-sub-section">
-  You can also use a reactive (or model-driven) approach to build forms.
-  However, this page focuses on template-driven forms.
-</div>
+{{< alert >}}
+You can also use a reactive (or model-driven) approach to build forms.
+However, this page focuses on template-driven forms.
+{{< /alert>}}
 
 You can build almost any form with an Angular template&mdash;login forms, contact forms, and pretty much any business form.
 You can lay out the controls creatively, bind them to data, specify validation rules and display validation errors,
@@ -50,7 +51,7 @@ otherwise wrestle with yourself.
 
 You'll learn to build a template-driven form that looks like this:
 
-<img class="image-display" src="{% asset ng/devguide/forms/hero-form.png @path %}" width="360" alt="Clean Form">
+{{< figure src="hero-form.png" caption="Clean Form" alt="Clean Form" width="360">}}
 
 The *Hero Employment Agency* uses this form to maintain personal information about heroes.
 Every hero needs a job. It's the company mission to match the right hero with the right crisis.
@@ -61,7 +62,8 @@ required fields have an asterisk (*).
 
 If you delete the hero name, the form displays a validation error in an attention-grabbing style:
 
-<img class="image-display" src="{% asset ng/devguide/forms/hero-form-name-required.png @path %}" width="360" alt="Invalid, Name Required">
+{{< figure src="hero-form-name-required.png" caption="Invalid, Name Required"
+alt="Invalid, Name Required" width="360" >}}
 
 Note that the *Submit* button is disabled, and the input control changes from green to red.
 
@@ -114,17 +116,7 @@ and one optional field (`alterEgo`).
 
 In the `lib` directory, create the following file with the given content:
 
-<?code-excerpt "lib/src/hero.dart" title linenums?>
-```
-  class Hero {
-    int id;
-    String name, power, alterEgo;
-
-    Hero(this.id, this.name, this.power, [this.alterEgo]);
-
-    String toString() => '$id: $name ($alterEgo). Super power: $power';
-  }
-```
+{{< excerpt src="lib/src/hero.dart" >}}
 
 It's an anemic model with few requirements and no behavior, good enough for the demo.
 
@@ -840,16 +832,16 @@ Here’s the code for the final version of the app:
   <?code-pane "web/main.dart" linenums?>
 </code-tabs>
 
-[angular_forms]: {{site.pub-api}}/angular_forms/{{site.data.pkg-vers.angular.vers}}/angular_forms/angular_forms-library.html
+[angular_forms]: {{< param pubApi >}}/angular_forms/latest/angular_forms/angular_forms-library.html
 [angular_forms@pub]: https://pub.dev/packages/angular_forms
 [Bootstrap]: https://getbootstrap.com
 [Bootstrap forms]: https://getbootstrap.com/docs/4.0/components/forms
 [Bootstrap custom-forms]: https://getbootstrap.com/docs/4.0/components/forms/#custom-forms
-[class binding]: template-syntax#class-binding
+[class binding]: {{< ref template-syntax >}}#class-binding
 [hidden]: https://developer.mozilla.org/docs/Web/HTML/Global_attributes/hidden
-[NgClass]: {{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/angular/NgClass-class.html
-[NgControl]: {{site.pub-api}}/angular_forms/{{site.data.pkg-vers.angular.vers}}/angular_forms/NgControl-class.html
-[NgControlStatus]: {{site.pub-api}}/angular_forms/{{site.data.pkg-vers.angular.vers}}/angular_forms/NgControlStatus-class.html
-[NgForm]: {{site.pub-api}}/angular_forms/{{site.data.pkg-vers.angular.vers}}/angular_forms/NgForm-class.html
-[NgForm.form]: {{site.pub-api}}/angular_forms/{{site.data.pkg-vers.angular.vers}}/angular_forms/AbstractNgForm/form.html
-[NgModel]: {{site.pub-api}}/angular_forms/{{site.data.pkg-vers.angular.vers}}/angular_forms/NgModel-class.html
+[NgClass]: {{< param pubApi >}}/angular/latest/angular/NgClass-class.html
+[NgControl]: {{< param pubApi >}}/angular_forms/latest/angular_forms/NgControl-class.html
+[NgControlStatus]: {{< param pubApi >}}/angular_forms/latest/angular_forms/NgControlStatus-class.html
+[NgForm]: {{< param pubApi >}}/angular_forms/latest/angular_forms/NgForm-class.html
+[NgForm.form]: {{< param pubApi >}}/angular_forms/latest/angular_forms/AbstractNgForm/form.html
+[NgModel]: {{< param pubApi >}}/angular_forms/latest/angular_forms/NgModel-class.html
