@@ -88,8 +88,8 @@ Follow the [setup](setup) instructions to create a new project named `forms`.
 
 <?code-excerpt path-base="examples/ng/doc"?>
 
-The Angular forms functionality is in the [angular_forms][] library, which
-comes in [its own package][angular_forms@pub]. Add the package to the pubspec
+The Angular forms functionality is in the [ngforms][] library, which
+comes in [its own package][ngforms@pub]. Add the package to the pubspec
 dependencies:
 
 <?code-excerpt "quickstart/pubspec.yaml" diff-with="forms/pubspec.yaml" from="dependencies" to="angular_forms"?>
@@ -125,12 +125,7 @@ note the brackets in `[this.alterEgo]`.
 
 You can create a new hero like this:
 
-<?code-excerpt "lib/src/hero_form_component.dart" region="SkyDog"?>
-```
-  var myHero =
-      Hero(42, 'SkyDog', 'Fetch any object at any distance', 'Leslie Rollover');
-  print('My hero is ${myHero.name}.'); // "My hero is SkyDog."
-```
+{{< excerpt src="lib/src/hero_form_component.dart" section="SkyDog" >}}
 
 ## Create a basic form
 
@@ -142,34 +137,7 @@ Begin with the class because it states, in brief, what the hero editor can do.
 
 Create the following file with the given content:
 
-<?code-excerpt "lib/src/hero_form_component.dart (v1)" plaster="none" title?>
-```
-  import 'package:angular/angular.dart';
-  import 'package:angular_forms/angular_forms.dart';
-
-  import 'hero.dart';
-
-  const List<String> _powers = [
-    'Really Smart',
-    'Super Flexible',
-    'Super Hot',
-    'Weather Changer'
-  ];
-
-  @Component(
-    selector: 'hero-form',
-    templateUrl: 'hero_form_component.html',
-    directives: [coreDirectives, formDirectives],
-  )
-  class HeroFormComponent {
-    Hero model = Hero(18, 'Dr IQ', _powers[0], 'Chuck Overstreet');
-    bool submitted = false;
-
-    List<String> get powers => _powers;
-
-    void onSubmit() => submitted = true;
-  }
-```
+{{< excerpt src="lib/src/hero_form_component.dart" section="v1" >}}
 
 There’s nothing special about this component, nothing form-specific,
 nothing to distinguish it from any component you've written before.
@@ -184,13 +152,11 @@ Understanding this component requires only the Angular concepts covered in previ
   for the template HTML.
 - You defined mock data for `model` and `powers`.
 
-  <div class="l-sub-section" markdown="1">
-  Down the road, you can inject a data service to get and save real data
-  or perhaps expose these properties as inputs and outputs
-  (see [Input and output properties](template-syntax#inputs-outputs) in the
-  [Template Syntax](template-syntax) page) for binding to a
-  parent component. This is not a concern now and these future changes won't affect the form.
-  </div>
+Down the road, you can inject a data service to get and save real data
+or perhaps expose these properties as inputs and outputs
+(see [Input and output properties]({{< ref template-syntax >}}#inputs-outputs) in the
+[Template Syntax]({{< ref template-syntax >}}) page) for binding to a
+parent component. This is not a concern now and these future changes won't affect the form.
 
 ### Revise the app component
 
@@ -198,46 +164,13 @@ Understanding this component requires only the Angular concepts covered in previ
 
 Replace the contents of the starter app version with the following:
 
-<?code-excerpt "lib/app_component.dart" title?>
-```
-  import 'package:angular/angular.dart';
-
-  import 'src/hero_form_component.dart';
-
-  @Component(
-    selector: 'my-app',
-    template: '<hero-form></hero-form>',
-    directives: [HeroFormComponent],
-  )
-  class AppComponent {}
-```
+{{< excerpt src="lib/app_component.dart" >}}
 
 ### Create an initial form template
 
 Create the template file with the following contents:
 
-<?code-excerpt "lib/src/hero_form_component_1.html (start)" plaster="none" title?>
-```
-  <div class="container">
-    <h1>Hero Form</h1>
-    <form>
-      <div class="form-group">
-        <label for="name">Name&nbsp;*</label>
-        <input type="text" class="form-control" id="name" required>
-      </div>
-      <div class="form-group">
-        <label for="alterEgo">Alter Ego</label>
-        <input type="text" class="form-control" id="alterEgo">
-      </div>
-      <div class="row">
-        <div class="col-auto">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-        <small class="col text-right">*&nbsp;Required</small>
-      </div>
-    </form>
-  </div>
-```
+{{< excerpt src="lib/src/hero_form_component_1.html" section="start" >}}
 
 The language is simply HTML5. You're presenting two of the `Hero` fields, `name` and `alterEgo`, and
 opening them up for user input in input boxes.
@@ -249,13 +182,13 @@ You added a *Submit* button at the bottom with some classes on it for styling.
 
 *You're not using Angular yet*. There are no bindings or extra directives, just layout.
 
-<div class="l-sub-section" markdown="1">
-  In template driven forms, if you've imported the `angular_forms` library, you don't have to do anything
-  to the `<form>` tag in order to make use of the library capabilities. Continue on to see how this works.
-</div>
+{{< alert >}}
+In template driven forms, if you've imported the `ngforms` library, you don't have to do anything
+to the `<form>` tag in order to make use of the library capabilities. Continue on to see how this works.
+{{< /alert>}}
 
-<i class="material-icons">open_in_browser</i>
- **Refresh the browser.** You'll see a simple, unstyled form.
+<!-- TODO: import material icons <i class="material-icons">open_in_browser</i> -->
+**Refresh the browser.** You'll see a simple, unstyled form.
 
 ### Style the form
 
@@ -263,23 +196,17 @@ The general CSS classes `container` and `btn` come from [Bootstrap][].
 Bootstrap also has [form-specific classes][Bootstrap forms] including `form-control` and `form-group`.
 Together, these give the form a little style.
 
-<div class="l-sub-section" markdown="1">
-  Angular makes no use of Bootstrap classes or
-  the styles of any external library. Angular apps can use any CSS library or none at all.
-</div>
+{{< alert >}}
+Angular makes no use of Bootstrap classes or
+the styles of any external library. Angular apps can use any CSS library or none at all.
+{{< /alert >}}
 
 Add Bootstrap styles by inserting the following link to the `<head>` of `index.html`:
 
-<?code-excerpt "web/index.html (bootstrap)" title?>
-```
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
-        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
-        crossorigin="anonymous">
-```
+{{< excerpt src="web/index.html" section="bootstrap" >}}
 
-<i class="material-icons">open_in_browser</i>
- **Refresh the browser.** You'll see a form with style!
+<!-- TODO: material icon <i class="material-icons">open_in_browser</i> -->
+**Refresh the browser.** You'll see a form with style!
 
 ## Add powers with _*ngFor_
 
@@ -288,19 +215,11 @@ You maintain that list internally (in `HeroFormComponent`).
 
 You'll add a `select` to the
 form and bind the options to the `powers` list using `ngFor`,
-a technique seen previously in the [Displaying Data](displaying-data) page.
+a technique seen previously in the [Displaying Data]({{< ref displaying-data >}}) page.
 
 Add the following HTML *immediately below* the *Alter Ego* group:
 
-<?code-excerpt "lib/src/hero_form_component_1.html (powers)" title?>
-```
-  <div class="form-group">
-    <label for="power">Hero Power&nbsp;*</label>
-    <select class="form-control" id="power" required>
-      <option *ngFor="let p of powers" [value]="p">{!{p}!}</option>
-    </select>
-  </div>
-```
+{{< excerpt src="lib/src/hero_form_component_1.html" section="powers" >}}
 
 This code repeats the `<option>` tag for each power in the list of powers.
 The `p` template input variable is a different power in each iteration;
@@ -309,15 +228,16 @@ you display its name using the interpolation syntax.
 <a id="ngModel"></a>
 ## Two-way data binding with _ngModel_
 
-<i class="material-icons">open_in_browser</i>
+<!-- TODO: material icons <i class="material-icons">open_in_browser</i> -->
 **Running the app** now is a bit disappointing.
 
-<img class="image-display" src="{% asset ng/devguide/forms/hero-form-wo-bindings.png @path %}" width="360" alt="Early form with no binding">
+{{< figure src="hero-form-wo-bindings.png" caption="Early form with no binding"
+alt="Early form with no binding" width="360" >}}
 
 You don't see hero data because you're not binding to the `Hero` yet.
 You know how to do that from earlier pages.
-[Displaying Data](displaying-data) teaches property binding.
-[User Input](user-input) shows how to listen for DOM events with an
+[Displaying Data]({{< ref displaying-data >}}) teaches property binding.
+[User Input]({{< ref user-input >}}) shows how to listen for DOM events with an
 event binding and how to update a component property with the displayed value.
 
 Now you need to display, listen, and extract at the same time.
@@ -328,17 +248,7 @@ makes binding the form to the model easy.
 
 Find the `<input>` tag for *Name* and update it like this:
 
-<?code-excerpt "lib/src/hero_form_component_2.html (name)" title?>
-```
-  <!-- TODO: remove the next diagnostic line -->
-  <mark>{!{model.name}!}</mark><hr>
-  <div class="form-group">
-    <label for="name">Name&nbsp;*</label>
-    <input type="text" class="form-control" id="name" required
-           [(ngModel)]="model.name"
-           ngControl="name">
-  </div>
-```
+{{< excerpt src="lib/src/hero_form_component_2.html" section="name" >}}
 
 <div class="l-sub-section" markdown="1">
   You added a diagnostic interpolation before the form-group
@@ -348,33 +258,34 @@ Find the `<input>` tag for *Name* and update it like this:
 
 Focus on the binding syntax: `[(ngModel)]="..."`.
 
-<i class="material-icons">open_in_browser</i>
+<!-- TODO: material icon <i class="material-icons">open_in_browser</i> -->
 **Run the app** now and type in the *Name* input,
 adding and deleting characters. You'll see the characters appear and disappear
 from the diagnostic text. At some point it might look like this:
 
-<img class="image-display" src="{% asset ng/devguide/forms/name-ngmodel.png @path %}" width="300" alt="Name ngModel">
+{{< figure src="name-ngmodel.png" caption="Name ngModel" alt="Name ngModel"
+width="300" >}}
 
 The diagnostic is evidence that values really are flowing from the input to the model and
 back again.
 
-<div class="l-sub-section" markdown="1">
-  That's *two-way data binding*.
-  For more information, see
-  [Two-way binding with NgModel](template-syntax#ngModel) on the
-  the [Template Syntax](template-syntax) page.
-</div>
+{{< alert context="info" >}}
+That's *two-way data binding*.
+For more information, see
+[Two-way binding with NgModel](template-syntax#ngModel) on the
+the [Template Syntax](template-syntax) page.
+{{< /alert >}}
 
 Notice that you also added an `ngControl` directive to the `<input>` tag and set it to "name",
 which makes sense for the hero's name. Any unique value will do, but using a descriptive name is helpful.
 Defining an `ngControl` directive is a requirement when using `[(ngModel)]` in combination with a form.
 
-<div class="l-sub-section" markdown="1">
-  Internally, Angular creates `NgFormControl` instances and
-  registers them with an `NgForm` directive that Angular attached to the `<form>` tag.
-  Each `NgFormControl` is registered under the name you assigned to the `ngControl` directive.
-  You'll read more about `NgForm` [later in this guide](#ngForm).
-</div>
+{{< alert context="info" >}}
+Internally, Angular creates `NgFormControl` instances and
+registers them with an `NgForm` directive that Angular attached to the `<form>` tag.
+Each `NgFormControl` is registered under the name you assigned to the `ngControl` directive.
+You'll read more about `NgForm` [later in this guide](#ngForm).
+{{< /alert >}}
 
 Add similar `[(ngModel)]` bindings and `ngControl` directives to *Alter Ego* and *Hero Power*.
 
@@ -383,41 +294,17 @@ confirm that two-way data binding works for the *entire hero model*.
 
 After revision, the core of the form should look like this:
 
-<?code-excerpt "lib/src/hero_form_component_3.html (controls)" title?>
-```
-  <!-- TODO: remove the next diagnostic line -->
-  <mark>{!{model}!}</mark><hr>
-  <div class="form-group">
-    <label for="name">Name&nbsp;*</label>
-    <input type="text" class="form-control" id="name" required
-           [(ngModel)]="model.name"
-           ngControl="name">
-  </div>
-  <div class="form-group">
-    <label for="alterEgo">Alter Ego</label>
-    <input type="text" class="form-control" id="alterEgo"
-           [(ngModel)]="model.alterEgo"
-           ngControl="alterEgo">
-  </div>
-  <div class="form-group">
-    <label for="power">Hero Power&nbsp;*</label>
-    <select class="form-control" id="power" required
-            [(ngModel)]="model.power"
-            ngControl="power">
-      <option *ngFor="let p of powers" [value]="p">{!{p}!}</option>
-    </select>
-  </div>
-```
+{{< excerpt src="lib/src/hero_form_component_3.html" section="controls" >}}
 
-<div class="l-sub-section" markdown="1">
-  - Each input element has an `id` property that is used by the `label` element's `for` attribute
+{{< alert >}}
+- Each input element has an `id` property that is used by the `label` element's `for` attribute
   to match the label to its input control.
-  - Each input element has a `ngControl` directive that is required by Angular forms to register the control with the form.
-</div>
+- Each input element has a `ngControl` directive that is required by Angular forms to register the control with the form.
+{{< /alert >}}
 
 If you run the app now and change every hero model property, the form might display like this:
 
-<img class="image-display" src="{% asset ng/devguide/forms/ngmodel.png @path %}" width="460" alt="ngModel">
+{{< figure src="ngmodel.png" caption="ngModel" alt="ngModel" width="460" >}}
 
 The diagnostic near the top of the form
 confirms that all of your changes are reflected in the model.
