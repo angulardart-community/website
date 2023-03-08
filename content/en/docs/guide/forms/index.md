@@ -82,7 +82,7 @@ You'll build this form in small steps:
 
 ## Setup
 
-Follow the [setup](setup) instructions to create a new project named `forms`.
+Follow the [setup]({{< ref setup >}}) instructions to create a new project named `forms`.
 
 ### Add angular_forms
 
@@ -334,42 +334,30 @@ strong visual signal when a control value is invalid.
 To create such visual feedback, you'll use the
 [Bootstrap custom-forms][] classes `is-valid` and `is-invalid`.
 
-Add a [template reference variable](template-syntax#ref-vars) called `name`
+Add a [template reference variable]({{< ref template-syntax >}}#ref-vars) called `name`
 to the _Name_ `<input>` tag. Use `name` and [class bindings][class binding]
 to conditionally assign the appropriate form validity class.
 
 Temporarily add another template reference variable named `spy`
 to the _Name_ `<input>` tag and use it to display the input's CSS classes.
 
-<?code-excerpt "lib/src/hero_form_component_4.html (name)" title?>
-```
-  <input type="text" class="form-control" id="name" required
-         [(ngModel)]="model.name"
-         #name="ngForm"
-         #spy
-         [class.is-valid]="name.valid"
-         [class.is-invalid]="!name.valid"
-         ngControl="name">
-  <!-- TODO: remove the next diagnostic line -->
-  {!{spy.className}!}
-```
+{{< excerpt src="lib/src/hero_form_component_4.html" section="name" >}}
 
-<div class="l-sub-section" markdown="1">
+{{< alert context="info" >}}
 #### Template reference variables
+The `spy` [template reference variable](template-syntax#ref-vars) gets bound to the
+`<input>` DOM element, whereas the `name` variable (through the `#name="ngForm"` syntax)
+gets bound to the [NgModel]({{< param pubApi >}}/ngforms/latest/angular_forms/NgModel-class.html)
+associated with the input element.
 
-  The `spy` [template reference variable](template-syntax#ref-vars) gets bound to the
-  `<input>` DOM element, whereas the `name` variable (through the `#name="ngForm"` syntax)
-  gets bound to the [NgModel]({{site.pub-api}}/angular_forms/{{site.data.pkg-vers.angular.vers}}/angular_forms/NgModel-class.html)
-  associated with the input element.
+Why "ngForm"?  A [Directive]({{< param pubApi >}}/ngdart/latest/di/Directive-class.html)'s
+[exportAs]({{< param pubApi >}}/ngdart/latest/di/Directive/exportAs.html) property tells Angular
+how to link the reference variable to the directive. You set `name` to "ngForm"
+because the [ngModel]({{< param pubApi >}}/ngdart/latest/angular_forms/NgModel-class.html)
+directive's `exportAs` property is "ngForm".
+{{< /alert >}}
 
-  Why "ngForm"?  A [Directive]({{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/di/Directive-class.html)'s
-  [exportAs]({{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/di/Directive/exportAs.html) property tells Angular
-  how to link the reference variable to the directive. You set `name` to "ngForm"
-  because the [ngModel]({{site.pub-api}}/angular_forms/{{site.data.pkg-vers.angular.vers}}/angular_forms/NgModel-class.html)
-  directive's `exportAs` property is "ngForm".
-</div>
-
-<i class="material-icons">open_in_browser</i>
+<!-- TOOD: material icon <i class="material-icons">open_in_browser</i> -->
 **Refresh the browser,** and follow these steps:
 
 1. Look at the _Name_ input.
@@ -386,28 +374,13 @@ As an alternative to class bindings, you can use an [NgClass][]
 directive to style a control. First, add the following method to set a
 control's state-dependent CSS class names:
 
-<?code-excerpt "lib/src/hero_form_component.dart (setCssValidityClass)" title?>
-```
-  Map<String, bool> setCssValidityClass(NgControl control) {
-    final validityClass = control.valid == true ? 'is-valid' : 'is-invalid';
-    return {validityClass: true};
-  }
-```
+{{< excerpt src="lib/src/hero_form_component.dart" section="setCssValidityClass" >}}
 
 Use the map value returned by this method to bind to the [NgClass][] directive
 &mdash; read more about this directive and its alternatives in the
 [template syntax](template-syntax#ngClass) page.
 
-<?code-excerpt "lib/src/hero_form_component.html (power)" title?>
-```
-  <select class="form-control" id="power" required
-          [(ngModel)]="model.power"
-          #power="ngForm"
-          [ngClass]="setCssValidityClass(power)"
-          ngControl="power">
-    <option *ngFor="let p of powers" [value]="p">{!{p}!}</option>
-  </select>
-```
+{{< excerpt src="lib/src/hero_form_component.html" section="power" >}}
 
 ## Show and hide validation error messages
 
@@ -419,18 +392,13 @@ Leverage the control's state to reveal a helpful message.
 
 When the user deletes the name, the form should look like this:
 
-<img class="image-display" src="{% asset ng/devguide/forms/name-required-error.png @path %}" width="300" alt="Name required">
+{{< figure src="name-required-error.png" alt="Name required" width="300" >}}
 
 To achieve this effect, add the following `<div>` immediately after the _Name_ `<input>`:
 
-<?code-excerpt "lib/src/hero_form_component.html (hidden error message)" title?>
-```
-  <div [hidden]="name.valid || name.pristine" class="invalid-feedback">
-    Name is required
-  </div>
-```
+{{< excerpt src="lib/src/hero_form_component.html" section="hidden-error-message" >}}
 
-<i class="material-icons">open_in_browser</i>
+<!-- TODO: material icon <i class="material-icons">open_in_browser</i> -->
 **Refresh the browser** and delete the _Name_ input. The error message is displayed.
 
 You control visibility of the error message by setting the [hidden][] attribute
@@ -440,20 +408,20 @@ In this example, you hide the message when the control is valid or pristine
 &mdash; "pristine" means the user hasn't changed the value since it was displayed in
 this form.
 
-<div class="l-sub-section" markdown="1">
+{{< alert >}}
 #### User experience is the developer's choice
 
-  Some developers want the message
-  to display at all times.  If you ignore the `pristine` state, you would hide the
-  message only when the value is valid. If you arrive in this component with a
-  new (blank) hero or an invalid hero, you'll see the error message immediately,
-  before you've done anything.
+Some developers want the message
+to display at all times.  If you ignore the `pristine` state, you would hide the
+message only when the value is valid. If you arrive in this component with a
+new (blank) hero or an invalid hero, you'll see the error message immediately,
+before you've done anything.
 
-  Some developers want the message to display only when the user makes an invalid
-  change.  Hiding the message while the control is "pristine" achieves that goal.
-  You'll see the significance of this choice when you [add a _Clear_ button](#add-a-clear-button)
-  to the form.
-</div>
+Some developers want the message to display only when the user makes an invalid
+change.  Hiding the message while the control is "pristine" achieves that goal.
+You'll see the significance of this choice when you [add a _Clear_ button](#add-a-_clear_-button)
+to the form.
+{{< /alert >}}
 
 The hero *Alter Ego* is optional so you can leave that be.
 
@@ -463,44 +431,26 @@ already constrains the power to valid values.
 
 ## Add a _Clear_ button
 
-{% comment %} Until the next subsection is added, hide this heading:
-<!---------------------------------------------------------------------------->
 ### Resetting the model
-<!---------------------------------------------------------------------------->
-{% endcomment %}
 
 Add a `clear()` method to the component class:
 
-<?code-excerpt "lib/src/hero_form_component.dart (clear)" title?>
-```
-  void clear() {
-    model.name = '';
-    model.power = _powers[0];
-    model.alterEgo = '';
-  }
-```
+{{< excerpt src="lib/src/hero_form_component.dart" section="clear" >}}
 
 Add a _Clear_ button with a `click` event binding, right after the *Submit* button:
 
-<?code-excerpt "lib/src/hero_form_component_4.html (Clear button)" title?>
-```
-  <button (click)="clear()" type="button" class="btn">
-    Clear
-  </button>
-```
+{{< excerpt src="lib/src/hero_form_component_4.html" section="Clear-button" >}}
 
-<i class="material-icons">open_in_browser</i>
+<!-- TODO: material icon <i class="material-icons">open_in_browser</i> -->
 **Refresh the browser.** Click the _Clear_ button. The text fields go blank,
 and if you've changed the power, it reverts to its default value.
 
-{% if false %}
+<!-- {% if false %}
 {% comment %}
-<!---------------------------------------------------------------------------->
 Skipping this for now since Angular doesn't yet support resetting forms
 (https://github.com/dart-lang/angular/issues/216), and it isn't clear
 that this is necessary
-<!---------------------------------------------------------------------------->
-{% endcomment %}
+{% endcomment %} -->
 
 Notice how the _Name_ control is red, indicating an invalid `name` property.
 No error message is showing because the form is pristine &mdash;
@@ -521,30 +471,21 @@ You have to clear all of the control values and flags imperatively,
 which you can do by calling the `NgForm.reset()` method.
 Replace the component `clear()` method call by a form reset:
 
-<div class="alert alert-warning" markdown="1">
-  `NgForm.reset()` isn't supported yet: https://github.com/dart-lang/angular/issues/216.
-</div>
+{{< alert context="warning" >}}
+`NgForm.reset()` may not be supported yet: https://github.com/dart-lang/angular/issues/216.
+{{< /alert >}}
 
-<?code-excerpt "lib/src/hero_form_component_5.html (Clear button)" title?>
-```
-  <!-- NgForm reset isn't supported yet: https://github.com/dart-lang/angular/issues/216. -->
-  <button (click)="heroForm.reset()" type="button" class="btn">
-    Clear
-  </button>
-```
+{{< excerpt src="lib/src/hero_form_component_5.html" section="Clear-button" >}}
 
 Because of the two-way bindings, resetting the form clears the model.
 
-<i class="material-icons">open_in_browser</i>
+<!-- TODO: material icon <i class="material-icons">open_in_browser</i> -->
 **Refresh the browser.** Clicking _Clear_ now resets the form, its control flags,
 and the model.
 
-<div class="l-sub-section" markdown="1">
-  You don't need the component `clear()` method anymore, so you can delete it.
-</div>
-
-<!---------------------------------------------------------------------------->
-{% endif %}
+{{< alert >}}
+You don't need the component `clear()` method anymore, so you can delete it.
+{{< /alert >}}
 
 ## Submit the form with _ngSubmit_
 
@@ -556,37 +497,28 @@ trigger a form submit because of its type (`type="submit"`).
 A form submit is useless at the moment. To make it useful, assign
 form component's `onSubmit()` method to the form's `ngSubmit` event binding:
 
-<?code-excerpt "lib/src/hero_form_component.html (ngSubmit)"?>
-```
-  <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
-```
+{{< excerpt src="lib/src/hero_form_component.html" section="ngSubmit" >}}
 
 Note the template reference variable `#heroForm`.
 As was [explained earlier](#template-reference-variables),
 the variable `heroForm` gets bound to the `NgForm` directive that governs the form as a whole.
 
-<div class="l-sub-section" markdown="1">
+{{< alert context="info" >}}
 #### The `NgForm` directive
-{:#ngForm}
 
-  Angular automatically creates and attaches an [NgForm][]  directive to the `<form>` tag.
+Angular automatically creates and attaches an [NgForm][]  directive to the `<form>` tag.
 
-  The `NgForm` directive supplements the `form` element with additional features.
-  It holds the controls you created for the elements with `ngModel` and `ngControl` directives,
-  and monitors their properties, including their validity.
-</div>
+The `NgForm` directive supplements the `form` element with additional features.
+It holds the controls you created for the elements with `ngModel` and `ngControl` directives,
+and monitors their properties, including their validity.
+{{< /alert >}}
 
 You'll bind the form's overall validity via
 the `heroForm` variable to the button's `disabled` property:
 
-<?code-excerpt "lib/src/hero_form_component.html" region="Submit-button"?>
-```
-  <button [disabled]="!heroForm.form.valid" type="submit" class="btn btn-primary">
-    Submit
-  </button>
-```
+{{< excerpt src="lib/src/hero_form_component.html" section="Submit-button">}}
 
-<i class="material-icons">open_in_browser</i>
+<!-- TODO: material icon <i class="material-icons">open_in_browser</i> -->
 **Refresh the browser.** You'll find that the button is enabled&mdash;although
 it doesn't do anything useful yet.
 
@@ -606,72 +538,38 @@ For you, it was as simple as this:
 
 Submitting the form has no visual effect at the moment.
 
-<div class="l-sub-section" markdown="1">
-  As can be expected for a demo.
-  Jazzing up the demo won't teach you anything new about forms.
-  But this is an opportunity to exercise some of your newly won
-  binding skills.
-  If you aren't interested, skip to this page's [summary](#summary).
-</div>
+{{< alert >}}
+As can be expected for a demo.
+Jazzing up the demo won't teach you anything new about forms.
+But this is an opportunity to exercise some of your newly won
+binding skills.
+If you aren't interested, skip to this page's [summary](#summary).
+{{< /alert >}}
 
 As a visual effect, you can hide the data entry area and display something else.
 
 Wrap the form in a `<div>` and bind
 its `hidden` property to the `HeroFormComponent.submitted` property.
 
-<?code-excerpt "lib/src/hero_form_component.html (excerpt)" region="edit-div" title?>
-```
-  <div [hidden]="submitted">
-    <h1>Hero Form</h1>
-    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
-      <!-- ··· -->
-    </form>
-  </div>
-```
+{{< excerpt src="lib/src/hero_form_component.html" section="edit-div" >}}
 
 The form is visible from the start because the
 `submitted` property is false until you submit the form,
 as this fragment from the `HeroFormComponent` shows:
 
-<?code-excerpt "lib/src/hero_form_component.dart (submitted)" plaster="none" title?>
-```
-  bool submitted = false;
-
-  void onSubmit() => submitted = true;
-```
+{{< excerpt src="lib/src/hero_form_component.dart" section="submitted" >}}
 
 Now add the following HTML below the `<div>` wrapper you just wrote:
 
-<?code-excerpt "lib/src/hero_form_component.html (submitted)" title?>
-```
-  <div [hidden]="!submitted">
-    <h1>Hero data</h1>
+{{< excerpt src="lib/src/hero_form_component.html" section="submitted" >}}
 
-    <table class="table">
-      <tr>
-        <th>Name</th>
-        <td>{!{model.name}!}</td>
-      </tr>
-      <tr>
-        <th>Alter Ego</th>
-        <td>{!{model.alterEgo}!}</td>
-      </tr>
-      <tr>
-        <th>Power</th>
-        <td>{!{model.power}!}</td>
-      </tr>
-    </table>
-
-    <button (click)="submitted=false" class="btn btn-primary">Edit</button>
-  </div>
-```
-
-<i class="material-icons">open_in_browser</i>
+<!-- TODO: material icon <i class="material-icons">open_in_browser</i> -->
 **Refresh the browser,** and submit the form.
 The `submitted` flag becomes true and the form disappears.
 You'll see the hero model values (read-only) displayed in a table.
 
-<img class="image-display" src="{% asset ng/devguide/forms/submitted-hero-data.png @path %}" width="360" alt="Clean Form">
+{{< figure src="submitted-hero-data.png" caption="Clean Form" alt="Clean Form"
+width="360" >}}
 
 The view includes an *Edit* button whose click event binding clears the `submitted` flag.
 When you click the *Edit* button, the table disappears and the editable form reappears.
@@ -694,7 +592,8 @@ In this page, you learned how to use the following features:
 
 The final project folder structure should look like this:
 
-<div class="ul-filetree" markdown="1">
+<!-- TODO: display it like a tree format -->
+{{< alert >}}
 - angular_forms
   - lib
     - app_component.dart
@@ -706,29 +605,37 @@ The final project folder structure should look like this:
     - main.dart
     - styles.css
   - pubspec.yaml
-</div>
+{{< /alert >}}
 
 Here’s the code for the final version of the app:
 
-<code-tabs>
+{{< codetabs 
+    "lib/app_component.dart"
+    "lib/src/hero.dart"
+    "lib/src/hero_form_component.dart"
+    "lib/src/hero_form_component.html"
+    "web/index.html"
+    "web/main.dart"
+>}}
+<!-- <code-tabs>
   <?code-pane "lib/app_component.dart" linenums?>
   <?code-pane "lib/src/hero.dart" linenums?>
   <?code-pane "lib/src/hero_form_component.dart" region="final" linenums?>
   <?code-pane "lib/src/hero_form_component.html" linenums?>
   <?code-pane "web/index.html" linenums?>
   <?code-pane "web/main.dart" linenums?>
-</code-tabs>
+</code-tabs> -->
 
-[angular_forms]: {{< param pubApi >}}/angular_forms/latest/angular_forms/angular_forms-library.html
-[angular_forms@pub]: https://pub.dev/packages/angular_forms
+[ngforms]: {{< param pubApi >}}/angular_forms/latest/angular_forms/angular_forms-library.html
+[ngforms@pub]: https://pub.dev/packages/angular_forms
 [Bootstrap]: https://getbootstrap.com
 [Bootstrap forms]: https://getbootstrap.com/docs/4.0/components/forms
 [Bootstrap custom-forms]: https://getbootstrap.com/docs/4.0/components/forms/#custom-forms
 [class binding]: {{< ref template-syntax >}}#class-binding
 [hidden]: https://developer.mozilla.org/docs/Web/HTML/Global_attributes/hidden
 [NgClass]: {{< param pubApi >}}/angular/latest/angular/NgClass-class.html
-[NgControl]: {{< param pubApi >}}/angular_forms/latest/angular_forms/NgControl-class.html
-[NgControlStatus]: {{< param pubApi >}}/angular_forms/latest/angular_forms/NgControlStatus-class.html
-[NgForm]: {{< param pubApi >}}/angular_forms/latest/angular_forms/NgForm-class.html
-[NgForm.form]: {{< param pubApi >}}/angular_forms/latest/angular_forms/AbstractNgForm/form.html
-[NgModel]: {{< param pubApi >}}/angular_forms/latest/angular_forms/NgModel-class.html
+[NgControl]: {{< param pubApi >}}/ngforms/latest/angular_forms/NgControl-class.html
+[NgControlStatus]: {{< param pubApi >}}/ngforms/latest/angular_forms/NgControlStatus-class.html
+[NgForm]: {{< param pubApi >}}/ngforms/latest/angular_forms/NgForm-class.html
+[NgForm.form]: {{< param pubApi >}}/ngforms/latest/angular_forms/AbstractNgForm/form.html
+[NgModel]: {{< param pubApi >}}/ngforms/latest/angular_forms/NgModel-class.html
