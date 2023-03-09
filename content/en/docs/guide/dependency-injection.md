@@ -7,8 +7,8 @@ menu:
     parent: "guide"
 weight: 170
 toc: true
+excerptbase: dependency-injection
 ---
-<?code-excerpt path-base="examples/ng/doc/dependency-injection"?>
 
 **Dependency injection** is an important app design pattern.
 It's used so widely that almost everyone just calls it _DI_.
@@ -18,7 +18,7 @@ you really can't build an Angular app without it.
 
 This page covers what DI is, why it's useful, and how to use Angular DI.
 
-Run the {% example_ref %}.
+Run the {{< exref dependency-injection >}}.
 
 <a id="why-di"></a>
 ## Why dependency injection?
@@ -26,24 +26,7 @@ Run the {% example_ref %}.
 To understand why dependency injection is so important, consider an example without it.
 Imagine writing the following code:
 
-<?code-excerpt "lib/src/car/car_no_di.dart (car)" title="lib/src/car/car.dart (without DI)"?>
-```
-  class Car {
-    Engine engine;
-    Tires tires;
-    var description = 'No DI';
-
-    Car() {
-      engine = Engine();
-      tires = Tires();
-    }
-
-    // Method using the engine and tires
-    String drive() => '$description car with '
-        '${engine.cylinders} cylinders and '
-        '${tires.make} tires.';
-  }
-```
+{{< excerpt src="lib/src/car/car_no_di.dart" section="car" >}}
 
 The `Car` class creates everything it needs inside its constructor.
 What's the problem?
@@ -90,28 +73,28 @@ How can you make `Car` more robust, flexible, and testable?
 <a id="ctor-injection"></a>
 That's super easy. Change the `Car` constructor to a version with DI:
 
-<code-tabs>
+{{< codetabs 
+    "lib/src/car/car.dart"
+    "lib/src/car/car_no_di.dart"
+>}}
+<!-- <code-tabs>
   <?code-pane "lib/src/car/car.dart (excerpt with DI)" region="car-ctor" linenums?>
   <?code-pane "lib/src/car/car_no_di.dart (excerpt without DI)" region="car-ctor" linenums?>
-</code-tabs>
+</code-tabs> -->
 
 See what happened? The definition of the dependencies are
 now in the constructor.
 The `Car` class no longer creates an engine or tires.
 It just consumes them.
 
-<div class="l-sub-section" markdown="1">
-  This example leverages Dart's constructor syntax for declaring parameters and
-  initializing properties simultaneously.
-</div>
+{{< alert context="info" >}}
+This example leverages Dart's constructor syntax for declaring parameters and
+initializing properties simultaneously.
+{{< /alert >}}
 
 Now you can create a car by passing the engine and tires to the constructor.
 
-<?code-excerpt "lib/src/car/car_creations.dart (car-ctor-instantiation)"?>
-```
-  // Simple car with 4 cylinders and Flintstone tires.
-  Car(Engine(), Tires())
-```
+{{< excerpt src="lib/src/car/car_creations.dart" section="car-ctor-instantiation" >}}
 
 How cool is that?
 The definition of the engine and tire dependencies are
@@ -121,48 +104,29 @@ conform to the general API requirements of an engine or tires.
 
 If someone extends the `Engine` class, that is not `Car`'s problem.
 
-<div class="l-sub-section" markdown="1">
-  The _consumer_ of `Car` has the problem. The consumer must update the car creation code to
-  something like this:
+{{< alert context="warning" raw=true >}}
+{{< markdownify >}}
+The _consumer_ of `Car` has the problem. The consumer must update the car creation code to
+something like this:
+{{< /markdownify>}}
 
-  <?code-excerpt "lib/src/car/car_creations.dart (car-ctor-instantiation-with-param)" replace="/Car\(E.*/[!$&!]/g"?>
-  ```
-    class Engine2 extends Engine {
-      Engine2(cylinders) : super.withCylinders(cylinders);
-    }
+<!-- TODO: why does a !<br> appears in the excerpt? -->
+<!-- <?code-excerpt "lib/src/car/car_creations.dart (car-ctor-instantiation-with-param)" replace="/Car\(E.*/[!$&!]/g"?> -->
+{{< excerpt src="lib/src/car/car_creations.dart" section="car-ctor-instantiation-with-param" >}}
 
-    Car superCar() =>
-        // Super car with 12 cylinders and Flintstone tires.
-        [!Car(Engine2(12), Tires())!]
-          ..description = 'Super';
-  ```
-
-  The critical point is this: the `Car` class did not have to change.
-  You'll take care of the consumer's problem shortly.
-</div>
+{{< markdownify >}}
+The critical point is this: the `Car` class did not have to change.
+You'll take care of the consumer's problem shortly.
+{{< /markdownify >}}
+{{< /alert >}}
 
 The `Car` class is much easier to test now because you are in complete control
 of its dependencies.
 You can pass mocks to the constructor that do exactly what you want them to do
 during each test:
 
-<?code-excerpt "lib/src/car/car_creations.dart (car-ctor-instantiation-with-mocks)" replace="/\bCar\(.*/[!$&!]/g"?>
-```
-  class MockEngine extends Engine {
-    MockEngine() : super.withCylinders(8);
-  }
-
-  class MockTires extends Tires {
-    MockTires() {
-      make = 'YokoGoodStone';
-    }
-  }
-
-  Car testCar() =>
-      // Test car with 8 cylinders and YokoGoodStone tires.
-      [!Car(MockEngine(), MockTires())!]
-        ..description = 'Test';
-```
+<!-- TODO: why does a !<br> appears in the excerpt? -->
+{{< excerpt src="lib/src/car/car_creations.dart" section="car-ctor-instantiation-with-mocks" >}}
 
 **You just learned what dependency injection is**.
 
@@ -177,19 +141,7 @@ You need something that takes care of assembling these parts.
 
 You _could_ write a giant class to do that:
 
-<?code-excerpt "lib/src/car/car_factory.dart" title?>
-```
-  import 'car.dart';
-
-  // BAD pattern!
-  class CarFactory {
-    Car createCar() => Car(createEngine(), createTires())
-      ..description = 'Factory';
-
-    Engine createEngine() => Engine();
-    Tires createTires() => Tires();
-  }
-```
+{{< excerpt src="lib/src/car/car_factory.dart" >}}
 
 It's not so bad now with only three creation methods.
 But maintaining it will be hairy as the app grows.
@@ -205,10 +157,8 @@ You register some classes with this injector, and it figures out how to create t
 
 When you need a `Car`, you simply ask the injector to get it for you and you're good to go.
 
-<?code-excerpt "lib/src/injector_component.dart (injector.get)" replace="/_//g"?>
-```
-  car = injector.get(Car);
-```
+{{< excerpt src="lib/src/injector_component.dart" section="injector-get" 
+pattern="_" replace="" >}}
 
 Everyone wins. The `Car` knows nothing about creating an `Engine` or `Tires`.
 The consumer knows nothing about creating a `Car`.
@@ -222,17 +172,23 @@ This is what a **dependency injection framework** is all about.
 
 Angular ships with its own dependency injection framework.
 You'll learn Angular dependency injection through a discussion of the sample app that accompanies this page.
-Run the {% example_ref %} anytime.
+Run the {{< exref dependency-injection >}} anytime.
 
 Start by reviewing this simplified version of the _heroes_ feature
-from the [The Tour of Heroes](../tutorial/).
+from the [The Tour of Heroes]({{< ref tutorial >}}).
 
-<code-tabs>
+{{< codetabs
+  "lib/src/heroes/heroes_components_1.dart"
+  "lib/src/heroes/hero_list_component_1.dart"
+  "lib/src/heroes/hero.dart"
+  "lib/src/heroes/mock_heroes.dart" 
+>}}
+<!-- <code-tabs>
   <?code-pane "lib/src/heroes/heroes_component_1.dart" region="v1" linenums?>
   <?code-pane "lib/src/heroes/hero_list_component_1.dart" linenums?>
   <?code-pane "lib/src/heroes/hero.dart" linenums?>
   <?code-pane "lib/src/heroes/mock_heroes.dart" linenums?>
-</code-tabs>
+</code-tabs> -->
 
 The `HeroesComponent` is the top-level heroes component.
 It's only purpose is to display the `HeroListComponent`
