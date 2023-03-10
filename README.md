@@ -25,7 +25,7 @@ Here are simple instructions if you want to hack on it now:
   generate code excerpts.
 4. If you have [Hugo] installed on your system, you may run `hugo server`
   directly. If not, do step 2 and run `npm run server`.
-5. Open `htttp://localhost:1313` (or the addresss Hugo shows you if you
+5. Open `http://localhost:1313` (or the addresss Hugo shows you if you
   specified a
   custom address/port).
 6. If you want to build the site, perform step 2 and run
