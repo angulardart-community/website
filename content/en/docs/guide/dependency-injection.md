@@ -197,12 +197,7 @@ which displays a list of hero names.
 This version of the `HeroListComponent` gets its heroes from `mockHeroes`, an in-memory collection
 defined in a separate file.
 
-<?code-excerpt "lib/src/heroes/hero_list_component_1.dart (class)" title?>
-```
-  class HeroListComponent {
-    final List<Hero> heroes = mockHeroes;
-  }
-```
+{{< excerpt src="lib/src/heroes/hero_list_component_1.dart" section="class" >}}
 
 That may suffice in the early stages of development, but it's far from ideal.
 As soon as you try to test this component or get heroes from a remote server,
@@ -214,15 +209,7 @@ replace every other use of the `mockHeroes` data.
 It's better to hide the details concerning hero data access inside a _service_ class,
 defined in its own file.
 
-<?code-excerpt "lib/src/heroes/hero_service_1.dart" title replace="/@Inj.*/[!$&!]/g"?>
-```
-  import 'hero.dart';
-  import 'mock_heroes.dart';
-
-  class HeroService {
-    List<Hero> getAll() => mockHeroes;
-  }
-```
+{{< excerpt src="lib/src/heroes/hero_service_1.dart" >}}
 
 The service class exposes a `getHeroes()` method
 that returns the same mock data as before.
@@ -231,7 +218,7 @@ Of course, this isn't a real data service.
 If the service were actually getting data from a remote server,
 the `getHeroes()` method signature would be asynchronous.
 Such a hero service is presented in the
-tutorial section on [Heroes and HTTP](/tutorial/toh-pt6#heroes-and-http).
+tutorial section on [Heroes and HTTP]({{< ref toh-6 >}}#heroes-and-http).
 The focus here is on service _injection_, so a synchronous service will suffice.
 
 <a id="injector-config"></a>
@@ -254,11 +241,11 @@ Without a provider, the injector would not know
 that it is responsible for injecting the service
 nor be able to create the service.
 
-<div class="l-sub-section" markdown="1">
-  You'll learn more about _providers_ [below](#providers).
-  For now it is sufficient to know that they create services
-  and must be registered with an injector.
-</div>
+{{< alert context="info" >}}
+You'll learn more about _providers_ [below](#providers).
+For now it is sufficient to know that they create services
+and must be registered with an injector.
+{{< /alert >}}
 
 The most common way to register a provider is with
 any Angular annotation that has a **`providers` list argument**.
@@ -268,24 +255,7 @@ The most common of these is [@Component()][].
 
 Here's a revised `HeroesComponent` that registers the `HeroService` in its `providers` list.
 
-<?code-excerpt "lib/src/heroes/heroes_component_1.dart (revised)" region="full" plaster="none" replace="/providers:.*/[!$&!]/g" title?>
-```
-  import 'package:angular/angular.dart';
-
-  import 'hero_list_component.dart';
-  import 'hero_service.dart';
-
-  @Component(
-    selector: 'my-heroes',
-    template: '''
-      <h2>Heroes</h2>
-      <hero-list></hero-list>
-    ''',
-    [!providers: [ClassProvider(HeroService)],!]
-    directives: [HeroListComponent],
-  )
-  class HeroesComponent {}
-```
+{{< excerpt src="lib/src/heroes/heroes_component_1.dart" section="full" >}}
 
 An instance of the `HeroService` is now available for injection in this `HeroesComponent`
 and all of its child components.
@@ -301,45 +271,16 @@ and is never destroyed so the `HeroService` created for the `HeroComponent` also
 
 You can also register providers in the app's **root injector**, which you pass
 as an argument to the [runApp()][] function. For example, the app from the
-[tutorial (part 5)](../tutorial/toh-pt5) injects providers from the
+[tutorial (part 5)]({{< ref toh-5 >}}) injects providers from the
 [routerProvidersHash][] list:
 
-<?code-excerpt path-base="examples/ng/doc"?>
-<?code-excerpt "toh-5/web/main.dart" title replace="/injector(?!\$)/[!$&!]/g; /\binjector\b/rootInjector/g"?>
-```
-  import 'package:ngdart/angular.dart';
-  import 'package:ngrouter/ngrouter.dart';
-  import 'package:angular_tour_of_heroes/app_component.template.dart' as ng;
-
-  import 'main.template.dart' as self;
-
-  @GenerateInjector(
-    routerProvidersHash, // You can use routerProviders in production
-  )
-  final InjectorFactory [!rootInjector!] = self.rootInjector$Injector;
-
-  void main() {
-    runApp(ng.AppComponentNgFactory, createInjector: [!rootInjector!]);
-  }
-```
-<?code-excerpt path-base="examples/ng/doc/dependency-injection"?>
+{{< excerpt base="toh-5" src="web/main.dart" >}}
 
 Use root injector provisioning for _app-wide services_ declared _external_ to
 the app package. Registering app specific services like `HeroService` is
 _discouraged_:
 
-<?code-excerpt "web/main_1.dart (discouraged)" replace="/ClassProvider.*|\/\/.*/[!$&!]/g; /_1//g"?>
-```
-  @GenerateInjector([
-    [!// DON'T register app-local services here; this is for illustration purposes only!]
-    [!ClassProvider(HeroService),!]
-  ])
-  final InjectorFactory rootInjector = self.rootInjector$Injector;
-
-  void main() {
-    runApp(ng.AppComponentNgFactory, createInjector: rootInjector);
-  }
-```
+{{< excerpt src="web/main_1.dart" section="discouraged" >}}
 
 The preferred approach is to register app services in app components.
 Because the `HeroService` is used within the *Heroes* feature set, and nowhere else,
@@ -355,18 +296,19 @@ specifying a **constructor parameter annotated with the dependency's type**.
 Here's the `HeroListComponent` constructor, asking for the `HeroService` to be
 injected.
 
-<?code-excerpt "lib/src/heroes/hero_list_component.dart (ctor-signature)"?>
-```
-  HeroListComponent(HeroService heroService)
-```
+{{< excerpt src="lib/src/heroes/hero_list_component.dart" section="ctor-signature" >}}
 
 Of course, the `HeroListComponent` should do something with the injected `HeroService`.
 Here's the revised component, making use of the injected service, side-by-side with the previous version for comparison.
 
-<code-tabs>
+{{< codetabs
+    "lib/src/heroes/hero_list_component_2.dart"
+    "lib/src/heroes/hero_list_component_1.dart"
+>}}
+<!-- <code-tabs>
   <?code-pane "lib/src/heroes/hero_list_component_2.dart (with DI)" region="" linenums?>
   <?code-pane "lib/src/heroes/hero_list_component_1.dart (without DI)" region="" linenums?>
-</code-tabs>
+</code-tabs> -->
 
 Notice that the `HeroListComponent` doesn't know where the `HeroService` comes from.
 _You_ know that it comes from the parent `HeroesComponent`.
@@ -377,11 +319,12 @@ The only thing that matters is that the `HeroService` is provided in some parent
 Services are singletons _within the scope of an injector_.
 There is at most one instance of a service in a given injector.
 
-{% comment %}From TS page; not relevant until we have modules.
+<!-- {% comment %}
+From TS page; not relevant until we have modules.
 There is only one root injector and the `UserService` is registered with that injector.
 Therefore, there can be just one `UserService` instance in the entire app
 and every class that injects `UserService` get this service instance.
-{% endcomment %}
+{% endcomment %} -->
 
 However, Angular DI is a
 [hierarchical injection system](hierarchical-dependency-injection),
@@ -406,44 +349,23 @@ and a descendent of its parent's parent's injector,
 and so on all the way back to the app's _root_ injector.
 Angular can inject a service provided by any injector in that lineage.
 
-{% comment %}From TS page; not relevant until we have modules.
+<!-- {% comment %}
+From TS page; not relevant until we have modules.
 For example, Angular could inject a `HeroListComponent`
 with both the `HeroService` provided in `HeroComponent`
 and the `UserService` provided in `AppModule`.
-{% endcomment %}
+{% endcomment %} -->
 
 ## Testing a component
 
 Earlier you saw that designing a class for dependency injection makes the class easier to test.
 Listing dependencies as constructor parameters may be all you need to test app parts effectively.
 
-For example, the [tutorial (part 5)](../tutorial/toh-pt5) has a
+For example, the [tutorial (part 5)]({{< ref toh-5 >}}) has a
 `HeroListComponent` test that uses a mock router provisioned through the root
 injector:
 
-<?code-excerpt path-base="examples/ng/doc"?>
-<?code-excerpt "toh-5/test/heroes_test.dart (rootInjector)" title remove="Probe" replace="/injector.factory/rootInjector/g; /rootInjector(?!\$)|MockRouter/[!$&!]/g"?>
-```
-  import 'package:angular_tour_of_heroes/src/hero_list_component.template.dart'
-      as ng;
-  // ···
-  import 'heroes_test.template.dart' as self;
-  // ···
-  @GenerateInjector([
-    ClassProvider(HeroService),
-    ClassProvider(Router, useClass: [!MockRouter!]),
-  ])
-  final InjectorFactory [!rootInjector!] = self.rootInjector$Injector;
-
-  void main() {
-    final testBed = NgTestBed<HeroListComponent>(
-      ng.HeroListComponentNgFactory,
-      [!rootInjector!]: [!rootInjector!],
-    );
-    // ···
-  }
-```
-<?code-excerpt path-base="examples/ng/doc/dependency-injection"?>
+{{< excerpt base="toh-5" src="test/heroes_test.dart" section="rootInjector" >}}
 
 Learn more in [Component Testing: Services](testing/component/services).
 
