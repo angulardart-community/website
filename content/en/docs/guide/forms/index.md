@@ -483,7 +483,7 @@ Because of the two-way bindings, resetting the form clears the model.
 **Refresh the browser.** Clicking _Clear_ now resets the form, its control flags,
 and the model.
 
-{{< alert >}}
+{{< alert context="info" >}}
 You don't need the component `clear()` method anymore, so you can delete it.
 {{< /alert >}}
 
@@ -626,16 +626,16 @@ Here’s the code for the final version of the app:
   <?code-pane "web/main.dart" linenums?>
 </code-tabs> -->
 
-[ngforms]: {{< param pubApi >}}/angular_forms/latest/angular_forms/angular_forms-library.html
-[ngforms@pub]: https://pub.dev/packages/angular_forms
+[ngforms]: {{< param pubApi >}}/ngforms/latest/angular_forms/angular_forms-library.html
+[ngforms@pub]: https://pub.dev/packages/ngforms
 [Bootstrap]: https://getbootstrap.com
 [Bootstrap forms]: https://getbootstrap.com/docs/4.0/components/forms
 [Bootstrap custom-forms]: https://getbootstrap.com/docs/4.0/components/forms/#custom-forms
 [class binding]: {{< ref template-syntax >}}#class-binding
 [hidden]: https://developer.mozilla.org/docs/Web/HTML/Global_attributes/hidden
-[NgClass]: {{< param pubApi >}}/angular/latest/angular/NgClass-class.html
+[NgClass]: {{< param pubApi >}}/ngdart/latest/angular/NgClass-class.html
 [NgControl]: {{< param pubApi >}}/ngforms/latest/angular_forms/NgControl-class.html
-[NgControlStatus]: {{< param pubApi >}}/ngforms/latest/angular_forms/NgControlStatus-class.html
-[NgForm]: {{< param pubApi >}}/ngforms/latest/angular_forms/NgForm-class.html
-[NgForm.form]: {{< param pubApi >}}/ngforms/latest/angular_forms/AbstractNgForm/form.html
-[NgModel]: {{< param pubApi >}}/ngforms/latest/angular_forms/NgModel-class.html
+[NgControlStatus]: {{< param pubApi >}}/ngforms/latest/ngforms/NgControlStatus-class.html
+[NgForm]: {{< param pubApi >}}/ngforms/latest/ngforms/NgForm-class.html
+[NgForm.form]: {{< param pubApi >}}/ngforms/latest/ngforms/AbstractNgForm/form.html
+[NgModel]: {{< param pubApi >}}/ngforms/latest/ngforms/NgModel-class.html
