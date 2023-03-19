@@ -1,0 +1,20 @@
+name: template_syntax
+description: Template Syntax
+version: 0.0.1
+
+environment:
+  sdk: '>=2.5.0 <3.0.0'
+
+dependencies:
+  angular: ^6.0.0
+  angular_components: ^1.0.3
+  angular_forms: ^3.0.0
+  angular_router: ^2.0.0-alpha+22
+
+dev_dependencies:
+  angular_test: ^3.0.0
+  build_runner: ^1.7.0
+  build_test: ^1.3.1
+  build_web_compilers: ^2.4.0
+  pageloader: ^3.2.0
+  test: ^1.6.3
