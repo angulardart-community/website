@@ -7,11 +7,8 @@ menu:
     parent: "guide"
 weight: 180
 toc: true
+excerptbase: template-syntax
 ---
-<?code-excerpt path-base="examples/ng/doc/template-syntax"?>
-<style>td, th {vertical-align: top}</style>
-
-<small>_Last updated: {{page.date}}_</small>
 
 This page covers the basic elements of the Angular template syntax for constructing views.
 

@@ -4,8 +4,6 @@ description: "FAQ and other tips for using AngularDart."
 date: 2022-08-14T13:51:53-04:00
 ---
 
-_Updated December 2018_
-
 This FAQ applies to AngularDart. For more general Dart questions,
 see the [Dart FAQ.]({{< param dartlang >}}/faq)
 
