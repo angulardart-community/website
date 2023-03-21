@@ -153,7 +153,7 @@ template for the example `HeroListComponent`:
 
 The template uses typical HTML elements like `<h2>` and  `<p>`. It also
 includes code that uses Angular's [template syntax]({{ ref template-syntax }}) like
-`*ngFor`, `{!{hero.name}}`, `(click)`, `[hero]`, and `<hero-detail>`.
+`*ngFor`, `{{hero.name}}`, `(click)`, `[hero]`, and `<hero-detail>`.
 
 In the last line of the template, the `<hero-detail>` tag is a custom element
 that represents a new component, `HeroDetailComponent`. The new component (code
@@ -271,7 +271,7 @@ lang="html" >}}
 
 Here are the three ways that the example uses data binding syntax:
 
-* The `{!{hero.name}}` [*interpolation*](displaying-data#interpolation)
+* The `{{hero.name}}` [*interpolation*](displaying-data#interpolation)
   displays the component's `hero.name` property value within the `<li>`
   element.
 

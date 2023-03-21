@@ -261,7 +261,7 @@ before it is assigned to an element property
 or displayed between element tags, as in this example.
 
 ```html
-<label>My current hero is {!{hero.name}}</label>
+<label>My current hero is {{hero.name}}</label>
 ```
 
 Read more about [interpolation](/guide/template-syntax#interpolation) in the
@@ -349,7 +349,7 @@ Here's an example that uses the built-in `currency` pipe to display
 a numeric value in the local currency.
 
 ```html
-<label>Price:</label>{!{product.price | currency}}
+<label>Price:</label>{{product.price | currency}}
 ```
 
 You can also write your own custom pipes. Read more in the page on

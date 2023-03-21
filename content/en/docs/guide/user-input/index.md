@@ -82,7 +82,7 @@ current contents of that element.
 After each call, the `onKey()` method appends the input box value to the
 component's `values` property, followed by a separator character (`|`). The
 template uses Angular [interpolation]({{< ref template-syntax >}}#interpolation)
-(`{!{...}!}`) to display the `values` property.
+(`{{...}}`) to display the `values` property.
 
 Suppose the user enters the letters "abc", and then backspaces to remove them
 one by one. Here's what the UI displays:

@@ -18,18 +18,20 @@ component class instance (the *component*) and its user-facing template.
 You might be familiar with the combination of component and template from experience with model-view-controller (MVC) or model-view-viewmodel (MVVM).
 In Angular, the component plays the part of the controller/viewmodel, and the template represents the view.
 
-The {% example_ref %}
+The {{< exref template-syntax >}}
 demonstrates all of the syntax and code snippets described in this page.
 
-<div class="l-hr"></div>
-## HTML in templates  {#html}
+## Basics before everything...
+
+<!-- <div class="l-hr"></div> -->
+### HTML in templates {#html}
 
 HTML is the language of the Angular template.
 Almost all HTML syntax is valid template syntax.
 The `<script>` element is a notable exception;
 it's forbidden, eliminating the risk of script injection attacks.
 In practice, `<script>` is ignored and a warning appears in the browser console.
-See the [Security](security) page for details.
+See the [Security]({{< ref security >}}) page for details.
 
 Some legal HTML doesn't make much sense in a template.
 The `<html>`, `<body>`, and `<base>` elements have no useful role.
@@ -40,28 +42,19 @@ In the following sections, you'll learn how to get and set DOM (Document Object 
 
 Begin with the first form of data binding&mdash;interpolation&mdash;to see how much richer template HTML can be.
 
-<a href="#page-content">back to top</a>
+<!-- <a href="#page-content">back to top</a>
 <div class="l-hr"></div>
 
-<div id="interpolation"></div>
-## Interpolation ( <span class="syntax">{&#xfeff;{...}}</span> )
+<div id="interpolation"></div> -->
+### Interpolation ( <span class="syntax">{&#xfeff;{...}}</span> )
 
-You met the double-curly braces of interpolation, `{!{` and `}!}`, early in your Angular education.
+You met the double-curly braces of interpolation, `{{` and `}}`, early in your Angular education.
 
-<?code-excerpt "lib/app_component.html (first-interpolation)"?>
-```
-  <p>My current hero is {!{currentHero.name}!}</p>
-```
+{{< excerpt src="lib/app_component.html" section="first-interpolation" >}}
 
 You use interpolation to weave calculated strings into the text between HTML element tags and within attribute assignments.
 
-<?code-excerpt "lib/app_component.html" region="title+image"?>
-```
-  <h3>
-    {!{title}!}
-    <img src="{!{heroImageUrl}!}" style="height:30px">
-  </h3>
-```
+{{< excerpt src="lib/app_component.html" section="title+image" >}}
 
 The text between the braces is often the name of a component property. Angular replaces that name with the
 string value of the corresponding component property. In the example above, Angular evaluates the `title` and `heroImageUrl` properties
@@ -70,19 +63,11 @@ and "fills in the blanks", first displaying a bold app title and then a heroic i
 More generally, the text between the braces is a **template expression** that Angular first **evaluates**
 and then **converts to a string**. The following interpolation illustrates the point by adding the two numbers:
 
-<?code-excerpt "lib/app_component.html (sum-1)"?>
-```
-  <!-- "The sum of 1 + 1 is 2" -->
-  <p>The sum of 1 + 1 is {!{1 + 1}!}</p>
-```
+{{< excerpt src="lib/app_component.html" section="sum-1" >}}
 
 The expression can invoke methods of the host component such as `getVal()`, seen here:
 
-<?code-excerpt "lib/app_component.html (sum-2)"?>
-```
-  <!-- "The sum of 1 + 1 is not 4" -->
-  <p>The sum of 1 + 1 is not {!{1 + 1 + getVal()}!}</p>
-```
+{{< excerpt src="lib/app_component.html" section="sum-2" >}}
 
 Angular evaluates all expressions in double curly braces,
 converts the expression results to strings, and links them with neighboring literal strings. Finally,
@@ -97,8 +82,8 @@ syntax that Angular converts into a
 
 But first, let's take a closer look at template expressions and statements.
 
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
+<!-- <a href="#page-content">back to top</a>
+<div class="l-hr"></div> -->
 
 ## Template expressions
 
@@ -106,7 +91,7 @@ A template **expression** produces a value.
 Angular executes the expression and assigns it to a property of a binding target;
 the target might be an HTML element, a component, or a directive.
 
-The interpolation braces in `{!{1 + 1}!}` surround the template expression `1 + 1`.
+The interpolation braces in `{{1 + 1}}` surround the template expression `1 + 1`.
 In the [property binding](#property-binding) section below,
 a template expression appears in quotes to the right of the&nbsp;`=` symbol, as in `[property]="expression"`.
 
@@ -139,7 +124,7 @@ In the following snippets, the `title`  within double curly braces and the
 
 <?code-excerpt "lib/app_component.html (context-component-expression)"?>
 ```
-  {!{title}!}
+  {{title}}
   <span [hidden]="isUnchanged">changed</span>
 ```
 
@@ -149,8 +134,8 @@ or a [template reference variable](#ref-vars) (`#heroInput`).
 
 <?code-excerpt "lib/app_component.html (context-var)" plaster="none"?>
 ```
-  <div *ngFor="let hero of heroes">{!{hero.name}!}</div>
-  <input #heroInput> {!{heroInput.value}!}
+  <div *ngFor="let hero of heroes">{{hero.name}}</div>
+  <input #heroInput> {{heroInput.value}}
 ```
 
 The context for terms in an expression is a blend of the _template variables_
@@ -187,7 +172,7 @@ Access members of exported enums using the usual syntax:
 
 <?code-excerpt "lib/app_component.html (enums)" retain="Color."?>
 ```
-  The name of the Color.red enum is {!{Color.red}!}.<br>
+  The name of the Color.red enum is {{Color.red}}.<br>
 ```
 
 <a href="#page-content">back to top</a>
@@ -303,7 +288,7 @@ are passed to an event handling method of the component.
 <?code-excerpt "lib/app_component.html (context-var-statement)" plaster="none"?>
 ```
   <button (click)="onSave($event)">Save</button>
-  <button *ngFor="let hero of heroes" (click)="deleteHero(hero)">{!{hero.name}!}</button>
+  <button *ngFor="let hero of heroes" (click)="deleteHero(hero)">{{hero.name}}</button>
   <form #heroForm (ngSubmit)="onSubmit(heroForm)"> ... </form>
 ```
 
@@ -351,7 +336,7 @@ _view-to-source-to-view_.
   <td>One-way<br>from data source<br>to view target</td>
   <td markdown="1">
   ```dart
-  {!{expression}!}
+  {{expression}}
   [target]="expression"
   bind-target="expression"
   ```
@@ -736,10 +721,10 @@ The following binding pairs do the same thing:
 
 <?code-excerpt "lib/app_component.html (property-binding-vs-interpolation)"?>
 ```
-  <p><img src="{!{heroImageUrl}!}"> is the <i>interpolated</i> image.</p>
+  <p><img src="{{heroImageUrl}}"> is the <i>interpolated</i> image.</p>
   <p><img [src]="heroImageUrl"> is the <i>property bound</i> image.</p>
 
-  <p><span>"{!{title}!}" is the <i>interpolated</i> title.</span></p>
+  <p><span>"{{title}}" is the <i>interpolated</i> title.</span></p>
   <p>"<span [innerHTML]="title"></span>" is the <i>property bound</i> title.</p>
 ```
 
@@ -773,7 +758,7 @@ nor property binding.
     Angular generates warnings for these two lines as it sanitizes them
     WARNING: sanitizing HTML stripped some content (see http://g.co/ng/security#xss).
    -->
-  <p><span>"{!{evilTitle}!}" is the <i>interpolated</i> evil title.</span></p>
+  <p><span>"{{evilTitle}}" is the <i>interpolated</i> evil title.</span></p>
   <p>"<span [innerHTML]="evilTitle"></span>" is the <i>property bound</i> evil title.</p>
 ```
 
@@ -812,7 +797,7 @@ There are no property targets to bind to.
 This fact becomes painfully obvious when writing something like this:
 
 ```html
-<tr><td colspan="{!{1 + 1}!}">Three-Four</td></tr>
+<tr><td colspan="{{1 + 1}}">Three-Four</td></tr>
 ```
 
 The result is this error:
@@ -842,7 +827,7 @@ Bind `[attr.colspan]` to a calculated value:
     <tr><td [attr.colspan]="1 + 1">One-Two</td></tr>
 
     <!-- ERROR: There is no `colspan` property to set!
-      <tr><td colspan="{!{1 + 1}!}">Three-Four</td></tr>
+      <tr><td colspan="{{1 + 1}}">Three-Four</td></tr>
     -->
 
     <tr><td>Five</td><td>Six</td></tr>
@@ -862,7 +847,7 @@ is to set ARIA attributes, as in this example:
 <?code-excerpt "lib/app_component.html (attrib-binding-aria)"?>
 ```
   <!-- create and set an aria attribute for assistive technology -->
-  <button [attr.aria-label]="actionName">{!{actionName}!} with Aria</button>
+  <button [attr.aria-label]="actionName">{{actionName}} with Aria</button>
 ```
 
 <a href="#page-content">back to top</a>
@@ -1075,9 +1060,9 @@ Here are the pertinent excerpts from that `HeroComponent`:
 ```
   template: '''
     <div>
-      <img src="{!{heroImageUrl}!}">
+      <img src="{{heroImageUrl}}">
       <span [style.text-decoration]="lineThrough">
-        {!{prefix}!} {!{hero?.name}!}
+        {{prefix}} {{hero?.name}}
       </span>
       <button (click)="delete()">Delete</button>
     </div>
@@ -1205,7 +1190,7 @@ It has a `size` value property and a companion `sizeChange` event:
       <div>
         <button (click)="dec()" [disabled]="size <= minSize">-</button>
         <button (click)="inc()" [disabled]="size >= maxSize">+</button>
-        <label [style.font-size.px]="size">FontSize: {!{size}!}px</label>
+        <label [style.font-size.px]="size">FontSize: {{size}}px</label>
       </div>''',
     exports: [minSize, maxSize],
   )
@@ -1595,8 +1580,8 @@ The `nullHero` is never displayed.
 
 <?code-excerpt "lib/app_component.html (NgIf-2)"?>
 ```
-  <div *ngIf="currentHero != null">Hello, {!{currentHero.name}!}</div>
-  <div *ngIf="nullHero != null">Hello, {!{nullHero.name}!}</div>
+  <div *ngIf="currentHero != null">Hello, {{currentHero.name}}</div>
+  <div *ngIf="nullHero != null">Hello, {{nullHero.name}}</div>
 ```
 
 <div class="l-sub-section" markdown="1">
@@ -1619,7 +1604,7 @@ Here is an example of `NgFor` applied to a simple `<div>`:
 
 <?code-excerpt "lib/app_component.html (NgFor-1)"?>
 ```
-  <div *ngFor="let hero of heroes">{!{hero.name}!}</div>
+  <div *ngFor="let hero of heroes">{{hero.name}}</div>
 ```
 
 You can also apply an `NgFor` to a component element, as in this example:
@@ -1667,7 +1652,7 @@ and then passed in a binding to the `hero` property of the `<my-hero>` component
 
 <?code-excerpt "lib/app_component.html (NgFor-1-2)" plaster="none"?>
 ```
-  <div *ngFor="let hero of heroes">{!{hero.name}!}</div>
+  <div *ngFor="let hero of heroes">{{hero.name}}</div>
   <my-hero *ngFor="let hero of heroes" [hero]="hero"></my-hero>
 ```
 
@@ -1683,7 +1668,7 @@ The next example captures the `index` in a variable named `i` and displays it wi
 
 <?code-excerpt "lib/app_component.html (NgFor-3)"?>
 ```
-  <div *ngFor="let hero of heroes; let i=index">{!{i + 1}!} - {!{hero.name}!}</div>
+  <div *ngFor="let hero of heroes; let i=index">{{i + 1}} - {{hero.name}}</div>
 ```
 
 <div class="l-sub-section" markdown="1">
@@ -1717,7 +1702,7 @@ In the microsyntax expression, set `trackBy` to this method.
 <?code-excerpt "lib/app_component.html (trackBy)" replace="/\s+#withTrackBy//g"?>
 ```
   <div *ngFor="let hero of heroes; trackBy: trackByHeroId">
-    ({!{hero.id}!}) {!{hero.name}!}
+    ({{hero.id}}) {{hero.name}}
   </div>
 ```
 
@@ -1788,7 +1773,7 @@ For example, you can replace the `<confused-hero>` switch case with the followin
 
 <?code-excerpt "lib/app_component.html (NgSwitch-div)"?>
 ```
-  <div *ngSwitchCase="'confused'">Are you as confused as {!{currentHero.name}!}?</div>
+  <div *ngSwitchCase="'confused'">Are you as confused as {{currentHero.name}}?</div>
 ```
 
 <a href="#page-content">back to top</a>
@@ -1847,7 +1832,7 @@ The following is a *simplified* version of the form example in the [Forms](forms
       <button type="submit" [disabled]="!heroForm.form.valid">Submit</button>
   </form>
   <div [hidden]="!heroForm.form.valid">
-      {!{submitMessage}!}
+      {{submitMessage}}
   </div>
 ```
 
@@ -1903,7 +1888,7 @@ These directive properties must be declared as **inputs** or **outputs**.
   The *source* is on the *right* of the `=`.
 
   The *target* of a binding is the property or event inside the binding punctuation: `[]`, `()` or `[()]`.
-  The *source* is either inside quotes (`" "`) or within an interpolation (`{!{}!}`).
+  The *source* is either inside quotes (`" "`) or within an interpolation (`{{}}`).
 
   Every member of a **source** directive is automatically available for binding.
   You don't have to do anything special to access a directive member in a template expression or statement.
@@ -2022,7 +2007,7 @@ They're easy to apply within template expressions, using the **pipe operator (`|
 
 <?code-excerpt "lib/app_component.html (pipes-1)"?>
 ```
-  <div>Title through uppercase pipe: {!{title | uppercase}!}</div>
+  <div>Title through uppercase pipe: {{title | uppercase}}</div>
 ```
 
 The pipe operator passes the result of an expression on the left to a pipe function on the right.
@@ -2034,7 +2019,7 @@ You can chain expressions through multiple pipes:
   <!-- Pipe chaining: convert title to uppercase, then to lowercase -->
   <div>
     Title through a pipe chain:
-    {!{title | uppercase | lowercase}!}
+    {{title | uppercase | lowercase}}
   </div>
 ```
 
@@ -2043,14 +2028,14 @@ You can also [apply parameters](pipes#parameterizing-a-pipe) to a pipe:
 <?code-excerpt "lib/app_component.html (pipes-3)"?>
 ```
   <!-- pipe with configuration argument => "February 25, 1970" -->
-  <div>Birthdate: {!{currentHero?.birthdate | date:'longDate'}!}</div>
+  <div>Birthdate: {{currentHero?.birthdate | date:'longDate'}}</div>
 ```
 
 The `json` pipe can be helpful for debugging bindings:
 
 <?code-excerpt "lib/app_component.html (pipes-json)"?>
 ```
-  <div>{!{currentHero | json}!}</div>
+  <div>{{currentHero | json}}</div>
 ```
 
 The generated output looks something like this:
@@ -2076,14 +2061,14 @@ Here it is, protecting against a view render failure if the `currentHero` is nul
 
 <?code-excerpt "lib/app_component.html (safe-2)"?>
 ```
-  The current hero's name is {!{currentHero?.name}!}
+  The current hero's name is {{currentHero?.name}}
 ```
 
 What happens when the following data bound `title` property is null?
 
 <?code-excerpt "lib/app_component.html (safe-1)"?>
 ```
-  The title is {!{title}!}
+  The title is {{title}}
 ```
 
 The view still renders but the displayed value is blank; you see only "The title is" with nothing after it.
@@ -2093,7 +2078,7 @@ Suppose the template expression involves a property path, as in this next exampl
 that displays the `name` of a null hero.
 
 ```html
-The null hero's name is {!{nullHero.name}}
+The null hero's name is {{nullHero.name}}
 ```
 
 Dart throws an exception, and so does Angular:
@@ -2122,7 +2107,7 @@ You could code around that problem with [*ngIf](#ngIf).
 <?code-excerpt "lib/app_component.html (safe-4)"?>
 ```
   <!--No hero, div not displayed, no error -->
-  <div *ngIf="nullHero != null">The null hero's name is {!{nullHero.name}!}</div>
+  <div *ngIf="nullHero != null">The null hero's name is {{nullHero.name}}</div>
 ```
 
 These approaches have merit but can be cumbersome, especially if the property path is long.
@@ -2135,7 +2120,7 @@ The display is blank, but the app keeps rolling without errors.
 <?code-excerpt "lib/app_component.html (safe-6)"?>
 ```
   <!-- No hero, no problem! -->
-  The null hero's name is {!{nullHero?.name}!}
+  The null hero's name is {{nullHero?.name}}
 ```
 
 It works perfectly with long property paths such as `a?.b?.c?.d`.
