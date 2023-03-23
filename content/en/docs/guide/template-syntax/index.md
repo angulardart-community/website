@@ -122,21 +122,13 @@ The *expression context* is typically the _component_ instance.
 In the following snippets, the `title`  within double curly braces and the
 `isUnchanged` in quotes refer to properties of the `AppComponent`.
 
-<?code-excerpt "lib/app_component.html (context-component-expression)"?>
-```
-  {{title}}
-  <span [hidden]="isUnchanged">changed</span>
-```
+{{< excerpt src="lib/app_component.html" section="context-component-expression" >}}
 
 An expression can also refer to properties of the _template's_ context,
 such as a [template input variable](#template-input-variable) (`let hero`)
 or a [template reference variable](#ref-vars) (`#heroInput`).
 
-<?code-excerpt "lib/app_component.html (context-var)" plaster="none"?>
-```
-  <div *ngFor="let hero of heroes">{{hero.name}}</div>
-  <input #heroInput> {{heroInput.value}}
-```
+{{< excerpt src="lib/app_component.html" section="context-var" >}}
 
 The context for terms in an expression is a blend of the _template variables_
 and the component's _members_.
@@ -146,38 +138,22 @@ and, lastly, the component's member names.
 
 The previous example presents such a name collision. The component has a `hero`
 property and the `*ngFor` defines a `hero` template variable.
-The `hero` in `{% raw %}{{hero.name}}{% endraw %}`
+The `hero` in `{{hero.name}}`
 refers to the template input variable, not the component's property.
 
 Template expressions can refer to top-level and static-member constants and
 functions that are listed in a component's `exports` argument.
 
-<?code-excerpt "lib/app_component.dart (exports)" replace="/exports:.*/[!$&!]/g"?>
-```
-  import 'dart:math' as math;
-  // ···
-  enum Color { red, green, blue }
-  // ···
-  @Component(
-    // ···
-    [!exports: [Color, math.min],!]
-    // ···
-  )
-  class AppComponent implements OnInit {
-    // ···
-  }
-```
+{{< excerpt src="lib/app_component.dart" section="exports" >}}
 
 Access members of exported enums using the usual syntax:
 
-<?code-excerpt "lib/app_component.html (enums)" retain="Color."?>
-```
-  The name of the Color.red enum is {{Color.red}}.<br>
-```
+{{< excerpt src="lib/app_component.html" section="enums" >}}
 
-<a href="#page-content">back to top</a>
+<!-- <a href="#page-content">back to top</a> -->
 
 <div id="no-side-effects"></div>
+
 ### Expression guidelines
 
 Template expressions can make or break an app.
@@ -231,8 +207,8 @@ If an idempotent expression returns a string or a number, it returns the same st
 when called twice in a row. If the expression returns an object (including a `List`),
 it returns the same object *reference* when called twice in a row.
 
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
+<!-- <a href="#page-content">back to top</a>
+<div class="l-hr"></div> -->
 
 ## Template statements
 
@@ -241,10 +217,7 @@ such as an element, component, or directive.
 You'll see template statements in the [event binding](#event-binding) section
 appearing in quotes to the right of the `=`&nbsp;symbol as in `(event)="statement"`.
 
-<?code-excerpt "lib/app_component.html (context-component-statement)"?>
-```
-  <button (click)="deleteHero()">Delete hero</button>
-```
+{{< excerpt src="lib/app_component.html" section="context-component-statement" >}}
 
 A template statement *has a side effect*.
 That's the whole point of an event.
@@ -274,10 +247,7 @@ such as an event handling method of the component instance.
 The *statement context* is typically the component instance.
 The *deleteHero* in `(click)="deleteHero()"` is a method of the data-bound component.
 
-<?code-excerpt "lib/app_component.html (context-component-statement)"?>
-```
-  <button (click)="deleteHero()">Delete hero</button>
-```
+{{< excerpt src="lib/app_component.html" section="context-component-statement" >}}
 
 The statement context can also refer to properties of the template's own context.
 In the following examples, the template `$event` object,
@@ -285,12 +255,7 @@ a [template input variable](#template-input-variable) (`let hero`),
 and a [template reference variable](#ref-vars) (`#heroForm`)
 are passed to an event handling method of the component.
 
-<?code-excerpt "lib/app_component.html (context-var-statement)" plaster="none"?>
-```
-  <button (click)="onSave($event)">Save</button>
-  <button *ngFor="let hero of heroes" (click)="deleteHero(hero)">{{hero.name}}</button>
-  <form #heroForm (ngSubmit)="onSubmit(heroForm)"> ... </form>
-```
+{{< excerpt src="lib/app_component.html" section="context-var-statement" >}}
 
 Template context names take precedence over component context names.
 In `deleteHero(hero)` above, the `hero` is the template input variable,
@@ -309,8 +274,8 @@ Method calls or simple property assignments are best.
 Now that you have a feel for template expressions and statements,
 you're ready to learn about the varieties of data binding syntax beyond interpolation.
 
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
+<!-- <a href="#page-content">back to top</a>
+<div class="l-hr"></div> -->
 
 ## Binding syntax: An overview  {#binding-syntax}
 
@@ -327,7 +292,8 @@ Binding types can be grouped into three categories based on the direction of
 data flow: _source-to-view_, _view-to-source_, and two-way sequence
 _view-to-source-to-view_.
 
-{% comment %}Dart gives the best code styling results for the fenced code in the table.{% endcomment %}
+<!-- TODO: use native markdown table -->
+<!-- {% comment %}Dart gives the best code styling results for the fenced code in the table.{% endcomment %} -->
 <table width="100%">
   <col width="30%"> <col width="50%"> <col width="20%">
   <tr> <th>Data direction</th> <th>Syntax</th> <th>Type</th> </tr>
@@ -335,11 +301,13 @@ _view-to-source-to-view_.
   <tr>
   <td>One-way<br>from data source<br>to view target</td>
   <td markdown="1">
+  {{< markdownify >}}
   ```dart
   {{expression}}
   [target]="expression"
   bind-target="expression"
   ```
+  {{< /markdownify >}}
   </td>
   <td>Interpolation<br>Property<br>Attribute<br>Class<br>Style</td>
   </tr>
@@ -347,10 +315,12 @@ _view-to-source-to-view_.
   <tr>
   <td>One-way<br>from view target<br>to data source</td>
   <td markdown="1">
+  {{< markdownify >}}
   ```dart
   (target)="statement"
   on-target="statement"
   ```
+  {{< /markdownify >}}
   </td>
   <td>Event</td>
   </tr>
@@ -358,9 +328,11 @@ _view-to-source-to-view_.
   <tr>
   <td>Two-way</td>
   <td markdown="1">
+  {{< markdownify >}}
   ```dart
   [(target)]="expression"
   ```
+  {{< /markdownify >}}
   </td>
   <td>Two-way</td>
   </tr>
@@ -384,35 +356,20 @@ It requires a new mental model.
 In the normal course of HTML development, you create a visual structure with HTML elements, and
 you modify those elements by setting element attributes with string constants.
 
-<?code-excerpt "lib/app_component.html" region="img+button"?>
-```
-  <div class="special">Mental Model</div>
-  <img src="assets/images/hero.png">
-  <button disabled>Save</button>
-```
+{{< excerpt src="lib/app_component.html" section="img+button" >}}
 
 You still create a structure and initialize attribute values this way in Angular templates.
 
 Then you learn to create new elements with components that encapsulate HTML
 and drop them into templates as if they were native HTML elements.
 
-<?code-excerpt "lib/app_component.html (my-hero-1)"?>
-```
-  <!-- Normal HTML -->
-  <div class="special">Mental Model</div>
-  <!-- Wow! A new element! -->
-  <my-hero></my-hero>
-```
+{{< excerpt src="lib/app_component.html" section="my-hero-1" >}}
 
 That's HTML Plus.
 
 Then you learn about data binding. The first binding you meet might look like this:
 
-<?code-excerpt "lib/app_component.html (disabled-button-1)"?>
-```
-  <!-- Bind button disabled state to `isUnchanged` property -->
-  <button [disabled]="isUnchanged">Save</button>
-```
+{{< excerpt src="lib/app_component.html" section="disabled-button-1" >}}
 
 Your intuition might suggest that you're binding to the button's `disabled` attribute and setting
 it to the current value of the component's `isUnchanged` property. That intuition would be incorrect!
@@ -422,7 +379,7 @@ binding, you're no longer working with HTML *attributes*. You aren't setting
 attributes; you're setting the *properties* of DOM elements, components, and
 directives.
 
-<div class="l-sub-section" markdown="1">
+{{< alert context="info" >}}
 ### HTML attribute vs. DOM property
 
   The distinction between an HTML attribute and a DOM property is crucial to understanding how Angular binding works.
@@ -463,17 +420,17 @@ directives.
   The value of the *property* matters.
 
   **The HTML attribute and the DOM property are not the same thing, even when they have the same name.**
-</div>
+{{< /alert >}}
 
 This fact bears repeating:
 **Template binding works with *properties* and *events*, not *attributes*.**
 
-<div class="alert alert-info" markdown="1">
-  <h4>A world without attributes</h4>
+{{< alert context="warning" >}}
+  #### A world without attritbues
   In the world of Angular, the only role of attributes is to initialize element and directive state.
   When you write a data binding, you're dealing exclusively with properties and events of the target object.
   HTML attributes effectively disappear.
-</div>
+{{< /alert >}}
 
 With this model in mind, read on to learn about binding targets.
 
@@ -492,72 +449,50 @@ The following table summarizes the scenarios:
   <td>Property</td>
   <td>Element&nbsp;property<br>Component&nbsp;property<br>Directive&nbsp;property</td>
   <td markdown="1">
-  <?code-excerpt "lib/app_component.html (property-binding-syntax-1)"?>
-  ```
-    <img [src]="heroImageUrl">
-    <my-hero [hero]="currentHero"></my-hero>
-    <div [ngClass]="{'special': isSpecial}">...</div>
-  ```
+  {{< excerpt src="lib/app_component.html" section="property-binding-syntax-1" >}}
   </td>
 </tr>
 <tr>
   <td>Event</td>
   <td>Element&nbsp;event<br>Component&nbsp;event<br>Directive&nbsp;event</td>
   <td markdown="1">
-  <?code-excerpt "lib/app_component.html (event-binding-syntax-1)"?>
-  ```
-    <button (click)="onSave()">Save</button>
-    <my-hero (deleteRequest)="deleteHero()"></my-hero>
-    <div (myClick)="clicked=$event" clickable>click me</div>
-  ```
+  {{< excerpt src="lib/app_component.html" section="event-binding-syntax-1" >}}
   </td>
 </tr>
 <tr>
   <td>Two-way</td>
   <td>Event and property</td>
   <td markdown="1">
-  <?code-excerpt "lib/app_component.html (2-way-binding-syntax-1)"?>
-  ```
-    <input [(ngModel)]="name">
-  ```
+  {{< excerpt src="lib/app_component.html" section="2-way-binding-syntax-1" >}}
   </td>
 </tr>
 <tr>
   <td>Attribute</td>
   <td>Attribute (the&nbsp;exception)</td>
   <td markdown="1">
-  <?code-excerpt "lib/app_component.html (attribute-binding-syntax-1)"?>
-  ```
-    <button [attr.aria-label]="help">help</button>
-  ```
+  {{< excerpt src="lib/app_component.html" section="attribute-binding-syntax-1" >}}
   </td>
 </tr>
 <tr>
   <td>Class</td>
   <td><code>class</code> property</td>
   <td markdown="1">
-  <?code-excerpt "lib/app_component.html (class-binding-syntax-1)"?>
-  ```
-    <div [class.special]="isSpecial">Special</div>
-  ```
+  {{< excerpt src="lib/app_component.html" section="class-binding-syntax-1" >}}
   </td>
 </tr>
 <tr>
   <td>Style</td>
   <td><code>style</code> property</td>
   <td markdown="1">
-  <?code-excerpt "lib/app_component.html (style-binding-syntax-1)"?>
-  ```
-    <button [style.color]="isSpecial ? 'red' : 'green'">
-  ```
+  {{< excerpt src="lib/app_component.html" section="style-binding-syntax-1" >}}
   </td>
 </tr>
 </table>
 
 You're now ready to look at binding types in detail.
 
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
+<!-- <a href="#page-content">back to top</a>
+<div class="l-hr"></div> -->
 
 ## Property binding ( <span class="syntax">[property]</span> ) {#property-binding}
 
@@ -567,32 +502,20 @@ The binding sets the property to the value of a [template expression](#template-
 The most common property binding sets an element property to a component property value. An example is
 binding the `src` property of an image element to a component's `heroImageUrl` property:
 
-<?code-excerpt "lib/app_component.html (property-binding-1)"?>
-```
-  <img [src]="heroImageUrl">
-```
+{{< excerpt src="lib/app_component.html" section="property-binding-1" >}}
 
 Another example is disabling a button when the component says that it `isUnchanged`:
 
-<?code-excerpt "lib/app_component.html (property-binding-2)"?>
-```
-  <button [disabled]="isUnchanged">Cancel is disabled</button>
-```
+{{< excerpt src="lib/app_component.html" section="property-binding-2" >}}
 
 Another is setting a property of a directive:
 
-<?code-excerpt "lib/app_component.html (property-binding-3)"?>
-```
-  <div [ngClass]="classes">[ngClass] binding to the classes property</div>
-```
+{{< excerpt src="lib/app_component.html" section="property-binding-3" >}}
 
 Yet another is setting the model property of a custom component (a great way
 for parent and child components to communicate):
 
-<?code-excerpt "lib/app_component.html (property-binding-4)"?>
-```
-  <my-hero [hero]="currentHero"></my-hero>
-```
+{{< excerpt src="lib/app_component.html" section="property-binding-4" >}}
 
 ### One-way *in*
 
@@ -602,34 +525,28 @@ from a component's data property into a target element property.
 You can't use property binding to pull values *out* of the target element.
 You can't bind to a property of the target element to _read_ it.; you can only _set_ it.
 
-<div class="l-sub-section" markdown="1">
-  Similarly, you can't use property binding to *call* a method on the target element.
+{{< alert >}}
+Similarly, you can't use property binding to *call* a method on the target element.
 
-  If the element raises events, you can listen to them with an [event binding](#event-binding).
+If the element raises events, you can listen to them with an [event binding](#event-binding).
 
-  If you must read a target element property or call one of its methods,
-  you need a different technique.
-  See the API reference for
-  [ViewChild]({{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/angular/ViewChild-class.html) and
-  [ContentChild]({{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/angular/ContentChild-class.html).
-</div>
+If you must read a target element property or call one of its methods,
+you need a different technique.
+See the API reference for
+[ViewChild]({{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/angular/ViewChild-class.html) and
+[ContentChild]({{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/angular/ContentChild-class.html).
+{{< /alert >}}
 
 ### Binding target
 
 An element property between enclosing square brackets identifies the target property.
 The target property in the following code is the image element's `src` property.
 
-<?code-excerpt "lib/app_component.html (property-binding-1)"?>
-```
-  <img [src]="heroImageUrl">
-```
+{{< excerpt src="lib/app_component.html" section="property-binding-1" >}}
 
 Some people prefer the `bind-` prefix alternative, known as the *canonical form*:
 
-<?code-excerpt "lib/app_component.html (property-binding-5)"?>
-```
-  <img bind-src="heroImageUrl">
-```
+{{< excerpt src="lib/app_component.html" section="property-binding-5" >}}
 
 The target name is always the name of a property, even when it appears to be the name of something else.
 You might see `src` and think it's the name of an attribute. It's not; it's the name of an image element property.
@@ -638,15 +555,12 @@ Element properties might be the more common targets,
 but Angular looks first to see if the name is a property of a known directive,
 as it is in the following example:
 
-<?code-excerpt "lib/app_component.html (property-binding-3)"?>
-```
-  <div [ngClass]="classes">[ngClass] binding to the classes property</div>
-```
+{{< excerpt src="lib/app_component.html" section="property-binding-3" >}}
 
-<div class="l-sub-section" markdown="1">
+{{< alert context="info" >}}
   Technically, Angular is matching the name to a directive [input](#inputs-outputs)
   or a property decorated with `@Input()`. Such inputs map to the directive's own properties.
-</div>
+{{< /alert >}}
 
 If the name fails to match a property of a known directive or element, Angular reports an “unknown directive” error.
 
@@ -669,10 +583,7 @@ In general, stick to data properties and to methods that return values and do no
 The template expression should evaluate to the type of value expected by the target property.
 The `hero` property of `HeroComponent` expects a `Hero` object, which is exactly what you're sending in the property binding:
 
-<?code-excerpt "lib/app_component.html (property-binding-4)"?>
-```
-  <my-hero [hero]="currentHero"></my-hero>
-```
+{{< excerpt src="lib/app_component.html" section="property-binding-4" >}}
 
 ### Remember the brackets
 
@@ -683,11 +594,15 @@ It does *not* evaluate the string!
 
 If you forget the brackets around the `hero` property like this:
 
+<!-- TODO: replace the text accordingly with regex -->
+{{< excerpt src="lib/app_component.html" section="property-binding-6" >}}
+<!-- 
 <?code-excerpt "lib/app_component.html (property-binding-6)" remove="--" replace="/DON'T.*/[!\x3C-- $& --\x3E!]/g"?>
 ```
-  [!<-- DON'T do this: -->!]
+  [!<-- DON'T do this: -- >!]
   <my-hero hero="currentHero"></my-hero>
 ```
+ -->
 
 You'll get the following build error:
 
@@ -707,10 +622,7 @@ it works just as well for directive and component properties.
 The following example initializes the `prefix` property of the `HeroComponent` to a fixed string,
 not a template expression. Angular sets it and forgets about it.
 
-<?code-excerpt "lib/app_component.html (property-binding-7)"?>
-```
-  <my-hero prefix="You are my" [hero]="currentHero"></my-hero>
-```
+{{< excerpt src="lib/app_component.html" section="property-binding-7" >}}
 
 The `[hero]` binding, on the other hand, remains a live binding to the component's `currentHero` property.
 
@@ -719,14 +631,7 @@ The `[hero]` binding, on the other hand, remains a live binding to the component
 You often have a choice between interpolation and property binding.
 The following binding pairs do the same thing:
 
-<?code-excerpt "lib/app_component.html (property-binding-vs-interpolation)"?>
-```
-  <p><img src="{{heroImageUrl}}"> is the <i>interpolated</i> image.</p>
-  <p><img [src]="heroImageUrl"> is the <i>property bound</i> image.</p>
-
-  <p><span>"{{title}}" is the <i>interpolated</i> title.</span></p>
-  <p>"<span [innerHTML]="title"></span>" is the <i>property bound</i> title.</p>
-```
+{{< excerpt src="lib/app_component.html" section="property-binding-vs-interpolation" >}}
 
 _Interpolation_ is a convenient alternative to _property binding_ in many cases.
 
@@ -741,34 +646,22 @@ When setting an element property to a non-string data value, you must use _prope
 
 Imagine the following *malicious content*.
 
-<?code-excerpt "lib/app_component.dart (evil-title)"?>
-```
-  String evilTitle =
-      'Template <script>alert("evil never sleeps")</script>Syntax';
-```
+{{< excerpt src="lib/app_component.dart" section="evil-title" >}}
 
 Fortunately, Angular data binding is on alert for dangerous HTML.
 It [*sanitizes*](security#sanitization-and-security-contexts) the values before displaying them.
 It **does not** allow HTML with script tags to leak into the browser, neither with interpolation
 nor property binding.
 
-<?code-excerpt "lib/app_component.html (property-binding-vs-interpolation-sanitization)"?>
-```
-  <!--
-    Angular generates warnings for these two lines as it sanitizes them
-    WARNING: sanitizing HTML stripped some content (see http://g.co/ng/security#xss).
-   -->
-  <p><span>"{{evilTitle}}" is the <i>interpolated</i> evil title.</span></p>
-  <p>"<span [innerHTML]="evilTitle"></span>" is the <i>property bound</i> evil title.</p>
-```
+{{< excerpt src="lib/app_component.html" section="property-binding-vs-interpolation-sanitization" >}}
 
 Interpolation handles the script tags differently than property binding but both approaches render the
 content harmlessly.
 
-<img class="image-display" src="{% asset ng/devguide/template-syntax/evil-title.png @path %}" alt="evil title made safe" width='500px'>
+{{< figure src="evil-title.png" alt="evil title made safe" width=500 >}}
 
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
+<!-- <a href="#page-content">back to top</a>
+<div class="l-hr"></div> -->
 
 ## Attribute, class, and style bindings  {#other-bindings}
 
@@ -778,10 +671,10 @@ The template syntax provides specialized one-way bindings for scenarios less wel
 
 You can set the value of an attribute directly with an **attribute binding**.
 
-<div class="l-sub-section" markdown="1">
+{{< alert >}}
   This is the only exception to the rule that a binding sets a target property.
   This is the only binding that creates and sets an attribute.
-</div>
+{{< /alert >}}
 
 This guide stresses repeatedly that setting an element property with a property binding
 is always preferred to setting the attribute with a string. Why does Angular offer attribute binding?
@@ -820,19 +713,7 @@ You then set the attribute value, using an expression that resolves to a string.
 
 Bind `[attr.colspan]` to a calculated value:
 
-<?code-excerpt "lib/app_component.html (attrib-binding-colspan)"?>
-```
-  <table border="1">
-    <!--  expression calculates colspan=2 -->
-    <tr><td [attr.colspan]="1 + 1">One-Two</td></tr>
-
-    <!-- ERROR: There is no `colspan` property to set!
-      <tr><td colspan="{{1 + 1}}">Three-Four</td></tr>
-    -->
-
-    <tr><td>Five</td><td>Six</td></tr>
-  </table>
-```
+{{< excerpt src="lib/app_component.html" section="attrib-binding-colspan">}}
 
 Here's how the table renders:
 
@@ -844,14 +725,7 @@ Here's how the table renders:
 One of the primary use cases for attribute binding
 is to set ARIA attributes, as in this example:
 
-<?code-excerpt "lib/app_component.html (attrib-binding-aria)"?>
-```
-  <!-- create and set an aria attribute for assistive technology -->
-  <button [attr.aria-label]="actionName">{{actionName}} with Aria</button>
-```
-
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
+{{< excerpt src="lib/app_component.html" section="attrib-binding-aria" >}}
 
 ### Class binding
 
