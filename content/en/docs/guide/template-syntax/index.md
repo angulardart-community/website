@@ -739,42 +739,22 @@ optionally followed by a dot (`.`) and the name of a CSS class: `[class.class-na
 The following examples show how to add and remove the app's "special" class
 with class bindings.  Here's how to set the attribute without binding:
 
-<?code-excerpt "lib/app_component.html (class-binding-1)"?>
-```
-  <!-- standard class attribute setting  -->
-  <div class="bad curly special">Bad curly special</div>
-```
+{{< excerpt src="lib/app_component.html" section="class-binding-1" >}}
 
 You can replace that with a binding to a string of the desired class names; this is an all-or-nothing, replacement binding.
 
-<?code-excerpt "lib/app_component.html (class-binding-2)"?>
-```
-  <!-- reset/override all class names with a binding  -->
-  <div class="bad curly special"
-       [class]="badCurly">Bad curly</div>
-```
+{{< excerpt src="lib/app_component.html" section="class-binding-2" >}}
 
 Finally, you can bind to a specific class name.
 Angular adds the class when the template expression evaluates to true.
 It removes the class when the expression is false.
 
-<?code-excerpt "lib/app_component.html (class-binding-3)"?>
-```
-  <!-- toggle the "special" class on/off with a property -->
-  <div [class.special]="isSpecial">The class binding is special</div>
+{{< excerpt src="lib/app_component.html" section="class-binding-3" >}}
 
-  <!-- binding to `class.special` trumps the class attribute -->
-  <div class="special"
-       [class.special]="!isSpecial">This one is not so special</div>
-```
-
-<div class="l-sub-section" markdown="1">
+{{< alert context="info" >}}
   While this is a fine way to toggle a single class name,
   the [NgClass directive](#ngClass) is usually preferred when managing multiple class names at the same time.
-</div>
-
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
+{{< /alert >}}
 
 ### Style binding
 
@@ -784,45 +764,34 @@ Style binding syntax resembles property binding.
 Instead of an element property between brackets, start with the prefix `style`,
 followed by a dot (`.`) and the name of a CSS style property: `[style.style-property]`.
 
-<?code-excerpt "lib/app_component.html (style-binding-1)"?>
-```
-  <button [style.color]="isSpecial ? 'red': 'green'">Red</button>
-  <button [style.background-color]="canSave ? 'cyan': 'grey'" >Save</button>
-```
+{{< excerpt src="lib/app_component.html" section="style-binding-1" >}}
 
 Some style binding styles have a unit extension.
 The following example conditionally sets the font size in  “em” and “%” units .
 
-<?code-excerpt "lib/app_component.html (style-binding-2)"?>
-```
-  <button [style.font-size.em]="isSpecial ? 3 : 1" >Big</button>
-  <button [style.font-size.%]="!isSpecial ? 150 : 50" >Small</button>
-```
+{{< excerpt src="lib/app_component.html" section="style-binding-2" >}}
 
-<div class="l-sub-section" markdown="1">
+{{< alert >}}
   While this is a fine way to set a single style,
   the [NgStyle directive](#ngStyle) is generally preferred when setting several inline styles at the same time.
 
   Note that a _style property_ name can be written in either
-  [dash-case](/glossary#dash-case), as shown above, or
-  [camelCase](/glossary#camelcase), such as `fontSize`.
-</div>
+  [dash-case]({{< ref glossary >}}#dash-case), as shown above, or
+  [camelCase]({{< ref glossary >}}#camelcase), such as `fontSize`.
+{{< /alert >}}
 
-<div class="alert alert-info" markdown="1">
-  <h4>Style property names</h4>
+{{< alert context="info" >}}
+  #### Style property names
 
-  While [camelCase](/glossary#camelcase) and
-  [dash-case](/glossary#dash-case) style property naming schemes are
+  While [camelCase]({{< ref glossary >}}#camelcase) and
+  [dash-case]({{< ref glossary >}}#dash-case) style property naming schemes are
   equivalent in AngularDart, only dash-case names are recognized by the
   `dart:html` [CssStyleDeclaration][CssSD] methods `getPropertyValue()`
   and `setProperty()`.
   So using dash-case for style property names is generally preferred.
 
-  [CssSD]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-html/CssStyleDeclaration-class.html
-</div>
-
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
+  [CssSD]: {{< param dartApi >}}/stable/dart-html/CssStyleDeclaration-class.html
+{{< /alert >}}
 
 ## Event binding  ( <span class="syntax">(event)</span> )  {#event-binding}
 
@@ -842,41 +811,28 @@ within parentheses on the left of an equal sign, and a quoted
 The following event binding listens for the button's click events, calling
 the component's `onSave()` method whenever a click occurs:
 
-<?code-excerpt "lib/app_component.html (event-binding-1)"?>
-```
-  <button (click)="onSave()">Save</button>
-```
+{{< excerpt src="lib/app_component.html" section="event-binding-1" >}}
 
 ### Target event
 
 A **name between parentheses** &mdash; for example, `(click)` &mdash;
 identifies the target event. In the following example, the target is the button's click event.
 
-<?code-excerpt "lib/app_component.html (event-binding-1)"?>
-```
-  <button (click)="onSave()">Save</button>
-```
+{{< excerpt src="lib/app_component.html" section="event-binding-1" >}}
 
 Some people prefer the `on-` prefix alternative, known as the **canonical form**:
 
-<?code-excerpt "lib/app_component.html (event-binding-2)"?>
-```
-  <button on-click="onSave()">On Save</button>
-```
+{{< excerpt src="lib/app_component.html" section="event-binding-2" >}}
 
 Element events might be the more common targets, but Angular looks first to see if the name matches an event property
 of a known directive, as it does in the following example:
 
-<?code-excerpt "lib/app_component.html (event-binding-3)"?>
-```
-  <!-- `myClick` is an event on the custom `ClickDirective` -->
-  <div (myClick)="clickMessage=$event" clickable>click with myClick</div>
-```
+{{< excerpt src="lib/app_component.html" section="event-binding-3" >}}
 
-<div class="l-sub-section" markdown="1">
+{{< alert >}}
   The `myClick` directive is further described in the section
   on [aliasing input/output properties](#aliasing-io).
-</div>
+{{< /alert >}}
 
 If the name fails to match an element event or an output property of a known directive,
 Angular reports an “unknown directive” error.
