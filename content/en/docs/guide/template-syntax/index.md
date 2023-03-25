@@ -533,8 +533,8 @@ If the element raises events, you can listen to them with an [event binding](#ev
 If you must read a target element property or call one of its methods,
 you need a different technique.
 See the API reference for
-[ViewChild]({{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/angular/ViewChild-class.html) and
-[ContentChild]({{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/angular/ContentChild-class.html).
+[ViewChild]({{< param pubApi >}}/angular/latest/angular/ViewChild-class.html) and
+[ContentChild]({{< param pubApi >}}/angular/latest/angular/ContentChild-class.html).
 {{< /alert >}}
 
 ### Binding target
@@ -597,7 +597,7 @@ If you forget the brackets around the `hero` property like this:
 <!-- TODO: replace the text accordingly with regex -->
 {{< excerpt src="lib/app_component.html" section="property-binding-6" >}}
 <!-- 
-<?code-excerpt "lib/app_component.html (property-binding-6)" remove="--" replace="/DON'T.*/[!\x3C-- $& --\x3E!]/g"?>
+{{!< excerpt src="lib/app_component.html (property-binding-6)" remove="--" replace="/DON'T.*/[!\x3C-- $& --\x3E!]/g" >}}
 ```
   [!<-- DON'T do this: -- >!]
   <my-hero hero="currentHero"></my-hero>
@@ -851,16 +851,12 @@ an **event object named `$event`**.
 
 The shape of the event object is determined by the target event.
 If the target event is a native DOM element event, then `$event` is a
-[DOM event object]( https://developer.mozilla.org/en-US/docs/Web/Events),
+[DOM event object](https://developer.mozilla.org/en-US/docs/Web/Events),
 with properties such as `target` and `target.value`.
 
 Consider this example:
 
-<?code-excerpt "lib/app_component.html (without-NgModel)"?>
-```
-  <input [value]="currentHero.name"
-         (input)="currentHero.name=$event.target.value" >
-```
+{{< excerpt src="lib/app_component.html" section="without-NgModel" >}}
 
 This code sets the input box `value` property by binding to the `name` property.
 To listen for changes to the value, the code binds to the input box's `input` event.
@@ -873,9 +869,10 @@ If the event belongs to a directive (recall that components are directives),
 `$event` has whatever shape the directive decides to produce.
 
 <div id="custom-event"></div>
+
 ### Custom events
 
-Directives typically raise custom events using a [StreamController]({{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-async/StreamController-class.html).
+Directives typically raise custom events using a [StreamController]({{< param dartApi >}}/stable/dart-async/StreamController-class.html).
 The directive creates a `StreamController` and exposes its underlying `stream` as a property.
 The directive calls `StreamController.add(payload)` to fire an event, passing in a message payload, which can be anything.
 Parent directives listen for the event by binding to this property and accessing the payload through the `$event` object.
@@ -886,28 +883,8 @@ The best it can do is raise an event reporting the user's delete request.
 
 Here are the pertinent excerpts from that `HeroComponent`:
 
-<?code-excerpt "lib/src/hero_component.dart (template)" region="template-1" title?>
-```
-  template: '''
-    <div>
-      <img src="{{heroImageUrl}}">
-      <span [style.text-decoration]="lineThrough">
-        {{prefix}} {{hero?.name}}
-      </span>
-      <button (click)="delete()">Delete</button>
-    </div>
-  ''',
-```
-<?code-excerpt "lib/src/hero_component.dart (deleteRequest)" plaster="none" title?>
-```
-  final _deleteRequest = StreamController<Hero>();
-  @Output()
-  Stream<Hero> get deleteRequest => _deleteRequest.stream;
-
-  void delete() {
-    _deleteRequest.add(hero);
-  }
-```
+{{< excerpt src="lib/src/hero_component.dart" section="template-1" >}}
+{{< excerpt src="lib/src/hero_component.dart" section="deleteRequest" >}}
 
 The component defines a private `StreamController` property and
 exposes the controller's stream through the `deleteRequest` getter.
@@ -916,10 +893,7 @@ directing the `StreamController` to add a `Hero` to the stream.
 
 Now imagine a hosting parent component that binds to the `HeroComponent`'s `deleteRequest` event.
 
-<?code-excerpt "lib/app_component.html (event-binding-to-component)"?>
-```
-  <my-hero (deleteRequest)="deleteHero($event)" [hero]="currentHero"></my-hero>
-```
+{{< excerpt src="lib/app_component.html" section="event-binding-to-component" >}}
 
 When the `deleteRequest` event fires, Angular calls the parent component's `deleteHero` method,
 passing the *hero-to-delete* (emitted by `HeroDetail`) in the `$event` variable.
@@ -933,24 +907,17 @@ Deleting the hero updates the model, perhaps triggering other changes
 including queries and saves to a remote server.
 These changes percolate through the system and are ultimately displayed in this and other views.
 
-{%comment%}
-//-
-### Event bubbling and propagation [TODO: reinstate this section when it becomes true]
+<!-- ### Event bubbling and propagation [TODO: reinstate this section when it becomes true]
 
 Angular invokes the event-handling statement if the event is raised by the current element or one of its child elements.
 
-<?code-excerpt "lib/app_component.html (event-binding-bubbling)"?>
-```
-  <div class="parent-div" (click)="onClickMe($event)" clickable>Click me
-    <div class="child-div">Click me too!</div>
-  </div>
-```
+{{< excerpt src="lib/app_component.html" section="event-binding-bubbling" >}}
 
 Many DOM events, both [native](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Overview_of_Events_and_Handlers ) and [custom](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events ), bubble up their ancestor tree of DOM elements until an event handler along the way prevents further propagation.
 
-<div class="l-sub-section" markdown="1">
-    `EventEmitter` events don't bubble.
-</div>
+{{< alert >}}
+`EventEmitter` events don't bubble.
+{{< /alert >}}
 
 The result of an event binding statement determines whether
 [event propagation](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Examples#Example_5:_Event_Propagation)
@@ -960,28 +927,12 @@ Event propagation stops if the binding statement returns a false value (as does 
 Clicking the button in the next example triggers a save;
 the click doesn't make it to the outer `<div>` so the div's save handler is not called.
 
-<?code-excerpt "lib/app_component.html (event-binding-no-propagation)"?>
-```
-  <!-- Will save only once -->
-  <div (click)="onSave()" clickable>
-    <button (click)="onSave($event)">Save, no propagation</button>
-  </div>
-```
+{{< excerpt src="lib/app_component.html" section="event-binding-no-propagation" >}}
 
 Propagation continues if the statement returns a true value. In the next example, the click is heard by both the button
 and the outer `<div>`, causing a double save.
 
-<?code-excerpt "lib/app_component.html (event-binding-propagation)"?>
-```
-  <!-- Will save twice -->
-  <div (click)="onSave()" clickable>
-    <button (click)="onSave()">Save w/ propagation</button>
-  </div>
-```
-{%endcomment%}
-
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
+{{< excerpt src="lib/app_component.html" section="event-binding-propagation" >}} -->
 
 ## Two-way binding ( <span class="syntax">[(...)]</span> )  {#two-way}
 
@@ -994,58 +945,18 @@ Angular offers a special _two-way data binding_ syntax for this purpose, **`[(x)
 The `[(x)]` syntax combines the brackets
 of _property binding_, `[x]`, with the parentheses of _event binding_, `(x)`.
 
-<div class="alert alert-warning" markdown="1">
-  <h4>[( )] = banana in a box</h4>
+{{< alert context="warning" >}}
+  #### [( )] = banana in a box
 
   Visualize a *banana in a box* to remember that the parentheses go _inside_ the brackets.
-</div>
+{{< /alert >}}
 
 The `[(x)]` syntax is easy to demonstrate when the element has a settable property called `x`
 and a corresponding event named `xChange`.
 Here's a `SizerComponent` that fits the pattern.
 It has a `size` value property and a companion `sizeChange` event:
 
-<?code-excerpt "lib/src/sizer_component.dart" title linenums?>
-```
-  import 'dart:async';
-  import 'dart:math';
-  import 'package:angular/angular.dart';
-
-  const minSize = 8;
-  const maxSize = minSize * 5;
-
-  @Component(
-    selector: 'my-sizer',
-    template: '''
-      <div>
-        <button (click)="dec()" [disabled]="size <= minSize">-</button>
-        <button (click)="inc()" [disabled]="size >= maxSize">+</button>
-        <label [style.font-size.px]="size">FontSize: {{size}}px</label>
-      </div>''',
-    exports: [minSize, maxSize],
-  )
-  class SizerComponent {
-    int _size = minSize * 2;
-    int get size => _size;
-    @Input()
-    void set size(/*String|int*/ val) {
-      int z = val is int ? val : int.tryParse(val);
-      if (z != null) _size = min(maxSize, max(minSize, z));
-    }
-
-    final _sizeChange = StreamController<int>();
-    @Output()
-    Stream<int> get sizeChange => _sizeChange.stream;
-
-    void dec() => resize(-1);
-    void inc() => resize(1);
-
-    void resize(int delta) {
-      size = size + delta;
-      _sizeChange.add(size);
-    }
-  }
-```
+{{< excerpt src="lib/src/sizer_component.dart" >}}
 
 The initial `size` is an input value from a property binding.
 Clicking the buttons increases or decreases the `size`, within min/max values constraints,
@@ -1053,11 +964,7 @@ and then raises (_emits_) the `sizeChange` event with the adjusted size.
 
 Here's an example in which the `AppComponent.fontSizePx` is two-way bound to the `SizerComponent`:
 
-<?code-excerpt "lib/app_component.html (two-way-1)"?>
-```
-  <my-sizer [(size)]="fontSizePx" #mySizer></my-sizer>
-  <div [style.font-size.px]="mySizer.size">Resizable Text</div>
-```
+{{< excerpt src="lib/app_component.html" section="two-way-1" >}}
 
 The `AppComponent.fontSizePx` establishes the initial `SizerComponent.size` value.
 Clicking the buttons updates the `AppComponent.fontSizePx` via the two-way binding.
@@ -1067,10 +974,7 @@ making the displayed text bigger or smaller.
 The two-way binding syntax is really just syntactic sugar for a _property_ binding and an _event_ binding.
 Angular _desugars_ the `SizerComponent` binding into this:
 
-<?code-excerpt "lib/app_component.html (two-way-2)"?>
-```
-  <my-sizer [size]="fontSizePx" (sizeChange)="fontSizePx=$event"></my-sizer>
-```
+{{< excerpt src="lib/app_component.html" section="two-way-2" >}}
 
 The `$event` variable contains the payload of the `SizerComponent.sizeChange` event.
 Angular assigns the `$event` value to the `AppComponent.fontSizePx` when the user clicks the buttons.
@@ -1082,9 +986,6 @@ However, no native HTML element follows the `x` value and `xChange` event patter
 
 Fortunately, the Angular [_NgModel_](#ngModel) directive is a bridge that enables two-way binding to form elements.
 
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
-
 ## Built-in directives  {#directives}
 
 Earlier versions of Angular included over seventy built-in directives.
@@ -1095,7 +996,7 @@ You don't need many of those directives in Angular.
 You can often achieve the same results with the more capable and expressive Angular binding system.
 Why create a directive to handle a click when you can write a simple binding such as this?
 
-<?code-excerpt "lib/app_component.html (event-binding-1)"?>
+{{< excerpt src="lib/app_component.html" section="event-binding-1" >}}
 ```
   <button (click)="onSave()">Save</button>
 ```
@@ -1106,9 +1007,6 @@ You'll write your own directives, just not as many.
 
 This segment reviews some of the most frequently used built-in directives,
 classified as either [_attribute_ directives](#attribute-directives) or [_structural_ directives](#structural-directives).
-
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
 
 ## Built-in _attribute_ directives  {#attribute-directives}
 
@@ -1125,9 +1023,8 @@ This section is an introduction to the most commonly used attribute directives:
 * [`NgStyle`](#ngStyle): Add and remove a set of HTML styles.
 * [`NgModel`](#ngModel): Two-way data binding to an HTML form element.
 
-<div class="l-hr"></div>
-
 <div id="ngClass"></div>
+
 ### NgClass
 
 You typically control how elements appear
@@ -1136,11 +1033,7 @@ You can bind to the `ngClass` to add or remove several classes simultaneously.
 
 A [class binding](#class-binding) is a good way to add or remove a *single* class.
 
-<?code-excerpt "lib/app_component.html (class-binding-3a)"?>
-```
-  <!-- toggle the "special" class on/off with a property -->
-  <div [class.special]="isSpecial">The class binding is special</div>
-```
+{{< excerpt src="lib/app_component.html" section="class-binding-3a" >}}
 
 To add or remove *many* CSS classes at the same time, the `NgClass` directive might be the better choice.
 
@@ -1152,33 +1045,19 @@ Consider a `setCurrentClasses` component method that sets a component property,
 `currentClasses` with an object that adds or removes three classes based on the
 `true`/`false` state of three other component properties:
 
-<?code-excerpt "lib/app_component.dart (setClasses)"?>
-```
-  Map<String, bool> currentClasses = <String, bool>{};
-  void setCurrentClasses() {
-    currentClasses = <String, bool>{
-      'saveable': canSave,
-      'modified': !isUnchanged,
-      'special': isSpecial
-    };
-  }
-```
+{{< excerpt src="lib/app_component.dart" section="setClasses" >}}
 
 Adding an `ngClass` property binding to `currentClasses` sets the element's classes accordingly:
 
-<?code-excerpt "lib/app_component.html (NgClass-1)"?>
-```
-  <div [ngClass]="currentClasses">This div is initially saveable, unchanged, and special</div>
-```
+{{< excerpt src="lib/app_component.html" section="NgClass-1" >}}
 
-<div class="l-sub-section" markdown="1">
+{{< alert >}}
   It's up to you to call `setCurrentClasses()`, both initially and when the dependent properties change.
-</div>
+{{< /alert >}}
 
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
 
 <div id="ngStyle"></div>
+
 ### NgStyle
 
 You can set inline styles dynamically, based on the state of the component.
@@ -1186,12 +1065,7 @@ With `NgStyle` you can set many inline styles simultaneously.
 
 A [style binding](#style-binding) is an easy way to set a *single* style value.
 
-<?code-excerpt "lib/app_component.html (NgStyle-1)"?>
-```
-  <div [style.font-size]="isSpecial ? 'x-large' : 'smaller'" >
-    This div is x-large or smaller.
-  </div>
-```
+{{< excerpt src="lib/app_component.html" section="NgStyle-1" >}}
 
 To set *many* inline styles at the same time, the `NgStyle` directive might be the better choice.
 
@@ -1201,35 +1075,18 @@ Each key of the object is a style name; its value is whatever is appropriate for
 Consider a `setCurrentStyles` component method that sets a component property, `currentStyles`
 with an object that defines three styles, based on the state of three other component propertes:
 
-<?code-excerpt "lib/app_component.dart (setStyles)"?>
-```
-  Map<String, String> currentStyles = <String, String>{};
-  void setCurrentStyles() {
-    currentStyles = <String, String>{
-      'font-style': canSave ? 'italic' : 'normal',
-      'font-weight': !isUnchanged ? 'bold' : 'normal',
-      'font-size': isSpecial ? '24px' : '12px'
-    };
-  }
-```
+{{< excerpt src="lib/app_component.dart" section="setStyles" >}}
 
 Adding an `ngStyle` property binding to `currentStyles` sets the element's styles accordingly:
 
-<?code-excerpt "lib/app_component.html (NgStyle-2)"?>
-```
-  <div [ngStyle]="currentStyles">
-    This div is initially italic, normal weight, and extra large (24px).
-  </div>
-```
+{{< excerpt src="lib/app_component.html" section="NgStyle-2" >}}
 
-<div class="l-sub-section" markdown="1">
+{{< alert >}}
   It's up to you to call `setCurrentStyles()`, both initially and when the dependent properties change.
-</div>
-
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
+{{< /alert >}}
 
 <div id="ngModel"></div>
+
 ### NgModel - Two-way binding to form elements with <span class="syntax">[(ngModel)]</span>
 
 When developing data entry forms, you often both display a data property and
@@ -1237,10 +1094,7 @@ update that property when the user makes changes.
 
 Two-way data binding with the `NgModel` directive makes that easy. Here's an example:
 
-<?code-excerpt "lib/app_component.html (NgModel-1)"?>
-```
-  <input [(ngModel)]="currentHero.name">
-```
+{{< excerpt src="lib/app_component.html" section="NgModel-1" >}}
 
 #### Inside <span class="syntax">[(ngModel)]</span>
 
@@ -1248,11 +1102,7 @@ Looking back at the `name` binding, note that
 you could achieve the same result with separate bindings to
 the `<input>` element's  `value` property and `input` event.
 
-<?code-excerpt "lib/app_component.html (without-NgModel)"?>
-```
-  <input [value]="currentHero.name"
-         (input)="currentHero.name=$event.target.value" >
-```
+{{< excerpt src="lib/app_component.html" section="without-NgModel" >}}
 
 That's cumbersome. Who can remember which element property to set and which element event emits user changes?
 How do you extract the currently displayed text from the input box so you can update the data property?
@@ -1260,19 +1110,14 @@ Who wants to look that up each time?
 
 That `ngModel` directive hides these onerous details behind its own  `ngModel` input and `ngModelChange` output properties.
 
-<?code-excerpt "lib/app_component.html (NgModel-3)"?>
-```
-  <input
-    [ngModel]="currentHero.name"
-    (ngModelChange)="currentHero.name=$event">
-```
+{{< excerpt src="lib/app_component.html" section="NgModel-3" >}}
 
-<div class="l-sub-section" markdown="1">
+{{< alert context="info" >}}
   The `ngModel` data property sets the element's value property and the `ngModelChange` event property
   listens for changes to the element's value.
 
   The details are specific to each kind of element and therefore the `NgModel` directive only works for an element
-  supported by a [ControlValueAccessor]({{site.pub-api}}/angular_forms/{{site.data.pkg-vers.angular.vers}}/angular_forms/ControlValueAccessor-class.html)
+  supported by a [ControlValueAccessor]({{< param pubApi >}}/angular_forms/latest/angular_forms/ControlValueAccessor-class.html)
   that adapts an element to this protocol.
   The `<input>` box is one of those elements.
   Angular provides *value accessors* for all of the basic HTML form elements and the
@@ -1286,7 +1131,7 @@ That `ngModel` directive hides these onerous details behind its own  `ngModel` i
   can name the value and event properties
   to suit Angular's basic [two-way binding syntax](#two-way) and skip `NgModel` altogether.
   The [`sizer` shown above](#two-way) is an example of this technique.
-</div>
+{{< /alert >}}
 
 Separate `ngModel` bindings is an improvement over binding to the element's native properties. You can do better.
 
@@ -1294,10 +1139,7 @@ You shouldn't have to mention the data property twice. Angular should be able to
 the component's data property and set it
 with a single declaration, which it can with the `[(ngModel)]` syntax:
 
-<?code-excerpt "lib/app_component.html (NgModel-1)"?>
-```
-  <input [(ngModel)]="currentHero.name">
-```
+{{< excerpt src="lib/app_component.html" section="NgModel-1" >}}
 
 Is `[(ngModel)]` all you need? Is there ever a reason to fall back to its expanded form?
 
@@ -1306,21 +1148,14 @@ If you need to do something more or something different, you can write the expan
 
 The following contrived example forces the input value to uppercase:
 
-<?code-excerpt "lib/app_component.html (NgModel-4)"?>
-```
-  <input
-    [ngModel]="currentHero.name"
-    (ngModelChange)="setUppercaseName($event)">
-```
+{{< excerpt src="lib/app_component.html" section="NgModel-4" >}}
 
 Here are all variations in action, including the uppercase version:
 
-<img class="image-display" src="{% asset ng/devguide/template-syntax/ng-model-anim.gif @path %}" alt="NgModel variations">
-
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
+<img class="image-display" src="ng-model-anim.gif" alt="NgModel variations">
 
 <div id="structural-directives"></div>
+
 ## Built-in _structural_ directives
 
 Structural directives are responsible for HTML layout.
@@ -1352,14 +1187,14 @@ You can add or remove an element from the DOM by applying an `NgIf` directive to
 that element (called the _host elment_).
 Bind the directive to a condition expression like `isActive` in this example.
 
-<?code-excerpt "lib/app_component.html (NgIf-1)"?>
+{{< excerpt src="lib/app_component.html" section="NgIf-1" >}}
 ```
   <my-hero *ngIf="isActive"></my-hero>
 ```
 
-<div class="alert alert-warning" markdown="1">
+{{< alert >}}
   Don't forget the asterisk (`*`) in front of `ngIf`.
-</div>
+{{< /alert >}}
 
 When the `isActive` expression returns a true value, `NgIf` adds the `HeroComponent` to the DOM.
 When the expression is false, `NgIf` removes the `HeroComponent`
@@ -1370,18 +1205,7 @@ from the DOM, destroying that component and all of its sub-components.
 You can control the visibility of an element with a
 [class](#class-binding) or [style](#style-binding) binding:
 
-<?code-excerpt "lib/app_component.html (NgIf-3)"?>
-```
-  <!-- isSpecial is true -->
-  <div [class.hidden]="!isSpecial">Show with class</div>
-  <div [class.hidden]="isSpecial">Hide with class</div>
-
-  <!-- HeroDetail is in the DOM but hidden -->
-  <my-hero [class.hidden]="isSpecial"></my-hero>
-
-  <div [style.display]="isSpecial ? 'block' : 'none'">Show with style</div>
-  <div [style.display]="isSpecial ? 'none'  : 'block'">Hide with style</div>
-```
+{{< excerpt src="lib/app_component.html" section="NgIf-3" >}}
 
 Hiding an element is quite different from removing an element with `NgIf`.
 
@@ -1408,22 +1232,16 @@ Here we see `NgIf` guarding two `<div>`s.
 The `currentHero` name appears only when there is a `currentHero`.
 The `nullHero` is never displayed.
 
-<?code-excerpt "lib/app_component.html (NgIf-2)"?>
-```
-  <div *ngIf="currentHero != null">Hello, {{currentHero.name}}</div>
-  <div *ngIf="nullHero != null">Hello, {{nullHero.name}}</div>
-```
+{{< excerpt src="lib/app_component.html" section="NgIf-2" >}}
 
-<div class="l-sub-section" markdown="1">
+{{< alert context="info" >}}
   See also the
   [_safe navigation operator_](#safe-navigation-operator "Safe naviation operator (?.)")
   described below.
-</div>
-
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
+{{< /alert >}}
 
 <div id="ngFor"></div>
+
 ### NgFor
 
 `NgFor` is a _repeater_ directive &mdash; a way to present a list of items.
@@ -1432,25 +1250,26 @@ You tell Angular to use that block as a template for rendering each item in the 
 
 Here is an example of `NgFor` applied to a simple `<div>`:
 
-<?code-excerpt "lib/app_component.html (NgFor-1)"?>
+{{< excerpt src="lib/app_component.html" section="NgFor-1" >}}
 ```
   <div *ngFor="let hero of heroes">{{hero.name}}</div>
 ```
 
 You can also apply an `NgFor` to a component element, as in this example:
 
-<?code-excerpt "lib/app_component.html (NgFor-2)"?>
+{{< excerpt src="lib/app_component.html" section="NgFor-2" >}}
 ```
   <my-hero *ngFor="let hero of heroes" [hero]="hero"></my-hero>
 ```
 
-<div class="alert alert-warning" markdown="1">
+{{< alert context="warning" >}}
   Don't forget the asterisk (`*`) in front of `ngFor`.
-</div>
+{{< /alert >}}
 
 The text assigned to `*ngFor` is the instruction that guides the repeater process.
 
 <div id="microsyntax"></div>
+
 #### *ngFor microsyntax
 
 The string assigned to `*ngFor` is not a [template expression](#template-expressions).
@@ -1468,6 +1287,7 @@ Learn about the _microsyntax_ in the [_Structural Directives_](structural-direct
 
 <div id="template-input-variable"></div>
 <div id="template-input-variables"></div>
+
 ### Template input variables
 
 The `let` keyword before `hero` creates a _template input variable_ called `hero`.
@@ -1480,11 +1300,7 @@ reference the `hero` input variable within the `ngFor` host element
 Here `hero` is referenced first in an interpolation
 and then passed in a binding to the `hero` property of the `<my-hero>` component.
 
-<?code-excerpt "lib/app_component.html (NgFor-1-2)" plaster="none"?>
-```
-  <div *ngFor="let hero of heroes">{{hero.name}}</div>
-  <my-hero *ngFor="let hero of heroes" [hero]="hero"></my-hero>
-```
+{{< excerpt src="lib/app_component.html" section="NgFor-1-2" >}}
 
 Learn more about _template input variables_ in the
 [_Structural Directives_](structural-directives#template-input-variable) guide.
@@ -1496,15 +1312,12 @@ You can capture the `index` in a template input variable and use it in the templ
 
 The next example captures the `index` in a variable named `i` and displays it with the hero name like this.
 
-<?code-excerpt "lib/app_component.html (NgFor-3)"?>
-```
-  <div *ngFor="let hero of heroes; let i=index">{{i + 1}} - {{hero.name}}</div>
-```
+{{< excerpt src="lib/app_component.html" section="NgFor-3">}}
 
-<div class="l-sub-section" markdown="1">
+{{< alert >}}
   Learn about the other `NgFor` context values such as `last`, `even`,
-  and `odd` in the [NgFor API reference]({{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/angular/NgFor-class.html).
-</div>
+  and `odd` in the [NgFor API reference]({{< param pubApi >}}/angular/latest/angular/NgFor-class.html).
+{{< /alert >}}
 
 #### *ngFor with _trackBy_ {#trackBy}
 
@@ -1522,23 +1335,15 @@ Angular can avoid this churn with `trackBy`.
 Add a method to the component that returns the value `NgFor` _should_ track.
 In this case, that value is the hero's `id`.
 
-<?code-excerpt "lib/app_component.dart (trackByHeroId)"?>
-```
-  Object trackByHeroId(_, dynamic o) => o is Hero ? o.id : o;
-```
+{{< excerpt src="lib/app_component.dart" section="trackByHeroId">}}
 
 In the microsyntax expression, set `trackBy` to this method.
 
-<?code-excerpt "lib/app_component.html (trackBy)" replace="/\s+#withTrackBy//g"?>
-```
-  <div *ngFor="let hero of heroes; trackBy: trackByHeroId">
-    ({{hero.id}}) {{hero.name}}
-  </div>
-```
+{{< excerpt src="lib/app_component.html" section="trackBy" >}}
 
-<aside class="alert alert-info" markdown="1">
+{{< alert >}}
   **Note:** A track-by function's signature must match the [TrackByFn][] type.
-</aside>
+{{< /alert >}}
 
 Here is an illustration of the _trackBy_ effect.
 "Reset heroes" creates new heroes with the same `hero.id`s.
@@ -1546,12 +1351,10 @@ Here is an illustration of the _trackBy_ effect.
 * With no `trackBy`, both buttons trigger complete DOM element replacement.
 * With `trackBy`, only changing the `id` triggers element replacement.
 
-<img class="image-display" src="{% asset ng/devguide/template-syntax/ng-for-track-by-anim.gif @path %}" alt="trackBy">
-
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
+<img class="image-display" src="ng-for-track-by-anim.gif" alt="trackBy">
 
 <div id="ngSwitch"></div>
+
 ### The _NgSwitch_ directives
 
 *NgSwitch* is like the Dart `switch` statement.
@@ -1561,22 +1364,14 @@ Angular puts only the *selected* element into the DOM.
 *NgSwitch* is actually a set of three, cooperating directives:
 `NgSwitch`, `NgSwitchCase`, and `NgSwitchDefault` as seen in this example.
 
-<?code-excerpt "lib/app_component.html (NgSwitch)" plaster="none"?>
-```
-  <div [ngSwitch]="currentHero.emotion">
-    <happy-hero    *ngSwitchCase="'happy'"    [hero]="currentHero"></happy-hero>
-    <sad-hero      *ngSwitchCase="'sad'"      [hero]="currentHero"></sad-hero>
-    <confused-hero *ngSwitchCase="'confused'" [hero]="currentHero"></confused-hero>
-    <unknown-hero  *ngSwitchDefault           [hero]="currentHero"></unknown-hero>
-  </div>
-```
+{{< excerpt src="lib/app_component.html" section="NgSwitch" >}}
 
-<div class="l-sub-section" markdown="1">
+{{< alert >}}
   You might come across an `NgSwitchWhen` directive in older code.
   That is the deprecated name for `NgSwitchCase`.
-</div>
+{{< /alert >}}
 
-<img class="image-display" src="{% asset ng/devguide/template-syntax/switch-anim.gif @path %}" alt="trackBy">
+<img class="image-display" src="switch-anim.gif" alt="trackBy">
 
 `NgSwitch` is the controller directive. Bind it to an expression that returns the *switch value*.
 The `emotion` value in this example is a string, but the switch value can be of any type.
@@ -1601,13 +1396,10 @@ which is bound to the `currentHero` of the parent component.
 Switch directives work as well with native elements and web components too.
 For example, you can replace the `<confused-hero>` switch case with the following.
 
-<?code-excerpt "lib/app_component.html (NgSwitch-div)"?>
+{{< excerpt src="lib/app_component.html" section="NgSwitch-div">}}
 ```
   <div *ngSwitchCase="'confused'">Are you as confused as {{currentHero.name}}?</div>
 ```
-
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
 
 ## Template reference variables ( <span class="syntax">#var</span> )  {#ref-vars}
 
@@ -1618,25 +1410,14 @@ It can also refer to an Angular component or directive or a
 Use the hash symbol (#) to declare a reference variable.
 The `#phone` declares a `phone` variable on an `<input>` element.
 
-<?code-excerpt "lib/app_component.html (ref-var)"?>
-```
-  <input #phone placeholder="phone number">
-```
+{{< excerpt src="lib/app_component.html" section="ref-var">}}
 
 You can refer to a template reference variable almost anywhere in the template
 (see [notes below](#template-reference-notes) for exceptions).
 The `phone` variable declared on this `<input>` is consumed in a `<button>` on
 the other side of the template
 
-<?code-excerpt "lib/app_component.html (ref-phone)"?>
-```
-  <input #phone placeholder="phone number">
-
-  <!-- lots of other elements -->
-
-  <!-- phone refers to the input element; pass its `value` to an event handler -->
-  <button (click)="callPhone(phone.value)">Call</button>
-```
+{{< excerpt src="lib/app_component.html" section="ref-phone">}}
 
 ### How a reference variable gets its value
 
@@ -1648,29 +1429,13 @@ The `NgForm` directive does that.
 
 The following is a *simplified* version of the form example in the [Forms](forms) guide.
 
-<?code-excerpt "lib/src/hero_form_component.html"?>
-```
-  <form (ngSubmit)="onSubmit(heroForm)" #heroForm="ngForm">
-      <div class="form-group">
-          <label for="name">Name
-              <input class="form-control"
-                     ngControl="name"
-                     required
-                     [(ngModel)]="hero.name">
-          </label>
-      </div>
-      <button type="submit" [disabled]="!heroForm.form.valid">Submit</button>
-  </form>
-  <div [hidden]="!heroForm.form.valid">
-      {{submitMessage}}
-  </div>
-```
+{{< excerpt src="lib/src/hero_form_component.html" >}}
 
 A template reference variable, `heroForm`, appears three times in this example, separated
 by a large amount of HTML.
 What is the value of `heroForm`?
 The `heroForm` is a reference to an Angular
-[NgForm]({{site.pub-api}}/angular_forms/{{site.data.pkg-vers.angular.vers}}/angular_forms/NgForm-class.html "API: NgForm")
+[NgForm]({{< param pubApi >}}/ngforms/latest/angular_forms/NgForm-class.html "API: NgForm")
 directive with the ability to track the value and validity of every control in the form.
 
 The native `<form>` element doesn't have a `form` property.
@@ -1694,9 +1459,6 @@ embedded view can be referenced from within it, but not the other way around.
 Do not define the same variable name more than once in the same template. The
 runtime value will be unpredictable.
 
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
-
 ## Input and output properties ( <span class="syntax">@Input</span> and <span class="syntax">@Output</span> )  {#inputs-outputs}
 
 So far, this page has focused mainly on binding to component members within template expressions and statements
@@ -1707,11 +1469,11 @@ This section concentrates on binding to **targets**, which are directive
 properties on the *left side of the binding declaration*.
 These directive properties must be declared as **inputs** or **outputs**.
 
-<div class="alert alert-warning" markdown="1">
+{{< alert context="warning" >}}
   Remember: All **components** are **directives**.
-</div>
+{{< /alert >}}
 
-<div class="l-sub-section" markdown="1">
+{{< alert context="info" >}}
   Note the important distinction between a data binding **target** and a data binding **source**.
 
   The *target* of a binding is to the *left* of the `=`.
@@ -1725,16 +1487,12 @@ These directive properties must be declared as **inputs** or **outputs**.
 
   You have *limited* access to members of a **target** directive.
   You can only bind to properties that are explicitly identified as *inputs* and *outputs*.
-</div>
+{{< /alert >}}
 
 In the following snippet, `iconUrl` and `onSave` are data-bound members of the `AppComponent`
 and are referenced within quoted syntax to the _right_ of the equals&nbsp;(`=`).
 
-<?code-excerpt "lib/app_component.html (io-1)"?>
-```
-  <img [src]="iconUrl"/>
-  <button (click)="onSave()">Save</button>
-```
+{{< excerpt src="lib/app_component.html" section="io-1">}}
 
 They are *neither inputs nor outputs* of the component. They are **sources** for their bindings.
 The targets are the native `<img>` and `<button>` elements.
@@ -1742,11 +1500,7 @@ The targets are the native `<img>` and `<button>` elements.
 Now look at a another snippet in which the `HeroComponent`
 is the **target** of a binding on the _left_ of the equals&nbsp;(`=`).
 
-<?code-excerpt "lib/app_component.html (io-2)"?>
-```
-  <my-hero [hero]="currentHero" (deleteRequest)="deleteHero($event)">
-  </my-hero>
-```
+{{< excerpt src="lib/app_component.html" section="io-2">}}
 
 Both `HeroComponent.hero` and `HeroComponent.deleteRequest` are on the **left side** of binding declarations.
 `HeroComponent.hero` is inside brackets; it is the target of a property binding.
@@ -1758,24 +1512,17 @@ Target properties must be explicitly marked as inputs or outputs.
 
 In the `HeroComponent`, such properties are marked as input or output properties using annotations.
 
-<?code-excerpt "lib/src/hero_component.dart (input-output-1)"?>
-```
-  @Input()
-  Hero hero;
-  final _deleteRequest = StreamController<Hero>();
-  @Output()
-  Stream<Hero> get deleteRequest => _deleteRequest.stream;
-```
+{{< excerpt src="lib/src/hero_component.dart" section="input-output-1">}}
 
 ### Input or output?
 
 *Input* properties usually receive data values.
 *Output* properties expose event producers, such as
-[Stream]({{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-async/Stream-class.html) objects.
+[Stream]({{< param dartApi >}}/stable/dart-async/Stream-class.html) objects.
 
 The terms _input_ and _output_ reflect the perspective of the target directive.
 
-<img class="image-display" src="{% asset ng/devguide/template-syntax/input-output.png @path %}" alt="Inputs and outputs">
+<img class="image-display" src="input-output.png" alt="Inputs and outputs">
 
 `HeroComponent.hero` is an **input** property from the perspective of `HeroComponent`
 because data flows *into* that property from a template binding expression.
@@ -1792,10 +1539,7 @@ Directive consumers expect to bind to the name of the directive.
 For example, when you apply a directive with a `myClick` selector to a `<div>` tag,
 you expect to bind to an event property that is also called `myClick`.
 
-<?code-excerpt "lib/app_component.html (myClick)"?>
-```
-  <div (myClick)="clickMessage=$event" clickable>click with myClick</div>
-```
+{{< excerpt src="lib/app_component.html" section="myClick">}}
 
 However, the directive name is often a poor choice for the name of a property within the directive class.
 The directive name rarely describes what the property does.
@@ -1808,24 +1552,17 @@ the directive's own `clicks` property.
 
 To specify the alias for the property name, pass the alias into the input/output decorator like this:
 
-<?code-excerpt "lib/src/click_directive.dart (output-myClick)"?>
-```
-  final _onClick = StreamController<String>();
-  // @Output(alias) propertyName = ...
-  @Output('myClick')
-  Stream<String> get clicks => _onClick.stream;
-```
-
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
+{{< excerpt src="lib/src/click_directive.dart" section="output-myClick">}}
 
 <div id="expression-operators"></div>
+
 ## Template expression operators
 
 The template expression language employs a subset of Dart syntax supplemented with a few special operators
 for specific scenarios. The next sections cover two of these operators: _pipe_ and _safe navigation operator_.
 
 <div id="pipe"></div>
+
 ### The pipe operator ( <span class="syntax">|</span> )
 
 The result of an expression might require some transformation before it's ready to use in a binding.
@@ -1835,38 +1572,21 @@ Angular [pipes](pipes) are a good choice for small transformations such as these
 Pipes are simple functions that accept an input value and return a transformed value.
 They're easy to apply within template expressions, using the **pipe operator (`|`)**:
 
-<?code-excerpt "lib/app_component.html (pipes-1)"?>
-```
-  <div>Title through uppercase pipe: {{title | uppercase}}</div>
-```
+{{< excerpt src="lib/app_component.html" section="pipes-1">}}
 
 The pipe operator passes the result of an expression on the left to a pipe function on the right.
 
 You can chain expressions through multiple pipes:
 
-<?code-excerpt "lib/app_component.html (pipes-2)"?>
-```
-  <!-- Pipe chaining: convert title to uppercase, then to lowercase -->
-  <div>
-    Title through a pipe chain:
-    {{title | uppercase | lowercase}}
-  </div>
-```
+{{< excerpt src="lib/app_component.html" section="pipes-2">}}
 
 You can also [apply parameters](pipes#parameterizing-a-pipe) to a pipe:
 
-<?code-excerpt "lib/app_component.html (pipes-3)"?>
-```
-  <!-- pipe with configuration argument => "February 25, 1970" -->
-  <div>Birthdate: {{currentHero?.birthdate | date:'longDate'}}</div>
-```
+{{< excerpt src="lib/app_component.html" section="pipes-3">}}
 
 The `json` pipe can be helpful for debugging bindings:
 
-<?code-excerpt "lib/app_component.html (pipes-json)"?>
-```
-  <div>{{currentHero | json}}</div>
-```
+{{< excerpt src="lib/app_component.html" section="pipes-json">}}
 
 The generated output looks something like this:
 
@@ -1877,10 +1597,8 @@ The generated output looks something like this:
   "rate": 325 }
 ```
 
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
-
 <div id="safe-navigation-operator"></div>
+
 ### The safe navigation operator ( <span class="syntax">?.</span> ) and null property paths
 
 The Angular **safe navigation operator (`?.`)**, like the Dart [conditional member
@@ -1889,17 +1607,11 @@ operator, is a fluent and convenient way to
 guard against null values in property paths.
 Here it is, protecting against a view render failure if the `currentHero` is null.
 
-<?code-excerpt "lib/app_component.html (safe-2)"?>
-```
-  The current hero's name is {{currentHero?.name}}
-```
+{{< excerpt src="lib/app_component.html" section="safe-2">}}
 
 What happens when the following data bound `title` property is null?
 
-<?code-excerpt "lib/app_component.html (safe-1)"?>
-```
-  The title is {{title}}
-```
+{{< excerpt src="lib/app_component.html" section="safe-1">}}
 
 The view still renders but the displayed value is blank; you see only "The title is" with nothing after it.
 That is reasonable behavior. At least the app doesn't crash.
@@ -1934,11 +1646,7 @@ Unfortunately, the app crashes when the `currentHero` is null.
 
 You could code around that problem with [*ngIf](#ngIf).
 
-<?code-excerpt "lib/app_component.html (safe-4)"?>
-```
-  <!--No hero, div not displayed, no error -->
-  <div *ngIf="nullHero != null">The null hero's name is {{nullHero.name}}</div>
-```
+{{< excerpt src="lib/app_component.html" section="safe-4">}}
 
 These approaches have merit but can be cumbersome, especially if the property path is long.
 Imagine guarding against a null somewhere in a long property path such as `a.b.c.d`.
@@ -1947,16 +1655,9 @@ The Angular safe navigation operator (`?.`) is a more fluent and convenient way 
 The expression bails out when it hits the first null value.
 The display is blank, but the app keeps rolling without errors.
 
-<?code-excerpt "lib/app_component.html (safe-6)"?>
-```
-  <!-- No hero, no problem! -->
-  The null hero's name is {{nullHero?.name}}
-```
+{{< excerpt src="lib/app_component.html" section="safe-6">}}
 
 It works perfectly with long property paths such as `a?.b?.c?.d`.
-
-<a href="#page-content">back to top</a>
-<div class="l-hr"></div>
 
 ## Summary
 
@@ -1964,5 +1665,5 @@ You've completed this survey of template syntax.
 Now it's time to put that knowledge to work on your own components and directives.
 
 
-[Map]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-core/Map-class.html
-[TrackByFn]: {{site.pub-api}}/angular/{{site.data.pkg-vers.angular.vers}}/angular/TrackByFn.html
+[Map]: {{< param dartApi >}}/stable/dart-core/Map-class.html
+[TrackByFn]: {{< param pubApi >}}/angular/latest/angular/TrackByFn.html
