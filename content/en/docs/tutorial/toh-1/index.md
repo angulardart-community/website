@@ -8,7 +8,7 @@ draft: false
 images: []
 menu:
   docs:
-    parent: ""
+    parent: "tutorial"
     identifier: "toh-1"
 weight: 220
 toc: true
