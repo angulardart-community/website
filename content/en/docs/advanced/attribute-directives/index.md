@@ -1,7 +1,6 @@
 ---
 title: "Attribute Directives"
-description: ""
-lead: ""
+description: "Attribute directives attach behavior to elements."
 date: 2023-02-28T20:44:10-05:00
 lastmod: 2023-02-28T20:44:10-05:00
 draft: false
