@@ -5,6 +5,7 @@ draft: false
 menu:
   docs:
     parent: "guide"
+    identifier: "dependency-injection"
 weight: 170
 toc: true
 excerptbase: dependency-injection
@@ -73,7 +74,7 @@ How can you make `Car` more robust, flexible, and testable?
 <a id="ctor-injection"></a>
 That's super easy. Change the `Car` constructor to a version with DI:
 
-{{< codetabs 
+{{< codetabs
     "lib/src/car/car.dart"
     "lib/src/car/car_no_di.dart"
 >}}
@@ -157,7 +158,7 @@ You register some classes with this injector, and it figures out how to create t
 
 When you need a `Car`, you simply ask the injector to get it for you and you're good to go.
 
-{{< excerpt src="lib/src/injector_component.dart" section="injector-get" 
+{{< excerpt src="lib/src/injector_component.dart" section="injector-get"
 pattern="_" replace="" >}}
 
 Everyone wins. The `Car` knows nothing about creating an `Engine` or `Tires`.
@@ -181,7 +182,7 @@ from the [The Tour of Heroes]({{< ref tutorial >}}).
   "lib/src/heroes/heroes_components_1.dart"
   "lib/src/heroes/hero_list_component_1.dart"
   "lib/src/heroes/hero.dart"
-  "lib/src/heroes/mock_heroes.dart" 
+  "lib/src/heroes/mock_heroes.dart"
 >}}
 <!-- <code-tabs>
   <?code-pane "lib/src/heroes/heroes_component_1.dart" region="v1" linenums?>
