@@ -6,9 +6,15 @@
     {{ range .Sections }}
       {{ $active := in $currentPage.RelPermalink .RelPermalink }}
       <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-{{ md5 .Title }}" aria-expanded="{{ if $active }}true{{ else }}false{{ end }}">
-          {{ .Title }}
-        </button>
+        <div style="display: flex;justify-content: flex-start;">
+          <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-{{ md5 .Title }}" aria-expanded="{{ if $active }}true{{ else }}false{{ end }}">
+            <!-- TODO: obviously this permalink doesn't work. In addition, when
+              selected the font should still say bold.
+              It's pretty easy to do, but requires some CSS refactoring and
+              planning... !-->
+            <a class="docs-link rounded{{ if $active }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+          </button>
+        </div>
         <div class="collapse{{ if $active }} show{{ end }}" id="section-{{ md5 .Title }}">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             {{ range .Pages }}
