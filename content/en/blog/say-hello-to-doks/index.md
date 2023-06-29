@@ -8,7 +8,7 @@ draft: false
 weight: 50
 images: []
 categories: ["News"]
-tags: ["security", "performance", "SEO"]
+tags: ["performance", "SEO"]
 contributors: ["Henk Verlinde"]
 pinned: false
 homepage: false

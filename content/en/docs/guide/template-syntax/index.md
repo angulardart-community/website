@@ -596,7 +596,7 @@ If you forget the brackets around the `hero` property like this:
 
 <!-- TODO: replace the text accordingly with regex -->
 {{< excerpt src="lib/app_component.html" section="property-binding-6" >}}
-<!-- 
+<!--
 {{!< excerpt src="lib/app_component.html (property-binding-6)" remove="--" replace="/DON'T.*/[!\x3C-- $& --\x3E!]/g" >}}
 ```
   [!<-- DON'T do this: -- >!]

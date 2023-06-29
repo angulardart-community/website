@@ -1,13 +1,13 @@
 ---
 title: "Security"
 description: "Developing for content security in Angular apps"
-date: 2023-06-25T22:44:27-04:00
-lastmod: 2023-06-25T22:44:27-04:00
+date: 2023-06-28T21:53:55-04:00
 draft: false
 images: []
 menu:
   docs:
     parent: "advanced"
+    # TODO: seems like tags in blogs will conflict
     identifier: "security"
 weight: 380
 toc: true
@@ -21,20 +21,18 @@ this user?_) and authorization (_What can this user do?_).
 
 For more information about the attacks and mitigations described below, see [OWASP Guide Project](https://www.owasp.org/index.php/Category:OWASP_Guide_Project).
 
-Try the {{< exref security >}} of the code shown in this page.
+Try the {{< exref "security" >}} of the code shown in this page.
 
-## Reporting vulnerabilities  {#report-issues}
+## Reporting vulnerabilities {#report-issues}
 
 To report vulnerabilities in Angular itself, email us at [security@angular.io](mailto:security@angular.io).
-
-For more information about how Google handles security issues, see [Google's security philosophy](https://www.google.com/about/appsecurity/).
 
 ## Best practices
 
 * **Keep current with the latest Angular library releases.**
   We regularly update the Angular libraries, and these updates may fix security defects discovered in
   previous versions. Check the Angular [change
-  log](https://github.com/dart-lang/angular/blob/master/angular/CHANGELOG.md) for security-related updates.
+  log]({{< param angularRepo >}}/blob/master/ngdart/CHANGELOG.md) for security-related updates.
 
 * **Don't modify your copy of Angular.**
   Private, customized versions of Angular tend to fall behind the current version and may not include
@@ -92,14 +90,7 @@ when it has to change a value during sanitization.
 The following template binds the value of `htmlSnippet`, once by interpolating it into an element's
 content, and once by binding it to the `innerHTML` property of an element:
 
-<?code-excerpt "lib/src/inner_html_binding_component.html" title?>
-```
-  <h3>Binding innerHTML</h3>
-  <p>Bound value:</p>
-  <p class="e2e-inner-html-interpolated">{!{htmlSnippet}!}</p>
-  <p>Result of binding to innerHTML:</p>
-  <p class="e2e-inner-html-bound" [innerHTML]="htmlSnippet"></p>
-```
+{{< excerpt src="lib/src/inner_html_binding_component.html" >}}
 
 Interpolated content is always escaped&mdash;the HTML isn't interpreted and the browser displays
 angle brackets in the element's text content.
@@ -108,23 +99,17 @@ For the HTML to be interpreted, bind it to an HTML property such as `innerHTML`.
 a value that an attacker might control into `innerHTML` normally causes an XSS
 vulnerability. For example, code contained in a `<script>` tag is executed:
 
-<?code-excerpt "lib/src/inner_html_binding_component.dart (class)" title?>
-```
-  class InnerHtmlBindingComponent {
-    // For example, a user/attacker-controlled value from a URL.
-    var htmlSnippet = 'Template <script>alert("0wned")</script> <b>Syntax</b>';
-  }
-```
+{{< excerpt src="lib/src/inner_html_binding_component.dart" section="class" >}}
 
 Angular recognizes the value as unsafe and automatically sanitizes it, which removes the `<script>`
 element but keeps safe content such as text and the `<b>` element.
 
-<img class="image-display" src="{% asset ng/devguide/security/binding-inner-html.png @path %}" alt="Interpolated and bound HTML values">
+{{< figure src="binding-inner-html.png" alt="Inerpolated and bound HTML values" >}}
 
 ### Avoid direct use of the DOM APIs
 
 The built-in browser DOM APIs don't automatically protect you from security vulnerabilities.
-For example, [document]({{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-html/document.html), and many third-party APIs
+For example, [document]({{< param dartApi >}}/stable/dart-html/document.html), and many third-party APIs
 contain unsafe methods. Avoid directly interacting with the DOM and instead use Angular
 templates where possible.
 
@@ -136,7 +121,8 @@ technique to prevent XSS. To enable CSP, configure your web server to return an 
 [Content Security Policy](https://developers.google.com/web/fundamentals/security/csp)
 on the Web Fundamentals site.
 
-<div><a id="offline-template-compiler"></a></div>
+<a id="offline-template-compiler"></a>
+
 ### Use the offline template compiler
 
 The offline template compiler prevents a whole class of vulnerabilities called template injection,
@@ -171,35 +157,26 @@ following methods:
   * `bypassSecurityTrustUrl`
   * `bypassSecurityTrustResourceUrl`
 
+{{< alert context="warning" >}}
+Security-related features were once removed in Angular 7, we're currently in the
+progress of fixing compatibility issues and bringing them back. Currently only
+interpolated values cannot escape sanitization; for all other usage, follow the
+guide below.
+{{< /alert >}}
+
 Remember, whether a value is safe depends on context, so choose the right context for
 your intended use of the value. Imagine that the following template needs to bind a URL to a
 `javascript:alert(...)` call:
 
-<?code-excerpt "lib/src/bypass_security_component.html (URL)" title?>
-```
-  <h4>A untrusted URL:</h4>
-  <p><a class="e2e-dangerous-url" [href]="dangerousUrl">Click me</a></p>
-  <h4>A trusted URL:</h4>
-  <p><a class="e2e-trusted-url" [href]="trustedUrl">Click me</a></p>
-```
+{{< excerpt src="lib/src/bypass_security_component.html" section="URL" >}}
 
 Normally, Angular automatically sanitizes the URL, disables the dangerous code, and
 in development mode, logs this action to the console. To prevent
 this, mark the URL value as a trusted URL using the `bypassSecurityTrustUrl` call:
 
-<?code-excerpt "lib/src/bypass_security_component.dart (excerpt)" region="trust-url" title?>
-```
-  BypassSecurityComponent(this.sanitizer) {
-    // javascript: URLs are dangerous if attacker controlled.
-    // Angular sanitizes them in data binding, but we can
-    // explicitly tell Angular to trust this value:
-    dangerousUrl = 'javascript:alert("Hi there")';
-    trustedUrl =
-        sanitizer.bypassSecurityTrustUrl('javascript:alert("Hi there")');
-```
+{{< excerpt src="lib/src/bypass_security_component.dart" section="trust-url" >}}
 
-<img class="image-display" src="{% asset ng/devguide/security/bypass-security-component.png @path %}"
-      alt='A screenshot showing an alert box created from a trusted URL'>
+{{< figure src="bypass-security-component.png" alt="A screenshot showing an alert box created from a trusted URL" >}}
 
 If you need to convert user input into a trusted value, use a
 controller method. The following template allows users to enter a YouTube video ID and load the
@@ -208,29 +185,10 @@ context, because an untrusted source can, for example, smuggle in file downloads
 could execute. So call a method on the controller to construct a trusted video URL, which causes
 Angular to allow binding into `<iframe src>`:
 
-<?code-excerpt "lib/src/bypass_security_component.html (iframe)" title?>
-```
-  <h4>Resource URL:</h4>
-  <p>Showing: {!{dangerousVideoUrl}!}</p>
-  <p>Trusted:</p>
-  <iframe class="e2e-iframe-trusted-src" width="640" height="390" [src]="videoUrl"></iframe>
-  <p>Untrusted:</p>
-  <iframe class="e2e-iframe-untrusted-src" width="640" height="390" [src]="dangerousVideoUrl"></iframe>
-```
-<?code-excerpt "lib/src/bypass_security_component.dart (excerpt)" region="trust-video-url" title?>
-```
-  void updateVideoUrl(String id) {
-    // Appending an ID to a YouTube URL is safe.
-    // Always make sure to construct SafeValue objects as
-    // close as possible to the input data, so
-    // that it's easier to check if the value is safe.
-    dangerousVideoUrl = 'https://www.youtube.com/embed/$id';
-    videoUrl = sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
-  }
-```
+{{< excerpt src="lib/src/bypass_security_component.html" section="iframe" >}}
+{{< excerpt src="lib/src/bypass_security_component.dart" section="trust-video-url" >}}
 
-{% comment %}
-<-- currently skipped for Dart -->
+<!-- currently skipped for Dart
 block http
 h2#http HTTP-level vulnerabilities
   Angular has built-in support to help prevent two common HTTP vulnerabilities, cross-site request
@@ -315,11 +273,12 @@ h3#xssi Cross-site script inclusion (XSSI)
   post](https://security.googleblog.com/2011/05/website-security-for-webmasters.html).
 
 //- end of block http
-{% endcomment %}
+!-->
 
 ## Auditing Angular apps  {#code-review}
 
-Angular apps must follow the same security principles as regular web apps, and
+Although Angular apps have sanitization enabled by the default which eliminates
+a lot of security threats, Angular apps should still follow the same security principles as regular web apps, and
 must be audited as such. Angular-specific APIs that should be audited in a security review,
 such as the [_bypassSecurityTrust_](#bypass-security-apis) methods, are marked in the documentation
 as security sensitive.
