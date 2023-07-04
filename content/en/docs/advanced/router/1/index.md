@@ -1,7 +1,6 @@
 ---
 title: "Routing Basics"
 description: "Getting started with the router"
-lead: ""
 date: 2023-06-23T21:57:48-04:00
 draft: false
 images: []
